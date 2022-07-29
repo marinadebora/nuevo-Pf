@@ -1,16 +1,20 @@
-import React, { useEffect, useState, Fragment } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { barcosEnAlquiler, filtrosCategoriaEmbarcacion } from '../actions/actions'
+import React, { useState, Fragment } from "react";
+import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
+import { Box } from '@mui/system';
 import Paginado from "./Paginado";
 import Card from './Card';
+import Navbar from './Navbar';
+
+import Footer from './Footer';
 import { Grid } from '@mui/material'
 import '../styles/searchBar.css';
+import { FiltroEmbRenta } from "./FiltroEmbRenta";
+import '../styles/box.css'
 
 export function BarcosEnAlquiler()
 {
   const productAlquiler = useSelector(state => state.rentVessels)
-  const dispatch = useDispatch()
 
  //----------paginado---------//
 
@@ -19,62 +23,28 @@ export function BarcosEnAlquiler()
   const index = page * characterPerPage;
   const endIndex = index - characterPerPage;
   const actualPage = productAlquiler?.slice(endIndex, index);
-  const [/* ordering */, setOrdering] = useState('')
 
 
-console.log(productAlquiler)
 
   const paginado = (numPage) =>
   {
     setPage(numPage)
   }
-
-  useEffect(() =>
-  {
-    dispatch(barcosEnAlquiler())
-  }, [dispatch])
-
-
-  const filtroPorCategoria = (event) =>
-  {
-    event.preventDefault()
-    if (event.target.value === 'sinFiltro') {
-      dispatch(barcosEnAlquiler())
-      setPage(1)
-      setOrdering(`Order ${event.target.value}`)
-    } else {
-      dispatch(filtrosCategoriaEmbarcacion(event.target.value))
-      setPage(1)
-      setOrdering(`Order ${event.target.value}`)
-    }
-
-  }
-
-
-
+ 
   return (
     <div>
-      <Link to='/home'>
-        <button id='buttonBack'>VOLVER</button>
-      </Link>
-      <Paginado
-        characterPerPage={characterPerPage}
-        newState={productAlquiler.length}
-        paginado={paginado}
+      <Navbar/>
+      
+      <FiltroEmbRenta 
+      setPage={setPage}
       />
-     <label key='venta'>Filtrar por Precio </label>
-      <select name="categoriasR" id="categoriasR" onChange={(e) => filtroPorCategoria(e)}>
-        <option key={'sinFiltro'} value={'sinFiltro'}>Sin Filtros</option>
-        <option key={'Gama Alta'} value={'Alta'}>Gama Alta</option>
-        <option key={'Gama Economica'} value={'Economica'}>Gama Economica</option>
-        <option key={'Gama Media'} value={'Media'}>Gama Media</option>
-      </select><br />
-      <br />
-      <br />
 
-
-
-
+        <Box id='boxAlq'>
+                <Box id='textBox1'>ALQUILER</Box>
+                
+            </Box>
+      
+    
       <Grid container spacing={2}>
         {
 
@@ -112,7 +82,16 @@ console.log(productAlquiler)
           })
         }
       </Grid>
-
+      <Link to='/home'>
+        <button id='buttonBack'>VOLVER</button>
+      </Link>
+      <Paginado
+        characterPerPage={characterPerPage}
+        newState={productAlquiler.length}
+        paginado={paginado}
+      />
+      
+      <Footer/>
 
     </div>);
 

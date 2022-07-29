@@ -3,11 +3,11 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector,  } from 'react-redux';
 import { useParams } from "react-router-dom";
-import { updateEmbarcacionRT} from '../../actions/admin-action';
+import { updateEmbarcacionEnV, Categorias} from '../../actions/admin-action';
 import { productosDetail, /*getAllTypes */} from '../../actions/actions'
 import { useNavigate } from 'react-router-dom';
 
-export function UpdateEmbarcacionRenta(){
+export function UpdateEmbarcacionVenta(){
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -15,11 +15,12 @@ export function UpdateEmbarcacionRenta(){
 
     
     const detail = useSelector(state => state.detail)
+    const allCat = useSelector(state => state.categorias)
 
     function validate(input){
         let errors = {}
 
-        if(!input.marca){
+        if(!input.tipo){
             errors.marca = 'Falta ingresar el marca'
         }
 
@@ -29,25 +30,29 @@ export function UpdateEmbarcacionRenta(){
     useEffect ( () => {
         dispatch(productosDetail(id))
     },[])
+    useEffect( () => {
+        dispatch(Categorias())
+    }, [])
 
    
 
     const [input, setInput] = useState({
-        marca: '',
+        tipo: '',
         modelo: '',
-        fabricacionDelMotor:0,
-        motor: '',
+        precio: "",
+        astillero: '',
         fabricacion: 0,
-        marcamotor:'' ,
-        puntal: "",
+        localizacion: '',
+        numero_de_pasajeros: 0,
         eslora:"",
         manga:"",
-        hp:"",
-        cantMotores:"",
-        transmision:"",
-        horas: "",
+        calado:"",
+        numero_de_motores:0,
+        marca_de_motor: "",
+        potencia_total: "",
         descripcion: "",
-        combustible: ""
+        combustible: "",
+        categorias: detail.categorias
     })
 
     const [errors, setErrors] = useState({});
@@ -63,29 +68,28 @@ export function UpdateEmbarcacionRenta(){
             [e.target.name]:e.target.value
         }))
     }
-
-    /*function handleDelete(d){
-        setInput({
-            ...input,
-            diets: input.diets.filter(e => e !== d)
-        })
-    }
-
-    function handleDiet(e){
-        if(!input.diets.includes(e.target.value)){
+    function handleCat(e){
+        if(!input.categorias.includes(e.target.value)){
             setInput({
                 ...input,
-                diets: [...input.diets, e.target.value]
+                categorias: [...input.categorias, e.target.value]
             })
         }
-    }*/
+    }
+
+    function handleDelete(d){
+        setInput({
+            ...input,
+            categorias: input.categorias.filter(e => e !== d)
+        })
+    }
 
     function handleSubmit(e){
         e.preventDefault()
         
         if(Object.keys(errors).length === 0){
             if(input.precio){parseInt(input.precio)}
-            dispatch(updateEmbarcacionRT(id, input))
+            dispatch(updateEmbarcacionEnV(id, input))
             return (
                 alert(`La embarcacion fue actualizada con éxito.`), navigate(`/admin`)
                 ) 
@@ -108,7 +112,7 @@ export function UpdateEmbarcacionRenta(){
 
         
         <div className="cont-form">
-            {!detail.transmision  ? 
+            {!allCat  ? 
                 <>
                     <div>
                         <h1>LOADING</h1>
@@ -121,13 +125,13 @@ export function UpdateEmbarcacionRenta(){
                             <h1>Actualiza tu Embarcacion</h1>
                             
                             <div >
-                                <label>Nombre de la Embarcacion: </label>
+                                <label>Tipo de la Embarcacion: </label>
                                 <input 
                                     
                                     type='text' 
-                                    name='marca' 
-                                    placeholder={detail.marca}
-                                    value={input.marca}
+                                    name='tipo' 
+                                    placeholder={detail.tipo}
+                                    value={input.tipo}
                                     onChange={handleChange}
                                     
                                 >
@@ -139,20 +143,20 @@ export function UpdateEmbarcacionRenta(){
                                 <label>Descripcion: </label>
                                 <textarea 
                                     type='text' 
-                                    name='descripcion' 
-                                    placeholder={detail.descripcion}
+                                    name='descripcion'
+                                    placeholder={detail.descripcion} 
                                     value={input.descripcion}
                                     onChange={handleChange}> 
                                 </textarea>
-                                
+                               
                             </div>
 
                             <div>
                                 <label>Modelo:</label>
                                 <input 
                                     type='text' 
-                                    name='modelo' 
-                                    placeholder= {detail.modelo}
+                                    name='modelo'
+                                    placeholder={detail.modelo}
                                     value={input.modelo} 
                                     onChange={handleChange}
                                     
@@ -161,12 +165,12 @@ export function UpdateEmbarcacionRenta(){
                                 
                             </div>
                             <div>
-                                <label>fabricacionDelMotor:</label>
-                                <input 
-                                    type='number' 
-                                    name='fabricacionDelMotor' 
-                                    placeholder= {detail.fabricacionDelMotor}
-                                    value={input.fabricacionDelMotor} 
+                                <label>Precio:</label>
+                                <input
+                                    type='text' 
+                                    name='precio'
+                                    placeholder={detail.precio} 
+                                    value={input.precio} 
                                     onChange={handleChange}
                                     
                                     >
@@ -174,12 +178,12 @@ export function UpdateEmbarcacionRenta(){
                                 
                             </div>
                             <div>
-                                <label>motor:</label>
-                                <input 
+                                <label>Astillero:</label>
+                                <input
                                     type='text' 
-                                    name='motor' 
-                                    placeholder= {detail.motor}
-                                    value={input.motor} 
+                                    name='astillero' 
+                                    placeholder={detail.astillero}
+                                    value={input.astillero} 
                                     onChange={handleChange}
                                     
                                     >
@@ -188,10 +192,10 @@ export function UpdateEmbarcacionRenta(){
                             </div>
                             <div>
                                 <label>Fabricacion:</label>
-                                <input 
+                                <input
                                     type='number' 
                                     name='fabricacion' 
-                                    placeholder= {detail.fabricacion}
+                                    placeholder={detail.fabricacion}
                                     value={input.fabricacion} 
                                     onChange={handleChange}
                                     
@@ -200,12 +204,12 @@ export function UpdateEmbarcacionRenta(){
                                 
                             </div>
                             <div>
-                                <label>marcamotor:</label>
+                                <label>Localizacion:</label>
                                 <input 
                                     type='text' 
-                                    name='marcamotor' 
-                                    placeholder= {detail.marcamotor}
-                                    value={input.marcamotor} 
+                                    name='localizacion' 
+                                    placeholder={detail.localizacion}
+                                    value={input.localizacion} 
                                     onChange={handleChange}
                                     
                                     >
@@ -213,12 +217,12 @@ export function UpdateEmbarcacionRenta(){
                                 
                             </div>
                             <div>
-                                <label>Puntal:</label>
+                                <label>Numero de Pasajeros:</label>
                                 <input 
-                                    type='text' 
-                                    name='puntal'
-                                    placeholder= {detail.puntal} 
-                                    value={input.puntal} 
+                                    type='number' 
+                                    name='numero_de_pasajeros'
+                                    placeholder={detail.numero_de_pasajeros} 
+                                    value={input.numero_de_pasajeros} 
                                     onChange={handleChange}
                                     
                                     >
@@ -229,8 +233,8 @@ export function UpdateEmbarcacionRenta(){
                                 <label>Eslora:</label>
                                 <input 
                                     type='text' 
-                                    name='eslora'
-                                    placeholder= {detail.eslora} 
+                                    name='eslora' 
+                                    placeholder={detail.eslora}
                                     value={input.eslora} 
                                     onChange={handleChange}
                                     
@@ -242,8 +246,8 @@ export function UpdateEmbarcacionRenta(){
                                 <label>Manga:</label>
                                 <input 
                                     type='text' 
-                                    name='manga'
-                                    placeholder= {detail.manga} 
+                                    name='manga' 
+                                    placeholder={detail.manga}
                                     value={input.manga} 
                                     onChange={handleChange}
                                     
@@ -252,12 +256,12 @@ export function UpdateEmbarcacionRenta(){
                                 
                             </div>
                             <div>
-                                <label>hp:</label>
+                                <label>Calado:</label>
                                 <input 
                                     type='text' 
-                                    name='hp' 
-                                    placeholder= {detail.hp}
-                                    value={input.hp} 
+                                    name='calado'
+                                    placeholder={detail.calado} 
+                                    value={input.calado} 
                                     onChange={handleChange}
                                     
                                     >
@@ -265,12 +269,12 @@ export function UpdateEmbarcacionRenta(){
                                 
                             </div>
                             <div>
-                                <label>Cantidad De Motores:</label>
+                                <label>Numero de Motores:</label>
                                 <input 
-                                    type='text' 
-                                    name='cantMotores' 
-                                    placeholder= {detail.cantMotores}
-                                    value={input.cantMotores} 
+                                    type='number' 
+                                    name='numero_de_motores'
+                                    placeholder={detail.numero_de_motores} 
+                                    value={input.numero_de_motores} 
                                     onChange={handleChange}
                                     
                                     >
@@ -278,12 +282,12 @@ export function UpdateEmbarcacionRenta(){
                                 
                             </div>
                             <div>
-                                <label>Transmision:</label>
+                                <label>Marca de Motor:</label>
                                 <input 
                                     type='text' 
-                                    name='transmision' 
-                                    placeholder= {detail.transmision}
-                                    value={input.transmision} 
+                                    name='marca_de_motor' 
+                                    placeholder={detail.marca_de_motor}
+                                    value={input.marca_de_motor} 
                                     onChange={handleChange}
                                     
                                     >
@@ -291,12 +295,12 @@ export function UpdateEmbarcacionRenta(){
                                 
                             </div>
                             <div>
-                                <label>Horas:</label>
+                                <label>Potencia Total:</label>
                                 <input 
                                     type='text' 
-                                    name='horas' 
-                                    placeholder= {detail.horas}
-                                    value={input.horas} 
+                                    name='potencia_total'
+                                    placeholder={detail.potencia_total} 
+                                    value={input.potencia_total} 
                                     onChange={handleChange}
                                     
                                     >
@@ -307,14 +311,27 @@ export function UpdateEmbarcacionRenta(){
                                 <label>Combustible:</label>
                                 <input 
                                     type='text' 
-                                    name='combustible'
-                                    placeholder= {detail.combustible} 
+                                    name='combustible' 
+                                    placeholder={detail.combustible}
                                     value={input.combustible} 
                                     onChange={handleChange}
                                     
                                     >
                                 </input>
                                 
+                            </div>
+                            <div className="class-select">
+                                <label>Categorias</label>
+                                <select onChange={handleCat} value='Onetype' >
+                                    <option>Eligir Categorias</option>
+                                    {
+                                        allCat && allCat?.map(e => {
+                                            return (
+                                                <option key={e} value={e} name={e}>{e}</option>
+                                            )
+                                        })
+                                    }
+                                </select>
                             </div>
                             
                          
@@ -323,6 +340,20 @@ export function UpdateEmbarcacionRenta(){
                                 <button className="button-submit" type="submit">Enviar Embarcacion</button>
                             
                         </form>
+                        <div className="my-categ">
+                            <h3>Mis Categorias</h3>
+                            <div className="cat">
+                                {input.categorias.map(d => {
+                                    return (
+                                    <div key={d} className="tipo_cat">
+                                        <button className="cerrar" onClick={() => handleDelete(d)}>X</button>
+                                        <p>{d}</p> 
+                                    </div>
+                                    )
+                                }
+                            )}
+                            </div>
+                        </div>
 
                        
                     </div>
@@ -332,4 +363,4 @@ export function UpdateEmbarcacionRenta(){
     )
 }
 
-export default UpdateEmbarcacionRenta;
+export default UpdateEmbarcacionVenta;

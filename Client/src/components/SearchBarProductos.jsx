@@ -68,9 +68,7 @@ export default function SearchBar(){
     <AppBar position='static' id="appBar2">
         <Grid>
           <Toolbar>
-          <Button><Link class='item' id='LinkVenta' to='/venta'><h4>EMBARCACIONES EN VENTA</h4></Link></Button>
-          <Button><Link class='item' id='LinkRenta' to='/alquiler'><h4>EMBARCACIONES EN RENTA</h4></Link></Button>
-          <Button><Link class='item' id='LinkAccesorios' to='/accesorios'><h4>ACCESORIOS</h4></Link></Button>
+         
    
     <div id='campos'>
       
@@ -91,11 +89,19 @@ export default function SearchBar(){
      
        </select>
 
+       
+      
+
+
+
+
+
       <label id='text'>Buscar por Nombre:</label>
       <input value={name} key='buscar' type='text' placeholder='buscar...' onChange={(e) => handleChange(e)} />
       <button  type='submit' id='buttonB' onClick={(e) => handleSubmit(e)}>Buscar</button>
       <button id='buttonB' onClick={reset}>Reset</button>
         
+      
     </div>
 
         
@@ -107,3 +113,6 @@ export default function SearchBar(){
 
   
 };
+
+
+

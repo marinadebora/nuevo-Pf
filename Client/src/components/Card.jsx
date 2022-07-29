@@ -10,23 +10,33 @@ import Badge from "@mui/material/Badge"
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Button from '@mui/material/Button';
 import '../styles/card.css';
-import {addToBasket} from '../actions/actions'
-import {useDispatch} from 'react-redux'
-import {  useState } from 'react';
+import { addToBasket, } from '../actions/actions'
+import { useDispatch, useSelector } from 'react-redux'
+import { useState } from 'react';
 
 
 
 
 
-export default function Producto({ tipo,id, producto, marca ,precio, fabricacion, imagenes, Link}) {
-  //const { id } = useParams();
-  const [contador,setContador]=useState(0)
-   const dispatch = useDispatch()
+export default function Producto({ tipo, id, producto, marca, precio, fabricacion, imagenes, Link })
+{
+  const [contador, setContador] = useState(0)
+  const dispatch = useDispatch() 
+  const basket=useSelector(state=>state.basket)    
+
+
+  const addToCart = () =>{
+    console.log(basket)
+    localStorage.setItem("items", JSON.stringify(basket))
+    dispatch(addToBasket(id))
+    
+      
+      setContador(contador + 1)
+     
+  }
    
-   const addToCart = () =>{
-      dispatch(addToBasket(id))
-    setContador(contador +1)
-   }
+
+  
   return (
     <Fragment>
       <Card sx={{ maxWidth: 330 }} id='card'>
@@ -34,44 +44,44 @@ export default function Producto({ tipo,id, producto, marca ,precio, fabricacion
           title={
 
             tipo ?
-            <Typography fontSize="20px" fontFamily="arial" fontWeight='bold' underline="none">
+            <Typography fontSize="15px" fontFamily="arial" fontWeight='bold' underline="none">
                {tipo}
             </Typography>
             :producto?
-            <Typography fontSize="20px" fontFamily="arial" fontWeight='bold' underline="none">
+            <Typography fontSize="15px" fontFamily="arial" fontWeight='bold' underline="none">
                {producto}
             </Typography>
 
             :marca&&
-            <Typography fontSize="20px" fontFamily="arial" fontWeight='bold' underline="none">
+            <Typography fontSize="15px" fontFamily="arial" fontWeight='bold' underline="none">
               {marca}
             </Typography>
 
           }
         />
 
-        { imagenes?
-         <CardMedia
-         component="img"
-         height="200"
-         image={imagenes} />
-         :''
-            
+        {imagenes ?
+          <CardMedia
+            component="img"
+            height="200"
+            image={imagenes} />
+          : ''
+
         }
         <CardContent>
-        {
-            fabricacion? <Typography>Año: {fabricacion}</Typography>:''
+          {
+            fabricacion ? <Typography>Año: {fabricacion}</Typography> : ''
           }
           <Typography>Price: {precio}</Typography>
         </CardContent>
         <CardActions disableSpacing id='cardAction'>
-          
+
           <IconButton aria-label="add to cart" onClick={addToCart} >
-          <Badge badgeContent={contador} color="secondary" id='badge'>
-            <AddShoppingCartIcon />
+            <Badge badgeContent={contador} color="secondary" id='badge'>
+              <AddShoppingCartIcon />
             </Badge>
           </IconButton>
-          <Button sx={{marginLeft: 'auto'}} size="small">{Link}</Button>
+          <Button sx={{ marginLeft: 'auto' }} size="small">{Link}</Button>
         </CardActions>
       </Card>
     </Fragment>
