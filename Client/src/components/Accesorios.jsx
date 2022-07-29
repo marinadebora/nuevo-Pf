@@ -1,6 +1,5 @@
-import React, { useEffect, useState, Fragment } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { accesorios } from '../actions/actions'
+import React, {  useState, Fragment } from "react";
+import {  useSelector } from "react-redux";
 import { useNavigate, Link } from 'react-router-dom';
 import Paginado from "./Paginado";
 import { Box } from '@mui/system';
@@ -20,7 +19,7 @@ export function Accesorios(){
   //----------paginado---------//
 
   const [page, setPage] = useState(1);
-  const [characterPerPage, setCharacterPerPage] = useState(5);
+  const [characterPerPage,] = useState(5);
   const index = page * characterPerPage;
   const endIndex = index - characterPerPage;
   const actualPage = accesorio?.slice(endIndex, index);
@@ -47,23 +46,17 @@ export function Accesorios(){
   return (
     <div>
 
-      <button id='buttonBack' onClick={volver}>VOLVER</button>
+    
 
-      <Paginado
-        characterPerPage={characterPerPage}
-        newState={accesorio.length}
-        paginado={paginado}
-      />
-
-    <FiltrosAccesorios
-    setPage={setPage}
-     />  
+     
       <Navbar/>
       <Box id='boxAcc'>
                 <Box id='textBox1'>VENTA</Box>
       </Box>
       <SearchBarProductos/>
-
+      <FiltrosAccesorios
+    setPage={setPage}
+     /> 
       <Grid container spacing={2}>
         {
 
