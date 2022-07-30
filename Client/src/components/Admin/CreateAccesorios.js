@@ -262,7 +262,7 @@ export function AccesoriosCreate(){
                             </div>
                             
                             <button id='buttonSubmitForm' classproducto="button-submit" type="submit">Create Product</button>
-                            <Link to='/admin'>
+                            <Link to='/dashboard'>
                                 <button id='buttonBackForm'>Back</button>
                             </Link>
 

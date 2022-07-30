@@ -1,5 +1,6 @@
-import React, {  useState, Fragment } from "react";
-import {  useSelector } from "react-redux";
+import React, { useEffect, useState, Fragment } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { accesorios } from '../actions/actions'
 import { useNavigate, Link } from 'react-router-dom';
 import Paginado from "./Paginado";
 import { Box } from '@mui/system';
@@ -9,22 +10,25 @@ import Footer from './Footer';
 import SearchBarProductos from './SearchBarProductos';
 import { Grid } from '@mui/material'
 import '../styles/searchBar.css';
-import { FiltrosAccesorios } from "./FiltrosAccesorios";
 import '../styles/box.css'
+import {FiltrosAccesorios} from './FiltrosAccesorios';
 
 
 
 export function Accesorios(){ 
   const accesorio = useSelector(state => state.accesories)
+  const dispatch = useDispatch()
   //----------paginado---------//
 
   const [page, setPage] = useState(1);
-  const [characterPerPage,] = useState(5);
+  const [characterPerPage, setCharacterPerPage] = useState(5);
   const index = page * characterPerPage;
   const endIndex = index - characterPerPage;
   const actualPage = accesorio?.slice(endIndex, index);
+  const [ordering, setOrdering] = useState('')
   const navigate = useNavigate()
- 
+  const [venta, setVenta] = useState('')
+  const [categorias, setCategorias] = useState('')
 
 
   const paginado = (numPage) =>
@@ -32,10 +36,10 @@ export function Accesorios(){
     setPage(numPage)
   }
 
-  console.log(accesorio)
-
-
-  
+  useEffect(() =>
+  {
+    dispatch(accesorios())
+  }, [dispatch])
 
   const volver = () =>
   {
@@ -46,18 +50,14 @@ export function Accesorios(){
   return (
     <div>
 
-    
-
-     
       <Navbar/>
       <Box id='boxAcc'>
                 <Box id='textBox1'>VENTA</Box>
       </Box>
       <SearchBarProductos/>
-      <FiltrosAccesorios
-    setPage={setPage}
-     /> 
+      
       <Grid container spacing={2}>
+  
         {
 
           actualPage?.map(e => 
@@ -94,7 +94,11 @@ export function Accesorios(){
           })
         }
       </Grid>
-
+      <br /><br /><br /><br /><br />
+      <FiltrosAccesorios
+    setPage={setPage}
+     />
+<br /><br /><br /><br /><br />
       <button id='buttonBack' onClick={volver}>VOLVER</button>
 
 <Paginado

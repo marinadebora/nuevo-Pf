@@ -9,6 +9,7 @@ import Navbar from '../Navbar'
 import {Button, Typography} from "@mui/material";
 import admincss from '../../styles/admin.css'
 import {Grid} from '@mui/material'
+//import '../styles/card.css';
 
 
 
@@ -35,7 +36,7 @@ export default function Admin(){
 
     return(
         <div>
-            <Navbar/>
+           
             <Typography sx={{marginLeft: 'auto'}} variant="h6" component="p" id='guest1'>
               Wellcome Admin
             </Typography>

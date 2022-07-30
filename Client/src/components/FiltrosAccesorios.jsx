@@ -1,6 +1,7 @@
 import React,{ useEffect,useState }  from "react";
 import { accesorios, filtroPrecioAccesorios, filtroCategoriaAccesorios,precioOrdenAccesorios } from '../actions/actions'
 import { useDispatch } from "react-redux";
+
 export function FiltrosAccesorios({setPage}) {
     const dispatch = useDispatch()
     const [, setOrdering] = useState('')
@@ -41,7 +42,7 @@ export function FiltrosAccesorios({setPage}) {
     {
       event.preventDefault()
       if (event.target.value === 'sinFiltro') {
-       
+        dispatch(filtroPrecioAccesorios(event.target.value))
         setCategorias(false)
         setPage(1)
         setOrdering(`Order ${event.target.value}`)

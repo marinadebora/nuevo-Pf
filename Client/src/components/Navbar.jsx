@@ -10,9 +10,9 @@ import '../styles/searchBar.css';
 export default function Navbar() {
   //constante para cambiar e numero del carrito de forma dinamica
   // si la activo se rompe el detail por un tema de estado
- //const carrito=useSelector(state=>state.basket)
- //const suma=carrito.filter(Boolean).length
- 
+ /*  const carrito=useSelector(state=>state.basket)
+  const suma=carrito.filter(Boolean).length
+ */
 
   return (
     
@@ -39,7 +39,7 @@ export default function Navbar() {
             
            
             <Typography sx={{marginLeft: 'auto'}} variant="h6" component="p" id='guest'>
-            <Link id='adminNavbar' to='/admin'>
+            <Link id='adminNavbar' to='/dashboard'>
               Hello Guest
               </Link>
             </Typography>
@@ -54,7 +54,7 @@ export default function Navbar() {
 
             <Link to='/checkoutPage'>
               <IconButton arial-label="show cart items" id="cartButton">
-                <Badge badgeContent={1} color="secondary" id='badge'>
+                <Badge badgeContent={3} color="secondary" id='badge'>
                   <ShoppingCart id="cart" />
                 </Badge>
               </IconButton>

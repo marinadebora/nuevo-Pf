@@ -1,20 +1,21 @@
-import React, { useState, Fragment } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState, Fragment } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { barcosEnAlquiler, filtrosCategoriaEmbarcacion } from '../actions/actions'
 import { Link } from 'react-router-dom';
 import { Box } from '@mui/system';
 import Paginado from "./Paginado";
-import Card from './Card';
+import CardRentaVenta from './CardRentaVenta';
 import Navbar from './Navbar';
 
 import Footer from './Footer';
 import { Grid } from '@mui/material'
 import '../styles/searchBar.css';
-import { FiltroEmbRenta } from "./FiltroEmbRenta";
 import '../styles/box.css'
 
 export function BarcosEnAlquiler()
 {
   const productAlquiler = useSelector(state => state.rentVessels)
+  const dispatch = useDispatch()
 
  //----------paginado---------//
 
@@ -23,22 +24,27 @@ export function BarcosEnAlquiler()
   const index = page * characterPerPage;
   const endIndex = index - characterPerPage;
   const actualPage = productAlquiler?.slice(endIndex, index);
+  const [/* ordering */, setOrdering] = useState('')
 
 
+console.log(productAlquiler)
 
   const paginado = (numPage) =>
   {
     setPage(numPage)
   }
- 
+
+  useEffect(() =>
+  {
+    dispatch(barcosEnAlquiler())
+  }, [dispatch])
+
+
+  
   return (
     <div>
-      <Navbar/>
-      
-      <FiltroEmbRenta 
-      setPage={setPage}
-      />
 
+    <Navbar/>
         <Box id='boxAlq'>
                 <Box id='textBox1'>ALQUILER</Box>
                 
@@ -56,7 +62,7 @@ export function BarcosEnAlquiler()
 
                 <Grid item xs={12} sm={6} md={4} lg={3}>
 
-                  <Card
+                  <CardRentaVenta
                     tipo={e.tipo}
                     Marca={e.Marca}
                     modelo={e.modelo}
