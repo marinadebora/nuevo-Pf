@@ -17,6 +17,7 @@ import {FiltrosAccesorios} from './FiltrosAccesorios';
 
 export function Accesorios(){ 
   const accesorio = useSelector(state => state.accesories)
+  console.log(accesorio)
   const dispatch = useDispatch()
   //----------paginado---------//
 
@@ -31,6 +32,7 @@ export function Accesorios(){
   const [categorias, setCategorias] = useState('')
 
 
+ 
   const paginado = (numPage) =>
   {
     setPage(numPage)
