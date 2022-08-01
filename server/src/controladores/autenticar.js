@@ -38,7 +38,7 @@ const { validacioncampos } = require('../middlewares/validador-de-campos')
 
 
 
-const correo = async (req,res = response)=>{
+const correo = async (req,res )=>{
     const {email,password,nombre,apellido} = req.body;
     try {
         await transporter.sendMail({
