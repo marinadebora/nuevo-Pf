@@ -30,7 +30,7 @@ export function productosDetail(id)
     return async function (dispatch)
     {
         try {
-           const proDetail =await axios(`/todo/${id}`)
+           const proDetail =await axios(`/todos/${id}`)
           
             return dispatch({
                 type: 'PRODUCTOS_DETAIL',
