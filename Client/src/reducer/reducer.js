@@ -16,6 +16,8 @@
   
   function rootReducer(state = initialState, action)
   {
+    const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
+
   
     switch (action.type) {
   
@@ -66,20 +68,37 @@
           categories: action.payload
         }
 
-       case 'ADD_TO_BASKET':
-          const cart_add = state.products.find(e => e._id === action.payload) 
+        case 'ADD_TO_BASKET':
+          const cart_add = state.allAccesories.find(e => e._id === action.payload.id)
+         const actual_card = localStorage.getItem("item2") 
+          //JSON.stringify([...cartFromLocalStorage, cart_add._id, cart_add.producto])
          
+         if(cartFromLocalStorage.length) {
+          localStorage.setItem(
+            "item2",
+            JSON.stringify([...cartFromLocalStorage, cart_add])
+          );
+        } else {
+          localStorage.setItem(
+            "item2",
+            JSON.stringify([cart_add])
+          )
+        }
+        return{
+          ...state
+        }
+  
+        case 'REMOVE_TO_BASKET':
+          const cart_remove = state.basket.filter(e => e!==undefined&& e._id !== action.payload)
+  
           return{
             ...state,
-            basket: [...state.basket,cart_add]
-          } 
-  
-          case 'REMOVE_TO_BASKET':
-            const cart_remove = state.basket.filter(e => e!==undefined&& e._id !== action.payload)
-    
-            return{
+            basket: cart_remove
+          }
+          case "GET_ALL_CART":
+            return {
               ...state,
-              basket: cart_remove
+              basket:state.basket
             }
     
         //----------filtros----------//
@@ -201,6 +220,20 @@
             }
           case "POST_CATEGORIAS":   
             return { ...state, categorias: state.categorias.concat(action.payload) };
+            case "RESET_DETAIL":
+              return {
+                ...state,
+                detail: {},
+              };
+              case 'REGISTRO':
+            return{
+              ...state
+            }
+            case "USUARIOS":
+            return{
+              ...state,
+              user: action.payload
+            }
   
       default: {
         return state
