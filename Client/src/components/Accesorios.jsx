@@ -12,7 +12,7 @@ import { Grid } from '@mui/material'
 import '../styles/searchBar.css';
 import '../styles/box.css'
 import {FiltrosAccesorios} from './FiltrosAccesorios';
-
+import img from '../imagenes/sin_productos.jpg'
 
 
 export function Accesorios(){ 
@@ -62,7 +62,7 @@ export function Accesorios(){
   
         {
 
-          actualPage?.map(e => 
+          actualPage.length > 0 ? actualPage.map(e => 
           {
             return (
               <Fragment>
@@ -93,7 +93,11 @@ export function Accesorios(){
 
               </Fragment>
             )
-          })
+          }):  <img className="sin_art" src={img} alt="sin articulos" />
+          
+         
+             
+         
         }
       </Grid>
       <br /><br /><br /><br /><br />

@@ -95,7 +95,7 @@
           ...state,
           saleVessels: action.payload === 'mayor' ? precios.filter(e => parseInt(e.precio) > 300000) : filterPrecio
         }
-  
+  //----------filtros de accesorios----------//
       case 'FITRO_PRECIO_ACCESORIO':
         const estadoAcc = state.allAccesories
         const precioAcc = estadoAcc.filter(e => e.precio.split('$')[1])

@@ -30,6 +30,13 @@ const { requireSignin } = require("../controladores/Verificaciones");
 
 let router = Router();
 
+
+
+
+
+
+
+
 router.use("/embarcacionesV", getEmbarVenta);
 router.use("/embarcacionesVId", getEmbarVentaId);
 router.use("/embarcacionesR", getEmbarRenta);
@@ -49,7 +56,6 @@ router.use("/embarcacionesR",deleteEmbarcacionesRenta);
 router.use("/accesorio",deleteAccesorios);
 router.post("/registro",usuarios,correo);
 router.post("/autenticar",usuariosAuth); 
-
 router.get("/categorias", categorias);
 router.use("/categorias", postCategorias);
 router.use('/correo', correo);
