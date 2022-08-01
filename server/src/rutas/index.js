@@ -31,12 +31,6 @@ const { requireSignin } = require("../controladores/Verificaciones");
 let router = Router();
 
 
-
-
-
-
-
-
 router.use("/embarcacionesV", getEmbarVenta);
 router.use("/embarcacionesVId", getEmbarVentaId);
 router.use("/embarcacionesR", getEmbarRenta);
