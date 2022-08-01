@@ -5,7 +5,7 @@ import axios from "axios"
 export function postAccesorio(payload) {
     return async function (dispatch) {
       try {
-        const accesoriosCreated = await axios.post(`/accesorios`, payload);
+        const accesoriosCreated = await axios.post(`/accesorio`, payload);
         return dispatch({
           type: "POST_ACCESORIOS",
           payload: accesoriosCreated,
