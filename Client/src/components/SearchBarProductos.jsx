@@ -69,8 +69,8 @@ export default function SearchBar(){
          
    
     <div id='campos'>
-  {/*     
-      <label id='text'>Buscar por Categoria:</label>
+      
+     {/*  <label id='text'>Buscar por Categoria:</label>
       <select name="categoriasR" id="categoriasR" onChange={(e) => filtroPorCategoria(e)}>
       <option key={'all'} value={'sinFiltro'}>Sin Filtros</option>
       {
@@ -79,9 +79,9 @@ export default function SearchBar(){
             return <option key={e} value={e}>{e}</option>
           })
        
-      } */}
+      }
       
-       </select>
+       </select> */}
 
       <label id='text'>Buscar por Nombre:</label>
       <input value={name} key='buscar' type='text' placeholder='buscar...' onChange={(e) => handleChange(e)} />
