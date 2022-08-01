@@ -220,6 +220,7 @@
             }
           case "POST_CATEGORIAS":   
             return { ...state, categorias: state.categorias.concat(action.payload) };
+            
             case "RESET_DETAIL":
               return {
                 ...state,
