@@ -27,7 +27,7 @@ export default function CheckoutPage()
     const accesorio = useSelector(state => state.allAccesories._id)
     const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
     const [cart /* setCart */] = useState(cartFromLocalStorage);
-    const[cant, /SetCant/]= useState(1)
+    const[cant, SetCant]= useState(1)
 
     
     
