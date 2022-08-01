@@ -254,7 +254,7 @@ export function postAccesorio(payload)
 	return async function (dispatch)
 	{
 		try {
-			const accesoriosCreated = await axios.post(`accesorios`, payload);
+			const accesoriosCreated = await axios.post(`https://nautical25.herokuapp.com/accesorios`, payload);
 			return dispatch({
 				type: "POST_ACCESORIOS",
 				payload: accesoriosCreated,
@@ -307,7 +307,7 @@ export function postEmbarcacionEnV(payload)
 	return async function (dispatch)
 	{
 		try {
-			const embarcacionCreated = await axios.post(`/embrarcacionesV`, payload);
+			const embarcacionCreated = await axios.post(`https://nautical25.herokuapp.com/embrarcacionesV`, payload);
 			return dispatch({
 				type: "POST_EMBARCACIONENV",
 				payload: embarcacionCreated,
@@ -357,7 +357,7 @@ export function updateEmbarcacionEnV(id, payload)
 {
 	return function (dispatch)
 	{
-		return axios.put(`/embrarcacionesV/${id}`, payload)
+		return axios.put(`https://nautical25.herokuapp.com/embrarcacionesV/${id}`, payload)
 			.then(data =>
 			{
 				dispatch({
@@ -376,7 +376,7 @@ export function postEmbarcacionRT(payload)
 	return async function (dispatch)
 	{
 		try {
-			const embarcacionCreated = await axios.post(`/embarcacionesR`, payload);
+			const embarcacionCreated = await axios.post(`https://nautical25.herokuapp.com/embarcacionesR`, payload);
 			return dispatch({
 				type: "POST_EMBARCACIONRT",
 				payload: embarcacionCreated,
@@ -412,7 +412,7 @@ export function updateEmbarcacionRT(id, payload)
 {
 	return function (dispatch)
 	{
-		return axios.put(`/embarcacionesR/${id}`, payload)
+		return axios.put(`https://nautical25.herokuapp.com/embarcacionesR/${id}`, payload)
 			.then(data =>
 			{
 				dispatch({
@@ -430,7 +430,7 @@ export function updateEmbarcacionRT(id, payload)
 
 export const registro = (value) => async (dispatch) =>
 {
-	return await axios.post(`/registro`, value)
+	return await axios.post(`https://nautical25.herokuapp.com/registro`, value)
 		.then(res =>
 		{
 			dispatch({ type: "REGISTRO", payload: res.data })
