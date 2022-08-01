@@ -40,7 +40,7 @@ export default function Navbar() {
            
             <Typography sx={{marginLeft: 'auto'}} variant="h6" component="p" id='guest'>
             <Link id='adminNavbar' to='/dashboard'>
-              Hello Guest
+              Hello Admin
               </Link>
             </Typography>
             
