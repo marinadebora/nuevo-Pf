@@ -10,10 +10,10 @@ import Badge from "@mui/material/Badge"
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Button from '@mui/material/Button';
 import '../styles/card.css';
-import {addToBasket,getItemsCart} from '../actions/actions'
-import {useDispatch, useSelector, } from 'react-redux'
-import {  useState } from 'react';
-import swal from "sweetalert";
+import {addToBasket} from '../actions/actions'
+import {useDispatch } from 'react-redux'
+/* import {  useState } from 'react';
+ */import swal from "sweetalert";
 import {useNavigate } from "react-router-dom";
 
 
@@ -25,16 +25,16 @@ import {useNavigate } from "react-router-dom";
 
 export default function Producto({ tipo,id, producto, marca ,precio, fabricacion, imagenes, Link}) {
 
-  const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
-  const [cart /* setCart */] = useState(cartFromLocalStorage);
+  /* const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
+  const [cart , setCart ] = useState(cartFromLocalStorage); */
   
   
   
   
    const navigate = useNavigate();
-   const [contador, setContador] = useState(0)
+ /*   const [contador, setContador] = useState(0)
+   const basket=useSelector(state=>state.basket)  */ 
    const dispatch = useDispatch() 
-   const basket=useSelector(state=>state.basket)  
    /*function addToCart(){
     localStorage.getItem("item2")
     const idlocal = cartFromLocalStorage.map(e=> e._id)

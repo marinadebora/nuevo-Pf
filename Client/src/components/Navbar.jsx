@@ -4,15 +4,65 @@ import Logo from "../imagenes/Nautical1.png";
 import { ShoppingCart } from "@mui/icons-material";
 import { Link } from 'react-router-dom';
 import '../styles/searchBar.css';
+import { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import { setToken } from "../actions/actions";
+import { useDispatch} from 'react-redux';
 
 
 
 export default function Navbar() {
   //constante para cambiar e numero del carrito de forma dinamica
   // si la activo se rompe el detail por un tema de estado
- /*  const carrito=useSelector(state=>state.basket)
+  /*  const carrito=useSelector(state=>state.basket)
   const suma=carrito.filter(Boolean).length
  */
+  const dispatch = useDispatch()
+  const history = useNavigate()
+  const[usuario, setUsuario] = useState(null)
+console.log(usuario)
+  useEffect(()=>{
+    if(localStorage.getItem('loguearUsuario')){
+    const users = JSON.parse(localStorage.getItem('loguearUsuario'))
+    setUsuario(users)
+  }
+  },[])
+
+  const handelOut =()=>{
+      setUsuario(null)
+      JSON.parse(localStorage.removeItem('loguearUsuario'))
+      dispatch(setToken(usuario))
+      history("/singIn")
+  }
+
+  const logueado = ()=>{
+    return(
+      <div>
+        <Typography sx={{marginLeft: 'auto'}} variant="h6" component="p" id='guest'>
+          Bienvenido {usuario.email.split('@')[0]}
+          <Button type="submit" variant="outlined" sx={{marginLeft: '35px'}} onSubmit={handelOut}>Sing out</Button>
+        </Typography>
+        
+      </div>
+        
+      
+    )
+  }
+
+  const sinLogin = ()=>{
+    return(
+      <div>
+        <Link to='/singIn'>
+              <Button variant="outlined" id="button">Sing In</Button>
+            </Link>
+
+            <Link to='/singUp'>
+              <Button variant="outlined" id="button">Sing Up</Button>
+            </Link>
+      </div>
+    )
+  }
+  
 
   return (
     
@@ -37,20 +87,25 @@ export default function Navbar() {
               <button src='/alquiler' id='buttonParalel'>Alquiler Yates</button>
             </Link>
             
-           
+            
             <Typography sx={{marginLeft: 'auto'}} variant="h6" component="p" id='guest'>
             <Link id='adminNavbar' to='/dashboard'>
-              Hello Admin
+              Hello Guest
               </Link>
             </Typography>
             
-            <Link to='/singIn'>
+            {
+              usuario?
+              logueado():
+              sinLogin()
+            }
+            {/* <Link to='/singIn'>
               <Button variant="outlined" id="button">Sing In</Button>
             </Link>
 
             <Link to='/singUp'>
               <Button variant="outlined" id="button">Sing Up</Button>
-            </Link>
+            </Link> */}
 
             <Link to='/checkoutPage'>
               <IconButton arial-label="show cart items" id="cartButton">

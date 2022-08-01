@@ -454,6 +454,7 @@ export const login = (value)=> async (dispatch)=>{
             Authorization: token
         }
     }
+	
     const action = await axios.post(`${URL_BASE}/autenticar`,value, config)
     return dispatch({
         type: 'LOGIN',
@@ -462,6 +463,7 @@ export const login = (value)=> async (dispatch)=>{
 }
 	let token = null
 console.log(token)
+
 export const setToken = (newToken)=>{
     token = `Bearer ${newToken}`
     return token
