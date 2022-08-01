@@ -235,6 +235,15 @@
               ...state,
               user: action.payload
             }
+            case 'LOGIN':
+            return{
+              ...state
+            }
+            case 'BUSCAR_ACCESORIOS':
+        return{
+          ...state,
+          accesories: action.payload
+        }
   
       default: {
         return state

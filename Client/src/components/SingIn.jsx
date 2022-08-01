@@ -13,6 +13,11 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import NavBar from './Navbar';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { login, setToken, usuarios } from '../actions/actions';
+import { useEffect } from 'react';
 
 
 
@@ -35,21 +40,66 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+  const history = useNavigate()
+  const dispatch = useDispatch()
+  /* const user = useSelector(state => state.user) */
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [usuario, setUsuario] = useState(null)
+  
+  /* console.log(email)
+  console.log(password) */
 
-  return (
+  const handleSubmit = async(e)=>{
+    e.preventDefault();
+    try {
+      const usuarioss = await (dispatch(login({email,password})))
+      if(!usuarioss){
+        alert('hay errores en los campos')
+      }else{
+        alert('Bienvenido a nuestra pagina')
+        setUsuario(usuarioss.payload.data)
+        setToken(usuarioss.payload.data.token)
+        localStorage.setItem(
+          'loguearUsuario', JSON.stringify(usuarioss.payload.data)
+        )
+        setEmail('')
+        setPassword('')
+        history("/")
+      }
+      
+    } catch (error) {
+      console.log(error)
+      alert("Correo y/o contraseña incorrecta")
+    }
+  }
+  
+  useEffect(()=>{
+    const mantenerSesion = localStorage.getItem('loguearUsuario')
+    if(mantenerSesion){
+      const users = JSON.parse(mantenerSesion)
+      setUsuario(users)
+      setToken(users.token)
+      console.log(users.token)
+    }
+  },[])
 
-    
-    <div>
-    <NavBar/>
-    <ThemeProvider theme={theme}>
+  useEffect(()=>{
+    dispatch(usuarios())
+  },[dispatch])
+
+
+  const ya = ()=>{
+    return(
+      <div>
+        <h1>listo ya mentego sesion falta cerrar sesion</h1>
+      </div>
+    )
+  }
+
+  const renderizarFormulario = ()=>{
+    return(
+      <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -76,6 +126,7 @@ export default function SignIn() {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={({target})=> setEmail(target.value.toLocaleLowerCase())}
             />
             <TextField
               margin="normal"
@@ -86,6 +137,7 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={({target})=> setPassword(target.value)}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -116,6 +168,21 @@ export default function SignIn() {
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
+    )
+  }
+
+  return (
+
+    
+    <div>
+    <NavBar/>
+    {
+      usuario?
+      ya():
+      renderizarFormulario()
+    }
+    
+    
     
     </div>
   );

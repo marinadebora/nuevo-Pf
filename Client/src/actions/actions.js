@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-//const URL_BASE = "http://localhost:4000"
+const URL_BASE ="https://nautical25.herokuapp.com"
 //import infoProductos from '../infoPrueba/index'
 
 
@@ -446,4 +446,40 @@ export const usuarios = () => async (dispatch) =>
 		{
 			dispatch({ type: "USUARIOS", payload: res.data })
 		})
+}
+
+export const login = (value)=> async (dispatch)=>{
+    const config ={
+        headers:{
+            Authorization: token
+        }
+    }
+    const action = await axios.post(`${URL_BASE}/autenticar`,value, config)
+    return dispatch({
+        type: 'LOGIN',
+        payload: action
+    })
+}
+	let token = null
+console.log(token)
+export const setToken = (newToken)=>{
+    token = `Bearer ${newToken}`
+    return token
+}
+
+
+
+  export const busquedaAccesorios = (name)=> async (dispatch)=>{
+    try {
+        console.log(name)
+        if(name){
+            return await fetch(`${URL_BASE}/accesorios?producto=${name}`)
+            .then(res => res.json())
+            .then(res =>{
+            dispatch({type:'BUSCAR_ACCESORIOS', payload: res})
+        })
+        }
+    }catch (error) {
+        alert(`El nombre: ${name}, no existe`)
+    }
 }
