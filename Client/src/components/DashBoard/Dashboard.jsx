@@ -90,7 +90,7 @@ function DashboardContent() {
 
   const volver = () =>
   {
-      navigate(-1)
+      navigate('/dashboard')
   }
   return (
     <ThemeProvider theme={mdTheme}>

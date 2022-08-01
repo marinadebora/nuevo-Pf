@@ -7,6 +7,7 @@ import "../styles/navBar.css";
 import { Box } from '@mui/system';
 import { Link } from 'react-router-dom';
 import '../styles/searchBar.css';
+import {FiltrosAccesorios} from './FiltrosAccesorios'
 
 
 
@@ -69,6 +70,7 @@ export default function SearchBar(){
          
    
     <div id='campos'>
+     
       
      {/*  <label id='text'>Buscar por Categoria:</label>
       <select name="categoriasR" id="categoriasR" onChange={(e) => filtroPorCategoria(e)}>
