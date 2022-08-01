@@ -70,7 +70,7 @@ export default function SearchBar(){
           <Toolbar>
          
    
-    <div id='campos'>
+   {/*  <div id='campos'>
       
       <label id='text'>Buscar por Categoria:</label>
       <select name="categoriasR" id="categoriasR" onChange={(e) => filtroPorCategoria(e)}>
@@ -87,7 +87,7 @@ export default function SearchBar(){
        
       
      
-       </select>
+       </select> */}
 
        
       
@@ -95,14 +95,14 @@ export default function SearchBar(){
 
 
 
-
+{/* 
       <label id='text'>Buscar por Nombre:</label>
       <input value={name} key='buscar' type='text' placeholder='buscar...' onChange={(e) => handleChange(e)} />
       <button  type='submit' id='buttonB' onClick={(e) => handleSubmit(e)}>Buscar</button>
       <button id='buttonB' onClick={reset}>Reset</button>
         
       
-    </div>
+    </div> */}
 
         
         

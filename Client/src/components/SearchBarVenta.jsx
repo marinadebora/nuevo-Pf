@@ -71,7 +71,7 @@ export default function SearchBar(){
           <Button><Link class='item' id='LinkVenta' to='/venta'><h4>EMBARCACIONES EN VENTA</h4></Link></Button>
           <Button><Link class='item' id='LinkRenta' to='/alquiler'><h4>EMBARCACIONES EN RENTA</h4></Link></Button>
           <Button><Link class='item' id='LinkAccesorios' to='/accesorios'><h4>ACCESORIOS</h4></Link></Button>
-   
+   {/* 
     <div id='campos'>
       
       <label id='text'>Buscar por Categoria:</label>
@@ -96,7 +96,7 @@ export default function SearchBar(){
       <button  type='submit' id='buttonB' onClick={(e) => handleSubmit(e)}>Buscar</button>
       <button id='buttonB' onClick={reset}>Reset</button>
         
-    </div>
+    </div> */}
 
         
         
