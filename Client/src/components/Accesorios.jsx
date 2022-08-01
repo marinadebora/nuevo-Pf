@@ -13,6 +13,8 @@ import '../styles/searchBar.css';
 import '../styles/box.css'
 import {FiltrosAccesorios} from './FiltrosAccesorios';
 import img from '../imagenes/sin_productos.jpg'
+import {todosLosProductos,getItemsCart, resetDetail} from '../actions/actions'
+
 
 
 export function Accesorios(){ 
@@ -30,7 +32,8 @@ export function Accesorios(){
   const navigate = useNavigate()
   const [venta, setVenta] = useState('')
   const [categorias, setCategorias] = useState('')
-
+  const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
+  const [cart /* setCart */] = useState(cartFromLocalStorage);
 
  
   const paginado = (numPage) =>
@@ -38,10 +41,15 @@ export function Accesorios(){
     setPage(numPage)
   }
 
-  useEffect(() =>
-  {
+  useEffect(()=>{
+    localStorage.getItem("item2")
+    localStorage.setItem("item2", JSON.stringify(cart));
+    
+    dispatch(getItemsCart());
+    dispatch(resetDetail());
     dispatch(accesorios())
-  }, [dispatch])
+
+},[dispatch, cart,localStorage.getItem("item2")])
 
   const volver = () =>
   {

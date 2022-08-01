@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -10,9 +10,13 @@ import Badge from "@mui/material/Badge"
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Button from '@mui/material/Button';
 import '../styles/card.css';
-import {addToBasket} from '../actions/actions'
-import {useDispatch} from 'react-redux'
+import {addToBasket,getItemsCart} from '../actions/actions'
+import {useDispatch, useSelector, } from 'react-redux'
 import {  useState } from 'react';
+import swal from "sweetalert";
+import {useNavigate } from "react-router-dom";
+
+
 
 
 
@@ -20,14 +24,83 @@ import {  useState } from 'react';
 
 
 export default function Producto({ tipo,id, producto, marca ,precio, fabricacion, imagenes, Link}) {
-  //const { id } = useParams();
-  const [contador,setContador]=useState(0)
-   const dispatch = useDispatch()
+
+  const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
+  const [cart /* setCart */] = useState(cartFromLocalStorage);
+  
+  
+  
+  
+   const navigate = useNavigate();
+   const [contador, setContador] = useState(0)
+   const dispatch = useDispatch() 
+   const basket=useSelector(state=>state.basket)  
+   /*function addToCart(){
+    localStorage.getItem("item2")
+    const idlocal = cartFromLocalStorage.map(e=> e._id)
+          const searchId = idlocal.includes(id)
+          localStorage.getItem("item2")
+          console.log(searchId)
+         if(searchId){
+            return  alert("error")
+            
+          }
+    
+    dispatch(addToBasket({id}))
    
-   const addToCart = () =>{
-      dispatch(addToBasket(id))
-    setContador(contador +1)
-   }
+     
+  }*/
+  /*useEffect(()=>{
+    let localUser
+    ( async() => {
+    if(localStorage.getItem('userInfo')){
+        localUser = JSON.parse(localStorage.getItem('userInfo'));
+        setUser(localUser)
+    }
+    })()
+}, [dispatch])*/
+  const addToCart = () =>{
+    
+   
+    dispatch(addToBasket({id}))
+     return  swal({
+      title: "Your product was successfully added to the cart",
+      text: "What do you want to do next?",
+      icon: "success",
+      buttons: {
+        cart: {
+          text: "Go to cart",
+          value: "cart",
+        },
+       
+        cancel: "Stay",
+      },
+    }).then((value) => {
+      switch (value) {
+        case "cart":
+          navigate("/checkoutPage");
+          swal("Welcome to your cart", "Have a nice buy!", "success");
+          break;
+
+        default:
+          break;
+      }
+    });
+     
+  }
+  
+   
+  useEffect(()=>{
+    localStorage.getItem("item2")
+   
+},[localStorage.getItem("item2")])
+   
+   
+   
+
+ 
+  
+  
   return (
     <Fragment>
       <Card sx={{ maxWidth: 330 }} id='card'>
@@ -68,8 +141,8 @@ export default function Producto({ tipo,id, producto, marca ,precio, fabricacion
         </CardContent>
         <CardActions disableSpacing id='cardAction'>
           
-          <IconButton aria-label="add to cart" onClick={addToCart} >
-          <Badge badgeContent={contador} color="secondary" id='badge'>
+          <IconButton aria-label="add to cart" onClick={addToCart}>
+          <Badge  color="secondary" id='badge'>
             <AddShoppingCartIcon />
             </Badge>
           </IconButton>

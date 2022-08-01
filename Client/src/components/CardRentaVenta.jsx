@@ -6,8 +6,6 @@ import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import Badge from "@mui/material/Badge"
-import { Link } from 'react-router-dom';
 import ContactMailIcon from "@mui/icons-material/ContactMail";
 import Button from '@mui/material/Button';
 import '../styles/card.css';

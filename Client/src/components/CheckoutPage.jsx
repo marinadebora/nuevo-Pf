@@ -1,4 +1,3 @@
-
 import NavBar from './Navbar'
 import { addToBasket, removeToBasket } from '../actions/actions'
 import { useSelector, useDispatch } from 'react-redux'
