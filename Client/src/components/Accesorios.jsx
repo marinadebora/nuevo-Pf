@@ -91,6 +91,7 @@ export function Accesorios(){
                     producto={e.producto}
                     descripcion={e.descripcion}
                     Tamaño={e.Tamaño}
+                    id={e._id}
                     Link={<Link to={`/home/${e._id}`} >Info</Link>}
                   />
 
