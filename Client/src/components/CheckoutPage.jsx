@@ -30,7 +30,11 @@ export default function CheckoutPage()
     
     
     
-
+    function handleDelete(d){
+        const deleted = cart.filter(e => e !== d)
+        localStorage.setItem("item2", JSON.stringify(deleted));
+     
+    }
    
 
   useEffect(() => {
@@ -65,10 +69,7 @@ console.log(uniqueArray);
         navigate(-1)
     }
 
-    const deleteProduct=(id)=>{
-        dispatch(removeToBasket(id))
-     
-    }
+   
 
    // const precioTotal = 
  

@@ -28,8 +28,10 @@
 
 #textBoxL2{
     padding-top: 7px;
-    margin-right: 770px;
+    margin-left: 80px;
+    margin-right: 700px;
     font-size: 14px;
+    text-align: justify;
 }
 
 #buttonsLanding{
