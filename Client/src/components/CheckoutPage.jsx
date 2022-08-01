@@ -1,5 +1,5 @@
 import NavBar from './Navbar'
-import { addToBasket, removeToBasket,getItemsCart } from '../actions/actions'
+import { addToBasket, removeToBasket,getItemsCart, } from '../actions/actions'
 import { useSelector, useDispatch ,} from 'react-redux'
 import { useEffect ,useState,Fragment} from 'react'
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +10,8 @@ import { accesorios } from '../actions/actions'
 import { Grid } from '@mui/material'
 import Card from './CardShop'
 import {  Link } from 'react-router-dom';
+import swal from "sweetalert";
+
 
 
 
@@ -25,16 +27,12 @@ export default function CheckoutPage()
     const accesorio = useSelector(state => state.allAccesories._id)
     const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
     const [cart /* setCart */] = useState(cartFromLocalStorage);
-    const[cant, SetCant]= useState(1)
+    const[cant, /SetCant/]= useState(1)
 
     
     
     
-    function handleDelete(d){
-        const deleted = cart.filter(e => e !== d)
-        localStorage.setItem("item2", JSON.stringify(deleted));
-     
-    }
+
    
 
   useEffect(() => {
@@ -69,7 +67,43 @@ console.log(uniqueArray);
         navigate(-1)
     }
 
+    const deleteProduct=(id)=>{
+        dispatch(removeToBasket(id))
+     
+    }
+      
    
+    const handleDelete = (id) => {
+        localStorage.setItem(
+          "item2",
+          JSON.stringify(cartFromLocalStorage.filter((e) => e._id !== id))
+        );
+        return  swal({
+            title: "Your product was successfully deleted to the cart",
+            icon: "success",
+            buttons: {
+                OK: {
+                    text: "OK",
+                    value: "check",
+                  },      
+            },
+          }).then((value) => {
+            switch (value) {
+              case "check":
+                navigate("/checkoutPage");
+                break;
+      
+              default:
+                break;
+            }
+          });
+          
+        
+       
+      };
+
+     
+    
 
    // const precioTotal = 
  
@@ -104,7 +138,7 @@ console.log(uniqueArray);
                     astillero={e.astillero}
                     fabricacion={e.fabricacion}
                     localizacion={e.localizacion}
-                    imagenes={e.imagenes?.[0]}
+                    imagenes={e.imagenes[0]}
                     producto={e.producto}
                     descripcion={e.descripcion}
                     Tamaño={e.Tamaño}
@@ -113,6 +147,7 @@ console.log(uniqueArray);
                   />
                 <button>Cantidad:{cant}</button>
                 <button>Precio Total:{e.precio}</button>
+                <button onClick={() => handleDelete(e._id)} className="delete-button">Delete</button>
                 </Grid>
               
               </Fragment>
