@@ -20,7 +20,7 @@ export default function Navbar() {
   const dispatch = useDispatch()
   const history = useNavigate()
   const[usuario, setUsuario] = useState(null)
-console.log(usuario)
+
   useEffect(()=>{
     if(localStorage.getItem('loguearUsuario')){
     const users = JSON.parse(localStorage.getItem('loguearUsuario'))
@@ -29,18 +29,23 @@ console.log(usuario)
   },[])
 
   const handelOut =()=>{
+    /* let local = JSON.parse(localStorage.getItem('loguearUsuario')) */
+    if(usuario){
+      alert('Has cerrado sesion con exito')
       setUsuario(null)
-      JSON.parse(localStorage.removeItem('loguearUsuario'))
-      dispatch(setToken(usuario))
+      localStorage.removeItem('loguearUsuario')
+      setToken(usuario)
       history("/singIn")
+    }
+      
   }
 
   const logueado = ()=>{
     return(
       <div>
         <Typography sx={{marginLeft: 'auto'}} variant="h6" component="p" id='guest'>
-          Bienvenido {usuario.email.split('@')[0]}
-          <Button type="submit" variant="outlined" sx={{marginLeft: '35px'}} onSubmit={handelOut}>Sing out</Button>
+          Bienvenido {usuario.nombre}
+          <Button type="onClick" variant="outlined" sx={{marginLeft: '35px'}} onClick={handelOut}>Sing out</Button>
         </Typography>
         
       </div>

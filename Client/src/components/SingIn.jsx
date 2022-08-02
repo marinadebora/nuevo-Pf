@@ -18,6 +18,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { login, setToken, usuarios } from '../actions/actions';
 import { useEffect } from 'react';
+import jwt_decode from 'jwt-decode'
+
 
 
 
@@ -65,7 +67,7 @@ export default function SignIn() {
         )
         setEmail('')
         setPassword('')
-        history("/")
+        history("/accesorios")
       }
       
     } catch (error) {
@@ -73,6 +75,34 @@ export default function SignIn() {
       alert("Correo y/o contraseña incorrecta")
     }
   }
+  const [user, setUser] = useState(null)
+
+  function handleCallbackResponse(response) {
+    console.log("Encoded JWT ID token: " + response.credential)
+    var userObject = jwt_decode(response.credential);
+    console.log(userObject);
+    setUser(userObject);
+    document.getElementById("signInDiv").hidden=true
+    if(user){
+      alert('has iniciado sesion')
+      setToken(response.credential)
+      localStorage.setItem('logueadoGoogle', JSON.stringify(userObject.email, userObject.given_name, userObject.family_name))
+    }
+    }
+  
+    useEffect(()=>{
+      
+      global.google.accounts.id.initialize({
+        client_id: "407769620948-hc19ijqbfmbgb19qe5h2b26q2icc3b5d.apps.googleusercontent.com",
+        callback: handleCallbackResponse
+      });
+    
+      global.google.accounts.id.renderButton(
+        document.getElementById("signInDiv"),
+        {theme: "outline", size: "large"}
+      );
+      global.google.accounts.id.prompt();
+    },[])
   
   useEffect(()=>{
     const mantenerSesion = localStorage.getItem('loguearUsuario')
@@ -92,7 +122,7 @@ export default function SignIn() {
   const ya = ()=>{
     return(
       <div>
-        <h1>listo ya mentego sesion falta cerrar sesion</h1>
+        <h1>listo ya mentego sesion</h1>
       </div>
     )
   }
@@ -151,6 +181,7 @@ export default function SignIn() {
             >
               Sign In
             </Button>
+            <div id="signInDiv"></div>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
@@ -173,7 +204,6 @@ export default function SignIn() {
 
   return (
 
-    
     <div>
     <NavBar/>
     {

@@ -4,8 +4,14 @@ const jwt = require("jsonwebtoken")
 const usuariosAuth= async (req,res)=>{
     const {email,password} = req.body;
     const api = await Usuarios.findOne({email})
-    const nombre = api.nombre + ' ' + api.apellido
-    console.log(nombre)
+    let nombre = ''
+    let id = ''
+    if(api) {
+        nombre = api.nombre + ' ' + api.apellido
+        id = api._id
+    }
+    
+    /* console.log(nombre) */
     Usuarios.findOne({email},(err,Usuarios)=>{
     if(err) {
     res.status(404).send("Error al autenticar el correo")
@@ -22,7 +28,7 @@ const usuariosAuth= async (req,res)=>{
             })
             console.log(token)
             res.cookie("pepito", token, { expiresIn: "10h" });
-            res.json({email,token,nombre})
+            res.json({email,token,nombre,id})
         }else {
             res.status(500).send("Correo y/o contraseña incorrecta")
         }
