@@ -454,7 +454,6 @@ export const login = (value)=> async (dispatch)=>{
             Authorization: token
         }
     }
-	
     const action = await axios.post(`${URL_BASE}/autenticar`,value, config)
     return dispatch({
         type: 'LOGIN',

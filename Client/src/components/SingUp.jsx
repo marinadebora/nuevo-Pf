@@ -99,7 +99,7 @@ useEffect(()=>{
     event.preventDefault();
     if(error.hasOwnProperty('last_name') || error.hasOwnProperty('firstName') || error.hasOwnProperty('email') || error.hasOwnProperty('password')){
             alert('Hay errores en los datos')
-        }else if(user?.find(e=> e.email.toLowerCase() === datos.email.toLowerCase())){
+        }else if(user.find(e=> e.email.toLowerCase() === datos.email.toLowerCase())){
             alert(`el Usuario con el correo: ${datos.email}, ya existe`)
         }else{
             dispatch(registro(datos))
