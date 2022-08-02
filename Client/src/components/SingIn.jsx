@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { login, setToken, usuarios } from '../actions/actions';
 import { useEffect } from 'react';
-import jwt_decode from 'jwt-decode'
+import jwt_decode from 'jwt-decode';
 
 
 
@@ -126,7 +126,6 @@ export default function SignIn() {
       </div>
     )
   }
-
   const renderizarFormulario = ()=>{
     return(
       <ThemeProvider theme={theme}>
