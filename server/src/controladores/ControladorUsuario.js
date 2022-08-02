@@ -8,8 +8,7 @@ const getUsuario = async(req,res)=>{
             _id: e._id,
             nombre: e.nombre,
             apellido: e.apellido,
-            email: e.email,
-            password: e.password
+            email: e.email
         }
     })
     res.send(map)
