@@ -1,7 +1,7 @@
 import React from "react";
 import {  useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { productName,filtroCatgorias, todasCategorias, todosLosProductos,busquedaAccesorios } from "../actions/actions";
+import { /* productName,filtroCatgorias, */ todasCategorias, accesorios,busquedaAccesorios } from "../actions/actions";
 import {AppBar, Toolbar, Grid, Button} from "@mui/material";
 import "../styles/navBar.css";
 import { Box } from '@mui/system';
@@ -47,7 +47,7 @@ export default function SearchBar(){
 
   }
 
-  const filtroPorCategoria = (event) =>
+ /*  const filtroPorCategoria = (event) =>
   {
     if(event.target.value==='sinFiltro'){
       dispatch(todosLosProductos())
@@ -56,10 +56,10 @@ export default function SearchBar(){
       event.preventDefault()
       dispatch(filtroCatgorias(event.target.value))
     }
-  }
+  } */
 
   const reset = () =>{
-    dispatch(todosLosProductos())
+    dispatch(accesorios())
   }
 
   return (
@@ -88,7 +88,7 @@ export default function SearchBar(){
       <label id='text'>Buscar por Nombre:</label>
       <input value={name} key='buscar' type='text' placeholder='buscar...' onChange={(e) => handleChange(e)} />
       <button  type='submit' id='buttonB' onClick={(e) => handleSubmit(e)}>Buscar</button>
-      <button id='buttonB' onClick={reset}>Reset</button>
+      <button id='buttonB' onClick={reset}>Recargar</button>
         
       
     </div>
