@@ -126,12 +126,12 @@ function DashboardContent() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Admin
+              Administrador
             </Typography>
 
-            <Link href="/singIn">
-              <Button variant="outlined" id="buttonDasboard">Inicia Sesion</Button>
-            </Link>
+            {/* cuando este la ruta/ funcion  de cerrar sesion conectar a este boton */}
+              <Button variant="outlined" id="buttonDasboard">Cerrar Sesion</Button>
+       
 
 
             {/* <IconButton color="inherit">

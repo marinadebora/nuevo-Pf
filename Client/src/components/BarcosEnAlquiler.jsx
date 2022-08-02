@@ -86,7 +86,7 @@ console.log(productAlquiler)
           })
         }
       </Grid>
-      <Link to='/home'>
+      <Link to='/accesorios'>
         <button id='buttonBack'>VOLVER</button>
       </Link>
       <Paginado
