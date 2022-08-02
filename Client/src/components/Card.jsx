@@ -129,7 +129,7 @@ export default function Producto({ tipo,id, producto, marca ,precio, fabricacion
          id='imgCard'
          component="img"
          height="200"
-         image={imagenes} />
+         image={imagenes?.[0]} />
          :''
             
         }
@@ -137,7 +137,7 @@ export default function Producto({ tipo,id, producto, marca ,precio, fabricacion
         {
             fabricacion? <Typography>Año: {fabricacion}</Typography>:''
           }
-          <Typography>Price: {precio}</Typography>
+          <Typography>Precio: {precio}</Typography>
         </CardContent>
         <CardActions disableSpacing id='cardAction'>
           
