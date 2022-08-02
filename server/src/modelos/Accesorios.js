@@ -82,12 +82,12 @@ valoraciones:{
 rating:{
     type: Number
 },
-comentarios: [
+comentarios:{type: Array} /* [
     {
         userId: {type: mongoose.Schema.Types.ObjectId, ref: 'Usuarios'},
         comentario: String
 
-    }]
+    }] */
 },{
     versionKey:false,
     timestamps:true
