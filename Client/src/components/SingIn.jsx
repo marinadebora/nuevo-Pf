@@ -17,13 +17,8 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { login, setToken, usuarios } from '../actions/actions';
-<<<<<<< HEAD
-import { useEffect} from 'react';
-import jwt_decode from "jwt-decode";
-=======
 import { useEffect } from 'react';
-import jwt_decode from 'jwt-decode'
->>>>>>> b40e328adb6c0cbb0c1968354ea62e2b1305b442
+import jwt_decode from 'jwt-decode';
 
 
 
@@ -131,33 +126,6 @@ export default function SignIn() {
       </div>
     )
   }
-  const [user,setUser]= useState({})
-
-function handleCallbackResponse(response){
- console.log("Encoded JWT ID token: " + response.credential);
- var userObject = jwt_decode(response.credential);
- console.log(userObject);
- setUser(userObject);
- document.getElementById("signInDiv").hidden=true;
-}
-function handleSignOut(event){
-  setUser({});
-  document.getElementById("signInDiv").hidden=false;
-}
-  useEffect(()=>{
-    /* global google*/
-    google.accounts.id.initialize({
-      client_id: "870312932213-kj6jj3ui8ud0sl96tg84dav6h3l9efr9.apps.googleusercontent.com",
-      callback: handleCallbackResponse
-    });
-    google.accounts.id.renderButton(
-      document.getElementById("signInDiv"),
-      {theme:"outline",size:"large"}
-    );
-    google.accounts.id.prompt();
-  },[]);
-
-
   const renderizarFormulario = ()=>{
     return(
       <ThemeProvider theme={theme}>
@@ -213,18 +181,6 @@ function handleSignOut(event){
               Sign In
             </Button>
             <div id="signInDiv"></div>
-<<<<<<< HEAD
-            { Object.keys(user).length != 0 &&
-             <button onClick={(e)=>handleSignOut(e)}>Sign Out</button>
-            }
-            {user && 
-            <div>
-              <img src={user.picture}></img>
-              <h3>{user.name}</h3>
-            </div>
-            }
-=======
->>>>>>> b40e328adb6c0cbb0c1968354ea62e2b1305b442
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
