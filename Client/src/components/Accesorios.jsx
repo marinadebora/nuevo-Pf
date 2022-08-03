@@ -20,7 +20,7 @@ import { getItemsCart, resetDetail } from '../actions/actions'
 export function Accesorios()
 {
   const accesorio = useSelector(state => state.accesories)
-  console.log(accesorio)
+  /* console.log(accesorio) */
   const dispatch = useDispatch()
   //----------paginado---------//
 

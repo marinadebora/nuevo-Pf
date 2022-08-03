@@ -48,7 +48,7 @@ export default function SignIn() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [usuario, setUsuario] = useState(null)
-  
+  console.log(usuario)
   /* console.log(email)
   console.log(password) */
 
@@ -75,34 +75,58 @@ export default function SignIn() {
       alert("Correo y/o contraseña incorrecta")
     }
   }
-  const [user, setUser] = useState(null)
+  const [user , setUser]= useState('')
 
-  function handleCallbackResponse(response) {
-    console.log("Encoded JWT ID token: " + response.credential)
-    var userObject = jwt_decode(response.credential);
-    console.log(userObject);
-    setUser(userObject);
-    document.getElementById("signInDiv").hidden=true
-    if(user){
-      alert('has iniciado sesion')
-      setToken(response.credential)
-      localStorage.setItem('logueadoGoogle', JSON.stringify(userObject.email, userObject.given_name, userObject.family_name))
+function handleCallbackResponse(response){
+  console.log("Encoded JWT ID token: " + response.credential);
+  setUser(response.credential)
+  const userObject = jwt_decode(response.credential);
+  setUser(userObject);
+  console.log(user);
+  /* console.log(userObject) */
+  document.getElementById("signInDiv").hidden=true;
+  if(userObject) {
+    alert('has iniciado sesion')
+    setToken(response.credential)
+    const local = localStorage.setItem('logueadoGoogle', JSON.stringify({email:userObject.email, nombre:userObject.given_name, apellido:userObject.family_name}))
+    setUsuario(localStorage.getItem('logueadoGoogle'))
+  }
+}
+
+useEffect(()=>{
+  const mantenerSesion = localStorage.getItem('logueadoGoogle')
+    if(mantenerSesion){
+      const users = JSON.parse(mantenerSesion)
+      setUsuario(users)
+      setToken(user)
+      console.log(user)
     }
-    }
-  
-    useEffect(()=>{
-      
-      global.google.accounts.id.initialize({
-        client_id: "407769620948-hc19ijqbfmbgb19qe5h2b26q2icc3b5d.apps.googleusercontent.com",
-        callback: handleCallbackResponse
-      });
-    
-      global.google.accounts.id.renderButton(
-        document.getElementById("signInDiv"),
-        {theme: "outline", size: "large"}
-      );
-      global.google.accounts.id.prompt();
-    },[])
+},[])
+
+function handleSignOut(event){
+  if(usuario){
+    setUser({});
+    document.getElementById("signInDiv").hidden=false;
+    alert('Has cerrado sesion con exito')
+    setUsuario(null)
+    localStorage.removeItem('loguearUsuario')
+    setToken(usuario)
+    history("/singIn")
+  }
+}
+
+  useEffect(()=>{
+    /* global google*/
+    google.accounts.id.initialize({
+      client_id: "407769620948-hc19ijqbfmbgb19qe5h2b26q2icc3b5d.apps.googleusercontent.com",
+      callback: handleCallbackResponse
+    });
+    google.accounts.id.renderButton(
+      document.getElementById("signInDiv"),
+      {theme:"outline",size:"large"}
+    );
+    google.accounts.id.prompt();
+  },[]);
   
   useEffect(()=>{
     const mantenerSesion = localStorage.getItem('loguearUsuario')
@@ -123,6 +147,15 @@ export default function SignIn() {
     return(
       <div>
         <h1>listo ya mentego sesion</h1>
+        { Object.keys(user).length != 0 &&
+              <button onClick={(e)=>handleSignOut(e)}>Sign Out</button>
+            }
+            {user && 
+            <div>
+              <img src={user.picture}></img>
+              <h3>{user.name}</h3>
+            </div>
+            }
       </div>
     )
   }
@@ -182,6 +215,7 @@ export default function SignIn() {
               Sign In
             </Button>
             <div id="signInDiv"></div>
+            
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
