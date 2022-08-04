@@ -30,6 +30,7 @@ const { requireSignin } = require("../controladores/Verificaciones");
 const {getUsuario} = require("../controladores/ControladorUsuario");
 const putUsuario = require("./putUsuarioCarrito");
 const putAccesoriosComentarios = require("./putAccesoriosComentarios");
+const { UsuarioId } = require("../controladores/controladorIdUsuario");
 
 let router = Router();
 
@@ -65,6 +66,7 @@ router.use("/categorias", postCategorias)
 router.get("/user", getUsuario)
 router.use("/user", putUsuario)
 router.use("/comentario", putAccesoriosComentarios)
+router.get("/usuario/:id",UsuarioId)
 
 
 // no ejecutar esta ruta para no replicar los documentos de la base de datos

@@ -48,17 +48,17 @@ export default function SignIn() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [usuario, setUsuario] = useState(null)
-  
+
   /* console.log(email)
   console.log(password) */
 
-  const handleSubmit = async(e)=>{
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const usuarioss = await (dispatch(login({email,password})))
-      if(!usuarioss){
+      const usuarioss = await (dispatch(login({ email, password })))
+      if (!usuarioss) {
         alert('hay errores en los campos')
-      }else{
+      } else {
         alert('Bienvenido a nuestra pagina')
         setUsuario(usuarioss.payload.data)
         setToken(usuarioss.payload.data.token)
@@ -69,7 +69,7 @@ export default function SignIn() {
         setPassword('')
         history("/accesorios")
       }
-      
+
     } catch (error) {
       console.log(error)
       alert("Correo y/o contraseña incorrecta")
@@ -82,137 +82,141 @@ export default function SignIn() {
     var userObject = jwt_decode(response.credential);
     console.log(userObject);
     setUser(userObject);
-    document.getElementById("signInDiv").hidden=true
-    if(user){
+    document.getElementById("signInDiv").hidden = true
+    if (user) {
       alert('has iniciado sesion')
       setToken(response.credential)
       localStorage.setItem('logueadoGoogle', JSON.stringify(userObject.email, userObject.given_name, userObject.family_name))
     }
-    }
-  
-    useEffect(()=>{
-      
-      global.google.accounts.id.initialize({
-        client_id: "407769620948-hc19ijqbfmbgb19qe5h2b26q2icc3b5d.apps.googleusercontent.com",
-        callback: handleCallbackResponse
-      });
-    
-      global.google.accounts.id.renderButton(
-        document.getElementById("signInDiv"),
-        {theme: "outline", size: "large"}
-      );
-      global.google.accounts.id.prompt();
-    },[])
-  
-  useEffect(()=>{
+
+
+
+
+  }
+
+  useEffect(() => {
+
+    global.google.accounts.id.initialize({
+      client_id: "407769620948-hc19ijqbfmbgb19qe5h2b26q2icc3b5d.apps.googleusercontent.com",
+      callback: handleCallbackResponse
+    });
+
+    global.google.accounts.id.renderButton(
+      document.getElementById("signInDiv"),
+      { theme: "outline", size: "large" }
+    );
+    global.google.accounts.id.prompt();
+  }, [])
+
+  useEffect(() => {
     const mantenerSesion = localStorage.getItem('loguearUsuario')
-    if(mantenerSesion){
+    if (mantenerSesion) {
       const users = JSON.parse(mantenerSesion)
       setUsuario(users)
       setToken(users.token)
       console.log(users.token)
     }
-  },[])
+  }, [])
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(usuarios())
-  },[dispatch])
+  }, [dispatch])
 
 
-  const ya = ()=>{
-    return(
+  const ya = () => {
+    return (
       <div>
         <h1>listo ya mentego sesion</h1>
       </div>
     )
   }
-  const renderizarFormulario = ()=>{
-    return(
+  const renderizarFormulario = () => {
+    return (
       <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              onChange={({target})=> setEmail(target.value.toLocaleLowerCase())}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              onChange={({target})=> setPassword(target.value)}
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In
-            </Button>
-            <div id="signInDiv"></div>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <Box
+            sx={{
+              marginTop: 8,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in
+            </Typography>
+            <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                onChange={({ target }) => setEmail(target.value.toLocaleLowerCase())}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                onChange={({ target }) => setPassword(target.value)}
+              />
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Sign In
+              </Button>
+              <div id="signInDiv"></div>
+              <Grid container>
+                <Grid item xs>
+                  <Link href="#" variant="body2">
+                    Forgot password?
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Link href="./singUp" variant="body2">
+                    {"Don't have an account? Sign Up"}
+                  </Link>
+                </Grid>
               </Grid>
-              <Grid item>
-                <Link href="./singUp" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
+            </Box>
           </Box>
-        </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
-      </Container>
-    </ThemeProvider>
+          <Copyright sx={{ mt: 8, mb: 4 }} />
+        </Container>
+      </ThemeProvider>
     )
   }
 
   return (
 
     <div>
-    <NavBar/>
-    {
-      usuario?
-      ya():
-      renderizarFormulario()
-    }
-    
-    
-    
+      <NavBar />
+      {
+        usuario ?
+          ya() :
+          renderizarFormulario()
+      }
+
+
+
     </div>
   );
 }
