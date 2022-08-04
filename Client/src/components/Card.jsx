@@ -24,44 +24,13 @@ import {useNavigate } from "react-router-dom";
 
 
 export default function Producto({ tipo,id, producto, marca ,precio, fabricacion, imagenes, Link}) {
-
-  /* const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
-  const [cart , setCart ] = useState(cartFromLocalStorage); */
-  
-  
-  
-  
-   const navigate = useNavigate();
- /*   const [contador, setContador] = useState(0)
-   const basket=useSelector(state=>state.basket)  */ 
+   
+  const navigate = useNavigate();
    const dispatch = useDispatch() 
-   /*function addToCart(){
-    localStorage.getItem("item2")
-    const idlocal = cartFromLocalStorage.map(e=> e._id)
-          const searchId = idlocal.includes(id)
-          localStorage.getItem("item2")
-          console.log(searchId)
-         if(searchId){
-            return  alert("error")
-            
-          }
+  
+  
+   async function addToCart () {
     
-    dispatch(addToBasket({id}))
-   
-     
-  }*/
-  /*useEffect(()=>{
-    let localUser
-    ( async() => {
-    if(localStorage.getItem('userInfo')){
-        localUser = JSON.parse(localStorage.getItem('userInfo'));
-        setUser(localUser)
-    }
-    })()
-}, [dispatch])*/
-  const addToCart = () =>{
-    
-   
     dispatch(addToBasket({id}))
      return  swal({
       title: "Your product was successfully added to the cart",
@@ -141,7 +110,7 @@ export default function Producto({ tipo,id, producto, marca ,precio, fabricacion
         </CardContent>
         <CardActions disableSpacing id='cardAction'>
           
-          <IconButton aria-label="add to cart" onClick={addToCart}>
+          <IconButton aria-label="add to cart"onClick={() => addToCart()}>
           <Badge  color="secondary" id='badge'>
             <AddShoppingCartIcon />
             </Badge>
