@@ -18,3 +18,14 @@
 #Ecopy{
     margin-left: 200px;
 }
+#buttonParalel{
+    width: 80px;
+    background-color: transparent;
+    border: none;
+    color: #02537d;
+    -webkit-transform: skewX(40deg); 
+    margin-top: 22px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
