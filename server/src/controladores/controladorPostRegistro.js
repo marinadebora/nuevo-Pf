@@ -3,13 +3,19 @@ const bcrypt=require("bcrypt");
 const jwt = require("jsonwebtoken")
 
 const usuarios= async (req,res,next)=>{
-    const {email,password,firstName,lastName} = req.body;
-    const api = await Usuarios.findOne({ email })
+    const {email,password,/* nombre,apellido */firstName,lastName} = req.body;
+    const api = await Usuarios.findOne({email})
+
     console.log(api)
     if(api){ 
         res.status(404).send('El usuario ya existe')
     }else{
-    const user= new Usuarios({email,password,nombre:firstName,apellido:lastName});
+    const user = new Usuarios({
+        email:email,
+        password:password,
+        nombre: firstName,
+        apellido:lastName
+    });
     user.save(err =>{
         if(err){
             console.log(err)
@@ -20,14 +26,12 @@ const usuarios= async (req,res,next)=>{
             })
             res.send({
                 email:email,
-                nombre: firstName,
+                nombre:firstName,
                 token:token
             })
-            next()
         }
-
     })
-  
+    next()
 }
 };
 
