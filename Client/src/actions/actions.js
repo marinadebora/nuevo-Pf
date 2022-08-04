@@ -439,6 +439,16 @@ export const registro = (value) => async (dispatch) =>
 			alert(error)
 		})
 }
+
+/* export const registro = (value)=> async (dispatch)=>{
+    return await axios.post(`http://localhost:4000/registro`,value)
+    .then(res =>{
+        dispatch({type: "REGISTRO", payload: res.data})
+    }).catch(error=>{
+        alert(error)
+    })
+} */
+
 export const usuarios = () => async (dispatch) =>
 {
 	return await axios.get(`/user`)
@@ -446,6 +456,14 @@ export const usuarios = () => async (dispatch) =>
 		{
 			dispatch({ type: "USUARIOS", payload: res.data })
 		})
+}
+
+let token = null
+console.log(token)
+
+export const setToken = (newToken)=>{
+    token = `Bearer ${newToken}`
+    return token
 }
 
 export const login = (value)=> async (dispatch)=>{
@@ -460,17 +478,8 @@ export const login = (value)=> async (dispatch)=>{
         payload: action
     })
 }
-	let token = null
-//console.log(token)
 
-export const setToken = (newToken)=>{
-    token = `Bearer ${newToken}`
-    return token
-}
-
-
-
-  export const busquedaAccesorios = (name)=> async (dispatch)=>{
+export const busquedaAccesorios = (name)=> async (dispatch)=>{
     try {
         console.log(name)
         if(name){

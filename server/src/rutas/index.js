@@ -30,15 +30,19 @@ const { requireSignin } = require("../controladores/Verificaciones");
 const {getUsuario} = require("../controladores/ControladorUsuario");
 const putUsuario = require("./putUsuarioCarrito");
 const putAccesoriosComentarios = require("./putAccesoriosComentarios");
+const controladorHistoria = require("../NuevaHistoria/controladorHistoria")
+
 
 let router = Router();
+
+router.use("/", controladorHistoria)
 
 
 router.use("/embarcacionesV", getEmbarVenta);
 router.use("/embarcacionesVId", getEmbarVentaId);
 router.use("/embarcacionesR", getEmbarRenta);
 router.use("/embarcacionesRId", getEmbarRentaId);
-router.use("/accesorios",/* requireSignin, */ getAccesorios);
+router.use("/accesorios", getAccesorios);
 router.use("/accesorio", getAccesoriosId);
 router.use("/todos", getTodo);
 router.use("/todos", getTodoId);

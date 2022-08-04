@@ -13,7 +13,7 @@ const UsuariosSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         cantidad: Number, default:1
         }] */,
-    historialDeCompra:{type:Array},
+    historialDeCompra:/* {type: Array} */[{ type: Schema.Types.ObjectId, ref:"Historials"}],
     favoritos:{type:Array},
     admin:{type:Boolean,default:false}
 
