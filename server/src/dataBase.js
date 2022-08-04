@@ -15,7 +15,6 @@ const { MONGO_USERS
     } catch (error) {
         console.error(error)
     }
-
 })() 
 
 
@@ -30,4 +29,3 @@ const { MONGO_USERS
 //         console.error(error)
 //     }
 // })() 
-
