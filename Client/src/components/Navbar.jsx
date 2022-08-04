@@ -20,8 +20,11 @@ export default function Navbar() {
   const dispatch = useDispatch()
   const history = useNavigate()
   const[usuario, setUsuario] = useState(null)
+  const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
+ 
 
   useEffect(()=>{
+    localStorage.getItem("item2") 
     if(localStorage.getItem('loguearUsuario')){
     const users = JSON.parse(localStorage.getItem('loguearUsuario'))
     setUsuario(users)
@@ -114,7 +117,7 @@ export default function Navbar() {
 
             <Link to='/checkoutPage'>
               <IconButton arial-label="show cart items" id="cartButton">
-                <Badge badgeContent={3} color="secondary" id='badge'>
+                <Badge badgeContent={cartFromLocalStorage.length} color="secondary" id='badge'>
                   <ShoppingCart id="cart" />
                 </Badge>
               </IconButton>
