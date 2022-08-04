@@ -21,11 +21,13 @@ const getUsuario = async(req,res)=>{
             _id: e._id,
             nombre: e.nombre,
             apellido: e.apellido,
+
             email: e.email,
             carritoDeCompra: e.carritoDeCompra,
             historialDeCompra: e.historialDeCompra,
             favoritos: e.favoritos,
             admin: e.admin
+
         }
     })
     res.send(map)
