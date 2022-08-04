@@ -31,7 +31,7 @@ export function UsuariosDetail(id)
 	return async function (dispatch)
 	{
 		try {
-			const userDetail = await axios(`${URL_LOCAL}/userd/${id}`)
+			const userDetail = await axios(`${URL_LOCAL}/usuario/${id}`)
 
 			return dispatch({
 				type: 'USUARIO_DETAIL',

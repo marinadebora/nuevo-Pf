@@ -21,7 +21,7 @@ export default function Navbar() {
   const history = useNavigate()
   const[usuario, setUsuario] = useState(null)
   const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
-  console.log(cartFromLocalStorage)
+ 
 
   useEffect(()=>{
     localStorage.getItem("item2") 

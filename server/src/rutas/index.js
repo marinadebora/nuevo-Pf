@@ -27,7 +27,6 @@ const {correo}= require("../controladores/autenticar")
 
 const {agregarAlCarrito, borrarCarrito, asignarUsuarioAlCarrito} = require("../controladores/controladorCarrito");
 const { requireSignin } = require("../controladores/Verificaciones");
-const getUsuarioId = require("./GetUsuarioId");
 const putUsuario = require("./putUsuarioCarrito");
 const putAccesoriosComentarios = require("./putAccesoriosComentarios");
 const { UsuarioId } = require("../controladores/controladorIdUsuario");
@@ -67,7 +66,6 @@ router.post("/carrito/:id", agregarAlCarrito);
 router.delete("/carrito",borrarCarrito)
 router.get("/categorias", categorias)
 router.use("/categorias", postCategorias)
-router.use("/userd", getUsuarioId)
 router.use("/user", putUsuario)
 router.use("/comentario", putAccesoriosComentarios)
 router.get("/usuario/:id",UsuarioId)
