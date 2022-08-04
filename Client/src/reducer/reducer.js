@@ -11,6 +11,7 @@
     detail: {},
     categorias: [],
     basket: [],
+   
   
   };
   
@@ -243,6 +244,16 @@
         return{
           ...state,
           accesories: action.payload
+        }
+      case 'EDITAR_USUARIOS':
+        return {
+          ...state,
+          user:action.payload
+        }
+      case 'EDITAR_ACC_COMENTARIOS':
+
+        return{
+          ...state,
         }
   
       default: {

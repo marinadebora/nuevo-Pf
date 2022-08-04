@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-const URL_BASE ="https://nautical25.herokuapp.com"
+const URL_BASE ="http://localhost:4000"|| "https://nautical25.herokuapp.com"
 //import infoProductos from '../infoPrueba/index'
 
 
@@ -461,7 +461,7 @@ export const login = (value)=> async (dispatch)=>{
     })
 }
 	let token = null
-console.log(token)
+//console.log(token)
 
 export const setToken = (newToken)=>{
     token = `Bearer ${newToken}`
@@ -484,3 +484,39 @@ export const setToken = (newToken)=>{
         alert(`El nombre: ${name}, no existe`)
     }
 }
+export function editarUsuario(){
+	return async function(dispatch){
+		try {
+			const usuarios = await axios.put('/user')
+			return dispatch({
+				type:'EDITAR_USUARIOS',
+				payload:usuarios.data
+			})
+		} catch (error) {
+			console.log(error)
+		}
+	}
+}
+
+
+ export function editarAccComentarios(id, payload){
+	return async function(dispatch){
+		try {
+			const accesorios = await axios.put(`comentario/${id}`,payload)
+			return dispatch({
+				type:'EDITAR_ACC_COMENTARIOS',
+				payload:accesorios.data
+			})
+		} catch (error) {
+			console.log(error)
+		}
+	} 
+}
+/* export const editarAccComentarios = (id, payload) => async (dispatch) =>
+{
+	return await axios.put(`${URL_BASE}comentario/${id}`,payload)
+		.then(res =>
+		{
+			dispatch({ type: 'EDITAR_ACC_COMENTARIOS', payload: res.data })
+		})
+} */
