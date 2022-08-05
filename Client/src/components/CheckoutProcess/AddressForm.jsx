@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useStateValue } from "../../stateProvider";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
@@ -15,6 +15,14 @@ import '../../styles/checkout.css';
 const AddressForm = ({nextStep}) => {
   const methods = useForm();
   const [{ shippingData }, dispatch] = useStateValue();
+  const ShippingLocalStorage = JSON.parse(localStorage.getItem("ShippingData") || "[]");
+
+  useEffect(() => {
+    localStorage.setItem("ShippingData", JSON.stringify(ShippingLocalStorage))
+ 
+   
+    
+  }, [ShippingLocalStorage]);
 
   return (
       <>
@@ -24,11 +32,19 @@ const AddressForm = ({nextStep}) => {
         <FormProvider {...methods}>
         <form
           onSubmit={methods.handleSubmit((data) => {
-            dispatch({
-              type: 'SET_SHIPPING_DATA',
-              shippingData: data,
-            });
-            nextStep();
+            const cart_add = data
+            const actual_card = localStorage.getItem("ShippingData") 
+             if(ShippingLocalStorage.length) {
+             localStorage.setItem(
+               "ShippingData",
+               JSON.stringify([cart_add])
+             );
+           } else {
+             localStorage.setItem(
+               "ShippingData",
+               JSON.stringify([cart_add])
+             )
+           }nextStep();
           })}
           >
               <Grid container spacing={3}>

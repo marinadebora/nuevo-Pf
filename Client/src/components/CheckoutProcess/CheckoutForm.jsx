@@ -39,6 +39,17 @@ const CheckoutForm = ({ backStep, nextStep }) => {
     const [loading, setLoading] = useState(false);
     const stripe = useStripe();
     const elements = useElements();
+
+    const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
+    const [cart /* setCart */] = useStateValue(cartFromLocalStorage);
+    const current_cart =cartFromLocalStorage;
+
+    const sumall = current_cart.map(item => item.precio);
+    const neto = sumall.map(e=>e.split('$')[1])
+    const num = neto.map(e=> parseInt(e))
+    var precioTotal =num.reduce((a, b) => a + b, 0);
+
+   //const InfoTotal = [precioTotal,cartFromLocalStorage,shipp]
   
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -56,7 +67,8 @@ const CheckoutForm = ({ backStep, nextStep }) => {
             "http://localhost:4000/api/checkout",
             {
               id,
-            //   amount: getBasketTotal(basket) * 100,
+              amount: precioTotal * 100,
+            
             }
           );
           /* enviamos al backend, y la información que vamos a enviar al backend */
@@ -101,12 +113,8 @@ const CheckoutForm = ({ backStep, nextStep }) => {
             type='submit'
             disabled={!stripe}
             id='buttonBackPaymentForm'
-          > A Pagar $1500
-            {/* {loading ? (
-              <CircularProgress />
-            ) : (
-              `Pay ${accounting.formatMoney(getBasketTotal(basket), "€")}`
-            )} */}
+          > A Pagar 
+            ${precioTotal}
           </Button>
         </div>
       </form>
