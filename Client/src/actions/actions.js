@@ -511,12 +511,12 @@ export const usuarios = () => async (dispatch) =>
 }
 
 let token = null
-console.log(token)
 
 export const setToken = (newToken)=>{
     token = `Bearer ${newToken}`
     return token
 }
+
 
 export const login = (value)=> async (dispatch)=>{
     const config ={
@@ -530,6 +530,9 @@ export const login = (value)=> async (dispatch)=>{
         payload: action
     })
 }
+
+
+
 
 export const busquedaAccesorios = (name)=> async (dispatch)=>{
     try {

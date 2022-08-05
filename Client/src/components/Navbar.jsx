@@ -14,9 +14,10 @@ import { useDispatch} from 'react-redux';
 export default function Navbar() {
   //constante para cambiar e numero del carrito de forma dinamica
   // si la activo se rompe el detail por un tema de estado
-  /*  const carrito=useSelector(state=>state.basket)
+ /*  const carrito=useSelector(state=>state.basket)
   const suma=carrito.filter(Boolean).length
  */
+
   const dispatch = useDispatch()
   const history = useNavigate()
   const[usuario, setUsuario] = useState(null)
@@ -73,6 +74,7 @@ export default function Navbar() {
   }
   
 
+
   return (
     
       <AppBar position="sticky" id="appBar">
@@ -96,25 +98,20 @@ export default function Navbar() {
               <button src='/alquiler' id='buttonParalel'>Alquiler Yates</button>
             </Link>
             
-            
+           
             <Typography sx={{marginLeft: 'auto'}} variant="h6" component="p" id='guest'>
             <Link id='adminNavbar' to='/dashboard'>
-              Hello Guest
+              Hello Admin
               </Link>
             </Typography>
             
-            {
-              usuario?
-              logueado():
-              sinLogin()
-            }
-            {/* <Link to='/singIn'>
+            <Link to='/singIn'>
               <Button variant="outlined" id="button">Sing In</Button>
             </Link>
 
             <Link to='/singUp'>
               <Button variant="outlined" id="button">Sing Up</Button>
-            </Link> */}
+            </Link>
 
             <Link to='/checkoutPage'>
               <IconButton arial-label="show cart items" id="cartButton">

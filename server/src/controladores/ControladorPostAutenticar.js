@@ -1,8 +1,11 @@
 const Usuarios= require("../modelos/Usuarios");
+const transporter = require("../controladores/controladorPostEmail")
+
 const jwt = require("jsonwebtoken")
 
-const usuariosAuth= async (req,res)=>{
+const usuariosAuth= (req,res)=>{
     const {email,password} = req.body;
+<<<<<<< HEAD
     const api = await Usuarios.findOne({email})
     let nombre = ''
     let id = ''
@@ -15,23 +18,30 @@ const usuariosAuth= async (req,res)=>{
     console.log(admin)
     
     /* console.log(nombre) */
+=======
+>>>>>>> f636a01 (Revert "singun")
     Usuarios.findOne({email},(err,Usuarios)=>{
     if(err) {
     res.status(404).send("Error al autenticar el correo")
-    }else if(!Usuarios){
+}else if(!Usuarios){
     res.status(404).send("Hay campos erroneos")
-    } else{
+} else{
     Usuarios.isCorrectPassword(password,(err,result)=>{
         if(err){
             res.status(500).send("Error al autenticar")
         }else if(result){
-            /* console.log(req.headers) */
+            console.log(req.headers.authorization/* .split(" ")[1] */)
             let token = jwt.sign({Usuarios}, "torombolo", {
                 expiresIn: "10h"
             })
+<<<<<<< HEAD
             console.log(token)
             res.cookie("pepito", token, { expiresIn: "10h" });
             res.json({email,token,nombre,id,admin})
+=======
+            res.cookie("token", token, { expiresIn: "10h" });
+            res.send({email,token})
+>>>>>>> f636a01 (Revert "singun")
         }else {
             res.status(500).send("Correo y/o contraseña incorrecta")
         }
@@ -41,5 +51,4 @@ const usuariosAuth= async (req,res)=>{
     });
     
 };
-
 module.exports= {usuariosAuth}
