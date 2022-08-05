@@ -115,11 +115,14 @@ export function Accesorios()
       <br /><br /><br /><br /><br />
       <button id='buttonBack' onClick={volver}>VOLVER</button>
 
+      
+
       <Paginado
         characterPerPage={characterPerPage}
         newState={accesorio.length}
         paginado={paginado}
       />
+
 
       <Footer />
     </div>);
