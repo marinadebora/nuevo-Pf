@@ -34,12 +34,12 @@ const { validacioncampos } = require('../middlewares/validador-de-campos')
 //         });
 //     }
 // });
- 
+
 
 
 
 const correo = async (req,res )=>{
-    const {email,password,nombre,apellido} = req.body;
+    const {email,password,firstName,lastName} = req.body;
     try {
         await transporter.sendMail({
             from: '"Usuario Creado 🚢" <accesoriosnautica02@gmail.com>', // sender address
@@ -47,12 +47,17 @@ const correo = async (req,res )=>{
             subject: "AccesoriosNautica", // Subject line
             text: "", // plain text body
             html: `"<b>De:accesoriosnautica02@gmail.com</b>"
-            <p>Password: ${password}</p>
-            <p>Nombre: ${nombre}</p>
-            <p>Apellido: ${apellido}</p>
+            <p>Tu solicitud de registro fue exitosa!!🎉</p>
+            <p>Y te registrastes con las credenciales:</p>
+            <br/>
+            <p>Nombre: ${firstName}</p>
+            <p>Apellido: ${lastName}</p>
+            <br/>
+            <p>Puedes acceder a nuestra pagina desde el siguiente enlace:</p>
+            <link>🚢https://nuevo-pf.vercel.app/🚢</link>
             `, // html body
         });
-         return("Correo Enviado")
+        return("Correo Enviado")
     } catch (error) {
         console.log(error)
         res.status(404).send("Error al enviar el correo")

@@ -2,6 +2,7 @@ import axios from 'axios';
 
 
 const URL_BASE ="https://nautical25.herokuapp.com"
+const URL_LOCAL ="http://localhost:4000"
 //import infoProductos from '../infoPrueba/index'
 
 
@@ -25,6 +26,24 @@ export function todosLosProductos()
 	}
 }
 
+export function UsuariosDetail(id)
+{
+	return async function (dispatch)
+	{
+		try {
+			const userDetail = await axios(`${URL_LOCAL}/usuario/${id}`)
+
+			return dispatch({
+				type: 'USUARIO_DETAIL',
+				payload: userDetail.data
+			})
+		} catch (error) {
+			console.log(error)
+		}
+
+	}
+
+}
 export function productosDetail(id)
 {
 	return async function (dispatch)
@@ -120,13 +139,25 @@ export const addToBasket = (item) =>
 		console.log(err)
 	}
 };
-
-
-export function removeToBasket(payload)
+export const addParam = (item) =>
 {
+	try {
+		return {
+			type: 'ADD_TO_PARAM',
+			payload: item,
+		}
+	} catch (err) {
+		console.log(err)
+	}
+};
+
+
+export function removeToBasket(item)
+
+{console.log(item)
 	return {
 		type: 'REMOVE_TO_BASKET',
-		payload
+		payload: item
 
 	}
 }
@@ -321,6 +352,21 @@ export function updateAccesorio(id, payload)
 			})
 	}
 }
+
+export function UpdateToCart(id, payload)
+{
+	return function (dispatch)
+	{
+		return axios.put(`${URL_LOCAL}/user/${id}`, payload)
+			.then(data =>
+			{
+				dispatch({
+					type: "UPDATE_CART",
+					payload: data
+				})
+			})
+	}
+}
 //---------------------EMBARCACIONENV---------------------
 //--------------------------------------------------------
 export function postEmbarcacionEnV(payload)
@@ -460,6 +506,16 @@ export const registro = (value) => async (dispatch) =>
 			alert(error)
 		})
 }
+
+/* export const registro = (value)=> async (dispatch)=>{
+    return await axios.post(`http://localhost:4000/registro`,value)
+    .then(res =>{
+        dispatch({type: "REGISTRO", payload: res.data})
+    }).catch(error=>{
+        alert(error)
+    })
+} */
+
 export const usuarios = () => async (dispatch) =>
 {
 	return await axios.get(`/user`)
@@ -469,20 +525,7 @@ export const usuarios = () => async (dispatch) =>
 		})
 }
 
-export const login = (value)=> async (dispatch)=>{
-    const config ={
-        headers:{
-            Authorization: token
-        }
-    }
-	
-    const action = await axios.post(`${URL_BASE}/autenticar`,value, config)
-    return dispatch({
-        type: 'LOGIN',
-        payload: action
-    })
-}
-	let token = null
+let token = null
 console.log(token)
 
 export const setToken = (newToken)=>{
@@ -490,9 +533,20 @@ export const setToken = (newToken)=>{
     return token
 }
 
+export const login = (value)=> async (dispatch)=>{
+    const config ={
+        headers:{
+            Authorization: token
+        }
+    }
+    const action = await axios.post(`${URL_BASE}/autenticar`,value, config)
+    return dispatch({
+        type: 'LOGIN',
+        payload: action
+    })
+}
 
-
-  export const busquedaAccesorios = (name)=> async (dispatch)=>{
+export const busquedaAccesorios = (name)=> async (dispatch)=>{
     try {
         console.log(name)
         if(name){

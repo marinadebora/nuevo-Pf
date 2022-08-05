@@ -45,7 +45,7 @@ export default function SignUp() {
     email:'',
     password:''
   })
-
+  console.log(user)
   const [error, setError] = useState({
     firstName:'Debe colocar su nombre',
     lastName:'Debe colocar su apellido',
@@ -65,7 +65,7 @@ export default function SignUp() {
         error.lastName = 'Debe contener un apellido valido'
     }
     if(!(/^[a-zA-Z-\s]+$/).test(e.lastName)){
-        error.last_name = 'Debe contener solo letras'
+        error.lastName = 'Debe contener solo letras'
     }
     if(!e.email){
         error.email = "Debe contener un email valido"
@@ -93,30 +93,25 @@ useEffect(()=>{
   dispatch(usuarios())
 },[dispatch])
 
-
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    if(error.hasOwnProperty('last_name') || error.hasOwnProperty('firstName') || error.hasOwnProperty('email') || error.hasOwnProperty('password')){
+    if(error.hasOwnProperty('lastName') || error.hasOwnProperty('firstName') || error.hasOwnProperty('email') || error.hasOwnProperty('password')){
             alert('Hay errores en los datos')
-        }else if(user?.find(e=> e.email.toLowerCase() === datos.email.toLowerCase())){
+        }else if(user.find(e=> e.email.toLowerCase() === datos.email.toLowerCase())){
             alert(`el Usuario con el correo: ${datos.email}, ya existe`)
         }else{
             dispatch(registro(datos))
             alert('El usuario se registro correctamente')
             setDatos({
-                name:'',
-                last_name:'',
+                firstName:'',
+                lastName:'',
                 email:'',
-                telefono:'',
-                direction:'',
                 password:''
             })
             history("/singIn")
         }
     
   };
-
 
   return (
     <div>

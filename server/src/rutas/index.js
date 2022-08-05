@@ -27,15 +27,22 @@ const {correo}= require("../controladores/autenticar")
 
 const {agregarAlCarrito, borrarCarrito, asignarUsuarioAlCarrito} = require("../controladores/controladorCarrito");
 const { requireSignin } = require("../controladores/Verificaciones");
+const putUsuario = require("./putUsuarioCarrito");
+const putAccesoriosComentarios = require("./putAccesoriosComentarios");
+const { UsuarioId } = require("../controladores/controladorIdUsuario");
+const controladorHistoria = require("../NuevaHistoria/controladorHistoria")
+
 
 let router = Router();
+
+router.use("/", controladorHistoria)
 
 
 router.use("/embarcacionesV", getEmbarVenta);
 router.use("/embarcacionesVId", getEmbarVentaId);
 router.use("/embarcacionesR", getEmbarRenta);
 router.use("/embarcacionesRId", getEmbarRentaId);
-router.use("/accesorios",/* requireSignin, */ getAccesorios);
+router.use("/accesorios", getAccesorios);
 router.use("/accesorio", getAccesoriosId);
 router.use("/todos", getTodo);
 router.use("/todos", getTodoId);
@@ -59,6 +66,9 @@ router.post("/carrito/:id", agregarAlCarrito);
 router.delete("/carrito",borrarCarrito)
 router.get("/categorias", categorias)
 router.use("/categorias", postCategorias)
+router.use("/user", putUsuario)
+router.use("/comentario", putAccesoriosComentarios)
+router.get("/usuario/:id",UsuarioId)
 
 
 // no ejecutar esta ruta para no replicar los documentos de la base de datos

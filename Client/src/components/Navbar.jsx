@@ -20,8 +20,11 @@ export default function Navbar() {
   const dispatch = useDispatch()
   const history = useNavigate()
   const[usuario, setUsuario] = useState(null)
-console.log(usuario)
+  const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
+ 
+
   useEffect(()=>{
+    localStorage.getItem("item2") 
     if(localStorage.getItem('loguearUsuario')){
     const users = JSON.parse(localStorage.getItem('loguearUsuario'))
     setUsuario(users)
@@ -29,18 +32,23 @@ console.log(usuario)
   },[])
 
   const handelOut =()=>{
+    /* let local = JSON.parse(localStorage.getItem('loguearUsuario')) */
+    if(usuario){
+      alert('Has cerrado sesion con exito')
       setUsuario(null)
-      JSON.parse(localStorage.removeItem('loguearUsuario'))
-      dispatch(setToken(usuario))
+      localStorage.removeItem('loguearUsuario')
+      setToken(usuario)
       history("/singIn")
+    }
+      
   }
 
   const logueado = ()=>{
     return(
       <div>
         <Typography sx={{marginLeft: 'auto'}} variant="h6" component="p" id='guest'>
-          Bienvenido {usuario.email.split('@')[0]}
-          <Button type="submit" variant="outlined" sx={{marginLeft: '35px'}} onSubmit={handelOut}>Sing out</Button>
+          Bienvenido {usuario.nombre}
+          <Button type="onClick" variant="outlined" sx={{marginLeft: '35px'}} onClick={handelOut}>Sing out</Button>
         </Typography>
         
       </div>
@@ -109,7 +117,7 @@ console.log(usuario)
 
             <Link to='/checkoutPage'>
               <IconButton arial-label="show cart items" id="cartButton">
-                <Badge badgeContent={3} color="secondary" id='badge'>
+                <Badge badgeContent={cartFromLocalStorage.length} color="secondary" id='badge'>
                   <ShoppingCart id="cart" />
                 </Badge>
               </IconButton>

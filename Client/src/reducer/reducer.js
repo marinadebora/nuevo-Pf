@@ -11,13 +11,18 @@
     detail: {},
     categorias: [],
     basket: [],
+<<<<<<< HEAD
     shippingData:[],
+=======
+    userDetail: [],
+>>>>>>> c0fd5d9e6b03a03241c52c26c47a7a6a61f11129
   
   };
   
   function rootReducer(state = initialState, action)
   {
     const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
+    const paramFromLocalStorage = JSON.parse(localStorage.getItem("parametros") || "[]"); 
 
   
     switch (action.type) {
@@ -30,11 +35,18 @@
           detail:{}
         }
       case 'PRODUCTOS_DETAIL':
-  console.log(action.payload)
+  
         return {
           ...state,
           detail: action.payload,
           basket:action.payload
+        }
+        case 'USUARIO_DETAIL':
+  
+        return {
+          ...state,
+          userDetail: action.payload,
+          
         }
   
       case 'BARCOS_EN_VENTA':
@@ -88,18 +100,56 @@
         return{
           ...state
         }
+        case 'ADD_TO_PARAM':
+          
+         const actual_card2 = localStorage.getItem("parametros") 
+          //JSON.stringify([...cartFromLocalStorage, cart_add._id, cart_add.producto])
+         
+         if(paramFromLocalStorage.length) {
+          localStorage.setItem(
+            "parametros",
+            JSON.stringify([...paramFromLocalStorage, cart_add])
+          );
+        } else {
+          localStorage.setItem(
+            "item2",
+            JSON.stringify([cart_add])
+          )
+        }
+        return{
+          ...state
+        }
   
         case 'REMOVE_TO_BASKET':
-          const cart_remove = state.basket.filter(e => e!==undefined&& e._id !== action.payload)
-  
-          return{
-            ...state,
-            basket: cart_remove
+          //const cart_remove = state.basket.filter(e => e!==undefined&& e._id !== action.payload)
+          const spliceCart = cartFromLocalStorage
+          var myIndex = spliceCart.indexOf(action.payload);
+          console.log(action.payload)
+         /* if (myIndex !== -1) {
+            spliceCart.splice(myIndex, 1);
+             }
+           console.log(spliceCart)
+           if(cartFromLocalStorage.length) {
+            localStorage.setItem(
+              "item2",
+              JSON.stringify([spliceCart])
+            );
+          } else {
+            localStorage.setItem(
+              "item2",
+              JSON.stringify([spliceCart])
+            )
+          }*/
+           return{
+            ...state
           }
+  
+          
           case "GET_ALL_CART":
+            const actual = localStorage.getItem("item2")
             return {
               ...state,
-              basket:state.basket
+              basket: actual
             }
 
           case 'SET_SHIPPING_DATA':

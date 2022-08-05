@@ -8,12 +8,12 @@ const UsuariosSchema = new Schema({
     password:{type:String,required:true},
     nombre:{type:String,required:true,lowercase:true},
     apellido:{type:String,required:true,lowercase:true},
-    carritoDeCompra:[{
+    carritoDeCompra:{type:Array}/* [{
         ref: "Accesorios",
         type: mongoose.Schema.Types.ObjectId,
         cantidad: Number, default:1
-        }],
-    historialDeCompra:{type:Array},
+        }] */,
+    historialDeCompra:/* {type: Array} */[{ type: Schema.Types.ObjectId, ref:"Historials"}],
     favoritos:{type:Array},
     admin:{type:Boolean,default:false}
 
