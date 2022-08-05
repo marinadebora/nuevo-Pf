@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 
 
-export function CatCreate(){
+export function CatCreate2(){
 
     const dispatch = useDispatch()
     const navigate = useNavigate();
@@ -125,7 +125,7 @@ export function CatCreate(){
                 !allCat ? 
                 <>
                     <div>
-                        <h1>LOADING</h1>
+                        <h1>Cargando...</h1>
                     </div>
                 </>:
                 <>
@@ -149,7 +149,7 @@ export function CatCreate(){
                                 <input 
                                     type='text' 
                                     name='nombre' 
-                                    placeholder='name of categorie..' 
+                                    placeholder='nombre de la categoria..' 
                                     value={input.nombre}
                                     onChange={handleChange}
                                     className={errors.nombre && 'danger'}
@@ -160,7 +160,7 @@ export function CatCreate(){
 
                             <button classproducto="button-submit" type="submit" >Enviar Categoria</button>
                             <Link to='/admin'>
-                                <button id='buttonBackForm'>Back</button>
+                                <button id='buttonBackForm'>Volver</button>
                             </Link>
                             
                           
@@ -176,4 +176,4 @@ export function CatCreate(){
     )
 }
 
-export default CatCreate;
+export default CatCreate2;

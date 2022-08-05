@@ -34,7 +34,6 @@ export default function CheckoutPage()
   const current_userID =UserFromLocalStorage?.id
   const myUserDetail = useSelector(state => state?.userDetail);
   const current_cart =cartFromLocalStorage;
- 
   const CartUser= myUserDetail[0]?.carritoDeCompra
   const paramFromLocalStorage = JSON.parse(localStorage.getItem("parametros") || "[]");
   const [param /* setCart */] = useState(paramFromLocalStorage);

@@ -1,4 +1,4 @@
- const initialState = {
+ export const initialState = {
     products: [],
     allProducts:[],
     saleVessels: [],
@@ -11,12 +11,18 @@
     detail: {},
     categorias: [],
     basket: [],
+<<<<<<< HEAD
+    userDetail: [],
+    shippingData:[],
+  
+=======
 
     userDetail:[],
     user:[],
     historial:[],
     comentario:[]
 
+>>>>>>> b83b943f67818760a5eb42a576022d6b7006ffce
   };
   
   function rootReducer(state = initialState, action)
@@ -152,6 +158,12 @@
               ...state,
               basket: actual
             }
+
+            case 'SET_SHIPPING_DATA':
+              return {
+                ...state,
+                shippingData: action.payload
+              }
     
         //----------filtros----------//
   
