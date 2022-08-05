@@ -27,11 +27,13 @@ const usuario=/* { "_id": "62e7f9455d0436c6a2dcfe9c",
 const UserFromLocalStorage = JSON.parse(localStorage.getItem("loguearUsuario"));
  const current_userID =UserFromLocalStorage.id
   const myDetail = useSelector(state => state.comentario);
-
-console.log(myDetail)
+const productos=useSelector(state => state.detail);
+const comentProduct=productos.comentarios
+console.log(comentProduct)
 const [acces, setAcces] = useState(
 
-{  comentarios:{
+{  ...comentProduct,
+  comentarios:{
   reseña:'',
     nombre: '',
   
@@ -42,7 +44,7 @@ const [acces, setAcces] = useState(
 
  useEffect(()=>{
   dispatch(usuarioId(current_userID))
-  //dispatch(productosDetail(id))
+  dispatch(productosDetail(id))
   },[dispatch,current_userID])
 
 console.log(acces) 
