@@ -2,10 +2,16 @@ import axios from 'axios';
 
 
 
+
 //const URL_BASE ="https://nautical25.herokuapp.com"
 
 //import infoProductos from '../infoPrueba/index'
 
+
+/* const URL_BASE = "https://nautical25.herokuapp.com";
+
+//import infoProductos from '../infoPrueba/index'
+const URL_LOCAL="http://localhost:4000" */
 
 export function todosLosProductos()
 {
@@ -476,6 +482,7 @@ export function updateEmbarcacionRT(id, payload)
 }
 
 
+
 export const registro = (value) => async (dispatch) =>
 {
 	return await axios.post(`/registro`, value)
@@ -486,6 +493,7 @@ export const registro = (value) => async (dispatch) =>
 		{
 			alert(error)
 		})
+
 
 }
 
@@ -511,6 +519,8 @@ export const usuarios = () => async (dispatch) =>
 let token = null
 
 
+
+
 export const setToken = (newToken)=>{
     token = `Bearer ${newToken}`
     return token
@@ -523,7 +533,9 @@ export const login = (value)=> async (dispatch)=>{
             Authorization: token
         }
     }
+
     const action = await axios.post("/autenticar",value, config)
+
     return dispatch({
         type: 'LOGIN',
         payload: action
@@ -546,4 +558,85 @@ export const busquedaAccesorios = (name)=> async (dispatch)=>{
     }catch (error) {
         alert(`El nombre: ${name}, no existe`)
     }
+}
+export function editarUsuario(){
+	return async function(dispatch){
+		try {
+			const usuarios = await axios.put('/user')
+			return dispatch({
+				type:'EDITAR_USUARIOS',
+				payload:usuarios.data
+			})
+		} catch (error) {
+			console.log(error)
+		}
+	}
+}
+
+
+ export function editarAccComentarios(id, payload){
+	return async function(dispatch){
+		try {
+			const accesorios = await axios.put(`/comentario/${id}`,payload)
+			console.log(accesorios)
+			return dispatch({
+				type:'EDITAR_ACC_COMENTARIOS',
+				payload:accesorios
+			})
+		} catch (error) {
+			console.log(error)
+		}
+	} 
+}
+export function usuarioId(id)
+{
+	return async function (dispatch)
+	{
+		try {
+			const userDetail = await axios(`/usuario/${id}`)
+
+			return dispatch({
+				type: 'USUARIO_ID',
+				payload: userDetail.data
+			})
+		} catch (error) {
+			console.log(error)
+		}
+
+	}}
+/* export function usuarioId(id)
+{
+	return async function (dispatch)
+	{
+		try {
+			return   axios.get(`http://localhost:4000/usuario/${id}`)
+            .then(data =>
+			{
+				dispatch({
+					type: "USUARIO_ID",
+					payload: data
+				})
+			})
+				
+		} catch (error) {
+			console.log(error)
+		}
+
+	}
+
+} */
+export function historialCompra(){
+	return async function(dispatch){
+		try{
+
+			const histComp= await axios(`/historia`)
+			return dispatch({
+				type:'HISTORIAL_COMPRA',
+				payload:histComp
+			})
+		}
+		catch(error){
+console.log(error)
+		}
+	}
 }
