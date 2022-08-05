@@ -44,7 +44,7 @@ const theme = createTheme();
 export default function SignIn() {
   const history = useNavigate()
   const dispatch = useDispatch()
-  /* const user = useSelector(state => state.user) */
+  const users = useSelector(state => state.user)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [usuario, setUsuario] = useState(null)
@@ -68,7 +68,12 @@ export default function SignIn() {
         )
         setEmail('')
         setPassword('')
-        history("/accesorios")
+        if(usuarioss.payload.data.admin === true){
+          history('/dashboard')
+        }else{
+          history("/accesorios")
+        }
+        
       }
 
     } catch (error) {
@@ -76,10 +81,11 @@ export default function SignIn() {
       alert("Correo y/o contraseña incorrecta")
     }
   }
-  const [user , setUser]= useState('')
+  const [user , setUser]= useState({})
 
+  
 async function handleCallbackResponse(response){
-  console.log("Encoded JWT ID token: " + response.credential);
+  /* console.log("Encoded JWT ID token: " + response.credential); */
   setUser(response.credential)
   const userObject = jwt_decode(response.credential);
   setUser(userObject);
@@ -89,14 +95,15 @@ async function handleCallbackResponse(response){
   if(userObject) {
     alert('has iniciado sesion')
     setToken(response.credential)
-    localStorage.setItem('logueadoGoogle', JSON.stringify({email:userObject.email, nombre:userObject.given_name, apellido:userObject.family_name, password:userObject.email}))
+    localStorage.setItem('logueadoGoogle', JSON.stringify({email:userObject.email, nombre:userObject.given_name, apellido:userObject.family_name, password:userObject.email, admin: false}))
     const google = JSON.parse(localStorage.getItem('logueadoGoogle'))
     setUsuario({google})
-    console.log(google)
-    
     dispatch(registroGoogle(google))
-    history("/accesorios")
-    
+    if(google.admin === true){
+      history('/dashboard')
+    }else{
+      history("/accesorios")
+    }
   }
 }
 

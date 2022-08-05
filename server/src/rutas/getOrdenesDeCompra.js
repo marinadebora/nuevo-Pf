@@ -1,4 +1,4 @@
-const {Router} = require("express");
+/* const {Router} = require("express");
 const ordenesDeCompra = require("../modelos/OrdenCompra")
 
 getOrdenes = Router()
@@ -17,4 +17,4 @@ getOrdenes.get("/", async (req, res)=>{
     catch(error){
         console.log(error)
     }
-})
+}) */
