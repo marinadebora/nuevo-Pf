@@ -50,14 +50,16 @@ export default function SignIn() {
   const [usuario, setUsuario] = useState(null)
   /* console.log(email)
   console.log(password) */
-  /* console.log(usuario) */
-  const handleSubmit = async(e)=>{
+
+
+  const handleSubmit = async (e) => {
+
     e.preventDefault();
     try {
-      const usuarioss = await (dispatch(login({email,password})))
-      if(!usuarioss){
+      const usuarioss = await (dispatch(login({ email, password })))
+      if (!usuarioss) {
         alert('hay errores en los campos')
-      }else{
+      } else {
         alert('Bienvenido a nuestra pagina')
         setUsuario(usuarioss.payload.data)
         setToken(usuarioss.payload.data.token)
@@ -68,7 +70,7 @@ export default function SignIn() {
         setPassword('')
         history("/accesorios")
       }
-      
+
     } catch (error) {
       console.log(error)
       alert("Correo y/o contraseña incorrecta")
@@ -134,21 +136,21 @@ function handleSignOut(event){
   
   useEffect(()=>{
     const mantenerSesion = localStorage.getItem('loguearUsuario')
-    if(mantenerSesion){
+    if (mantenerSesion) {
       const users = JSON.parse(mantenerSesion)
       setUsuario(users)
       setToken(users.token)
       console.log(users.token)
     }
-  },[])
+  }, [])
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(usuarios())
-  },[dispatch])
+  }, [dispatch])
 
 
-  const ya = ()=>{
-    return(
+  const ya = () => {
+    return (
       <div>
         <h1>listo ya mentego sesion</h1>
         { Object.keys(user).length != 0 &&
@@ -163,94 +165,93 @@ function handleSignOut(event){
       </div>
     )
   }
-  const renderizarFormulario = ()=>{
-    return(
+  const renderizarFormulario = () => {
+    return (
       <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              onChange={({target})=> setEmail(target.value.toLocaleLowerCase())}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              onChange={({target})=> setPassword(target.value)}
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In
-            </Button>
-            <div id="signInDiv"></div>
-            
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <Box
+            sx={{
+              marginTop: 8,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in
+            </Typography>
+            <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                onChange={({ target }) => setEmail(target.value.toLocaleLowerCase())}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                onChange={({ target }) => setPassword(target.value)}
+              />
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Sign In
+              </Button>
+              <div id="signInDiv"></div>
+              <Grid container>
+                <Grid item xs>
+                  <Link href="#" variant="body2">
+                    Forgot password?
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Link href="./singUp" variant="body2">
+                    {"Don't have an account? Sign Up"}
+                  </Link>
+                </Grid>
               </Grid>
-              <Grid item>
-                <Link href="./singUp" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
+            </Box>
           </Box>
-        </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
-      </Container>
-    </ThemeProvider>
+          <Copyright sx={{ mt: 8, mb: 4 }} />
+        </Container>
+      </ThemeProvider>
     )
   }
 
   return (
 
     <div>
-    <NavBar/>
-    {
-      usuario?
-      ya():
-      renderizarFormulario()
-    }
-    
-    
-    
+      <NavBar />
+      {
+        usuario ?
+          ya() :
+          renderizarFormulario()
+      }
+
+
+
     </div>
   );
 }

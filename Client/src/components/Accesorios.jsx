@@ -48,7 +48,7 @@ export function Accesorios()
     dispatch(resetDetail());
     dispatch(accesorios())
 
-  }, [dispatch, cart, localStorage.getItem("item2")])
+  }, [dispatch, cart,])
 
   const volver = () =>
   {

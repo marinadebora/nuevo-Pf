@@ -2,6 +2,7 @@ import axios from 'axios';
 
 
 const URL_BASE ="https://nautical25.herokuapp.com"
+const URL_LOCAL ="http://localhost:4000"
 //import infoProductos from '../infoPrueba/index'
 
 
@@ -25,6 +26,24 @@ export function todosLosProductos()
 	}
 }
 
+export function UsuariosDetail(id)
+{
+	return async function (dispatch)
+	{
+		try {
+			const userDetail = await axios(`${URL_LOCAL}/usuario/${id}`)
+
+			return dispatch({
+				type: 'USUARIO_DETAIL',
+				payload: userDetail.data
+			})
+		} catch (error) {
+			console.log(error)
+		}
+
+	}
+
+}
 export function productosDetail(id)
 {
 	return async function (dispatch)
@@ -120,13 +139,25 @@ export const addToBasket = (item) =>
 		console.log(err)
 	}
 };
-
-
-export function removeToBasket(payload)
+export const addParam = (item) =>
 {
+	try {
+		return {
+			type: 'ADD_TO_PARAM',
+			payload: item,
+		}
+	} catch (err) {
+		console.log(err)
+	}
+};
+
+
+export function removeToBasket(item)
+
+{console.log(item)
 	return {
 		type: 'REMOVE_TO_BASKET',
-		payload
+		payload: item
 
 	}
 }
@@ -295,6 +326,21 @@ export function updateAccesorio(id, payload)
 			{
 				dispatch({
 					type: "UPDATE_ACCESORIO",
+					payload: data
+				})
+			})
+	}
+}
+
+export function UpdateToCart(id, payload)
+{
+	return function (dispatch)
+	{
+		return axios.put(`${URL_LOCAL}/user/${id}`, payload)
+			.then(data =>
+			{
+				dispatch({
+					type: "UPDATE_CART",
 					payload: data
 				})
 			})
