@@ -24,7 +24,7 @@ const postCategorias = require("./postCategoria");
 const { usuarios } = require("../controladores/controladorPostRegistro");
 const { usuariosAuth } = require("../controladores/ControladorPostAutenticar");
 const {correo}= require("../controladores/autenticar")
-
+const { getUsuario } =require ("../controladores/ControladorUsuario")
 const {agregarAlCarrito, borrarCarrito, asignarUsuarioAlCarrito} = require("../controladores/controladorCarrito");
 const { requireSignin } = require("../controladores/Verificaciones");
 const putUsuario = require("./putUsuarioCarrito");
