@@ -6,6 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { store } from './store/index'
 import { BrowserRouter } from 'react-router-dom';
+import { StateProvider } from "./stateProvider";
+import reducer, { initialState } from "./reducer/reducer";
 import axios from 'axios';
 
 
@@ -14,7 +16,9 @@ ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <React.StrictMode>
+      <StateProvider initialState={initialState} reducer={reducer}>
           <App />  
+      </StateProvider>
       </React.StrictMode>
     </BrowserRouter>
   </Provider>,

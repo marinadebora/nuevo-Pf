@@ -143,6 +143,27 @@ export const getItemsCart = () =>
 };
 
 
+export function postShippingData(payload)
+{
+	return async function (dispatch)
+	{
+		try {
+			const datosDeEnvio = await axios.post(`https://nautical25.herokuapp.com/shippingData`, payload);
+			return dispatch({
+				type: "SET_SHIPPING_DATA",
+				payload: datosDeEnvio,
+			});
+		} catch (err) {
+			console.log(err)
+		}
+
+	}
+};
+
+
+
+
+
 //------------Filtro-Por-Precio------------//
 
 export function filtroPrecio(payload)

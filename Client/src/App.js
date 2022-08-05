@@ -23,6 +23,7 @@ import SingIn from './components/SingIn'
 import SingUp from './components/SingUp'
 import {CatCreate} from "./components/Admin/CreateCat"
 import ContactForm from "./components/ContactForm";
+import Checkout from "./components/CheckoutProcess/Checkout"
 
 export default function contactForm() {
   return (
@@ -36,6 +37,7 @@ export default function contactForm() {
         {/* <Route exact path='/home' element={<Home />} /> */}
         <Route exact path='/home/:id' element={<CardDetail />} />
         <Route exact path='/checkoutPage' element={<CheckoutPage />}/>
+        <Route exact path='/checkout' element={<Checkout/>}/>
         <Route exact path='/contactForm' element={<ContactForm />}/>
         
         <Route exact path='/admin' element={<Admin/>} />
