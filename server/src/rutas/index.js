@@ -33,6 +33,7 @@ const putAccesoriosComentarios = require("./putAccesoriosComentarios");
 const { UsuarioId } = require("../controladores/controladorIdUsuario");
 const controladorHistoria = require("../NuevaHistoria/controladorHistoria");
 const { updateHistorial } = require("../NuevaHistoria/controladorPutHistoria");
+const { correoCompra } = require("../controladores/autenticarCompra");
 
 
 
@@ -73,9 +74,9 @@ router.get("/user", getUsuario);
 router.use("/user", putUsuario);
 router.use("/comentario", putAccesoriosComentarios);
 router.get("/usuario/:id",UsuarioId);
-router.put("/historial/:id",updateHistorial);
+router.put("/historial/:id",updateHistorial,correoCompra);
 
-
+ 
 
 
 module.exports = router;

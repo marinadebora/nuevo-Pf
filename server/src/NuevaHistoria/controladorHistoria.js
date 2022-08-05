@@ -35,7 +35,7 @@ router.get("/historias", async (req,res)=>{
 
 })
 
-router.post("/historia", async(req,res)=>{
+router.post("/historia", async(req,res,next)=>{
     const {precioTotal, productos,usuario} = req.body;
     try {
         const user = await Usuarios.findById(usuario)
@@ -59,6 +59,7 @@ router.post("/historia", async(req,res)=>{
             res.send("la historia se creo correctamente cuesta: " + nuevaHistoria.precioTotal)
         }
         
+        // next()
     } catch (error) {
     console.log(error);   
     }
