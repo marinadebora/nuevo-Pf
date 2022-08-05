@@ -35,7 +35,8 @@ const { updateHistorial } = require("../NuevaHistoria/controladorPutHistoria");
 const { correoCompra } = require("../controladores/autenticarCompra");
 
 
-const usuariosGoogle = require('../controladores/ControladorRegistroGoogle')
+const usuariosGoogle = require('../controladores/ControladorRegistroGoogle');
+const { getUsuario } = require("../controladores/ControladorUsuario");
 
 /* const app = require("../modelos/SesionGoogle.js") */
 
@@ -69,16 +70,14 @@ router.use('/correo', correo);
 /* router.post("/registro",usuarios) */
 /* router.post("/autenticar",usuariosAuth); */
 router.post("/carrito/:id", agregarAlCarrito);
-<<<<<<< HEAD
 router.delete("/carrito",borrarCarrito);
 router.get("/categorias", categorias);
 router.use("/categorias", postCategorias);
-router.get("/user", getUsuario);
+router.get("/user",getUsuario);
 router.use("/user", putUsuario);
 router.use("/comentario", putAccesoriosComentarios);
 router.get("/usuario/:id",UsuarioId);
 router.put("/historial/:id",updateHistorial,correoCompra);
-=======
 router.delete("/carrito",borrarCarrito)
 
 /* router.get("/categorias", categorias)
@@ -99,8 +98,6 @@ router.use("/registroGoogle", usuariosGoogle, correo)
 // router.use("/a", cargarVentas)
 // router.use("/b", cargarRenta)
 // router.use("/c", cargarAccesorios)
-
->>>>>>> eb94a875e6ae0bbdf11a1a944f44ef42c5dbbf48
 
  
 

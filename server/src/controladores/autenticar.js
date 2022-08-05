@@ -2,8 +2,6 @@
 const { transporter } = require('../controladores/controladorPostEmail');
 const Router = require("express"); 
 const router = Router();
-const { body } = require('express-validator');
-const { validacioncampos } = require('../middlewares/validador-de-campos')
 
 // router.post("/", 
 // // body('contact_user','El nombre es obligatorio').notEmpty(),
