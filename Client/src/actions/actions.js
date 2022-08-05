@@ -1,8 +1,9 @@
 import axios from 'axios';
 
 
-const URL_BASE ="https://nautical25.herokuapp.com"
-const URL_LOCAL ="http://localhost:4000"
+
+//const URL_BASE ="https://nautical25.herokuapp.com"
+
 //import infoProductos from '../infoPrueba/index'
 
 
@@ -31,7 +32,7 @@ export function UsuariosDetail(id)
 	return async function (dispatch)
 	{
 		try {
-			const userDetail = await axios(`${URL_LOCAL}/usuario/${id}`)
+			const userDetail = await axios(`/usuario/${id}`)
 
 			return dispatch({
 				type: 'USUARIO_DETAIL',
@@ -285,7 +286,7 @@ export function postAccesorio(payload)
 	return async function (dispatch)
 	{
 		try {
-			const accesoriosCreated = await axios.post(`https://nautical25.herokuapp.com/accesorios`, payload);
+			const accesoriosCreated = await axios.post(`/accesorios`, payload);
 			return dispatch({
 				type: "POST_ACCESORIOS",
 				payload: accesoriosCreated,
@@ -336,7 +337,7 @@ export function UpdateToCart(id, payload)
 {
 	return function (dispatch)
 	{
-		return axios.put(`${URL_LOCAL}/user/${id}`, payload)
+		return axios.put(`/user/${id}`, payload)
 			.then(data =>
 			{
 				dispatch({
@@ -353,7 +354,7 @@ export function postEmbarcacionEnV(payload)
 	return async function (dispatch)
 	{
 		try {
-			const embarcacionCreated = await axios.post(`https://nautical25.herokuapp.com/embrarcacionesV`, payload);
+			const embarcacionCreated = await axios.post(`/embrarcacionesV`, payload);
 			return dispatch({
 				type: "POST_EMBARCACIONENV",
 				payload: embarcacionCreated,
@@ -403,7 +404,7 @@ export function updateEmbarcacionEnV(id, payload)
 {
 	return function (dispatch)
 	{
-		return axios.put(`https://nautical25.herokuapp.com/embrarcacionesV/${id}`, payload)
+		return axios.put(`/embrarcacionesV/${id}`, payload)
 			.then(data =>
 			{
 				dispatch({
@@ -422,7 +423,7 @@ export function postEmbarcacionRT(payload)
 	return async function (dispatch)
 	{
 		try {
-			const embarcacionCreated = await axios.post(`https://nautical25.herokuapp.com/embarcacionesR`, payload);
+			const embarcacionCreated = await axios.post(`/embarcacionesR`, payload);
 			return dispatch({
 				type: "POST_EMBARCACIONRT",
 				payload: embarcacionCreated,
@@ -458,7 +459,7 @@ export function updateEmbarcacionRT(id, payload)
 {
 	return function (dispatch)
 	{
-		return axios.put(`https://nautical25.herokuapp.com/embarcacionesR/${id}`, payload)
+		return axios.put(`/embarcacionesR/${id}`, payload)
 			.then(data =>
 			{
 				dispatch({
@@ -474,26 +475,22 @@ export function updateEmbarcacionRT(id, payload)
 	};
 }
 
-/* export const registro = (value) => async (dispatch) =>{
- 	return await axios.post(`https://nautical25.herokuapp.com/registro`, value)
- 		.then(res =>{
- 			dispatch({ type: "REGISTRO", payload: res.data })
- 		}).catch(error =>{
- 			alert(error)
- 		})
-  }*/
 
-export const registro = (value)=> async (dispatch)=>{
-    return await axios.post(`http://localhost:4000/registro`,value)
-    .then(res =>{
-        dispatch({type: "REGISTRO", payload: res.data})
-    }).catch(error=>{
-        alert(error)
-    })
+export const registro = (value) => async (dispatch) =>
+{
+	return await axios.post(`/registro`, value)
+		.then(res =>
+		{
+			dispatch({ type: "REGISTRO", payload: res.data })
+		}).catch(error =>
+		{
+			alert(error)
+		})
+
 }
 
 export const registroGoogle = (value)=> async (dispatch)=>{
-    return await axios.post(`http://localhost:4000/registroGoogle`,value)
+    return await axios.post(`/registroGoogle`,value)
     .then(res =>{
         dispatch({type:"REGISTROGOOGLR", payload: res.data})
     }).catch(error=>{
@@ -510,7 +507,9 @@ export const usuarios = () => async (dispatch) =>
 		})
 }
 
+
 let token = null
+
 
 export const setToken = (newToken)=>{
     token = `Bearer ${newToken}`
@@ -538,7 +537,7 @@ export const busquedaAccesorios = (name)=> async (dispatch)=>{
     try {
         console.log(name)
         if(name){
-            return await fetch(`${URL_BASE}/accesorios?producto=${name}`)
+            return await fetch(`/accesorios?producto=${name}`)
             .then(res => res.json())
             .then(res =>{
             dispatch({type:'BUSCAR_ACCESORIOS', payload: res})
