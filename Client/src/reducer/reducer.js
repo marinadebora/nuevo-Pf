@@ -277,6 +277,10 @@
             return{
               ...state
             }
+            case 'REGISTROGOOGLR':
+            return{
+              ...state
+            }
             case "USUARIOS":
             return{
               ...state,

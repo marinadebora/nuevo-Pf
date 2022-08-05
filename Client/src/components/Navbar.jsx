@@ -28,27 +28,28 @@ export default function Navbar() {
     if(localStorage.getItem('loguearUsuario')){
     const users = JSON.parse(localStorage.getItem('loguearUsuario'))
     setUsuario(users)
+  }else if(localStorage.getItem('logueadoGoogle')){
+    const users = JSON.parse(localStorage.getItem('logueadoGoogle'))
+    setUsuario(users)
   }
   },[])
 
   const handelOut =()=>{
-    /* let local = JSON.parse(localStorage.getItem('loguearUsuario')) */
     if(usuario){
       alert('Has cerrado sesion con exito')
       setUsuario(null)
-      localStorage.removeItem('loguearUsuario')
+      localStorage.removeItem('loguearUsuario') || localStorage.removeItem('logueadoGoogle')
       setToken(usuario)
       history("/singIn")
     }
-      
   }
 
   const logueado = ()=>{
     return(
       <div>
         <Typography sx={{marginLeft: 'auto'}} variant="h6" component="p" id='guest'>
-          Bienvenido {usuario.nombre}
-          <Button type="onClick" variant="outlined" sx={{marginLeft: '35px'}} onClick={handelOut}>Sing out</Button>
+          Bienvenido {usuario.nombre || usuario.firstName}
+          <Button type="onClick" variant="outlined" sx={{marginLeft: '35px'}} onClick={handelOut}>Cerrar Sesion</Button>
         </Typography>
         
       </div>
@@ -61,11 +62,11 @@ export default function Navbar() {
     return(
       <div>
         <Link to='/singIn'>
-              <Button variant="outlined" id="button">Sing In</Button>
+              <Button variant="outlined" id="button">Inicia Sesion</Button>
             </Link>
 
             <Link to='/singUp'>
-              <Button variant="outlined" id="button">Sing Up</Button>
+              <Button variant="outlined" id="button">Registro</Button>
             </Link>
       </div>
     )

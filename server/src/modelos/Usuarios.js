@@ -1,24 +1,20 @@
 const { Schema } = require("mongoose");
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
+/* const passportLocalMongoose = require('passport-local-mongoose') */
+/* const findOrCreate = require("mongoose-findorcreate") */
 
 
 const UsuariosSchema = new Schema({
-    email:{type:String,required:true,lowercase:true,unique:true},
-    password:{type:String,required:true},
-    nombre:{type:String,required:true,lowercase:true},
-    apellido:{type:String,required:true,lowercase:true},
-    carritoDeCompra:{type:Array}/* [{
-        ref: "Accesorios",
-        type: mongoose.Schema.Types.ObjectId,
-        cantidad: Number, default:1
-        }] */,
-    historialDeCompra:/* {type: Array} */[{ type: Schema.Types.ObjectId, ref:"Historials"}],
+    email:{type:String,required:true,lowercase:true},
+    password:{type:String,},
+    nombre:{type:String,lowercase:true},
+    apellido:{type:String,lowercase:true},
+    carritoDeCompra:{type:Array},
+    historialDeCompra:[{ type: Schema.Types.ObjectId, ref:"Historials"}],
     favoritos:{type:Array},
     admin:{type:Boolean,default:false}
-
 })
-// module.exports= mongoose.model('usuarios', UsuariosSchema);
 
 const saltRounds = 10;
 UsuariosSchema.pre("save",function(next){
@@ -49,7 +45,7 @@ UsuariosSchema.methods.isCorrectPassword= function(password,callback){
     });
 
 }
-
+/* UsuariosSchema.plugin(findOrCreate) */
 module.exports=mongoose.model("Usuarios",UsuariosSchema)
 
 
