@@ -5,30 +5,48 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 import { useDispatch, useSelector,  } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from "react-router-dom";
-import { productosDetail,editarAccComentarios } from "../../actions/actions";
-
+import { usuarioId,editarAccComentarios ,productosDetail} from "../../actions/actions";
+import '../../styles/review.css' 
+import PuntuacionEstrella from "./PuntuacionEstrella";
 
 export function Review () {
   const dispatch = useDispatch()
     const navigate = useNavigate()
     let { id } = useParams()
-    const cartFromLocalStorage = JSON.parse(localStorage.getItem("loguearUsuario") );
 
-const accesorios= useSelector(state=>state.acces_put)
-const detail = useSelector(state => state.detail)
-const [acces, setAcces] = useState({
- 
-    texto:'',
-    email:'',
-    nombre:''
-  
- 
-  
- 
+//const usuario= useSelector(state=>state.user)
+const usuario=/* { "_id": "62e7f9455d0436c6a2dcfe9c",
+"nombre": "diego",
+"apellido": "martinotti",
+"email": "diego.elprado22@gmail.com",} */
+{"_id": "62eb102b7d5ad512f6fdfcda",
+"email": "augustoloza.11@gmail.com",
+"password": "$2b$10$UNs9GAYfvU5L3/4t8s5eX.AdBn4zHNk0ISSwXAltJW.BvYD3Vy5vu",
+"nombre": "augusto",
+"apellido": "loza",}
+const UserFromLocalStorage = JSON.parse(localStorage.getItem("loguearUsuario"));
+ const current_userID =UserFromLocalStorage.id
+  const myDetail = useSelector(state => state.comentario);
 
-})
+console.log(myDetail)
+const [acces, setAcces] = useState(
+
+{  comentarios:{
+  reseña:'',
+    nombre: '',
+  
+    email: ''}}
+
+)/* "{"comentarios":{"reseña":" 020584","nombre":"marina carabajal","email":"m_deby_c@hotmail.com"}}" */
+
+
+ useEffect(()=>{
+  dispatch(usuarioId(current_userID))
+  //dispatch(productosDetail(id))
+  },[dispatch,current_userID])
 
 console.log(acces) 
+
 const [error,setError]=useState({
  
 })
@@ -45,30 +63,40 @@ function validate(acces){
 
 
  function handleChange(e){
+
   setAcces({
-    ...acces,
-    [e.target.name]:e.target.value,
+    
+    comentarios:{
+      [e.target.name]:e.target.value,
+      nombre: UserFromLocalStorage.nombre,
+ 
+      email: UserFromLocalStorage.email}
+     
+    
    
   })
   
-  setError(validate({
+/*   setError(validate({
     ...acces.comentarios,
     
    
-}))
+})) */
 }
 
 
  function handleSubmit(e){
   e.preventDefault()
   dispatch(editarAccComentarios(id, acces))
- setAcces({
-  [e.target.name]:e.target.value,
-  email:cartFromLocalStorage.email,
-  nombre:cartFromLocalStorage.nombre,
- })
-  
-  
+/*   setAcces({
+    
+    comentarios:{
+      [e.target.name]:e.target.value,
+      nombre: usuario.nombre,
+      apellido: usuario.apellido,
+      email: usuario.email}
+    
+   
+  }) */
       return (
           alert(`Tu comentario fue enviado con éxito.`), navigate(`/historialC`)
           ) 
@@ -83,56 +111,45 @@ function validate(acces){
   navigate(`/historialC`)
 }
  
-/*  {
-    "_id": "62e7f9455d0436c6a2dcfe9c",
-    "nombre": "diego",
-    "apellido": "martinotti",
-    "email": "diego.elprado22@gmail.com"
-  }, */
- const totalStars = 5;
- const activeStars = 5;
-/*   const dispatch = useDispatch();
-  const { id } = useParams();
-  const myDetail = useSelector(state => state.detail);
-const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") );
-  const [cart  setCart ] = useState(cartFromLocalStorage);
-   
-    
-  useEffect(() =>
-  {
-    localStorage.getItem("item2")
-    localStorage.setItem("item2", JSON.stringify(cart));
-    dispatch(productosDetail(id))
-  }, [dispatch, id]) */
+
 
   return (
   <div>
     <form  onSubmit={handleSubmit}>
  
-        <div>
+        <div className="contenedor">
                                 <label>Califica tu producto </label>
                                 <textarea 
                                     type='text' 
-                                    name='texto'
+                                    name='reseña'
                                     placeholder= ''
-                                    value={acces.texto}
+                                    value={acces.reseña}
                                     onChange={handleChange}
-                                > 
-                                </textarea>
-                             {/*    <input type="hidden"
+                                    className='textArea'
+                                > </textarea>
+
+                              {/*      <input type="hidden"
                                 name='comentarios'
-                                value={acces.comentarios.email=cartFromLocalStorage.email}
+                                value={acces.email}
                                 onChange={handleChange}
                                  />
                                 <input type="hidden"
                                 name='comentarios'
-                                value={acces.comentarios.nombre=cartFromLocalStorage.nombre}
+                                value={acces.nombre}
                                 onChange={handleChange}
-                                 /> */}
-                                 
+                                 /> 
+                                 <input type="hidden"
+                                name='comentarios'
+                                value={acces.apellido}
+                                onChange={handleChange}
+                                 />  */}
+                                
+                                                
                             </div>
                         <input type="submit" value="Enviar" />
-    </form>
+                        
+    </form><button onClick={cancel}>Cancelar</button>
+    <PuntuacionEstrella />
   </div>
   );
 };
@@ -141,18 +158,13 @@ const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") );
 
 
 
-/* import React from "react";
-
-    <Box>
-      {[...new Array(totalStars)].map((arr, index) => {
-        return index < activeStars ? <StarIcon /> : <StarBorderIcon />;
-      })}
-    </Box>
 
 
-  return (
-  
-  );
-};
-
-export default BasicFn; */
+/* {comentarios: [
+    {
+      reseña: "",
+      nombre: '',
+      apellido: '',
+      email: '',
+    }
+  ]} */
