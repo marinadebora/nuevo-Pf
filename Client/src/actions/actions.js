@@ -2,6 +2,12 @@ import axios from 'axios';
 
 
 
+
+//const URL_BASE ="https://nautical25.herokuapp.com"
+
+//import infoProductos from '../infoPrueba/index'
+
+
 /* const URL_BASE = "https://nautical25.herokuapp.com";
 
 //import infoProductos from '../infoPrueba/index'
@@ -32,7 +38,7 @@ export function UsuariosDetail(id)
 	return async function (dispatch)
 	{
 		try {
-			const userDetail = await axios(`${URL_LOCAL}/usuario/${id}`)
+			const userDetail = await axios(`/usuario/${id}`)
 
 			return dispatch({
 				type: 'USUARIO_DETAIL',
@@ -337,7 +343,7 @@ export function UpdateToCart(id, payload)
 {
 	return function (dispatch)
 	{
-		return axios.put(`${URL_LOCAL}/user/${id}`, payload)
+		return axios.put(`/user/${id}`, payload)
 			.then(data =>
 			{
 				dispatch({
@@ -476,27 +482,23 @@ export function updateEmbarcacionRT(id, payload)
 }
 
 
-/* export const registro = (value) => async (dispatch) =>{
- 	return await axios.post(`https://nautical25.herokuapp.com/registro`, value)
- 		.then(res =>{
- 			dispatch({ type: "REGISTRO", payload: res.data })
- 		}).catch(error =>{
- 			alert(error)
- 		})
-  }*/
+
+export const registro = (value) => async (dispatch) =>
+{
+	return await axios.post(`/registro`, value)
+		.then(res =>
+		{
+			dispatch({ type: "REGISTRO", payload: res.data })
+		}).catch(error =>
+		{
+			alert(error)
+		})
 
 
-export const registro = (value)=> async (dispatch)=>{
-    return await axios.post(`http://localhost:4000/registro`,value)
-    .then(res =>{
-        dispatch({type: "REGISTRO", payload: res.data})
-    }).catch(error=>{
-        alert(error)
-    })
 }
 
 export const registroGoogle = (value)=> async (dispatch)=>{
-    return await axios.post(`http://localhost:4000/registroGoogle`,value)
+    return await axios.post(`/registroGoogle`,value)
     .then(res =>{
         dispatch({type:"REGISTROGOOGLR", payload: res.data})
     }).catch(error=>{
@@ -513,13 +515,17 @@ export const usuarios = () => async (dispatch) =>
 		})
 }
 
+
 let token = null
-//console.log(token)
+
+
+
 
 export const setToken = (newToken)=>{
     token = `Bearer ${newToken}`
     return token
 }
+
 
 export const login = (value)=> async (dispatch)=>{
     const config ={
@@ -535,6 +541,9 @@ export const login = (value)=> async (dispatch)=>{
         payload: action
     })
 }
+
+
+
 
 export const busquedaAccesorios = (name)=> async (dispatch)=>{
     try {
