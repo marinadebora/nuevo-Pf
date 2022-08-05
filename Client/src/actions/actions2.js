@@ -84,7 +84,7 @@ export function accesorios()
 	{
 		try {
 
-			const prodVenta = await axios('/accesorios')
+			const prodVenta = await axios(`/accesorios`)
 			return dispatch({
 				type: 'ACCESORIOS',
 				payload: prodVenta.data
@@ -428,36 +428,31 @@ export function updateEmbarcacionRT(id, payload)
 	};
 }
 
-/* export const registro = (value) => async (dispatch) =>{
- 	return await axios.post(`https://nautical25.herokuapp.com/registro`, value)
- 		.then(res =>{
- 			dispatch({ type: "REGISTRO", payload: res.data })
- 		}).catch(error =>{
- 			alert(error)
- 		})
-  }*/
+/* export const registro = (value) => async (dispatch) =>
+{
+	return await axios.post(`https://nautical25.herokuapp.com/registro`, value)
+		.then(res =>
+		{
+			dispatch({ type: "REGISTRO", payload: res.data })
+		}).catch(error =>
+		{
+			alert(error)
+		})
+} */
 
 export const registro = (value)=> async (dispatch)=>{
     return await axios.post(`http://localhost:4000/registro`,value)
     .then(res =>{
         dispatch({type: "REGISTRO", payload: res.data})
     }).catch(error=>{
+		console.log(error)
         alert(error)
     })
 }
 
-export const registroGoogle = (value)=> async (dispatch)=>{
-    return await axios.post(`http://localhost:4000/registroGoogle`,value)
-    .then(res =>{
-        dispatch({type:"REGISTROGOOGLR", payload: res.data})
-    }).catch(error=>{
-        alert(error)
-    })
-} 
-
 export const usuarios = () => async (dispatch) =>
 {
-	return await axios.get(`/user`)
+	return await axios.get(`http://localhost:4000/user`)
 		.then(res =>
 		{
 			dispatch({ type: "USUARIOS", payload: res.data })
@@ -471,14 +466,13 @@ export const setToken = (newToken)=>{
     token = `Bearer ${newToken}`
     return token
 }
-
 export const login = (value)=> async (dispatch)=>{
     const config ={
         headers:{
             Authorization: token
         }
     }
-    const action = await axios.post("/autenticar",value, config)
+    const action = await axios.post(`${URL_BASE}/autenticar`,value, config)
     return dispatch({
         type: 'LOGIN',
         payload: action

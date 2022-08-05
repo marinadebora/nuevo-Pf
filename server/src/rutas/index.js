@@ -32,6 +32,9 @@ const putUsuario = require("./putUsuarioCarrito");
 const putAccesoriosComentarios = require("./putAccesoriosComentarios");
 const controladorHistoria = require("../NuevaHistoria/controladorHistoria")
 
+const usuariosGoogle = require('../controladores/ControladorRegistroGoogle')
+
+/* const app = require("../modelos/SesionGoogle.js") */
 
 let router = Router();
 
@@ -60,15 +63,20 @@ router.post("/autenticar",usuariosAuth);
 router.get("/categorias", categorias);
 router.use("/categorias", postCategorias);
 router.use('/correo', correo);
-router.post("/registro",usuarios);
-router.post("/autenticar",usuariosAuth);
+/* router.post("/registro",usuarios) */
+/* router.post("/autenticar",usuariosAuth); */
 router.post("/carrito/:id", agregarAlCarrito);
 router.delete("/carrito",borrarCarrito)
-router.get("/categorias", categorias)
-router.use("/categorias", postCategorias)
+/* router.get("/categorias", categorias)
+router.use("/categorias", postCategorias) */
 router.get("/user", getUsuario)
 router.use("/user", putUsuario)
 router.use("/comentario", putAccesoriosComentarios)
+
+
+/* router.use("/", app) */
+
+router.use("/registroGoogle", usuariosGoogle, correo)
 
 
 // no ejecutar esta ruta para no replicar los documentos de la base de datos

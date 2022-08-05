@@ -16,7 +16,7 @@ import NavBar from './Navbar';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
-import { login, setToken, usuarios } from '../actions/actions';
+import { login, setToken, usuarios, registroGoogle } from '../actions/actions';
 import { useEffect } from 'react';
 import jwt_decode from 'jwt-decode'
 
@@ -48,10 +48,9 @@ export default function SignIn() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [usuario, setUsuario] = useState(null)
-  console.log(usuario)
   /* console.log(email)
   console.log(password) */
-
+  /* console.log(usuario) */
   const handleSubmit = async(e)=>{
     e.preventDefault();
     try {
@@ -77,7 +76,7 @@ export default function SignIn() {
   }
   const [user , setUser]= useState('')
 
-function handleCallbackResponse(response){
+async function handleCallbackResponse(response){
   console.log("Encoded JWT ID token: " + response.credential);
   setUser(response.credential)
   const userObject = jwt_decode(response.credential);
@@ -88,8 +87,14 @@ function handleCallbackResponse(response){
   if(userObject) {
     alert('has iniciado sesion')
     setToken(response.credential)
-    const local = localStorage.setItem('logueadoGoogle', JSON.stringify({email:userObject.email, nombre:userObject.given_name, apellido:userObject.family_name}))
-    setUsuario(localStorage.getItem('logueadoGoogle'))
+    localStorage.setItem('logueadoGoogle', JSON.stringify({email:userObject.email, nombre:userObject.given_name, apellido:userObject.family_name, password:userObject.email}))
+    const google = JSON.parse(localStorage.getItem('logueadoGoogle'))
+    setUsuario({google})
+    console.log(google)
+    
+    dispatch(registroGoogle(google))
+    history("/accesorios")
+    
   }
 }
 
@@ -104,28 +109,27 @@ useEffect(()=>{
 },[])
 
 function handleSignOut(event){
+  event.preventDefault()
+  document.getElementById("signInDiv").hidden=false;
   if(usuario){
     setUser({});
-    document.getElementById("signInDiv").hidden=false;
     alert('Has cerrado sesion con exito')
     setUsuario(null)
-    localStorage.removeItem('loguearUsuario')
+    localStorage.removeItem('logueadoGoogle')
     setToken(usuario)
-    history("/singIn")
-  }
+  }history("/singIn")
 }
 
   useEffect(()=>{
-    /* global google*/
-    google.accounts.id.initialize({
+    global.google.accounts.id.initialize({
       client_id: "407769620948-hc19ijqbfmbgb19qe5h2b26q2icc3b5d.apps.googleusercontent.com",
       callback: handleCallbackResponse
     });
-    google.accounts.id.renderButton(
+    global.google.accounts.id.renderButton(
       document.getElementById("signInDiv"),
       {theme:"outline",size:"large"}
     );
-    google.accounts.id.prompt();
+    global.google.accounts.id.prompt();
   },[]);
   
   useEffect(()=>{
