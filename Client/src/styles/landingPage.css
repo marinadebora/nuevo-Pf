@@ -24,7 +24,10 @@
     height: 70px;
 }
 
-
+#textBoxL1{
+    padding: auto;
+    margin-left: 2rem;
+}
 
 #textBoxL2{
     padding-top: 7px;
@@ -80,6 +83,15 @@
     float:right;
     color:white;
     border: solid 1px white;
+    margin-right: 20px;
+    margin-top: 40px;
+}
+
+#buttonLandingSings{
+    display: flex;
+    float:right;
+    color:white;
+    /* border: solid 1px white; */
     margin-right: 20px;
     margin-top: 40px;
 }

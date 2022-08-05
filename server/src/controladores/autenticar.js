@@ -36,8 +36,6 @@ const { validacioncampos } = require('../middlewares/validador-de-campos')
 // });
 
 
-
-
 const correo = async (req,res )=>{
     const {email,password,firstName,lastName} = req.body;
     try {
@@ -48,10 +46,11 @@ const correo = async (req,res )=>{
             text: "", // plain text body
             html: `"<b>De:accesoriosnautica02@gmail.com</b>"
             <p>Tu solicitud de registro fue exitosa!!🎉</p>
-            <p>Y te registrastes con las credenciales:</p>
+            <p>Y te registraste con las credenciales:</p>
             <br/>
             <p>Nombre: ${firstName}</p>
             <p>Apellido: ${lastName}</p>
+            <p>password: ${password}</p>
             <br/>
             <p>Puedes acceder a nuestra pagina desde el siguiente enlace:</p>
             <link>🚢https://nuevo-pf.vercel.app/🚢</link>
@@ -59,8 +58,8 @@ const correo = async (req,res )=>{
         });
         return("Correo Enviado")
     } catch (error) {
+        /* res.status(404).send("Error al enviar el correo") */
         console.log(error)
-        res.status(404).send("Error al enviar el correo")
 
     }
 }
