@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
-import {todosLosProductos} from '../actions/actions'
+import {setToken, todosLosProductos} from '../actions/actions'
 import { Button } from "@mui/material";
 import { Box } from '@mui/system';
 import logoLanding from '../imagenes/Nautical.png'
@@ -10,7 +10,8 @@ import icon1 from '../imagenes/salvavidas.png'
 import icon2 from '../imagenes/bote.png'
 import icon3 from '../imagenes/timon.png'
 import '../styles/landingPage.css';
-
+import { Typography} from "@mui/material";
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -27,17 +28,65 @@ export default function Home()
 	const index = page * characterPerPage;
 	const endIndex = index - characterPerPage;
 	const actualPage = newState?.slice(endIndex, index);
+    const [usuario, setUsuario] = useState(null)
+    const history = useNavigate()
+    console.log(usuario)
 
-	const paginado = (numPage) =>
-	{
+	const paginado = (numPage) =>{
 		setPage(numPage)
 	}
+
+    const handelOut =()=>{
+        if(usuario){
+            alert('Has cerrado sesion con exito')
+            setUsuario(null)
+            localStorage.removeItem('loguearUsuario') || localStorage.removeItem('logueadoGoogle')
+            setToken(usuario)
+            history("/singIn")
+        }
+    }
+
+    useEffect(() => {
+        if (localStorage.getItem('loguearUsuario')) {
+            const users = JSON.parse(localStorage.getItem('loguearUsuario'))
+            setUsuario(users)
+        } else if (localStorage.getItem('logueadoGoogle')) {
+            const users = JSON.parse(localStorage.getItem('logueadoGoogle'))
+            setUsuario(users)
+        }
+    },[])
+
     useEffect(()=>{
-
         dispatch(todosLosProductos())
-
     },[dispatch])
 	
+
+    const sinSesion = ()=>{
+        return(
+            <div>
+            <Box id='boxButtonLanding'>
+                <Link to='/singUp'>
+                    <Button variant="outlined" id="buttonLandingSing">Registro</Button>
+                </Link>
+                <Link to='/singIn'>
+                    <Button variant="outlined" id="buttonLandingSing">Inicia Sesion</Button>
+                </Link>
+
+            </Box>
+            </div>
+        )
+    }
+
+    const iniciada = ()=>{
+        return(<div>
+            <Box id='boxButtonLanding'>
+                <Button type="onClick" variant="outlined" id="buttonLandingSing" sx={{ marginLeft: '35px' }} onClick={handelOut}>Cerrar Sesion</Button>
+                <Typography sx={{ marginLeft: 'auto' }} variant="h6" id="buttonLandingSings" component="p">
+                    Bienvenido {usuario.nombre || usuario.firstName}
+                </Typography>
+            </Box>
+        </div>
+    )}
 
     return(
         <div>
@@ -45,15 +94,11 @@ export default function Home()
             
             
             <Box id='boxLanding'>
-                <Box id='boxButtonLanding'>
-                    <Link to='/singIn'>
-                        <Button variant="outlined" id="buttonLandingSing">Inicia Sesion</Button>
-                    </Link>
-
-                    <Link to='/singUp'>
-                        <Button variant="outlined" id="buttonLandingSing">Registro</Button>
-                    </Link>
-                </Box>
+                {
+                    usuario ?
+                    iniciada():
+                    sinSesion()
+                }
 
                 <Box id='textBoxL1'><img id='logoL' src={logoLanding} alt='imgLanding'/></Box> 
                 <Box id='textBoxL2'>

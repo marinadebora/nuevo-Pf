@@ -27,7 +27,6 @@ const {correo}= require("../controladores/autenticar")
 
 const {agregarAlCarrito, borrarCarrito, asignarUsuarioAlCarrito} = require("../controladores/controladorCarrito");
 const { requireSignin } = require("../controladores/Verificaciones");
-const {getUsuario} = require("../controladores/ControladorUsuario");
 const putUsuario = require("./putUsuarioCarrito");
 const putAccesoriosComentarios = require("./putAccesoriosComentarios");
 const { UsuarioId } = require("../controladores/controladorIdUsuario");
@@ -36,6 +35,9 @@ const { updateHistorial } = require("../NuevaHistoria/controladorPutHistoria");
 const { correoCompra } = require("../controladores/autenticarCompra");
 
 
+const usuariosGoogle = require('../controladores/ControladorRegistroGoogle')
+
+/* const app = require("../modelos/SesionGoogle.js") */
 
 let router = Router();
 
@@ -64,9 +66,10 @@ router.post("/autenticar",usuariosAuth);
 router.get("/categorias", categorias);
 router.use("/categorias", postCategorias);
 router.use('/correo', correo);
-router.post("/registro",usuarios);
-router.post("/autenticar",usuariosAuth);
+/* router.post("/registro",usuarios) */
+/* router.post("/autenticar",usuariosAuth); */
 router.post("/carrito/:id", agregarAlCarrito);
+<<<<<<< HEAD
 router.delete("/carrito",borrarCarrito);
 router.get("/categorias", categorias);
 router.use("/categorias", postCategorias);
@@ -75,6 +78,29 @@ router.use("/user", putUsuario);
 router.use("/comentario", putAccesoriosComentarios);
 router.get("/usuario/:id",UsuarioId);
 router.put("/historial/:id",updateHistorial,correoCompra);
+=======
+router.delete("/carrito",borrarCarrito)
+
+/* router.get("/categorias", categorias)
+router.use("/categorias", postCategorias) */
+router.get("/user", getUsuario)
+
+router.use("/user", putUsuario)
+router.use("/comentario", putAccesoriosComentarios)
+router.get("/usuario/:id",UsuarioId)
+
+
+/* router.use("/", app) */
+
+router.use("/registroGoogle", usuariosGoogle, correo)
+
+
+// no ejecutar esta ruta para no replicar los documentos de la base de datos
+// router.use("/a", cargarVentas)
+// router.use("/b", cargarRenta)
+// router.use("/c", cargarAccesorios)
+
+>>>>>>> eb94a875e6ae0bbdf11a1a944f44ef42c5dbbf48
 
  
 
