@@ -1,13 +1,14 @@
 
 const mongoose = require("mongoose");
 const config = require("./config");
-const { MONGO_USERS,
+require('dotenv').config();
+const { MONGO_USERS
    } = process.env;
 
 // conectamos nuestra base de datos
 /* (async () =>
 {
-    try {
+    try { 
 
         const db = await mongoose.connect(MONGO_USERS);
         console.log('conectada la db', db.connection.name)

@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport')
 
  require('./dataBase')
-
+//  require('dotenv').config();
 const app = express();
 
 app.use(bodyParser.json())
