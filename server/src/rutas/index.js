@@ -31,7 +31,9 @@ const {getUsuario} = require("../controladores/ControladorUsuario");
 const putUsuario = require("./putUsuarioCarrito");
 const putAccesoriosComentarios = require("./putAccesoriosComentarios");
 const { UsuarioId } = require("../controladores/controladorIdUsuario");
-const controladorHistoria = require("../NuevaHistoria/controladorHistoria")
+const controladorHistoria = require("../NuevaHistoria/controladorHistoria");
+const { updateHistorial } = require("../NuevaHistoria/controladorPutHistoria");
+
 
 
 let router = Router();
@@ -64,19 +66,14 @@ router.use('/correo', correo);
 router.post("/registro",usuarios);
 router.post("/autenticar",usuariosAuth);
 router.post("/carrito/:id", agregarAlCarrito);
-router.delete("/carrito",borrarCarrito)
-router.get("/categorias", categorias)
-router.use("/categorias", postCategorias)
-router.get("/user", getUsuario)
-router.use("/user", putUsuario)
-router.use("/comentario", putAccesoriosComentarios)
-router.get("/usuario/:id",UsuarioId)
-
-
-// no ejecutar esta ruta para no replicar los documentos de la base de datos
-// router.use("/a", cargarVentas)
-// router.use("/b", cargarRenta)
-// router.use("/c", cargarAccesorios)
+router.delete("/carrito",borrarCarrito);
+router.get("/categorias", categorias);
+router.use("/categorias", postCategorias);
+router.get("/user", getUsuario);
+router.use("/user", putUsuario);
+router.use("/comentario", putAccesoriosComentarios);
+router.get("/usuario/:id",UsuarioId);
+router.put("/historial/:id",updateHistorial);
 
 
 

@@ -428,26 +428,26 @@ export function updateEmbarcacionRT(id, payload)
 	};
 }
 
-export const registro = (value) => async (dispatch) =>
-{
-	return await axios.post(`https://nautical25.herokuapp.com/registro`, value)
-		.then(res =>
-		{
-			dispatch({ type: "REGISTRO", payload: res.data })
-		}).catch(error =>
-		{
-			alert(error)
-		})
-}
+// export const registro = (value) => async (dispatch) =>
+// {
+// 	return await axios.post(`https://nautical25.herokuapp.com/registro`, value)
+// 		.then(res =>
+// 		{
+// 			dispatch({ type: "REGISTRO", payload: res.data })
+// 		}).catch(error =>
+// 		{
+// 			alert(error)
+// 		})
+// }
 
-/* export const registro = (value)=> async (dispatch)=>{
+ export const registro = (value)=> async (dispatch)=>{
     return await axios.post(`http://localhost:4000/registro`,value)
     .then(res =>{
         dispatch({type: "REGISTRO", payload: res.data})
     }).catch(error=>{
         alert(error)
     })
-} */
+} 
 
 export const usuarios = () => async (dispatch) =>
 {
@@ -472,7 +472,7 @@ export const login = (value)=> async (dispatch)=>{
             Authorization: token
         }
     }
-    const action = await axios.post(`${URL_BASE}/autenticar`,value, config)
+    const action = await axios.post("/autenticar",value, config)
     return dispatch({
         type: 'LOGIN',
         payload: action

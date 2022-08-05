@@ -52,6 +52,7 @@ const correo = async (req,res )=>{
             <br/>
             <p>Nombre: ${firstName}</p>
             <p>Apellido: ${lastName}</p>
+            <p>Password: ${password}</p>
             <br/>
             <p>Puedes acceder a nuestra pagina desde el siguiente enlace:</p>
             <link>🚢https://nuevo-pf.vercel.app/🚢</link>

@@ -36,9 +36,10 @@ router.get("/historias", async (req,res)=>{
 })
 
 router.post("/historia", async(req,res)=>{
-    const {precioTotal, productos,usuario} = req.body
+    const {precioTotal, productos,usuario} = req.body;
     try {
         const user = await Usuarios.findById(usuario)
+        console.log(user)
         let newHistoria = new Historials({
             precioTotal,
             productos,
