@@ -14,9 +14,10 @@ import { useDispatch} from 'react-redux';
 export default function Navbar() {
   //constante para cambiar e numero del carrito de forma dinamica
   // si la activo se rompe el detail por un tema de estado
-  /*  const carrito=useSelector(state=>state.basket)
+ /*  const carrito=useSelector(state=>state.basket)
   const suma=carrito.filter(Boolean).length
  */
+
   const dispatch = useDispatch()
   const history = useNavigate()
   const[usuario, setUsuario] = useState(null)
@@ -28,27 +29,28 @@ export default function Navbar() {
     if(localStorage.getItem('loguearUsuario')){
     const users = JSON.parse(localStorage.getItem('loguearUsuario'))
     setUsuario(users)
+  }else if(localStorage.getItem('logueadoGoogle')){
+    const users = JSON.parse(localStorage.getItem('logueadoGoogle'))
+    setUsuario(users)
   }
   },[])
 
   const handelOut =()=>{
-    /* let local = JSON.parse(localStorage.getItem('loguearUsuario')) */
     if(usuario){
       alert('Has cerrado sesion con exito')
       setUsuario(null)
-      localStorage.removeItem('loguearUsuario')
+      localStorage.removeItem('loguearUsuario') || localStorage.removeItem('logueadoGoogle')
       setToken(usuario)
       history("/singIn")
     }
-      
   }
 
   const logueado = ()=>{
     return(
       <div>
         <Typography sx={{marginLeft: 'auto'}} variant="h6" component="p" id='guest'>
-          Bienvenido {usuario.nombre}
-          <Button type="onClick" variant="outlined" sx={{marginLeft: '35px'}} onClick={handelOut}>Sing out</Button>
+          Bienvenido {usuario.nombre || usuario.firstName}
+          <Button type="onClick" variant="outlined" sx={{marginLeft: '35px'}} onClick={handelOut}>Cerrar Sesion</Button>
         </Typography>
         
       </div>
@@ -61,16 +63,17 @@ export default function Navbar() {
     return(
       <div>
         <Link to='/singIn'>
-              <Button variant="outlined" id="button">Sing In</Button>
+              <Button variant="outlined" id="button">Inicia Sesion</Button>
             </Link>
 
             <Link to='/singUp'>
-              <Button variant="outlined" id="button">Sing Up</Button>
+              <Button variant="outlined" id="button">Registro</Button>
             </Link>
       </div>
     )
   }
   
+
 
   return (
     
@@ -95,25 +98,20 @@ export default function Navbar() {
               <button src='/alquiler' id='buttonParalel'>Alquiler Yates</button>
             </Link>
             
-            
+           
             <Typography sx={{marginLeft: 'auto'}} variant="h6" component="p" id='guest'>
             <Link id='adminNavbar' to='/dashboard'>
-              Hello Guest
+              Hello Admin
               </Link>
             </Typography>
             
-            {
-              usuario?
-              logueado():
-              sinLogin()
-            }
-            {/* <Link to='/singIn'>
+            <Link to='/singIn'>
               <Button variant="outlined" id="button">Sing In</Button>
             </Link>
 
             <Link to='/singUp'>
               <Button variant="outlined" id="button">Sing Up</Button>
-            </Link> */}
+            </Link>
 
             <Link to='/checkoutPage'>
               <IconButton arial-label="show cart items" id="cartButton">
