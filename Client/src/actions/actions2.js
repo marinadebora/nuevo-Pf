@@ -1,11 +1,9 @@
 import axios from 'axios';
 
 
-
-/* const URL_BASE = "https://nautical25.herokuapp.com";
-
+const URL_BASE ="https://nautical25.herokuapp.com"
 //import infoProductos from '../infoPrueba/index'
-const URL_LOCAL="http://localhost:4000" */
+
 
 export function todosLosProductos()
 {
@@ -27,24 +25,6 @@ export function todosLosProductos()
 	}
 }
 
-export function UsuariosDetail(id)
-{
-	return async function (dispatch)
-	{
-		try {
-			const userDetail = await axios(`${URL_LOCAL}/usuario/${id}`)
-
-			return dispatch({
-				type: 'USUARIO_DETAIL',
-				payload: userDetail.data
-			})
-		} catch (error) {
-			console.log(error)
-		}
-
-	}
-
-}
 export function productosDetail(id)
 {
 	return async function (dispatch)
@@ -104,7 +84,7 @@ export function accesorios()
 	{
 		try {
 
-			const prodVenta = await axios('/accesorios')
+			const prodVenta = await axios(`/accesorios`)
 			return dispatch({
 				type: 'ACCESORIOS',
 				payload: prodVenta.data
@@ -140,25 +120,13 @@ export const addToBasket = (item) =>
 		console.log(err)
 	}
 };
-export const addParam = (item) =>
+
+
+export function removeToBasket(payload)
 {
-	try {
-		return {
-			type: 'ADD_TO_PARAM',
-			payload: item,
-		}
-	} catch (err) {
-		console.log(err)
-	}
-};
-
-
-export function removeToBasket(item)
-
-{console.log(item)
 	return {
 		type: 'REMOVE_TO_BASKET',
-		payload: item
+		payload
 
 	}
 }
@@ -286,7 +254,7 @@ export function postAccesorio(payload)
 	return async function (dispatch)
 	{
 		try {
-			const accesoriosCreated = await axios.post(`/accesorios`, payload);
+			const accesoriosCreated = await axios.post(`https://nautical25.herokuapp.com/accesorios`, payload);
 			return dispatch({
 				type: "POST_ACCESORIOS",
 				payload: accesoriosCreated,
@@ -332,21 +300,6 @@ export function updateAccesorio(id, payload)
 			})
 	}
 }
-
-export function UpdateToCart(id, payload)
-{
-	return function (dispatch)
-	{
-		return axios.put(`${URL_LOCAL}/user/${id}`, payload)
-			.then(data =>
-			{
-				dispatch({
-					type: "UPDATE_CART",
-					payload: data
-				})
-			})
-	}
-}
 //---------------------EMBARCACIONENV---------------------
 //--------------------------------------------------------
 export function postEmbarcacionEnV(payload)
@@ -354,7 +307,7 @@ export function postEmbarcacionEnV(payload)
 	return async function (dispatch)
 	{
 		try {
-			const embarcacionCreated = await axios.post(`/embrarcacionesV`, payload);
+			const embarcacionCreated = await axios.post(`https://nautical25.herokuapp.com/embrarcacionesV`, payload);
 			return dispatch({
 				type: "POST_EMBARCACIONENV",
 				payload: embarcacionCreated,
@@ -404,7 +357,7 @@ export function updateEmbarcacionEnV(id, payload)
 {
 	return function (dispatch)
 	{
-		return axios.put(`/embrarcacionesV/${id}`, payload)
+		return axios.put(`https://nautical25.herokuapp.com/embrarcacionesV/${id}`, payload)
 			.then(data =>
 			{
 				dispatch({
@@ -423,7 +376,7 @@ export function postEmbarcacionRT(payload)
 	return async function (dispatch)
 	{
 		try {
-			const embarcacionCreated = await axios.post(`/embarcacionesR`, payload);
+			const embarcacionCreated = await axios.post(`https://nautical25.herokuapp.com/embarcacionesR`, payload);
 			return dispatch({
 				type: "POST_EMBARCACIONRT",
 				payload: embarcacionCreated,
@@ -459,7 +412,7 @@ export function updateEmbarcacionRT(id, payload)
 {
 	return function (dispatch)
 	{
-		return axios.put(`/embarcacionesR/${id}`, payload)
+		return axios.put(`https://nautical25.herokuapp.com/embarcacionesR/${id}`, payload)
 			.then(data =>
 			{
 				dispatch({
@@ -475,38 +428,31 @@ export function updateEmbarcacionRT(id, payload)
 	};
 }
 
-
-/* export const registro = (value) => async (dispatch) =>{
- 	return await axios.post(`https://nautical25.herokuapp.com/registro`, value)
- 		.then(res =>{
- 			dispatch({ type: "REGISTRO", payload: res.data })
- 		}).catch(error =>{
- 			alert(error)
- 		})
-  }*/
-
+/* export const registro = (value) => async (dispatch) =>
+{
+	return await axios.post(`https://nautical25.herokuapp.com/registro`, value)
+		.then(res =>
+		{
+			dispatch({ type: "REGISTRO", payload: res.data })
+		}).catch(error =>
+		{
+			alert(error)
+		})
+} */
 
 export const registro = (value)=> async (dispatch)=>{
     return await axios.post(`http://localhost:4000/registro`,value)
     .then(res =>{
         dispatch({type: "REGISTRO", payload: res.data})
     }).catch(error=>{
+		console.log(error)
         alert(error)
     })
 }
 
-export const registroGoogle = (value)=> async (dispatch)=>{
-    return await axios.post(`http://localhost:4000/registroGoogle`,value)
-    .then(res =>{
-        dispatch({type:"REGISTROGOOGLR", payload: res.data})
-    }).catch(error=>{
-        alert(error)
-    })
-} 
-
 export const usuarios = () => async (dispatch) =>
 {
-	return await axios.get(`/user`)
+	return await axios.get(`http://localhost:4000/user`)
 		.then(res =>
 		{
 			dispatch({ type: "USUARIOS", payload: res.data })
@@ -514,22 +460,19 @@ export const usuarios = () => async (dispatch) =>
 }
 
 let token = null
-//console.log(token)
+console.log(token)
 
 export const setToken = (newToken)=>{
     token = `Bearer ${newToken}`
     return token
 }
-
 export const login = (value)=> async (dispatch)=>{
     const config ={
         headers:{
             Authorization: token
         }
     }
-
-    const action = await axios.post("/autenticar",value, config)
-
+    const action = await axios.post(`${URL_BASE}/autenticar`,value, config)
     return dispatch({
         type: 'LOGIN',
         payload: action
@@ -540,7 +483,7 @@ export const busquedaAccesorios = (name)=> async (dispatch)=>{
     try {
         console.log(name)
         if(name){
-            return await fetch(`/accesorios?producto=${name}`)
+            return await fetch(`${URL_BASE}/accesorios?producto=${name}`)
             .then(res => res.json())
             .then(res =>{
             dispatch({type:'BUSCAR_ACCESORIOS', payload: res})
@@ -549,85 +492,4 @@ export const busquedaAccesorios = (name)=> async (dispatch)=>{
     }catch (error) {
         alert(`El nombre: ${name}, no existe`)
     }
-}
-export function editarUsuario(){
-	return async function(dispatch){
-		try {
-			const usuarios = await axios.put('/user')
-			return dispatch({
-				type:'EDITAR_USUARIOS',
-				payload:usuarios.data
-			})
-		} catch (error) {
-			console.log(error)
-		}
-	}
-}
-
-
- export function editarAccComentarios(id, payload){
-	return async function(dispatch){
-		try {
-			const accesorios = await axios.put(`/comentario/${id}`,payload)
-			console.log(accesorios)
-			return dispatch({
-				type:'EDITAR_ACC_COMENTARIOS',
-				payload:accesorios
-			})
-		} catch (error) {
-			console.log(error)
-		}
-	} 
-}
-export function usuarioId(id)
-{
-	return async function (dispatch)
-	{
-		try {
-			const userDetail = await axios(`/usuario/${id}`)
-
-			return dispatch({
-				type: 'USUARIO_ID',
-				payload: userDetail.data
-			})
-		} catch (error) {
-			console.log(error)
-		}
-
-	}}
-/* export function usuarioId(id)
-{
-	return async function (dispatch)
-	{
-		try {
-			return   axios.get(`http://localhost:4000/usuario/${id}`)
-            .then(data =>
-			{
-				dispatch({
-					type: "USUARIO_ID",
-					payload: data
-				})
-			})
-				
-		} catch (error) {
-			console.log(error)
-		}
-
-	}
-
-} */
-export function historialCompra(){
-	return async function(dispatch){
-		try{
-
-			const histComp= await axios(`/historia`)
-			return dispatch({
-				type:'HISTORIAL_COMPRA',
-				payload:histComp
-			})
-		}
-		catch(error){
-console.log(error)
-		}
-	}
 }

@@ -5,8 +5,8 @@ require('dotenv').config();
 const { MONGO_USERS
    } = process.env;
 
-
-(async () =>
+// conectamos nuestra base de datos
+/* (async () =>
 {
     try { 
 
@@ -15,6 +15,7 @@ const { MONGO_USERS
     } catch (error) {
         console.error(error)
     }
+
 })() 
 
 
@@ -29,3 +30,4 @@ const { MONGO_USERS
 //         console.error(error)
 //     }
 // })() 
+
