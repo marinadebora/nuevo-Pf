@@ -6,7 +6,7 @@ const { MONGO_USERS
    } = process.env;
 
 // conectamos nuestra base de datos
-/* (async () =>
+(async () =>
 {
     try { 
 
