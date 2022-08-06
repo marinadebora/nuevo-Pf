@@ -1,4 +1,4 @@
- const initialState = {
+ export const initialState = {
     products: [],
     allProducts:[],
     saleVessels: [],
@@ -11,8 +11,13 @@
     detail: {},
     categorias: [],
     basket: [],
-    userDetail: [],
-  
+    shippingData:[],
+    userDetail:[],
+    user:[],
+    historial:[],
+    comentario:[]
+
+
   };
   
   function rootReducer(state = initialState, action)
@@ -31,7 +36,8 @@
           detail:{}
         }
       case 'PRODUCTOS_DETAIL':
-  
+
+
         return {
           ...state,
           detail: action.payload,
@@ -147,6 +153,12 @@
               ...state,
               basket: actual
             }
+
+            case 'SET_SHIPPING_DATA':
+              return {
+                ...state,
+                shippingData: action.payload
+              }
     
         //----------filtros----------//
   
@@ -282,10 +294,12 @@
               ...state
             }
             case "USUARIOS":
+              console.log(state.user)
             return{
               ...state,
               user: action.payload
             }
+            
             case 'LOGIN':
             return{
               ...state
@@ -295,7 +309,28 @@
           ...state,
           accesories: action.payload
         }
-  
+      case 'EDITAR_USUARIOS':
+        return {
+          ...state,
+          user:action.payload
+        }
+      case 'EDITAR_ACC_COMENTARIOS':
+       
+        return{
+          ...state,
+          comentario:action.payload
+          
+        }
+  case 'USUARIO_ID':
+    return{
+      ...state,
+      userDetail:action.payload
+    }
+    case 'HISTORIAL_COMPRA':
+      return{
+        ...state,
+        historial:action.payload
+      }
       default: {
         return state
       }

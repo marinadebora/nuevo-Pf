@@ -1,0 +1,40 @@
+.layout{
+    overflow: hidden;
+    margin-top: 10%;
+    margin-left: 300px;
+    padding: 10px;
+    height: auto;
+    width: 900px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+#buttonBackAddresFrom{
+    
+    font-weight: bold;
+    color: white;
+    height: 25px;
+    width: 90px;
+    background-color:#0184a9;
+    border-radius: 10px;
+    border: none;
+    margin-bottom: 10px;
+    margin-top: 25px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+#buttonBackPaymentForm{
+    
+    font-weight: bold;
+    color: white;
+    height: 40px;
+    width: 130px;
+    background-color:#0184a9;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    
+}
+
+

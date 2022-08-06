@@ -6,7 +6,7 @@ import { deleteAccesorio, deleteEmbarcacionRT,deleteEmbarcacionEnV } from "../..
 import { Link } from "react-router-dom";
 import '../../styles/cardDetail.css'
 
-export default function CardDetailAdmin()
+export default function CardDetailAdmin2()
 {
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -57,18 +57,18 @@ console.log(id)
             <div>
            {
             myDetail.producto 
-            ?<Link to={`/admin/updateacc/${id}`}><button className="update_button">Update Accesorio</button></Link>
+            ?<Link to={`/dashboard/updateacc/${id}`}><button className="update_button">Actualizar Accesorio</button></Link>
             
             : ""
            }
            {
             myDetail.marca 
-            ?<Link to={`/admin/updateembrt/${id}`}><button className="update_button">Update Embarcacion Renta</button></Link>
+            ?<Link to={`/dashboard/updateembrt/${id}`}><button className="update_button">Actualizar Embarcacion Renta</button></Link>
             : ""
            }
             {
             myDetail.tipo
-            ?<Link to={`/admin/updateembventa/${id}`}><button className="update_button">Update Embarcacion Venta</button></Link>
+            ?<Link to={`/dashboard/updateembventa/${id}`}><button className="update_button">Actualizar Embarcacion Venta</button></Link>
             : ""
            }
               
@@ -76,18 +76,18 @@ console.log(id)
             <div>
            {
             myDetail.producto 
-            ?<button onClick={() => delacc(id)} className="delete-button">Delete</button>
+            ?<button onClick={() => delacc(id)} className="delete-button">Eliminar</button>
             
             : ""
            }
            {
             myDetail.marca 
-            ?<button onClick={() => delEmbRT(id)} className="delete-button">Delete</button>
+            ?<button onClick={() => delEmbRT(id)} className="delete-button">Eliminar</button>
             : ""
            }
             {
             myDetail.tipo
-            ?<button onClick={() => delEmbVT(id)} className="delete-button">Delete</button>
+            ?<button onClick={() => delEmbVT(id)} className="delete-button">Eliminar</button>
             : ""
            }
               
@@ -193,7 +193,7 @@ console.log(id)
             )
           }
         </div>
-        : <h1><strong>Loading...</strong></h1>
+        : <h1><strong>Cargando...</strong></h1>
     }
   </div>;
 };

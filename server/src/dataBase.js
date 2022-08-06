@@ -5,7 +5,9 @@ require('dotenv').config();
 const { MONGO_USERS} = process.env;
 
 
- (async () =>
+// conectamos nuestra base de datos
+(async () =>
+
 {
     try { 
 
