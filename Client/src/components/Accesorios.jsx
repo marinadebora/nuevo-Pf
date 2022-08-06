@@ -94,6 +94,7 @@ export function Accesorios(){
                     descripcion={e.descripcion}
                     Tamaño={e.Tamaño}
                     id={e._id}
+                    stock={e.stock}
                     Link={<Link to={`/home/${e._id}`} >Info</Link>}
                   />
 

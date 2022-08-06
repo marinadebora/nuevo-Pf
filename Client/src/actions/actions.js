@@ -3,12 +3,11 @@ import axios from 'axios';
 
 
 
-//const URL_BASE ="https://nautical25.herokuapp.com"
-
-//import infoProductos from '../infoPrueba/index'
-
-
 /* const URL_BASE = "https://nautical25.herokuapp.com";
+
+const URL_BASE ="https://nautical25.herokuapp.com"
+const URL_LOCAL ="http://localhost:4000"
+
 
 //import infoProductos from '../infoPrueba/index'
 const URL_LOCAL="http://localhost:4000" */
@@ -499,7 +498,6 @@ export function updateEmbarcacionRT(id, payload)
 }
 
 
-
 export const registro = (value) => async (dispatch) =>
 {
 	return await axios.post(`/registro`, value)
@@ -511,8 +509,9 @@ export const registro = (value) => async (dispatch) =>
 			alert(error)
 		})
 
-
 }
+
+
 
 export const registroGoogle = (value)=> async (dispatch)=>{
     return await axios.post(`/registroGoogle`,value)

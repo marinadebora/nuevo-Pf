@@ -298,12 +298,11 @@ async function back(id) {
                 <form id="layout">
                 <p id="cantidad">Cantidad:{cantidad(e._id)}</p>
                 <div id="buttonsCart">
-                <button onClick={() => handleSplice(e._id)} class="pagination-button a" id="buttonMasMenos">-</button>
                 <button onClick={() => next(e._id)}class="pagination-button p" id="buttonMasMenos">+</button>
+                <button onClick={() => handleSplice(e._id)} class="pagination-button a" id="buttonMasMenos">-</button>
                 </div>
-                
-                <p id="precioTotal">Precio Total: US$ {e.precio.split('$')[1] * cantidad(e._id)}</p>
-                <button id="delete" onClick={() => handleDelete(e._id)} className="delete-button">Eliminar</button>
+                <p id="precioTotal">Precio Total:${e.precio.split('$')[1] * cantidad(e._id)}</p>
+                <button id="delete" onClick={() => handleDelete(e._id)} className="delete-button">Delete</button>
                 <div class="clearfix"></div>
                 </form>
                 

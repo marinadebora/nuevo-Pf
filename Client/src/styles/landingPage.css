@@ -97,4 +97,12 @@
     margin-right: 80px;
     
 }
+#buttonLandingSings{
+    display: flex;
+    float:right;
+    color:white;
+    /* border: solid 1px white; */
+    margin-right: 20px;
+    margin-top: 40px;
+}
 

@@ -25,27 +25,27 @@ const usuario=/* { "_id": "62e7f9455d0436c6a2dcfe9c",
 "nombre": "augusto",
 "apellido": "loza",}
 const UserFromLocalStorage = JSON.parse(localStorage.getItem("loguearUsuario"));
- const current_userID =UserFromLocalStorage.id
-  const myDetail = useSelector(state => state.comentario);
 
-console.log(myDetail)
-const [acces, setAcces] = useState(
+const current_userID =UserFromLocalStorage.id
+const myDetail = useSelector(state => state.detail);
 
-{  comentarios:{
-  reseña:'',
-    nombre: '',
+const comentProduct = myDetail.comentarios
+
+
+
+const [acces, setAcces] = useState({  
   
-    email: ''}}
-
-)/* "{"comentarios":{"reseña":" 020584","nombre":"marina carabajal","email":"m_deby_c@hotmail.com"}}" */
+  comentarios:{...comentProduct}
+  
+  })/* "{"comentarios":{"reseña":" 020584","nombre":"marina carabajal","email":"m_deby_c@hotmail.com"}}" */
 
 
  useEffect(()=>{
   dispatch(usuarioId(current_userID))
-  //dispatch(productosDetail(id))
+  dispatch(productosDetail(id))
   },[dispatch,current_userID])
 
-console.log(acces) 
+
 
 const [error,setError]=useState({
  
@@ -65,16 +65,30 @@ function validate(acces){
  function handleChange(e){
 
   setAcces({
+    ...acces,
     
     comentarios:{
-      [e.target.name]:e.target.value,
-      nombre: UserFromLocalStorage.nombre,
- 
-      email: UserFromLocalStorage.email}
-     
+    [e.target.name]:e.target.value,
+    nombre: UserFromLocalStorage.nombre,
+    email: UserFromLocalStorage.email}
     
-   
   })
+
+ /* const cart_add = state.allAccesories.find(e => e._id === action.payload.id)
+  const actual_card = localStorage.getItem("item2") 
+   //JSON.stringify([...cartFromLocalStorage, cart_add._id, cart_add.producto])
+  
+  if(cartFromLocalStorage.length) {
+   localStorage.setItem(
+     "item2",
+     JSON.stringify([...cartFromLocalStorage, cart_add])
+   );
+ } else {
+   localStorage.setItem(
+     "item2",
+     JSON.stringify([cart_add])
+   )
+ }*/
   
 /*   setError(validate({
     ...acces.comentarios,

@@ -11,9 +11,8 @@
     detail: {},
     categorias: [],
     basket: [],
-    userDetail: [],
     shippingData:[],
-
+    userDetail:[],
     user:[],
     historial:[],
     comentario:[]
