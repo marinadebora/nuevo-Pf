@@ -33,10 +33,7 @@ const { UsuarioId } = require("../controladores/controladorIdUsuario");
 const controladorHistoria = require("../NuevaHistoria/controladorHistoria");
 const { updateHistorial } = require("../NuevaHistoria/controladorPutHistoria");
 const { correoCompra } = require("../controladores/autenticarCompra");
-
-
 const usuariosGoogle = require('../controladores/ControladorRegistroGoogle');
-const { getUsuario } = require("../controladores/ControladorUsuario");
 const { correoContacto } = require("./postFormularioContacto");
 
 /* const app = require("../modelos/SesionGoogle.js") */
