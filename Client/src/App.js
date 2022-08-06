@@ -56,14 +56,11 @@ export default function contactForm() {
         <Route exact path='/accesorios' element={<Accesorios />} />
         <Route exact path='/accesorios/:id' element={<CardDetail />} />
 
-
         <Route exact path='/checkout' element={<Checkout/>}/>
         <Route exact path='/contactForm' element={<ContactForm />}/>
 
-
         <Route exact path='/historialC' element={<HistorialCompras/>} />
         <Route exact path='/review/:id' element={<Review />} />
-
       </Routes>
     </div>
    

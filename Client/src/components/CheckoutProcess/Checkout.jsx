@@ -13,7 +13,7 @@ import Review from './Review';
 import { useStateValue } from "../../stateProvider";
 import '../../styles/checkout.css';
 
-const steps = ["Datos de envio", "Informacion de pago"];
+const steps = ["Datos de envio", "Informacion de pago", "Confirmacion"];
 
 const Checkout = () => {
   const [activeStep, setActiveStep] = useState(0);  
@@ -23,7 +23,7 @@ const Checkout = () => {
   const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1 );
   const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1 );
 
-  const Form = () => activeStep === 0 ? <AddressForm nextStep={nextStep}/> : <PaymentForm/>;
+  const Form = () => activeStep === 0 ? <AddressForm nextStep={nextStep}/> : <PaymentForm backStep={backStep} nextStep={nextStep}/>;
 
 
   return (

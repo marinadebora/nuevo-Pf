@@ -50,6 +50,7 @@ export function BarcosEnVenta()
         <Navbar/>
         <Box id='boxVta'>
                 <Box id='textBox1'>VENTA</Box>
+                <Box id='textBox1'>(Nuevos y Usados)</Box>
                 
         </Box>
       
@@ -87,6 +88,7 @@ export function BarcosEnVenta()
       </Grid>
       
       <button id='buttonBack' onClick={volver}>VOLVER</button>
+      
       
       <Paginado
         characterPerPage={characterPerPage}
