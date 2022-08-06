@@ -23,6 +23,8 @@ import SingIn from './components/SingIn'
 import SingUp from './components/SingUp'
 import {CatCreate2} from "./components/DashBoard/CreateCat2"
 import ContactForm from "./components/ContactForm";
+import { HistorialCompras } from './components/usuarios/HistorialCompras';
+import { Review } from './components/usuarios/Review';
 
 import Checkout from "./components/CheckoutProcess/Checkout"
 
@@ -56,6 +58,8 @@ export default function contactForm() {
         <Route exact path='/checkout' element={<Checkout/>}/>
         <Route exact path='/contactForm' element={<ContactForm />}/>
 
+        <Route exact path='/historialC' element={<HistorialCompras/>} />
+        <Route exact path='/review/:id' element={<Review />} />
       </Routes>
     </div>
    

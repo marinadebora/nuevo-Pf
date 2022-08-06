@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate }from 'react-router-dom';
-import "./../styles/form.css"
+import "./../styles/contactForm.css"
 
 //const FORM_ENDPOINT = ""; // TODO - fill on the later step
 
@@ -16,8 +16,8 @@ const ContactForm = () => {
   if (submitted) {
    return (
      <>
-       <div className="text-2xl">Thank you!</div>
-       <div className="text-md">We'll be in touch soon.</div>
+       <div className="text-2xl">Gracias!</div>
+       <div className="text-md">Te contactasremos pronto.</div>
      </>
    );
  }
@@ -28,7 +28,7 @@ const ContactForm = () => {
   }
 
  return (
-    <form className="form"
+    <form className="contactForm"
     //   action={FORM_ENDPOINT}
       onSubmit={handleSubmit}
       method="POST"
@@ -48,6 +48,7 @@ const ContactForm = () => {
       <div className="mb-3 pt-0">
       <label>Email: </label>
         <input
+
           type="email"
           placeholder="Email"
           name="email"
@@ -65,14 +66,14 @@ const ContactForm = () => {
         />
       </div>
       <div className="mb-3 pt-0">
-        <button id="buttonBackForm" 
+        <button id="buttonBackFormContact" 
           className="bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
           type="submit"
         >
           Enviar
         </button>
       </div>
-      <button id='buttonBackForm' onClick={volver}>Volver</button>
+      <button id='buttonBackFormContact' onClick={volver}>Volver</button>
     </form>
   );
 };

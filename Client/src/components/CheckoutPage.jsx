@@ -15,12 +15,10 @@ import swal from "sweetalert";
 
 
 
-
 export default function CheckoutPage()
 {
 
     
-  
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -117,16 +115,16 @@ return cantidadfiltrada.length
   
   dispatch(addToBasket({id}))
   return  swal({
-    title: "Your product was successfully added to the cart",
-    text: "What do you want to do next?",
+    title: "El producto se ha agregado a tu carro de compras",
+    text: "Que queires hacer ahora?",
     icon: "success",
     buttons: {
       cart: {
-        text: "Go to cart",
+        text: "Ir al carro",
         value: "cart",
       },
      
-      cancel: "Stay",
+      cancel: "Seguir comprando",
     },
   }).then((value) => {
     switch (value) {
@@ -191,7 +189,7 @@ async function back(id) {
         JSON.stringify(cartFromLocalStorage.filter((e) => e._id !== id))
       );
       return  swal({
-          title: "Your product was successfully deleted to the cart",
+          title: "El producto se ha eliminado de tu carro",
           icon: "success",
           buttons: {
               OK: {
@@ -296,12 +294,19 @@ async function back(id) {
                     id={e._id}
                       
                   />
-                  <form>
-                <button onClick={() => handleSplice(e._id)} class="pagination-button a">-</button><p>Cantidad:{cantidad(e._id)}</p><button onClick={() => next(e._id)}class="pagination-button p">+</button>
+                
+                <form id="layout">
+                <p id="cantidad">Cantidad:{cantidad(e._id)}</p>
+                <div id="buttonsCart">
+                <button onClick={() => handleSplice(e._id)} class="pagination-button a" id="buttonMasMenos">-</button>
+                <button onClick={() => next(e._id)}class="pagination-button p" id="buttonMasMenos">+</button>
+                </div>
+                
+                <p id="precioTotal">Precio Total: US$ {e.precio.split('$')[1] * cantidad(e._id)}</p>
+                <button id="delete" onClick={() => handleDelete(e._id)} className="delete-button">Eliminar</button>
+                <div class="clearfix"></div>
                 </form>
-                <button>Precio x unidad:{e.precio}</button>
-                <button>Precio Total:${e.precio.split('$')[1] * cantidad(e._id)}</button>
-                <button onClick={() => handleDelete(e._id)} className="delete-button">Delete</button>
+                
                 </Grid>
               
               </Fragment>

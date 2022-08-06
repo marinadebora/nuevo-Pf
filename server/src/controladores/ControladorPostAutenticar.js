@@ -6,10 +6,13 @@ const usuariosAuth= async (req,res)=>{
     const api = await Usuarios.findOne({email})
     let nombre = ''
     let id = ''
+    let admin = false
     if(api) {
         nombre = api.nombre + ' ' + api.apellido
         id = api._id
+        admin = api.admin
     }
+    console.log(admin)
     
     /* console.log(nombre) */
     Usuarios.findOne({email},(err,Usuarios)=>{
@@ -28,7 +31,7 @@ const usuariosAuth= async (req,res)=>{
             })
             console.log(token)
             res.cookie("pepito", token, { expiresIn: "10h" });
-            res.json({email,token,nombre,id})
+            res.json({email,token,nombre,id,admin})
         }else {
             res.status(500).send("Correo y/o contraseña incorrecta")
         }
