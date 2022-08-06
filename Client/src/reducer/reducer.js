@@ -17,7 +17,6 @@
     historial:[],
     comentario:[]
 
-
   };
   
   function rootReducer(state = initialState, action)

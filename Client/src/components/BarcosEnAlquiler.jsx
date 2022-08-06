@@ -47,6 +47,7 @@ console.log(productAlquiler)
     <Navbar/>
         <Box id='boxAlq'>
                 <Box id='textBox1'>ALQUILER</Box>
+                <Box id='textBox1'>Contactanos</Box>
                 
             </Box>
       

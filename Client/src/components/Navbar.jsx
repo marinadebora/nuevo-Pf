@@ -80,7 +80,7 @@ export default function Navbar() {
       <AppBar position="sticky" id="appBar">
         <Grid>
           <Toolbar>
-          <Link to='/'>
+          <Link to='/accesorios'>
               <IconButton>
                 <img src={Logo} alt="img" id="logoNavBar" />
               </IconButton>

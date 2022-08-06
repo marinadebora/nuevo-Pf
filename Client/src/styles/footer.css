@@ -1,11 +1,12 @@
 #footer{
+    padding-top: 20px;
     height: 200px;
     background-color: #0184a9;
 }
 
 
 #LinksFooterAll{
-    margin-top: 10px;
+   
     margin-right: 30px;
    
 }
@@ -16,3 +17,9 @@
     margin-right: 10px;
     font-size: 15px;
 }
+
+.iframeAdress{
+   margin-left: 20%;
+
+}
+
