@@ -1,4 +1,4 @@
- const initialState = {
+ export const initialState = {
     products: [],
     allProducts:[],
     saleVessels: [],
@@ -11,11 +11,12 @@
     detail: {},
     categorias: [],
     basket: [],
-
+    shippingData:[],
     userDetail:[],
     user:[],
     historial:[],
     comentario:[]
+
 
   };
   
@@ -35,6 +36,7 @@
           detail:{}
         }
       case 'PRODUCTOS_DETAIL':
+
 
         return {
           ...state,
@@ -151,6 +153,12 @@
               ...state,
               basket: actual
             }
+
+            case 'SET_SHIPPING_DATA':
+              return {
+                ...state,
+                shippingData: action.payload
+              }
     
         //----------filtros----------//
   

@@ -2,10 +2,12 @@ import axios from 'axios';
 
 
 
+
 /* const URL_BASE = "https://nautical25.herokuapp.com";
 
 const URL_BASE ="https://nautical25.herokuapp.com"
 const URL_LOCAL ="http://localhost:4000"
+
 
 //import infoProductos from '../infoPrueba/index'
 const URL_LOCAL="http://localhost:4000" */
@@ -174,6 +176,23 @@ export const getItemsCart = () =>
 		}
 	} catch (err) {
 		console.log(err)
+	}
+};
+
+export function postShippingData(payload)
+{
+	return async function (dispatch)
+	{
+		try {
+			const datosDeEnvio = await axios.post(`https://nautical25.herokuapp.com/shippingData`, payload);
+			return dispatch({
+				type: "SET_SHIPPING_DATA",
+				payload: datosDeEnvio,
+			});
+		} catch (err) {
+			console.log(err)
+		}
+
 	}
 };
 
@@ -489,18 +508,11 @@ export const registro = (value) => async (dispatch) =>
 		{
 			alert(error)
 		})
+
 }
 
 
-/* export const registro = (value)=> async (dispatch)=>{
-    return await axios.post(`http://localhost:4000/registro`,value)
-    .then(res =>{
-        dispatch({type: "REGISTRO", payload: res.data})
-    }).catch(error=>{
-        alert(error)
-    })
-}
- */
+
 export const registroGoogle = (value)=> async (dispatch)=>{
     return await axios.post(`/registroGoogle`,value)
     .then(res =>{
@@ -519,13 +531,17 @@ export const usuarios = () => async (dispatch) =>
 		})
 }
 
+
 let token = null
-//console.log(token)
+
+
+
 
 export const setToken = (newToken)=>{
     token = `Bearer ${newToken}`
     return token
 }
+
 
 export const login = (value)=> async (dispatch)=>{
     const config ={
@@ -541,6 +557,9 @@ export const login = (value)=> async (dispatch)=>{
         payload: action
     })
 }
+
+
+
 
 export const busquedaAccesorios = (name)=> async (dispatch)=>{
     try {

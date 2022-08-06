@@ -2,11 +2,12 @@
 const mongoose = require("mongoose");
 const config = require("./config");
 require('dotenv').config();
-const { MONGO_USERS
-   } = process.env;
+const { MONGO_USERS} = process.env;
+
 
 // conectamos nuestra base de datos
 (async () =>
+
 {
     try { 
 
@@ -19,8 +20,6 @@ const { MONGO_USERS
 })() 
 
 
-
-
 //  (async()=>{
 //     try {
         
@@ -30,4 +29,3 @@ const { MONGO_USERS
 //         console.error(error)
 //     }
 // })() 
-

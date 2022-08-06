@@ -7,7 +7,7 @@ import { updateEmbarcacionEnV, Categorias} from '../../actions/admin-action';
 import { productosDetail, /*getAllTypes */} from '../../actions/actions'
 import { useNavigate } from 'react-router-dom';
 
-export function UpdateEmbarcacionVenta(){
+export function UpdateEmbarcacionVenta2(){
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -363,4 +363,4 @@ export function UpdateEmbarcacionVenta(){
     )
 }
 
-export default UpdateEmbarcacionVenta;
+export default UpdateEmbarcacionVenta2;
