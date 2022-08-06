@@ -12,9 +12,9 @@ import Button from '@mui/material/Button';
 import '../styles/card.css';
 import {addToBasket} from '../actions/actions'
 import {useDispatch } from 'react-redux'
-/* import {  useState } from 'react';
- */import swal from "sweetalert";
+import swal from "sweetalert";
 import {useNavigate } from "react-router-dom";
+import ImgSinStock from "../imagenes/ImgSinStock.png"
 
 
 
@@ -23,7 +23,7 @@ import {useNavigate } from "react-router-dom";
 
 
 
-export default function Producto({ tipo,id, producto, marca ,precio, fabricacion, imagenes, Link}) {
+export default function Producto({ tipo,id, producto, marca ,precio, fabricacion, imagenes, Link, stock}) {
    
   const navigate = useNavigate();
    const dispatch = useDispatch() 
@@ -93,13 +93,17 @@ export default function Producto({ tipo,id, producto, marca ,precio, fabricacion
           }
         />
 
-        { imagenes?
+        { stock >0 ?
          <CardMedia
          id='imgCard'
          component="img"
          height="200"
          image={imagenes?.[0]} />
-         :''
+         : <CardMedia
+         id='imgCard'
+         component="img"
+         height="200"
+         image={ImgSinStock} />
             
         }
         <CardContent>
@@ -109,12 +113,18 @@ export default function Producto({ tipo,id, producto, marca ,precio, fabricacion
           <Typography>Precio: {precio}</Typography>
         </CardContent>
         <CardActions disableSpacing id='cardAction'>
-          
-          <IconButton aria-label="add to cart"onClick={() => addToCart()}>
+          {stock >0 
+          ?<IconButton aria-label="add to cart"onClick={() => addToCart()}>
           <Badge  color="secondary" id='badge'>
             <AddShoppingCartIcon />
             </Badge>
           </IconButton>
+          :<IconButton disabled aria-label="add to cart"onClick={() => addToCart()}>
+          <Badge  color="secondary" id='badge'>
+            <AddShoppingCartIcon />
+            </Badge>
+          </IconButton>
+          }
           <Button sx={{marginLeft: 'auto'}} size="small">{Link}</Button>
         </CardActions>
       </Card>

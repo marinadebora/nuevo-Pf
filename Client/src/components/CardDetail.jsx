@@ -12,6 +12,7 @@ import {addToBasket } from '../actions/actions'
 import {  useState } from 'react';
 import swal from "sweetalert";
 import ContactMailIcon from "@mui/icons-material/ContactMail";
+import ImgSinStock from "../imagenes/ImgSinStock.png"
 
 export default function CardDetail()
 { 
@@ -64,6 +65,7 @@ export default function CardDetail()
           });
    }
 
+   
  const volver = () =>
   {
     navigate(-1)
@@ -85,8 +87,10 @@ export default function CardDetail()
             )
           } */}
 
-
+        {myDetail.stock > 0 ?
           <ImagenList/>
+          :<img src={ImgSinStock}></img>
+        }
 
           </div>
       
@@ -130,16 +134,34 @@ export default function CardDetail()
           </ul>
          
             <button id='buttonBack' onClick={volver}>VOLVER</button>
-           { 
-           myDetail.producto? <IconButton aria-label="add to cart" onClick={addToCart}>
+            {
+  myDetail.producto?  
+  <>
+      {
+          (myDetail.stock > 0) 
+          ?<>   
+          <IconButton aria-label="add to cart" onClick={addToCart}>
           <Badge  color="secondary" id='badge'>
             <AddShoppingCartIcon />
             </Badge>
-          </IconButton>
-          :  <IconButton href="/contactForm">
+          </IconButton> 
+          </> 
+          
+          :<>
+          <IconButton disabled aria-label="add to cart" onClick={addToCart}>
+          <Badge  color="secondary" id='badge'>
+            <AddShoppingCartIcon />
+            </Badge>
+          </IconButton> 
+          </>
+      }
+  </> :
+  <>
+      <IconButton href="/contactForm">
           <ContactMailIcon/>
         </IconButton>
-          }
+  </>
+}
          
         </div>
         
