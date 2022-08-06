@@ -10,6 +10,9 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import '../styles/card.css';
 import {addToBasket } from '../actions/actions'
 import {  useState } from 'react';
+import swal from "sweetalert";
+import ContactMailIcon from "@mui/icons-material/ContactMail";
+import ImgSinStock from "../imagenes/ImgSinStock.png"
 
 export default function CardDetail()
 { 
@@ -35,23 +38,38 @@ export default function CardDetail()
    
  
   
-   const addToCart = () =>{
-
-    
-          dispatch(addToBasket({id}))
-          
-          return alert("producto agregado correctamente")
+  async function addToCart(){
+        dispatch(addToBasket({id}))
+          return  swal({
+            title: "Your product was successfully added to the cart",
+            text: "What do you want to do next?",
+            icon: "success",
+            buttons: {
+              cart: {
+                text: "Go to cart",
+                value: "cart",
+              },
+             
+              cancel: "Stay",
+            },
+          }).then((value) => {
+            switch (value) {
+              case "cart":
+                navigate("/checkoutPage");
+                swal("Welcome to your cart", "Have a nice buy!", "success");
+                break;
+      
+              default:
+                break;
+            }
+          });
    }
 
-
-  const volver = () =>
+   
+ const volver = () =>
   {
     navigate(-1)
   }
-
-
-console.log(myDetail._id);
-
   return <div>
     {
       myDetail._id !== id?
@@ -69,8 +87,10 @@ console.log(myDetail._id);
             )
           } */}
 
-
+        {myDetail.stock > 0 ?
           <ImagenList/>
+          :<img src={ImgSinStock}></img>
+        }
 
           </div>
       
@@ -114,11 +134,34 @@ console.log(myDetail._id);
           </ul>
          
             <button id='buttonBack' onClick={volver}>VOLVER</button>
-            <IconButton aria-label="add to cart" onClick={addToCart}>
+            {
+  myDetail.producto?  
+  <>
+      {
+          (myDetail.stock > 0) 
+          ?<>   
+          <IconButton aria-label="add to cart" onClick={addToCart}>
           <Badge  color="secondary" id='badge'>
             <AddShoppingCartIcon />
             </Badge>
-          </IconButton>
+          </IconButton> 
+          </> 
+          
+          :<>
+          <IconButton disabled aria-label="add to cart" onClick={addToCart}>
+          <Badge  color="secondary" id='badge'>
+            <AddShoppingCartIcon />
+            </Badge>
+          </IconButton> 
+          </>
+      }
+  </> :
+  <>
+      <IconButton href="/contactForm">
+          <ContactMailIcon/>
+        </IconButton>
+  </>
+}
          
         </div>
         

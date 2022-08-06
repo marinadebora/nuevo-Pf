@@ -15,13 +15,10 @@ import swal from "sweetalert";
 
 
 
-
 export default function CheckoutPage()
 {
 
     
-  
-
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const stateBasket = useSelector((state) => state.basket)
@@ -34,7 +31,6 @@ export default function CheckoutPage()
   const current_userID =UserFromLocalStorage?.id
   const myUserDetail = useSelector(state => state?.userDetail);
   const current_cart =cartFromLocalStorage;
- 
   const CartUser= myUserDetail[0]?.carritoDeCompra
   const paramFromLocalStorage = JSON.parse(localStorage.getItem("parametros") || "[]");
   const [param /* setCart */] = useState(paramFromLocalStorage);
@@ -46,30 +42,6 @@ export default function CheckoutPage()
     
 })
 
-
-
-
-
- 
-function handleSubmit(e){
-  e.preventDefault()
-  
-  
-      dispatch(UpdateToCart(current_userID,input ))
-      
-      return (
-          alert(`El accesorio fue actualizado con éxito.`)
-          )  
-  
-}
-
-
-  /*useEffect(() => {
-  
-  if(typeof current_userID === "string"){
-    dispatch(UpdateToCart(current_userID,cartFromLocalStorage ));
-  }
-}, [cartFromLocalStorage ,dispatch ]);*/
 
 
 
@@ -106,87 +78,19 @@ return cantidadfiltrada.length
 }
 
 
-
-/*function next(id,results){
-  console.log(id)
-  var results = [];
-    results.push(id);
-    return next(results);
-  
-}*/
   async function next(id){
   
   dispatch(addToBasket({id}))
-  return  swal({
-    title: "Your product was successfully added to the cart",
-    text: "What do you want to do next?",
-    icon: "success",
-    buttons: {
-      cart: {
-        text: "Go to cart",
-        value: "cart",
-      },
-     
-      cancel: "Stay",
-    },
-  }).then((value) => {
-    switch (value) {
-      case "cart":
-        navigate("/checkoutPage");
-        swal("Welcome to your cart", "Have a nice buy!", "success");
-        break;
 
-      default:
-        break;
-    }
-  });
         
 };
-
-async function back(id) {
-  console.log(id)
-  dispatch(removeToBasket(id))
-};
-
-/*const addToCart = () =>{
-    
-   
-  dispatch(addToBasket({id}))
-   return  swal({
-    title: "Your product was successfully added to the cart",
-    text: "What do you want to do next?",
-    icon: "success",
-    buttons: {
-      cart: {
-        text: "Go to cart",
-        value: "cart",
-      },
-     
-      cancel: "Stay",
-    },
-  }).then((value) => {
-    switch (value) {
-      case "cart":
-        navigate("/checkoutPage");
-        swal("Welcome to your cart", "Have a nice buy!", "success");
-        break;
-
-      default:
-        break;
-    }
-  });
-   
-}*/
-
-
-
 
   const volver = () =>
   {
       navigate(-1)
   }
 
-  const handleDelete = (id) => {
+ async function handleDelete (id) {
       localStorage.setItem(
         "item2",
         JSON.stringify(cartFromLocalStorage.filter((e) => e._id !== id))
@@ -213,23 +117,7 @@ async function back(id) {
     };
    
    
-    /*var idprueba="62d8a6b52029a4c825e23ed6" 
-    //var myIndex2 = current_cart.findIndex((e)=> e._id === idprueba)
-    
-   
-    const prueba = (idprueba2) =>{
-      var myIndex2 = current_cart.findIndex((e)=> e._id === idprueba2)
-      if (myIndex2 !== -1) {
-        current_cart.splice(myIndex2, 1);
-           }
-           
-      
-    }*/
-
-    
-   
-    
-    
+  
     const handleSplice = (id) => {
       //indexOf(id);
       
@@ -295,11 +183,17 @@ async function back(id) {
                     descripcion={e.descripcion}
                     Tamaño={e.Tamaño}
                     id={e._id}
+                    stock={e.stock}
                       
                   />
                   <form>
-                <button onClick={() => handleSplice(e._id)} class="pagination-button a">-</button><p>Cantidad:{cantidad(e._id)}</p><button onClick={() => next(e._id)}class="pagination-button p">+</button>
+                    {
+                    cantidad(e._id) >= e.stock 
+                    ?<> <button  onClick={() => handleSplice(e._id)} class="pagination-button a">-</button><p>Cantidad:{cantidad(e._id)}</p><button disabled onClick={() => next(e._id)}class="pagination-button p">+</button></>
+                    : <><button onClick={() => handleSplice(e._id)} class="pagination-button a">-</button><p>Cantidad:{cantidad(e._id)}</p><button onClick={() => next(e._id)}class="pagination-button p">+</button></>
+                    }
                 </form>
+                <a>Stock Disponible{e.stock}</a>
                 <button>Precio x unidad:{e.precio}</button>
                 <button>Precio Total:${e.precio.split('$')[1] * cantidad(e._id)}</button>
                 <button onClick={() => handleDelete(e._id)} className="delete-button">Delete</button>
