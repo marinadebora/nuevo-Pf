@@ -96,6 +96,7 @@ export function Accesorios(){
                     id={e._id}
                     stock={e.stock}
                     Link={<Link to={`/home/${e._id}`} >Info</Link>}
+                    valoraciones={e.valoraciones}
                   />
 
                 </Grid>

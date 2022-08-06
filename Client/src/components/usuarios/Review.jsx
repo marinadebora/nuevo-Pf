@@ -25,7 +25,6 @@ const usuario=/* { "_id": "62e7f9455d0436c6a2dcfe9c",
 "nombre": "augusto",
 "apellido": "loza",}
 const UserFromLocalStorage = JSON.parse(localStorage.getItem("loguearUsuario"));
-
 const current_userID =UserFromLocalStorage.id
 const myDetail = useSelector(state => state.detail);
 
