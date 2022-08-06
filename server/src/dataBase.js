@@ -4,8 +4,10 @@ const config = require("./config");
 require('dotenv').config();
 const { MONGO_USERS} = process.env;
 
+
 // conectamos nuestra base de datos
 (async () =>
+
 {
     try { 
 
@@ -18,8 +20,6 @@ const { MONGO_USERS} = process.env;
 })() 
 
 
-
-
 //  (async()=>{
 //     try {
         
@@ -29,4 +29,3 @@ const { MONGO_USERS} = process.env;
 //         console.error(error)
 //     }
 // })() 
-

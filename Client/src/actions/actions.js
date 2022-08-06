@@ -500,6 +500,7 @@ export function updateEmbarcacionRT(id, payload)
 
 
 
+
 export const registro = (value) => async (dispatch) =>
 {
 	return await axios.post(`/registro`, value)
