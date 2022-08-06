@@ -36,7 +36,6 @@ const { correoCompra } = require("../controladores/autenticarCompra");
 
 
 const usuariosGoogle = require('../controladores/ControladorRegistroGoogle');
-const { getUsuario } = require("../controladores/ControladorUsuario");
 
 /* const app = require("../modelos/SesionGoogle.js") */
 
