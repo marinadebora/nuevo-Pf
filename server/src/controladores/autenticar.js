@@ -47,13 +47,10 @@ const correo = async (req,res )=>{
             <p>Y te registraste con las credenciales:</p>
             <br/>
             <p>Nombre: ${firstName}</p>
-<<<<<<< HEAD
             <p>Apellido: ${lastName}</p> 
             <p>Password: ${password}</p>
-=======
             <p>Apellido: ${lastName}</p>
             <p>password: ${password}</p>
->>>>>>> eb94a875e6ae0bbdf11a1a944f44ef42c5dbbf48
             <br/>
             <p>Puedes acceder a nuestra pagina desde el siguiente enlace:</p>
             <link>🚢https://nuevo-pf.vercel.app/🚢</link>
