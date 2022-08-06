@@ -9,12 +9,11 @@ import Typography from "@mui/material/Typography";
 import Badge from "@mui/material/Badge"
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Button from '@mui/material/Button';
-import '../styles/card.css';
-import {addToBasket} from '../actions/actions'
+import '../../styles/card.css';
 import {useDispatch } from 'react-redux'
-import swal from "sweetalert";
+/* import {  useState } from 'react';
+ */import swal from "sweetalert";
 import {useNavigate } from "react-router-dom";
-import ImgSinStock from "../imagenes/ImgSinStock.png"
 
 
 
@@ -23,40 +22,13 @@ import ImgSinStock from "../imagenes/ImgSinStock.png"
 
 
 
-export default function Producto({ tipo,id, producto, marca ,precio, fabricacion, imagenes, Link, stock}) {
+export default function Producto2({ tipo,id, producto, marca ,precio, fabricacion, imagenes, Link}) {
    
   const navigate = useNavigate();
    const dispatch = useDispatch() 
   
   
-   async function addToCart () {
-    
-    dispatch(addToBasket({id}))
-     return  swal({
-      title: "Your product was successfully added to the cart",
-      text: "What do you want to do next?",
-      icon: "success",
-      buttons: {
-        cart: {
-          text: "Go to cart",
-          value: "cart",
-        },
-       
-        cancel: "Stay",
-      },
-    }).then((value) => {
-      switch (value) {
-        case "cart":
-          navigate("/checkoutPage");
-          swal("Welcome to your cart", "Have a nice buy!", "success");
-          break;
-
-        default:
-          break;
-      }
-    });
-     
-  }
+   
   
    
   useEffect(()=>{
@@ -93,17 +65,13 @@ export default function Producto({ tipo,id, producto, marca ,precio, fabricacion
           }
         />
 
-        { stock >0 ?
+        { imagenes?
          <CardMedia
          id='imgCard'
          component="img"
          height="200"
          image={imagenes?.[0]} />
-         : <CardMedia
-         id='imgCard'
-         component="img"
-         height="200"
-         image={ImgSinStock} />
+         :''
             
         }
         <CardContent>
@@ -113,18 +81,8 @@ export default function Producto({ tipo,id, producto, marca ,precio, fabricacion
           <Typography>Precio: {precio}</Typography>
         </CardContent>
         <CardActions disableSpacing id='cardAction'>
-          {stock >0 
-          ?<IconButton aria-label="add to cart"onClick={() => addToCart()}>
-          <Badge  color="secondary" id='badge'>
-            <AddShoppingCartIcon />
-            </Badge>
-          </IconButton>
-          :<IconButton disabled aria-label="add to cart"onClick={() => addToCart()}>
-          <Badge  color="secondary" id='badge'>
-            <AddShoppingCartIcon />
-            </Badge>
-          </IconButton>
-          }
+          
+          
           <Button sx={{marginLeft: 'auto'}} size="small">{Link}</Button>
         </CardActions>
       </Card>
