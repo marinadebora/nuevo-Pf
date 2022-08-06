@@ -36,7 +36,6 @@ const { correoCompra } = require("../controladores/autenticarCompra");
 
 
 const usuariosGoogle = require('../controladores/ControladorRegistroGoogle');
-const { getUsuario } = require("../controladores/ControladorUsuario");
 
 /* const app = require("../modelos/SesionGoogle.js") */
 
@@ -82,7 +81,7 @@ router.delete("/carrito",borrarCarrito)
 
 /* router.get("/categorias", categorias)
 router.use("/categorias", postCategorias) */
-//router.get("/user", getUsuario)
+router.get("/user", getUsuario)
 
 router.use("/user", putUsuario)
 router.use("/comentario", putAccesoriosComentarios)
