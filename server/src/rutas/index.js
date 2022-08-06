@@ -33,9 +33,8 @@ const { UsuarioId } = require("../controladores/controladorIdUsuario");
 const controladorHistoria = require("../NuevaHistoria/controladorHistoria");
 const { updateHistorial } = require("../NuevaHistoria/controladorPutHistoria");
 const { correoCompra } = require("../controladores/autenticarCompra");
-
-
 const usuariosGoogle = require('../controladores/ControladorRegistroGoogle');
+const { correoContacto } = require("./postFormularioContacto");
 
 /* const app = require("../modelos/SesionGoogle.js") */
 
@@ -77,11 +76,11 @@ router.use("/user", putUsuario);
 router.use("/comentario", putAccesoriosComentarios);
 router.get("/usuario/:id",UsuarioId);
 router.put("/historial/:id",updateHistorial,correoCompra);
+router.post("/correoContacto",correoContacto);
 router.delete("/carrito",borrarCarrito)
 
 /* router.get("/categorias", categorias)
 router.use("/categorias", postCategorias) */
-router.get("/user", getUsuario)
 
 router.use("/user", putUsuario)
 router.use("/comentario", putAccesoriosComentarios)
