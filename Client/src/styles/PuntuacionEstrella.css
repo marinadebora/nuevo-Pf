@@ -33,3 +33,15 @@ label:hover ~ label {
 input[type="radio"]:checked ~ label {
   color: orange;
 }
+.pagination-button-a{
+  border: none;
+  background-color: white;
+ 
+}
+.pagination-button-a p{
+  
+  font-size: medium;
+}
+p:hover{
+  color: orange;
+}

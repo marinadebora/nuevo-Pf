@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useParams } from "react-router-dom";
 import { usuarioId, editarAccComentarios, productosDetail } from "../../actions/actions";
 import '../../styles/review.css'
-import PuntuacionEstrella from "./PuntuacionEstrella";
+import '../../styles/PuntuacionEstrella.css'
 
 export function Review()
 {
@@ -14,19 +14,30 @@ export function Review()
 
 
   const UserFromLocalStorage = JSON.parse(localStorage.getItem("loguearUsuario")) || JSON.parse(localStorage.getItem("logueadoGoogle"));
-  const current_userID = UserFromLocalStorage.id || UserFromLocalStorage.password
+  const current_userID = UserFromLocalStorage.id
   const myDetail = useSelector(state => state.detail);
 
   const comentProduct = myDetail.comentarios
 
 
-
+  const [star, setStar] = useState({
+    estrellas: ''
+  })
   const [acces, setAcces] = useState({
 
-    comentarios: { ...comentProduct }
+    comentarios: {
+      ...comentProduct,
+    }
 
   })
+  function puntuacion(e)
+  {
 
+    setStar({
+      ...star,
+      [e.target.name]: e.target.value
+    })
+  }
 
   useEffect(() =>
   {
@@ -51,6 +62,8 @@ export function Review()
 
 
 
+
+
   function handleChange(e)
   {
 
@@ -58,20 +71,23 @@ export function Review()
       ...acces,
 
       comentarios: {
+        star,
         [e.target.name]: e.target.value,
         nombre: UserFromLocalStorage.nombre,
         email: UserFromLocalStorage.email
       }
 
     })
+
+
     setError(validate({
       ...acces,
       [e.target.name]: e.target.value
     }))
 
   }
-
-
+  console.log(acces.comentarios)
+  console.log(star)
   function handleSubmit(e)
   {
     e.preventDefault()
@@ -98,8 +114,18 @@ export function Review()
     <div>
       <form onSubmit={handleSubmit}>
 
+
         <div className="contenedor">
           <label>Califica tu producto </label>
+          <p class="clasificacion">
+
+            <input onChange={puntuacion} id="radio1" type="radio" name="estrellas" value="5" /><label for="radio1">★</label>
+            <input onChange={puntuacion} id="radio2" type="radio" name="estrellas" value="4" /><label for="radio2">★</label>
+            <input onChange={puntuacion} id="radio3" type="radio" name="estrellas" value="3" /><label for="radio3">★</label>
+            <input onChange={puntuacion} id="radio4" type="radio" name="estrellas" value="2" /><label for="radio4">★</label>
+            <input onChange={puntuacion} id="radio5" type="radio" name="estrellas" value="1" /><label for="radio5">★</label>
+          </p>
+
           <textarea
             type='text'
             name='reseña'
@@ -113,9 +139,9 @@ export function Review()
 
         </div>
         <input type="submit" value="Enviar" />
-
       </form><button onClick={cancel}>Cancelar</button>
-      <PuntuacionEstrella />
+
+
     </div>
   );
 };
