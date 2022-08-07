@@ -40,24 +40,14 @@
 }
 
 
-.paralelogramo{
-   
-    width: 85px; 
-    height: 72px; 
-    margin-right: 60px;
-    background: #01bfc4;
-    border: none;
-    cursor: pointer;
-   
-   
-}
+
 
 #buttonNavBarMenu{
-    width: 80px;
+    width: 120px;
     background-color: transparent;
     border: none;
     color: #02537d;
-    margin-top: 22px;
+    margin-top: 5px;
     font-size: 15px;
     font-weight: bold;
     cursor: pointer;
