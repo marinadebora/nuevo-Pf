@@ -87,15 +87,15 @@ export default function Navbar() {
             </Link>
 
             <Link to='/accesorios' className='paralelogramo'>
-              <button src='/accesorios' id='buttonNavBarMenu'>Insumos</button>
+              <button src='/accesorios' id='buttonNavBarMenu'>PRODUCTOS</button>
             </Link>
 
             <Link to='/venta' className='paralelogramo'>
-              <button src='/venta' id='buttonNavBarMenu'>Venta Yates</button>
+              <button src='/venta' id='buttonNavBarMenu'>VENTA YATES</button>
             </Link>
 
             <Link to='/alquiler' className='paralelogramo'>
-              <button src='/alquiler' id='buttonNavBarMenu'>Alquiler Yates</button>
+              <button src='/alquiler' id='buttonNavBarMenu'>RENTA YATES</button>
             </Link>
             
            
