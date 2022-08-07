@@ -47,7 +47,7 @@ console.log(productAlquiler)
     <Navbar/>
         <Box id='boxAlq'>
                 <Box id='textBox1'>ALQUILER</Box>
-                <Box id='textBox1'>Contactanos</Box>
+                <Box id='textBox2'>Contactanos</Box>
                 
             </Box>
       
@@ -90,7 +90,7 @@ console.log(productAlquiler)
         }
       </Grid>
       <Link to='/accesorios'>
-        <button id='buttonBack'>VOLVER</button>
+        <button id='buttonBackAA'>VOLVER</button>
       </Link>
       <Paginado
         characterPerPage={characterPerPage}

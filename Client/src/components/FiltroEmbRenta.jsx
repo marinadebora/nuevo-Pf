@@ -1,6 +1,8 @@
 import React, {useState,useEffect} from 'react'
 import { barcosEnAlquiler, filtrosCategoriaEmbarcacion } from '../actions/actions'
 import { useDispatch } from "react-redux";
+import '../styles/searchBar.css';
+
 
 export function FiltroEmbRenta({setPage}){
     const dispatch = useDispatch()
@@ -28,7 +30,7 @@ export function FiltroEmbRenta({setPage}){
   }
   return (
     <div>
-        <label key='venta'>Filtrar por Gama </label>
+        <label id='text' key='venta'>Filtrar por Gama: </label>
       <select name="categoriasR" id="categoriasR" onChange={(e) => filtroPorCategoria(e)}>
         <option key={'sinFiltro'} value={'sinFiltro'}>Sin Filtros</option>
         <option key={'Gama Alta'} value={'Alta'}>Gama Alta</option>

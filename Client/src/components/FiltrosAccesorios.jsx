@@ -1,6 +1,7 @@
 import React,{ useEffect,useState }  from "react";
 import { accesorios, filtroPrecioAccesorios, filtroCategoriaAccesorios,precioOrdenAccesorios } from '../actions/actions'
 import { useDispatch } from "react-redux";
+import '../styles/searchBar.css';
 
 export function FiltrosAccesorios({setPage}) {
     const dispatch = useDispatch()
@@ -63,7 +64,7 @@ export function FiltrosAccesorios({setPage}) {
     
   return (
 <div>
-   <label key='Precio'>Filtrar por Precio </label>
+   <label id='text' key='Precio'>Filtrar por Precio: </label>
   <select name="Precio" id="barcoVentaAcc" onChange={(e) => filtroPorPrecio(e)}>
     <option key={'sinFiltro'} value={'sinFiltro'}>Sin Filtros</option>
     <option key={'mayor'} value={'mayor'}>Mas de US$ 120 </option>
@@ -71,7 +72,7 @@ export function FiltrosAccesorios({setPage}) {
     <option key={'menor'} value={'menor'}>Menos de US$ 45</option>
   </select>
   {
-        venta && <label key='venta'>Filtrar por Categoria</label>
+        venta && <label id='text' key='venta'>Filtrar por Categoria: </label>
   }
       
       {
@@ -84,7 +85,7 @@ export function FiltrosAccesorios({setPage}) {
         </select>
       }
        {
-        categorias && <label key='orden'>Ordenar</label>
+        categorias && <label id='text' key='orden'>Ordenar: </label>
        } 
         
       {
