@@ -3,6 +3,7 @@ import { addToBasket, removeToBasket,getItemsCart,UsuariosDetail,UpdateToCart, }
 import { useSelector, useDispatch ,} from 'react-redux'
 import { useEffect ,useState,Fragment} from 'react'
 import { useNavigate } from 'react-router-dom';
+import {Button} from "@mui/material";
 import '../styles/card.css';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import IconButton from "@mui/material/IconButton";
@@ -267,7 +268,7 @@ async function back(id) {
         </>:
         <div>
         <NavBar />
-            <p id='titleCheckoutPage'>Shopping Cart</p>
+            <h1 id='titleCheckoutPage'>Shopping Cart</h1>
             {
               uniqueArray?.map(e => (
                     e !== undefined &&
@@ -301,7 +302,7 @@ async function back(id) {
                 <button onClick={() => next(e._id)}class="pagination-button p" id="buttonMasMenos">+</button>
                 <button onClick={() => handleSplice(e._id)} class="pagination-button a" id="buttonMasMenos">-</button>
                 </div>
-                <p id="precioTotal">Precio Total:${e.precio.split('$')[1] * cantidad(e._id)}</p>
+                <p id="precioTotal">Precio Total:US$ {e.precio.split('$')[1] * cantidad(e._id)}</p>
                 <button id="delete" onClick={() => handleDelete(e._id)} className="delete-button">Delete</button>
                 <div class="clearfix"></div>
                 </form>
@@ -319,7 +320,14 @@ async function back(id) {
                 ))
                 }
                 <div>
-        <h1>PRECIO COMPRA TOTAL:{precioTotal}</h1>
+        <div id='pagoTotal'>  
+        <h2> TOTAL</h2>
+        <h2>US$ {precioTotal}</h2>
+        </div>   
+       
+        <Button href="/checkout" variant="contained" size="large" id='pagarButton'>Pagar</Button>
+       
+
       </div>
             <button id='buttonBackCheckout' onClick={volver}>Back</button>
         </div>
