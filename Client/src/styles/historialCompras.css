@@ -5,12 +5,12 @@
   
 }
 .contenedor-orden{
-  width: 45%;
-  background-color: rgba(32,147,179,255);
-  box-shadow: 0 3px 13px 1px rgb(0 0 0 / 9%);
+  width: 75%;
+
+  box-shadow: 0 3px 13px 1px rgba(0, 0, 0, 0.503);
 }
 .contenedor-art{
-    width:500px;
+    width:80%;
     height: 200px;
     margin:30px 50px ;
     display: flex;
@@ -18,7 +18,7 @@
     align-items:flex-end;
     justify-content:flex-start;
     background-color: #fff;
-    box-shadow: 0 3px 13px 1px rgb(0, 0, 0);
+    box-shadow: 0 3px 13px 1px rgba(3, 124, 246, 0.644);
     border-radius: 10px ;
     
     }
