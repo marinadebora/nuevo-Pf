@@ -9,6 +9,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Confirmation from './Confirmacion'
+import { Grid } from '@mui/material'
 import Review from './Review';
 import { useStateValue } from "../../stateProvider";
 import '../../styles/checkout.css';
@@ -27,7 +28,11 @@ const Checkout = () => {
 
 
   return (
+    
+
+    <Grid container spacing={2}>
     <>
+    <Grid item xs={12} sm={6} md={4} lg={3}>
       <main className="layout"> 
         <Paper className="paper">
           <Typography component='h1' variant='h4' aling='center' fontWeight='bold'>
@@ -47,7 +52,9 @@ const Checkout = () => {
           )}
         </Paper>
       </main>
+      </Grid>
     </>
+    </Grid>
   );
 };
 
