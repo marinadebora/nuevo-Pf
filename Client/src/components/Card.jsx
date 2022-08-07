@@ -23,7 +23,7 @@ import ImgSinStock from "../imagenes/ImgSinStock.png"
 
 
 
-export default function Producto({ tipo,id, producto, marca ,precio, fabricacion, imagenes, Link, stock}) {
+export default function Producto({ tipo,id, producto, marca ,precio, fabricacion, imagenes, Link, stock,comentarios}) {
    
   const navigate = useNavigate();
    const dispatch = useDispatch() 
@@ -65,8 +65,12 @@ export default function Producto({ tipo,id, producto, marca ,precio, fabricacion
 },[localStorage.getItem("item2")])
    
    
-   
-
+ let filtroEstrella=comentarios?.map(e=>e.star?.estrellas);
+ let parse=filtroEstrella.map(e=> parseInt(e))
+ let filtro=parse.filter(e=>  e!==null && e!==undefined)
+ let promedio=filtro?.reduce((a, b) =>a + b, 0)/filtroEstrella.length
+ let total=Math.round(promedio)
+console.log(total)
  
   
   
@@ -125,6 +129,14 @@ export default function Producto({ tipo,id, producto, marca ,precio, fabricacion
             </Badge>
           </IconButton>
           }
+          {  total?<div>
+            { total=== 1?<li className="estrellas">★</li>:total=== 2
+              ?<li className="estrellas">★★</li>:total=== 3
+              ?<li className="estrellas">★★★</li>:total=== 4
+              ?<li className="estrellas">★★★★</li>:total=== 5
+              ?<li className="estrellas">★★★★</li>:''
+              }</div>:''
+              }
           <Button sx={{marginLeft: 'auto'}} size="small">{Link}</Button>
         </CardActions>
       </Card>
