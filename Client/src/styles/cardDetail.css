@@ -61,5 +61,27 @@
 #ulDetail li{
     margin:0px;
     list-style-type: none;
-    font-size: 5px;
+    font-size: 15px;
+}
+.contenedor-total{
+    margin:8px;
+    width: 80%;
+    text-align: center;
+    box-shadow: 0 3px 13px 1px rgba(6, 6, 6, 0.269);
+}
+.comentario{
+    margin:5px;
+    width: 98%;
+    text-align: left;
+    border:1px solid #0184a9;
+    box-shadow: 0 3px 3px 1px #0184a9;
+}
+.nombre{
+    margin:10px ;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+}
+.reseña{
+    margin:10px ;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
