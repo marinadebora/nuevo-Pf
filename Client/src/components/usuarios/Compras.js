@@ -207,11 +207,50 @@ productos:[
           "stock": 5,
           "createdAt": "2022-07-21T01:07:01.989Z",
           "updatedAt": "2022-08-02T00:14:02.344Z"
-        }
+        },{
+          "valoraciones": [],
+          "comentarios": [],
+          "_id": "62d8a6b52029a4c825e23edd",
+          "producto": "Cornamusas para muelles de amarre",
+          "categorias": [
+          "seguridad"
+          ],
+          "imagenes": [
+          "https://m.media-amazon.com/images/I/518HVHunAPL._AC_SL1001_.jpg",
+          "https://static.tiendy.net/shops/todoparatubarco/products/c/o/large_cornamusa-667238-1.jpg",
+          "https://www.accastillage-diffusion.com/media/catalog/product/cache/924d0a271c8f697a0eeb1446e323380e/c/o/conf-a50082-a50082.jpeg"
+          ],
+          "descripcion": "Cornamusas para muelles de amarre, 5 pulgadas de cornamusa inoxidable 316 para yate marino, Cornamusa de amarre, Base hueca",
+          "dimensiones": "5 pulgadas",
+          "precio": "US$17.22",
+          "stock": 5,
+          "createdAt": "2022-07-21T01:07:01.990Z",
+          "updatedAt": "2022-08-02T00:29:58.116Z"
+          },
+          {
+            "valoraciones": [],
+            "comentarios": [],
+            "_id": "62d8a6b52029a4c825e23edc",
+            "producto": "Orion Safety 584,",
+            "categorias": [
+            "seguridad"
+            ],
+            "imagenes": [
+            "https://images-na.ssl-images-amazon.com/images/I/411jLdJD08L._SR600%2C315_PIWhiteStrip%2CBottomLeft%2C0%2C35_SCLZZZZZZZ_FMpng_BG255%2C255%2C255.jpg",
+            "https://m.media-amazon.com/images/I/6171vk1ZiZL._AC_SX522_.jpg",
+            "https://cdn.shopify.com/s/files/1/0548/7634/0269/products/8d334632-c2d1-52bd-93d6-79d4cc9fb901_500x500.jpg?v=1634015525"
+            ],
+            "descripcion": "Orion Safety 584, Alerter Basic 4, lanzador de calibre 12 y paquete de señal aéreaSeñal de día o noche aprobada por USCG.",
+            "dimensiones": "calibre 12",
+            "precio": "US$98",
+            "stock": 5,
+            "createdAt": "2022-07-21T01:07:01.990Z",
+            "updatedAt": "2022-08-02T00:21:51.533Z"
+            },
       ],
       "estado_de_la_compra": {
-        enviada:false,
-        pendiente:true,
+        enviada:true,
+        pendiente:false,
         rechazada:false,
         en_proceso:false
       },
