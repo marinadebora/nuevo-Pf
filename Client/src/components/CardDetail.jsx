@@ -130,18 +130,18 @@ export default function CardDetail()
           {
             myDetail.Tamaño ? <li><p id='titleDetailCard'>Tamaño:</p> <p>{myDetail.Tamaño}</p></li> : ''
           }
-          {
-            myDetail.comentarios && myDetail.comentarios.map(e=>(
               <div className='contenedor-total'>
                 <h2>Calificaciones de los usuarios</h2>
+          {
+            myDetail.comentarios ? myDetail.comentarios.map(e=>(
               <div className="comentario">
         
             <li className="nombre">El usuario {e.nombre}</li>
             <li className="reseña">califico este producto como: {e.reseña}</li>
             </div>
-            </div>
-            ))
+            )):<h4>Este producto sun no tiene comentarios</h4>
           }
+          </div>
           
           </ul>
          

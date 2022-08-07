@@ -70,7 +70,7 @@ export default function Producto2({ tipo,id, producto, marca ,precio, fabricacio
          id='imgCard'
          component="img"
          height="200"
-         image={imagenes?.[0]} />
+         image={imagenes} />
          :''
             
         }
