@@ -17,6 +17,26 @@ const AddressForm = ({nextStep}) => {
   const [{ shippingData }, dispatch] = useStateValue();
   const ShippingLocalStorage = JSON.parse(localStorage.getItem("ShippingData") || "[]");
 
+  console.log(shippingData)
+
+  async function validate(){
+    let errors = {}
+
+    if (!shippingData.firsName) {
+      return alert ("Falta ingresar nombre")
+    } else if (shippingData.firsName.search(/^[a-zA-Zñáéíóúü]*$/)) {
+      //Valido el input con expresion regular.
+      return alert ("El nombre no puede contener caracteres especiales ni numeros ") 
+    }
+    if (shippingData.firsName.length > 15) {
+      return alert ("El nombre no puede exceder los 15 caracteres") ;
+    }
+
+
+    
+    
+}
+
   useEffect(() => {
     localStorage.setItem("ShippingData", JSON.stringify(ShippingLocalStorage))
  
@@ -34,6 +54,7 @@ const AddressForm = ({nextStep}) => {
           onSubmit={methods.handleSubmit((data) => {
             const cart_add = data
             const actual_card = localStorage.getItem("ShippingData") 
+            
              if(ShippingLocalStorage.length) {
              localStorage.setItem(
                "ShippingData",
@@ -44,7 +65,8 @@ const AddressForm = ({nextStep}) => {
                "ShippingData",
                JSON.stringify([cart_add])
              )
-           }nextStep();
+           }
+           nextStep();
           })}
           >
               <Grid container spacing={3}>
@@ -53,11 +75,12 @@ const AddressForm = ({nextStep}) => {
                 <AddressInput required name='direccion' label='Direccion' />
                 <AddressInput required name='email' label='Correo Electronico' />
                 <AddressInput required name='ciudad' label='Ciudad' />
-                <AddressInput required name='cp' label='CP' />
+                <AddressInput required name='cp' label='CP' /> 
               </Grid>
+              
               <div>
                 <Button component={Link} to='/checkoutPage' id='buttonBackAddresFrom'>Atras</Button>
-                <Button type='submit' id='buttonBackAddresFrom'>Siguiente</Button>
+                <Button onClick={() => validate()} type='submit' id='buttonBackAddresFrom'>Siguiente</Button>
               </div>
           </form>
         </FormProvider>
