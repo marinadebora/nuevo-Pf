@@ -16,7 +16,7 @@ export function HistorialCompras()  {
 console.log(user)
 
   useEffect(()=>{
-  dispatch(usuarioId(current_userID))
+  dispatch(usuarioId(myUserDetail._id))
   },[dispatch,current_userID])
 
 
@@ -103,8 +103,23 @@ user?.historialDeCompra?.map(e=>(
   
   
 
-
-
+{/*  {
+  "usuario":"62ed9a114c7c3d7663b3864d",
+  "productos":[
+      {
+        "producto":"62d8a6b52029a4c825e23ed5",
+        "cantidad":1,
+        "precio":25
+      },
+{
+        "producto":"62d8a6b52029a4c825e23ed3",
+        "cantidad":1,
+        "precio":25
+      }
+      
+    ],
+  "precioTotal":25
+} */}
 
 
 

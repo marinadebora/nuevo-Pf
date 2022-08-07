@@ -84,7 +84,7 @@ export default function SearchBar(){
       }
       
        </select> */}
-
+      <Link to='/historialC'>Historial de Compras</Link>
       <label id='text'>Buscar por Nombre:</label>
       <input value={name} key='buscar' type='text' placeholder='buscar...' onChange={(e) => handleChange(e)} />
       <button  type='submit' id='buttonB' onClick={(e) => handleSubmit(e)}>Buscar</button>

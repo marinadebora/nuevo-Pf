@@ -226,3 +226,20 @@ productos:[
       //  email: myUserDetail.email
       // apellido: myUserDetail.apellido,
       //nombre: myUserDetail.nombre  
+/* {
+  "usuario":"62ec5a805ef63219134a5c68",
+  "productos":[
+      {
+        "producto":"62e03d8cc14f64211809661d",
+        "cantidad":1,
+        "precio":25
+      },
+{
+        "producto":"62e0422c592bb92fc1642169",
+        "cantidad":1,
+        "precio":25
+      }
+      
+    ],
+  "precioTotal":25
+} */
