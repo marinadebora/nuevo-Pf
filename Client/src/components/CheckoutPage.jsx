@@ -131,7 +131,7 @@ return cantidadfiltrada.length
     switch (value) {
       case "cart":
         navigate("/checkoutPage");
-        swal("Welcome to your cart", "Have a nice buy!", "success");
+        swal("Bienvenido a tu carro","Que tenga una buena compra" ,"success");
         break;
 
       default:
