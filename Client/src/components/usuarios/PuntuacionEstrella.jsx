@@ -1,33 +1,67 @@
-import React, {useState} from 'react'
+import React, {useState,useEffect} from 'react'
 import '../../styles/PuntuacionEstrella.css'
-const PuntuacionEstrella = () => {
-  const [estrellas, setEstrellas] = useState({
-    estrellas:0
-  })
-console.log(estrellas)
-const handleChange=(e)=>{
-  setEstrellas({
-    [e.target.name]:e.target.value,
-  })
-}
+import { useSelector, useDispatch ,} from 'react-redux'
+export default function PuntuacionEstrella (){
 
+  const dispatch = useDispatch()
+  const StarFromLocalStorage = JSON.parse(localStorage.getItem("Stars") || "[]");
+  const [star /* setCart */] = useState(StarFromLocalStorage);
+  const current_starts =StarFromLocalStorage;
+
+
+
+ 
+console.log(current_starts)
+/*const handleChange=(e)=>{
+  setEstrellas({
+    [e.target.name]*/
+    const addStars = (valor) =>{
+    
+      const cart_add = valor
+      const actual_card = localStorage.getItem("Stars") 
+       //JSON.stringify([...cartFromLocalStorage, cart_add._id, cart_add.producto])
+      
+      if(StarFromLocalStorage.length) {
+       localStorage.setItem(
+         "Stars",
+         JSON.stringify([...StarFromLocalStorage, cart_add])
+       );
+     } else {
+       localStorage.setItem(
+         "Stars",
+         JSON.stringify([cart_add])
+       )
+     }
+    }
+  
+const promedio = StarFromLocalStorage.reduce((a, b) => a + b, 0) / StarFromLocalStorage.length
+console.log(promedio)
+
+  useEffect(() => {
+    
+    localStorage.getItem("Stars")
+    localStorage.setItem("Stars", JSON.stringify(current_starts));
+    
+  }, [dispatch, current_starts]);
+   
 
   return (
     <div>
-  <form>
 
-<p class="clasificacion">
+      <form className='form'>
+  <p class="clasificacion">
+  <button  onClick={() => addStars(5)} class="pagination-button a">★</button>
+  <button  onClick={() => addStars(4)} class="pagination-button a">★</button>
+  <button  onClick={() => addStars(3)} class="pagination-button a">★</button>
+  <button  onClick={() => addStars(2)} class="pagination-button a">★</button>
+  <button  onClick={() => addStars(1)} class="pagination-button a">★</button>
+    
 
-  <input id="radio1" type="radio" name="estrellas" value="5"/><label for="radio1">★</label>
-  <input id="radio2" type="radio" name="estrellas" value="4"/><label for="radio2">★</label>
-  <input id="radio3" type="radio" name="estrellas" value="3"/><label for="radio3">★</label>
-  <input id="radio4" type="radio" name="estrellas" value="2"/><label for="radio4">★</label>
-  <input id="radio5" type="radio" name="estrellas" value="1"/><label for="radio5">★</label>
-          </p>
+  </p>
+</form>
 
-        </form>
     </div>
   )
 }
 
-export default PuntuacionEstrella
+
