@@ -96,14 +96,14 @@
 }
 
 
-@media(max-width: 895px){
+@media(max-width: 900px){
     #textBox1{
-        padding-top: 70px;
+        padding-top: 80px;
         font-size: 60px;
     }
     #textBox2{
-        padding-top: 5px;
-        font-size: 60px;
+        padding-top: 20px;
+        font-size: 40px;
     }
 
     #box{
@@ -115,49 +115,19 @@
     }
 }
 
-@media(max-width: 660px){
-    #textBox1{
-        padding-top: 40px;
-        font-size: 40px;
-    }
-    #textBox2{
-        padding-top: 5px;
-        font-size: 40px;
-    }
 
-    #box{
-        
-        height:150px;
-        
-        
+
+@media(max-width: 786px){
     
-    }
-}
-
-@media(max-width: 695px){
-    #textBox1{
-        padding-top: 40px;
-        font-size: 40px;
-    }
-    #textBox2{
-        padding-top: 5px;
-        font-size: 40px;
-    }
-
-    #box{
-        
-        height:150px;
-        
-        
-    
-    }
-}
-
-@media(max-width: 498px){
-    
-    #box{
+    #boxVta{
        display: none;
     }
+    #boxAlq{
+        display: none;
+     }
+    #boxAcc{
+        display: none;
+     }
     #textBox1{
         display: none;
     }
