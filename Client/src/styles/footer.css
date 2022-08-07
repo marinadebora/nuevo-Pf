@@ -23,3 +23,25 @@
 
 }
 
+@media(max-width: 990px){
+    .iframeAdress{
+       display: none;
+     
+     }
+}
+
+@media(max-width: 800px){
+    .iframe{
+       display: none;
+     
+     }
+
+     #LinksFooterAll{
+   
+        margin-right: 20px;
+       
+    }
+
+
+}
+
