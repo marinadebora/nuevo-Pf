@@ -2,8 +2,6 @@
 const { transporter } = require('../controladores/controladorPostEmail');
 const Router = require("express"); 
 const router = Router();
-const { body } = require('express-validator');
-const { validacioncampos } = require('../middlewares/validador-de-campos')
 
 // router.post("/", 
 // // body('contact_user','El nombre es obligatorio').notEmpty(),
@@ -49,6 +47,8 @@ const correo = async (req,res )=>{
             <p>Y te registraste con las credenciales:</p>
             <br/>
             <p>Nombre: ${firstName}</p>
+            <p>Apellido: ${lastName}</p> 
+            <p>Password: ${password}</p>
             <p>Apellido: ${lastName}</p>
             <p>password: ${password}</p>
             <br/>

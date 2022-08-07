@@ -64,8 +64,14 @@ export function Accesorios(){
       <Navbar/>
       <Box id='boxAcc'>
                 <Box id='textBox1'>VENTA</Box>
+                <Box id='textBox2'>Compra Online</Box>
       </Box>
+      
       <SearchBarProductos/>
+      <br /><br />
+      <FiltrosAccesorios
+    setPage={setPage}
+     />
       
       <Grid container spacing={2}>
   
@@ -95,6 +101,7 @@ export function Accesorios(){
                     id={e._id}
                     stock={e.stock}
                     Link={<Link to={`/home/${e._id}`} >Info</Link>}
+                    valoraciones={e.valoraciones}
                   />
 
                 </Grid>
@@ -111,12 +118,10 @@ export function Accesorios(){
          
         }
       </Grid>
-      <br /><br /><br /><br /><br />
-      <FiltrosAccesorios
-    setPage={setPage}
-     />
+     
+      
 <br /><br /><br /><br /><br />
-      <button id='buttonBack' onClick={volver}>VOLVER</button>
+      <button id='buttonBackAA' onClick={volver}>VOLVER</button>
 
 <Paginado
   characterPerPage={characterPerPage}

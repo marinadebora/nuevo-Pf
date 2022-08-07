@@ -40,6 +40,7 @@ export default function contactForm() {
         {/* <Route exact path='/home' element={<Home />} /> */}
         <Route exact path='/home/:id' element={<CardDetail />} />
         <Route exact path='/checkoutPage' element={<CheckoutPage />}/>
+        <Route exact path='/formContact' element={<ContactForm />}/>
         <Route exact path='/admin' element={<Admin/>} />
         <Route exact path='/dashboard' element={<Dashboard/>} />
         <Route exact path='/dashboard/:id' element={<CardDetailAdmin2 />} />
@@ -55,14 +56,11 @@ export default function contactForm() {
         <Route exact path='/accesorios' element={<Accesorios />} />
         <Route exact path='/accesorios/:id' element={<CardDetail />} />
 
-
         <Route exact path='/checkout' element={<Checkout/>}/>
         <Route exact path='/contactForm' element={<ContactForm />}/>
 
-
         <Route exact path='/historialC' element={<HistorialCompras/>} />
         <Route exact path='/review/:id' element={<Review />} />
-
       </Routes>
     </div>
    

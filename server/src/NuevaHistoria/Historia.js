@@ -12,6 +12,11 @@ const historialsSchema = new Schema({
   ],
 
   fechaDeCompra: {type: Date, default: Date.now},
+  precioTotal: {type: Number}, 
+  pendiente:{type:Boolean,default:true},
+  procesado:{type:Boolean,default:false},
+  recibido:{type:Boolean,default:false},
+  cancelado:{type:Boolean,default:false},  
   precioTotal: {type: Number},
   pendiente:{type: Boolean, default: true},
   procesado:{type: Boolean, default: false},

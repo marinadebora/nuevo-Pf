@@ -47,6 +47,7 @@ console.log(promedio)
 
   return (
     <div>
+
       <form className='form'>
   <p class="clasificacion">
   <button  onClick={() => addStars(5)} class="pagination-button a">★</button>
@@ -58,6 +59,7 @@ console.log(promedio)
 
   </p>
 </form>
+
     </div>
   )
 }

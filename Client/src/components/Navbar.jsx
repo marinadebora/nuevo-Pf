@@ -80,22 +80,22 @@ export default function Navbar() {
       <AppBar position="sticky" id="appBar">
         <Grid>
           <Toolbar>
-          <Link to='/'>
+          <Link to='/accesorios'>
               <IconButton>
                 <img src={Logo} alt="img" id="logoNavBar" />
               </IconButton>
             </Link>
 
             <Link to='/accesorios' className='paralelogramo'>
-              <button src='/accesorios' id='buttonParalel'>Insumos</button>
+              <button src='/accesorios' id='buttonNavBarMenu'>Insumos</button>
             </Link>
 
             <Link to='/venta' className='paralelogramo'>
-              <button src='/venta' id='buttonParalel'>Venta Yates</button>
+              <button src='/venta' id='buttonNavBarMenu'>Venta Yates</button>
             </Link>
 
             <Link to='/alquiler' className='paralelogramo'>
-              <button src='/alquiler' id='buttonParalel'>Alquiler Yates</button>
+              <button src='/alquiler' id='buttonNavBarMenu'>Alquiler Yates</button>
             </Link>
             
            

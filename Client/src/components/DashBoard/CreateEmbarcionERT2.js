@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import {postEmbarcacionRT, Categorias } from '../../actions/admin-action';
 import { barcosEnAlquiler, /*getAllTypes */} from '../../actions/actions';
-import form from '../../styles/form.css';
+import '../../styles/form.css';
 import { Link } from 'react-router-dom';
 import axios from "axios"
 
@@ -573,8 +573,8 @@ export function EmbarcacionCreateRT2(){
                             </div>
 
                             <button id='buttonSubmitForm' className="button-submit" type="submit">Create Product</button>
-                            <Link to='/admin'>
-                                <button id='buttonBackForm'>Back</button>
+                            <Link to='/dashboard'>
+                                <button id='buttonBackForm'>Volver</button>
                             </Link>
 
                             {/* {

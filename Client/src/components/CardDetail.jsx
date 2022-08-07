@@ -27,7 +27,7 @@ export default function CardDetail()
   const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
   const [cart /* setCart */] = useState(cartFromLocalStorage);
    
-    
+   console.log(myDetail) 
   useEffect(() =>
   {
     localStorage.getItem("item2")
@@ -89,7 +89,7 @@ export default function CardDetail()
 
         {myDetail.stock > 0 ?
           <ImagenList/>
-          :<img src={ImgSinStock}></img>
+          :<img src={ImgSinStock} alt=''></img>
         }
 
           </div>
@@ -129,6 +129,18 @@ export default function CardDetail()
           }
           {
             myDetail.Tamaño ? <li><p id='titleDetailCard'>Tamaño:</p> <p>{myDetail.Tamaño}</p></li> : ''
+          }
+          {
+            myDetail.comentarios && myDetail.comentarios.map(e=>(
+              <div className='contenedor-total'>
+                <h2>Calificaciones de los usuarios</h2>
+              <div className="comentario">
+        
+            <li className="nombre">El usuario {e.nombre}</li>
+            <li className="reseña">califico este producto como: {e.reseña}</li>
+            </div>
+            </div>
+            ))
           }
           
           </ul>

@@ -20,7 +20,7 @@
 #card{
     width: 400px;
     margin-top: 15px;
-    margin-left: 15px;
+    margin-left: 30px;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
     cursor: pointer;
 
@@ -31,7 +31,7 @@
 }
 
 #titleCheckoutPage{
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
 }
 
@@ -42,6 +42,7 @@
 
 #checkoutCard{
     float: left;
+    padding-bottom: 10px;
     width: 400px;
     height: 500px;
     margin-top: 15px;
@@ -63,6 +64,15 @@ li{
    margin-left: 0px;
 }
 
+#pagarButton{
+    background-color:#0184a9;
+    text-decoration: none;
+}
+
+#pagoTotal{
+    margin-top: 40px;
+    font-weight: bold;
+}
 
 
 #buttonBackCheckout{
@@ -80,7 +90,7 @@ li{
 	font-weight: bold; 
 	position: fixed;
 	bottom: 40px;
-	right: 40px;
+	right: 80px;
 	transition: all 300ms ease 0ms;
 	box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
 	z-index: 99;
@@ -92,6 +102,84 @@ li{
     font-size: 15px;
     margin-left: 5px;
 }
+
+#layout{
+    display: block;
+    width: 380px;
+    height: 135px;
+    padding: 5px;
+
+}
+
+#cantidad{
+   margin-top: 20px; 
+   display: inline-block;
+   align-items: baseline;
+   margin-right: 50px;
+
+}
+
+#buttonsCart{
+    display: inline-block;
+    align-items: baseline;
+    
+}
+
+/* #precioUnid{
+    
+    font-weight: bold;
+    color: black;
+    height: 12px;
+    width: 400px;
+    border: none;
+    font-size: 14px; 
+    font-weight: bold; 
+    margin-bottom: 1px;
+} */
+#precioTotal{
+    
+    font-weight: bold;
+    color: black;
+    height: 12px;
+    width: 400px;
+    border: none;
+    font-size: 14px; 
+    font-weight: bold; 
+    margin-bottom: 30px;
+}
+
+#delete{
+    border: 2px solid red;
+    color: red;
+    border-radius: 5px;
+    background-color: transparent;
+    
+   
+}
+
+
+#buttonMasMenos{
+    display: inline-block;
+    font-weight: bold;
+    color: #0184a9;
+    height: 30px;
+    width: 30px;
+    margin-right: 10px;
+    background-color:transparent;
+    border-radius: 20px;
+    border: 2px solid #0184a9;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    
+}
+
+.clearfix{
+    float: none;
+    clear: both;
+}
+
 
 
 
