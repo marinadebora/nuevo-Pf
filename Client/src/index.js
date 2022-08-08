@@ -8,13 +8,12 @@ import { store } from './store/index'
 import { BrowserRouter } from 'react-router-dom';
 import axios from 'axios';
 
-
 axios.defaults.baseURL = process.env.REACT_APP_API || 'http://localhost:4000'
 ReactDOM.render( 
   <Provider store={store}>
     <BrowserRouter>
       <React.StrictMode>
-          <App />  
+            <App />  
       </React.StrictMode>
     </BrowserRouter>
   </Provider>,

@@ -23,11 +23,20 @@ import SingIn from './components/SingIn'
 import SingUp from './components/SingUp'
 import {CatCreate} from "./components/Admin/CreateCat"
 import ContactForm from "./components/ContactForm";
+import Checkout from './components/Checkout';
+
+import { loadStripe } from "@stripe/stripe-js"
+import {Elements} from "@stripe/react-stripe-js"
+
+let publishableKey ="pk_test_51LTzChGPkJkLR4xlRyDUWk3Pj6SiGC8bq0An5pdnhBWsCwE0Y9eIT2uUj7baWSnQlXXXmqSlZitwQKJrd7o1LwC500k5khRIeF" 
+const stripePromise = loadStripe(publishableKey)
+
 
 export default function contactForm() {
   return (
-   
+    
     <div className="App">
+      <Elements stripe={stripePromise}>
       <Routes>
         <Route exact path= '/' element={<LandingPage/>}/>
         <Route exact path= '/' element={<Navbar/>}/>
@@ -60,7 +69,10 @@ export default function contactForm() {
         <Route exact path='/accesorios' element={<Accesorios />} />
         <Route exact path='/accesorios/:id' element={<CardDetail />} />
 
+
+        <Route path='/prueba/checkout' element={<Checkout/>}/>
       </Routes>
+      </Elements>
     </div>
    
   );

@@ -31,7 +31,7 @@ const putUsuario = require("./putUsuarioCarrito");
 const putAccesoriosComentarios = require("./putAccesoriosComentarios");
 const { UsuarioId } = require("../controladores/controladorIdUsuario");
 const controladorHistoria = require("../NuevaHistoria/controladorHistoria")
-
+const getUsuario = require("../controladores/ControladorUsuario");
 const usuariosGoogle = require('../controladores/ControladorRegistroGoogle')
 
 /* const app = require("../modelos/SesionGoogle.js") */
