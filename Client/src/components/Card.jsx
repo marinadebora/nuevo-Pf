@@ -10,11 +10,12 @@ import Badge from "@mui/material/Badge"
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Button from '@mui/material/Button';
 import '../styles/card.css';
-import {addToBasket} from '../actions/actions'
+import {addToBasket, addToFavoritos} from '../actions/actions'
 import {useDispatch } from 'react-redux'
-/* import {  useState } from 'react';
- */import swal from "sweetalert";
+import swal from "sweetalert";
 import {useNavigate } from "react-router-dom";
+import ImgSinStock from "../imagenes/vector-sin-stock.png"
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 
 
@@ -22,8 +23,7 @@ import {useNavigate } from "react-router-dom";
 
 
 
-
-export default function Producto({ tipo,id, producto, marca ,precio, fabricacion, imagenes, Link}) {
+export default function Producto({ tipo,id, producto, marca ,precio, fabricacion, imagenes, Link, stock,comentarios}) {
    
   const navigate = useNavigate();
    const dispatch = useDispatch() 
@@ -33,22 +33,50 @@ export default function Producto({ tipo,id, producto, marca ,precio, fabricacion
     
     dispatch(addToBasket({id}))
      return  swal({
-      title: "Your product was successfully added to the cart",
-      text: "What do you want to do next?",
+      title: "El producto se ha agregado a tu carro de compras",
+      text: "Que queires hacer ahora?",
       icon: "success",
       buttons: {
         cart: {
-          text: "Go to cart",
+          text: "Ir al carro",
           value: "cart",
         },
        
-        cancel: "Stay",
+        cancel: "Quedarse",
       },
     }).then((value) => {
       switch (value) {
         case "cart":
           navigate("/checkoutPage");
-          swal("Welcome to your cart", "Have a nice buy!", "success");
+          swal("Bienvenido a tu carro","Que tenga una buena compra" ,"success");
+          break;
+
+        default:
+          break;
+      }
+    });
+     
+  }
+  async function addToFav () {
+    
+    dispatch(addToFavoritos({id}))
+     return  swal({
+      title: "El producto se ha agregado a tu lista de favoritos",
+      text: "Que queires hacer ahora?",
+      icon: "success",
+      buttons: {
+        cart: {
+          text: "Ir a mi lista",
+          value: "cart",
+        },
+       
+        cancel: "Quedarse",
+      },
+    }).then((value) => {
+      switch (value) {
+        case "cart":
+          navigate("/checkoutPage");
+          swal("Bienvenido a tus favoritos","Que tenga una buena compra" ,"success");
           break;
 
         default:
@@ -61,11 +89,17 @@ export default function Producto({ tipo,id, producto, marca ,precio, fabricacion
    
   useEffect(()=>{
     localStorage.getItem("item2")
+    localStorage.getItem("Fav")
+   
    
 },[localStorage.getItem("item2")])
    
    
-   
+ let filtroEstrella=comentarios?.map(e=>e.star?.estrellas);
+ let parse=filtroEstrella.map(e=> parseInt(e))
+ let filtro=parse.filter(e=>  e!==null && e!==undefined)
+ let promedio=filtro?.reduce((a, b) =>a + b, 0)/filtroEstrella.length
+ let total=Math.round(promedio)
 
  
   
@@ -93,14 +127,21 @@ export default function Producto({ tipo,id, producto, marca ,precio, fabricacion
           }
         />
 
-        { imagenes?
+        { stock >0 ?
          <CardMedia
          id='imgCard'
          component="img"
          height="200"
          image={imagenes?.[0]} />
-         :''
-            
+         : <div className="div-img"> 
+           <CardMedia
+         id='imgCard'
+         component="img"
+         height="200"
+         image={imagenes?.[0]} />
+        {/*  <img className="imagen1" src={imagenes?.[0]} alt=''></img> */}
+         <img className="imagen2" src={ImgSinStock} alt=''></img>
+         </div> 
         }
         <CardContent>
         {
@@ -109,12 +150,27 @@ export default function Producto({ tipo,id, producto, marca ,precio, fabricacion
           <Typography>Precio: {precio}</Typography>
         </CardContent>
         <CardActions disableSpacing id='cardAction'>
-          
-          <IconButton aria-label="add to cart"onClick={() => addToCart()}>
+          {stock >0 
+          ?<IconButton aria-label="add to cart"onClick={() => addToCart()}>
           <Badge  color="secondary" id='badge'>
             <AddShoppingCartIcon />
             </Badge>
           </IconButton>
+          :<IconButton disabled aria-label="add to cart"onClick={() => addToCart()}>
+          <Badge  color="secondary" id='badge'>
+            <AddShoppingCartIcon />
+            </Badge>
+          </IconButton>
+          }
+          {  total?<div>
+            { total=== 1?<li className="estrellas">★</li>:total=== 2
+              ?<li className="estrellas">★★</li>:total=== 3
+              ?<li className="estrellas">★★★</li>:total=== 4
+              ?<li className="estrellas">★★★★</li>:total=== 5
+              ?<li className="estrellas">★★★★</li>:''
+              }</div>:''
+              }
+               <IconButton aria-label="add to favorites" onClick={() => addToFav()}> <FavoriteIcon /></IconButton>
           <Button sx={{marginLeft: 'auto'}} size="small">{Link}</Button>
         </CardActions>
       </Card>

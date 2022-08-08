@@ -1,28 +1,27 @@
 import React from 'react';
 import './App.css';
 import {Routes, Route} from 'react-router-dom'
-import Home from './components/Home';
 import CardDetail from './components/CardDetail';
 import { BarcosEnVenta } from './components/BarcosEnVenta';
 import { BarcosEnAlquiler } from './components/BarcosEnAlquiler';
 import { Accesorios } from './components/Accesorios';
 import Navbar from './components/Navbar';
-import SearchBar from './components/SearchBar';
 import Admin from "./components/Admin/Admin"
 import Dashboard from "./components/DashBoard/Dashboard.jsx"
-import {AccesoriosCreate} from "./components/Admin/CreateAccesorios"
-import {EmbarcacionCreateEnV} from "./components/Admin/CreateEmbarcacionEnv"
-import {EmbarcacionCreateRT} from "./components/Admin/CreateEmbarcionERT"
-import CardDetailAdmin from "./components/Admin/CardDetailAdmin"
-import {UpdateAccesorio} from "./components/Admin/EditAccesorios"
-import {UpdateEmbarcacionRenta} from "./components/Admin/EditEmbarcacionRT"
-import {UpdateEmbarcacionVenta}  from "./components/Admin/EditEmbarcacionEnv"
+import {AccesoriosCreate2} from "./components/DashBoard/CreateAccesorios2.js"
+import {EmbarcacionCreateEnV2} from "./components/DashBoard/CreateEmbarcacionEnv2"
+import {EmbarcacionCreateRT2} from "./components/DashBoard/CreateEmbarcionERT2"
+import CardDetailAdmin2 from "./components/DashBoard/CardDetailAdmin2"
+import {UpdateAccesorio2} from "./components/DashBoard/EditAccesorios2"
+import {UpdateEmbarcacionRenta2} from "./components/DashBoard/EditEmbarcacionRT2"
+import {UpdateEmbarcacionVenta2}  from "./components/DashBoard/EditEmbarcacionEnv2"
 import CheckoutPage from './components/CheckoutPage'
 import LandingPage from './components/LandingPage'
 import SingIn from './components/SingIn'
 import SingUp from './components/SingUp'
-import {CatCreate} from "./components/Admin/CreateCat"
+import {CatCreate2} from "./components/DashBoard/CreateCat2"
 import ContactForm from "./components/ContactForm";
+<<<<<<< HEAD
 import CheckoutPrueba from './components/CheckoutPrueba';
 
 import { loadStripe } from "@stripe/stripe-js"
@@ -35,6 +34,39 @@ const stripePromise = loadStripe(publishableKey)
 export default function contactForm() {
   return (
     
+=======
+import { HistorialCompras } from './components/usuarios/HistorialCompras';
+import { Review } from './components/usuarios/Review';
+import { useEffect ,useState} from 'react'
+import { useSelector, useDispatch ,} from 'react-redux'
+import { UsuariosDetail } from './actions/actions'
+import Checkout from "./components/CheckoutProcess/Checkout"
+import Favs from "./components/Favoritos"
+
+export default function App() {
+  const dispatch = useDispatch()
+  
+  const UserFromLocalStorage = JSON.parse(localStorage.getItem("loguearUsuario"));
+  const current_userID =UserFromLocalStorage?.id
+  const myUserDetail = useSelector(state => state?.userDetail);
+ 
+  
+
+
+
+  useEffect(() => {
+   
+    dispatch(UsuariosDetail(current_userID))
+    
+   
+    
+  }, [dispatch,current_userID ]);
+ 
+  
+  return (
+    !myUserDetail.admin  ?
+    <>
+>>>>>>> 97fc4e2357085773f149fa0e50590b5db41667f3
     <div className="App">
       <Elements stripe={stripePromise}>
       <Routes>
@@ -45,35 +77,70 @@ export default function contactForm() {
         {/* <Route exact path='/home' element={<Home />} /> */}
         <Route exact path='/home/:id' element={<CardDetail />} />
         <Route exact path='/checkoutPage' element={<CheckoutPage />}/>
-        <Route exact path='/contactForm' element={<ContactForm />}/>
+        <Route exact path='/formContact' element={<ContactForm />}/>
+        <Route exact path='/favs' element={<Favs />}/>
         
-        <Route exact path='/admin' element={<Admin/>} />
-        <Route exact path='/dashboard' element={<Dashboard/>} />
-        <Route exact path='/admin/:id' element={<CardDetailAdmin />} />
-
-        <Route exact path='/admin/createAcc' element={<AccesoriosCreate />} />
-        <Route exact path='/admin/createEmbarcacionVenta' element={<EmbarcacionCreateEnV />} />
-        <Route exact path='/admin/createEmbarcacionRenta' element={<EmbarcacionCreateRT/>} />
-        <Route exact path='/admin/createCat' element={<CatCreate/>} />
-
-        <Route exact path='/dashboard/createAcc' element={<AccesoriosCreate />} />
-        <Route exact path='/dashboard/createEmbarcacionVenta' element={<EmbarcacionCreateEnV />} />
-        <Route exact path='/dashboard/createEmbarcacionRenta' element={<EmbarcacionCreateRT/>} />
-        <Route exact path='/dashboard/createCat' element={<CatCreate/>} />
-
-        <Route exact path='/admin/updateacc/:id' element={<UpdateAccesorio/>} />
-        <Route exact path='/admin/updateembrt/:id' element={<UpdateEmbarcacionRenta/>} />
-        <Route exact path='/admin/updateembventa/:id' element={<UpdateEmbarcacionVenta/>} />
+        
+   
+        
         <Route exact path='/venta' element={<BarcosEnVenta  />} />
         <Route exact path='/alquiler' element={<BarcosEnAlquiler  />} />
         <Route exact path='/accesorios' element={<Accesorios />} />
         <Route exact path='/accesorios/:id' element={<CardDetail />} />
 
+<<<<<<< HEAD
 
         <Route path='/prueba/checkout' element={<CheckoutPrueba/>}/>
+=======
+        <Route exact path='/checkout' element={<Checkout/>}/>
+        <Route exact path='/contactForm' element={<ContactForm />}/>
+
+        <Route exact path='/historialC' element={<HistorialCompras/>} />
+        <Route exact path='/review/:id' element={<Review />} />
+>>>>>>> 97fc4e2357085773f149fa0e50590b5db41667f3
       </Routes>
       </Elements>
     </div>
+    </>
+    : <>
+    <div className="App">
+    <Routes>
+      <Route exact path= '/' element={<LandingPage/>}/>
+      <Route exact path= '/' element={<Navbar/>}/>
+      <Route exact path='/singIn' element={<SingIn />} />
+      <Route exact path='singUp' element={<SingUp />} />
+      {/* <Route exact path='/home' element={<Home />} /> */}
+      <Route exact path='/home/:id' element={<CardDetail />} />
+      <Route exact path='/checkoutPage' element={<CheckoutPage />}/>
+      <Route exact path='/formContact' element={<ContactForm />}/>
+      <Route exact path='/favs' element={<Favs />}/>
+      
+      
+      <Route exact path='/admin' element={<Admin/>} />
+      <Route exact path='/dashboard' element={<Dashboard/>} />
+      <Route exact path='/dashboard/:id' element={<CardDetailAdmin2 />} />
+      <Route exact path='/dashboard/createAcc' element={<AccesoriosCreate2 />} />
+      <Route exact path='/dashboard/createEmbarcacionVenta' element={<EmbarcacionCreateEnV2 />} />
+      <Route exact path='/dashboard/createEmbarcacionRenta' element={<EmbarcacionCreateRT2/>} />
+      <Route exact path='/dashboard/createCat' element={<CatCreate2/>} />
+      <Route exact path='/dashboard/updateacc/:id' element={<UpdateAccesorio2/>} />
+      <Route exact path='/dashboard/updateembrt/:id' element={<UpdateEmbarcacionRenta2/>} />
+      <Route exact path='/dashboard/updateembventa/:id' element={<UpdateEmbarcacionVenta2/>} />
+      <Route exact path='/venta' element={<BarcosEnVenta  />} />
+      
+
+      <Route exact path='/alquiler' element={<BarcosEnAlquiler  />} />
+      <Route exact path='/accesorios' element={<Accesorios />} />
+      <Route exact path='/accesorios/:id' element={<CardDetail />} />
+
+      <Route exact path='/checkout' element={<Checkout/>}/>
+      <Route exact path='/contactForm' element={<ContactForm />}/>
+
+      <Route exact path='/historialC' element={<HistorialCompras/>} />
+      <Route exact path='/review/:id' element={<Review />} />
+    </Routes>
+  </div>
+  </>
    
   );
 }

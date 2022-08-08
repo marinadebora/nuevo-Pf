@@ -7,13 +7,14 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import {postEmbarcacionEnV, Categorias } from '../../actions/admin-action';
 import { barcosEnVenta, /*getAllTypes */} from '../../actions/actions';
-import form from '../../styles/form.css';
+import '../../styles/form.css';
 import { Link } from 'react-router-dom';
+import axios from "axios"
 
 
 
 
-export function EmbarcacionCreateEnV(){
+export function EmbarcacionCreateEnV2(){
 
     const dispatch = useDispatch()
     const navigate = useNavigate();
@@ -104,7 +105,10 @@ export function EmbarcacionCreateEnV(){
         dispatch(barcosEnVenta())
     }, [dispatch])
 
-    const [input, setinput] = useState({
+    const [imgSrc, setImgSrc] = useState("");
+    const [imgFile, setImgFile] = useState("");
+   
+   const [input, setInput] = useState({
         tipo: '',
         modelo: '',
         precio: "",
@@ -130,7 +134,7 @@ export function EmbarcacionCreateEnV(){
 
     function handleCat(e){
         if(!input.categorias.includes(e.target.value)){
-            setinput({
+            setInput({
                 ...input,
                 categorias: [...input.categorias, e.target.value]
             })
@@ -138,14 +142,14 @@ export function EmbarcacionCreateEnV(){
     }
 
     function handleDelete(d){
-        setinput({
+        setInput({
             ...input,
             categorias: input.categorias.filter(e => e !== d)
         })
     }
 
     function handleChange(e){
-        setinput({
+        setInput({
             ...input,
             [e.target.name]:e.target.value
         })
@@ -156,13 +160,62 @@ export function EmbarcacionCreateEnV(){
         
     }
     const handleChangeArray=(e)=>{
-        setinput({
+        setInput({
           ...input,
           [e.target.name] : [e.target.value]
       })
     }
     const allCat = useSelector(state => state.categorias)
     const allEmbarcacionVenta = useSelector((state) => state.saleVessels);
+    const handleDeleteImage = (e) => {
+        setInput({
+          ...input,
+          imagenes: input.imagenes.filter((tag) => tag !== e)
+          
+        });
+        
+      };
+      //const asd = short_screenshots: input.short_screenshots.filter((tag) => tag !== e),
+   
+      const cloudinaryUpload2 = async (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append("file", imgFile);
+        formData.append("upload_preset", "upload-images");
+    
+        try {
+          const response = await axios.post(
+            "https://api.cloudinary.com/v1_1/browsingyate/image/upload",
+            formData
+          );
+          
+          
+          setInput({ ...input, imagenes: [...input.imagenes.concat(response.data.url)] });
+          console.log("todo ok");
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+      
+     
+      const previewFile2 = (e) => {
+        const file = e.target.files[0]
+        setImgFile(file);
+        console.log(file)
+        
+        const reader = new FileReader();
+    
+        reader.onload = function () {
+          setImgSrc(reader.result);
+        };
+    
+        if (file) {
+          reader.readAsDataURL(file);
+        }
+      };
+      
+      
     
     function handleSubmit(e) {   
         e.preventDefault(); 
@@ -176,7 +229,7 @@ export function EmbarcacionCreateEnV(){
             
             
             dispatch(postEmbarcacionEnV(input))
-            setinput({
+            setInput({
                 tipo: '',
                 modelo: '',
                 precio: "",
@@ -216,7 +269,7 @@ export function EmbarcacionCreateEnV(){
             { !allCat ? 
                 <>
                     <div>
-                        <h1>LOADING</h1>
+                        <h1>Cargando...</h1>
                     </div>
                 </>:
                 
@@ -407,12 +460,105 @@ export function EmbarcacionCreateEnV(){
                                 </input>
                                 {errors.combustible && <p className="danger">{errors.combustible}</p>}
                             </div>
-                            <div >
-                           <label >Imagen</label>
-                           <input  type="url" value={input.imagenes} name="imagenes" onChange={(e)=>handleChangeArray(e)}></input> 
-                           {/*<button name="imagenes" onClick={(e)=>handleChangeArray(e)}>SUBIR FOTO</button>*/}
-       
-                            </div>
+                          
+                            <div className="component_rigth_form">
+                {/* MAIN IMAGE INPUT */}
+
+             
+               { input.imagenes.length < 5? <div>
+                  <label>Imagen Principal</label>
+                  
+                  <input
+                    className="inputImage"
+                    type="file" 
+                    placeholder="Main Image"
+                    name="image"
+                    id="main_image"
+                    
+                    onChange={previewFile2} 
+                  />
+                       <button id="save"
+                        bgColor={"#1884BE"}
+                        borderRadius={"none"}
+                        boxShadow="xl"
+                        color={"white"}
+                        fontSize={"1rem"}
+                        onClick={cloudinaryUpload2}
+                        isDisabled={imgSrc ? false : true}
+                        _hover={{
+                          background: "white",
+                          color: "#1884BE",
+                        }}
+                      >
+                        Guardar
+                      </button>
+
+
+                 
+                </div>
+                : <div>
+                  <h1>Alcanzaste el maximo de imagenes permitidas</h1>
+                   </div>
+                
+                      }
+                {/* 4 screenshots */}
+                <div >
+
+                  
+                  <div className="screenShots_Image">
+
+                    <div >
+                      <img src={input.imagenes[0]} id="image1" className="image_form"alt='' />
+                       {input.imagenes.length > 0 && <button
+      className="botonX"
+      onClick={(e) => handleDeleteImage(input.imagenes[0])}
+      type="reset"
+    >
+      X
+    </button>
+    } 
+                      <img src={input.imagenes[1]} id="image2" className="image_form"alt='' />
+                      {input.imagenes.length > 1 && <button
+      className="botonX"
+      onClick={(e) => handleDeleteImage(input.imagenes[1])}
+      type="reset"
+    >
+      X
+    </button>
+    } 
+                      <img src={input.imagenes[2]} id="image3" className="image_form"alt='' />
+                       {input.imagenes.length > 2 && <button
+      className="botonX"
+      onClick={(e) => handleDeleteImage(input.imagenes[2])}
+      type="reset"
+    >
+      X
+    </button>
+    } 
+                      <img src={input.imagenes[3]} id="image4" className="image_form" alt=''/>
+                      {input.imagenes.length > 3 && <button
+      className="botonX"
+      onClick={(e) => handleDeleteImage(input.imagenes[3])}
+      type="reset"
+    >
+      X
+    </button>
+    } 
+      <img src={input.imagenes[4]} id="image4" className="image_form"alt='' />
+                      {input.imagenes.length > 3 && <button
+      className="botonX"
+      onClick={(e) => handleDeleteImage(input.imagenes[4])}
+      type="reset"
+    >
+      X
+    </button>
+    } 
+                    </div>
+
+                  </div>
+                </div>
+   
+              </div> 
 
                             <div className="class-select">
                                 <label>Categorias</label>
@@ -429,15 +575,10 @@ export function EmbarcacionCreateEnV(){
                             </div>
 
                             <button id='buttonSubmitForm' className="button-submitev" type="submit">Create Product</button>
-                            <Link to='/admin'>
-                                <button id='buttonBackForm'>Back</button>
+                            <Link to='/dashboard'>
+                                <button id='buttonBackForm'>Volver</button>
                             </Link>
 
-                            {/* {
-                                ((errors.summary) || (errors.steps) || (errors.healthScore) || (!input.name)) ?
-                                <button disabled className="button-submit" type="submit">Enviar Receta</button>:
-                                
-                            } */}
                         </form>   
                         <div className="my-categ">
                             <h3>Mis Categorias</h3>
@@ -462,4 +603,4 @@ export function EmbarcacionCreateEnV(){
     )
 }
 
-export default EmbarcacionCreateEnV;
+export default EmbarcacionCreateEnV2;

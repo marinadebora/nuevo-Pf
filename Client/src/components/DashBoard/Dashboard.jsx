@@ -20,18 +20,7 @@ import { mainListItems } from './ListItems';
 import "../../styles/dasshBoard.css";
 
 
-function Copyright(props) {
-  return (
-    <Typography  id='Ecopy'variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Nautical
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+
 
 const drawerWidth = 240;
 
@@ -188,7 +177,7 @@ function DashboardContent() {
                
             
             </Grid>
-            <Copyright sx={{ pt: 4 }} />
+          
           </Container>
         </Box>
       </Box>

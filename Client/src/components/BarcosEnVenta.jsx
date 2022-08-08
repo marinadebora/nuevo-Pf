@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { barcosEnVenta } from '../actions/actions'
+import { barcosEnVenta, filtroPrecio, filtrosCategoriaEmbarcacion, precioOrden } from '../actions/actions'
 import { Link } from 'react-router-dom';
 import { Box } from '@mui/system';
 import Paginado from "./Paginado";
@@ -19,14 +19,14 @@ export function BarcosEnVenta()
 
   //----------paginado---------//
 
-/*   const [ordering, setOrdering] = useState('') */
+  const [ordering, setOrdering] = useState('')
   const [page, setPage] = useState(1);
-  const [characterPerPage, /* setCharacterPerPage */] = useState(5);
+  const [characterPerPage, setCharacterPerPage] = useState(5);
   const index = page * characterPerPage;
   const endIndex = index - characterPerPage;
   const actualPage = productVenta?.slice(endIndex, index);
-  /* const [venta, setVenta] = useState('')
-  const [categoriasR, setCategoriasR] = useState('') */
+  const [venta, setVenta] = useState('')
+  const [categoriasR, setCategoriasR] = useState('')
   const navigate=useNavigate()
 
 
@@ -50,6 +50,7 @@ export function BarcosEnVenta()
         <Navbar/>
         <Box id='boxVta'>
                 <Box id='textBox1'>VENTA</Box>
+                <Box id='textBox2'>(Nuevos y Usados)</Box>
                 
         </Box>
       
@@ -86,7 +87,8 @@ export function BarcosEnVenta()
         }
       </Grid>
       
-      <button id='buttonBack' onClick={volver}>VOLVER</button>
+      <button id='buttonBackAA' onClick={volver}>VOLVER</button>
+      
       
       <Paginado
         characterPerPage={characterPerPage}

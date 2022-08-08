@@ -3,6 +3,7 @@ import { addToBasket, removeToBasket,getItemsCart,UsuariosDetail,UpdateToCart, }
 import { useSelector, useDispatch ,} from 'react-redux'
 import { useEffect ,useState,Fragment} from 'react'
 import { useNavigate } from 'react-router-dom';
+import {Button} from "@mui/material";
 import '../styles/card.css';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import IconButton from "@mui/material/IconButton";
@@ -11,7 +12,7 @@ import { Grid } from '@mui/material'
 import Card from './CardShop'
 import {  Link } from 'react-router-dom';
 import swal from "sweetalert";
-
+import * as GiIcons from "react-icons/gi"
 
 
 
@@ -20,7 +21,6 @@ export default function CheckoutPage()
 {
 
     
-  
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -34,7 +34,6 @@ export default function CheckoutPage()
   const current_userID =UserFromLocalStorage?.id
   const myUserDetail = useSelector(state => state?.userDetail);
   const current_cart =cartFromLocalStorage;
- 
   const CartUser= myUserDetail[0]?.carritoDeCompra
   const paramFromLocalStorage = JSON.parse(localStorage.getItem("parametros") || "[]");
   const [param /* setCart */] = useState(paramFromLocalStorage);
@@ -47,30 +46,29 @@ export default function CheckoutPage()
 })
 
 
-
+async function handleClearCart (e){
+  localStorage.setItem("item2", []);
+  navigate("/accesorios");
+  return  swal({
+   title: "Se han borrado todos los productos de su carro de compras",
+   text: "Puede agregar mas desde nuestro inicio!!",
+   icon: "success",
+ 
+ }).then((value) => {
+   switch (value) {
+     case "cart":
+       
+       swal("Bienvenido a nuestra Pagina","Que tenga una buena compra" ,"success");
+       break;
+ 
+     default:
+       break;
+   }
+ });
+ };
 
 
  
-function handleSubmit(e){
-  e.preventDefault()
-  
-  
-      dispatch(UpdateToCart(current_userID,input ))
-      
-      return (
-          alert(`El accesorio fue actualizado con éxito.`)
-          )  
-  
-}
-
-
-  /*useEffect(() => {
-  
-  if(typeof current_userID === "string"){
-    dispatch(UpdateToCart(current_userID,cartFromLocalStorage ));
-  }
-}, [cartFromLocalStorage ,dispatch ]);*/
-
 
 
 function removeDuplicates(originalArray, prop) {
@@ -106,34 +104,26 @@ return cantidadfiltrada.length
 }
 
 
-
-/*function next(id,results){
-  console.log(id)
-  var results = [];
-    results.push(id);
-    return next(results);
-  
-}*/
   async function next(id){
   
   dispatch(addToBasket({id}))
   return  swal({
-    title: "Your product was successfully added to the cart",
-    text: "What do you want to do next?",
+    title: "El producto se ha agregado a tu carro de compras",
+    text: "Que queires hacer ahora?",
     icon: "success",
     buttons: {
       cart: {
-        text: "Go to cart",
+        text: "Ir al carro",
         value: "cart",
       },
      
-      cancel: "Stay",
+      cancel: "Seguir comprando",
     },
   }).then((value) => {
     switch (value) {
       case "cart":
         navigate("/checkoutPage");
-        swal("Welcome to your cart", "Have a nice buy!", "success");
+        swal("Bienvenido a tu carro","Que tenga una buena compra" ,"success");
         break;
 
       default:
@@ -142,43 +132,6 @@ return cantidadfiltrada.length
   });
         
 };
-
-async function back(id) {
-  console.log(id)
-  dispatch(removeToBasket(id))
-};
-
-/*const addToCart = () =>{
-    
-   
-  dispatch(addToBasket({id}))
-   return  swal({
-    title: "Your product was successfully added to the cart",
-    text: "What do you want to do next?",
-    icon: "success",
-    buttons: {
-      cart: {
-        text: "Go to cart",
-        value: "cart",
-      },
-     
-      cancel: "Stay",
-    },
-  }).then((value) => {
-    switch (value) {
-      case "cart":
-        navigate("/checkoutPage");
-        swal("Welcome to your cart", "Have a nice buy!", "success");
-        break;
-
-      default:
-        break;
-    }
-  });
-   
-}*/
-
-
 
 
   const volver = () =>
@@ -192,7 +145,7 @@ async function back(id) {
         JSON.stringify(cartFromLocalStorage.filter((e) => e._id !== id))
       );
       return  swal({
-          title: "Your product was successfully deleted to the cart",
+          title: "El producto se ha eliminado de tu carro",
           icon: "success",
           buttons: {
               OK: {
@@ -213,26 +166,10 @@ async function back(id) {
     };
    
    
-    /*var idprueba="62d8a6b52029a4c825e23ed6" 
-    //var myIndex2 = current_cart.findIndex((e)=> e._id === idprueba)
-    
-   
-    const prueba = (idprueba2) =>{
-      var myIndex2 = current_cart.findIndex((e)=> e._id === idprueba2)
-      if (myIndex2 !== -1) {
-        current_cart.splice(myIndex2, 1);
-           }
-           
-      
-    }*/
 
     
-   
-    
-    
     const handleSplice = (id) => {
-      //indexOf(id);
-      
+     
       var myIndex2 = current_cart.findIndex((e)=> e._id === id)
       if (myIndex2 !== -1) {
         current_cart.splice(myIndex2, 1);
@@ -270,7 +207,11 @@ async function back(id) {
         </>:
         <div>
         <NavBar />
-            <p id='titleCheckoutPage'>Shopping Cart</p>
+        <button 
+                className="buttonCleanCart" 
+                onClick={() => handleClearCart()}>
+                  Limpiar carrito <GiIcons.GiBroom /> </button>
+            <h1 id='titleCheckoutPage'>Shopping Cart</h1>
             {
               uniqueArray?.map(e => (
                     e !== undefined &&
@@ -295,14 +236,22 @@ async function back(id) {
                     descripcion={e.descripcion}
                     Tamaño={e.Tamaño}
                     id={e._id}
+                    stock={e.stock}
                       
                   />
-                  <form>
-                <button onClick={() => handleSplice(e._id)} class="pagination-button a">-</button><p>Cantidad:{cantidad(e._id)}</p><button onClick={() => next(e._id)}class="pagination-button p">+</button>
+                
+                <form id="layout">
+                <p id="cantidad">Cantidad:{cantidad(e._id)}</p>
+                <p id="cantidad">Stock Disponible:{e.stock}</p>
+                <div id="buttonsCart">
+                {e.stock <= cantidad(e._id) ? <button disabled onClick={() => next(e._id)}class="pagination-button p" id="buttonMasMenos">+</button>:<button onClick={() => next(e._id)}class="pagination-button p" id="buttonMasMenos">+</button>}
+                <button onClick={() => handleSplice(e._id)} class="pagination-button a" id="buttonMasMenos">-</button>
+                </div>
+                <p id="precioTotal">Precio Total:US$ {e.precio.split('$')[1] * cantidad(e._id)}</p>
+                <button id="delete" onClick={() => handleDelete(e._id)} className="delete-button">Borrar</button>
+                <div class="clearfix"></div>
                 </form>
-                <button>Precio x unidad:{e.precio}</button>
-                <button>Precio Total:${e.precio.split('$')[1] * cantidad(e._id)}</button>
-                <button onClick={() => handleDelete(e._id)} className="delete-button">Delete</button>
+                
                 </Grid>
               
               </Fragment>
@@ -316,9 +265,16 @@ async function back(id) {
                 ))
                 }
                 <div>
-        <h1>PRECIO COMPRA TOTAL:{precioTotal}</h1>
+        <div id='pagoTotal'>  
+        <h2> TOTAL</h2>
+        <h2>US$ {precioTotal}</h2>
+        </div>   
+       
+        <Button href="/checkout" variant="contained" size="large" id='pagarButton'>Pagar</Button>
+       
+
       </div>
-            <button id='buttonBackCheckout' onClick={volver}>Back</button>
+            <button id='buttonBackCheckout' onClick={volver}>Volver</button>
         </div>
         
     )

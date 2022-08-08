@@ -1,11 +1,12 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { barcosEnAlquiler } from '../actions/actions'
+import { barcosEnAlquiler, filtrosCategoriaEmbarcacion } from '../actions/actions'
 import { Link } from 'react-router-dom';
 import { Box } from '@mui/system';
 import Paginado from "./Paginado";
 import CardRentaVenta from './CardRentaVenta';
 import Navbar from './Navbar';
+
 import Footer from './Footer';
 import { Grid } from '@mui/material'
 import '../styles/searchBar.css';
@@ -23,7 +24,7 @@ export function BarcosEnAlquiler()
   const index = page * characterPerPage;
   const endIndex = index - characterPerPage;
   const actualPage = productAlquiler?.slice(endIndex, index);
-  /* const [ ordering , setOrdering] = useState('') */
+  const [/* ordering */, setOrdering] = useState('')
 
 
 console.log(productAlquiler)
@@ -46,6 +47,8 @@ console.log(productAlquiler)
     <Navbar/>
         <Box id='boxAlq'>
                 <Box id='textBox1'>ALQUILER</Box>
+                <Box id='textBox2'>Contactanos</Box>
+                
             </Box>
       
     
@@ -87,7 +90,7 @@ console.log(productAlquiler)
         }
       </Grid>
       <Link to='/accesorios'>
-        <button id='buttonBack'>VOLVER</button>
+        <button id='buttonBackAA'>VOLVER</button>
       </Link>
       <Paginado
         characterPerPage={characterPerPage}

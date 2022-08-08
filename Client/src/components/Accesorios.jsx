@@ -11,44 +11,52 @@ import SearchBarProductos from './SearchBarProductos';
 import { Grid } from '@mui/material'
 import '../styles/searchBar.css';
 import '../styles/box.css'
-import { FiltrosAccesorios } from './FiltrosAccesorios';
+import {FiltrosAccesorios} from './FiltrosAccesorios';
 import img from '../imagenes/sin_productos.jpg'
-import { getItemsCart, resetDetail } from '../actions/actions'
+import {todosLosProductos,getItemsCart, resetDetail} from '../actions/actions'
+import '../styles/accesorios.css'
 
 
-
-export function Accesorios()
-{
+export function Accesorios(){ 
   const accesorio = useSelector(state => state.accesories)
   /* console.log(accesorio) */
   const dispatch = useDispatch()
   //----------paginado---------//
 
   const [page, setPage] = useState(1);
-  const [characterPerPage] = useState(5);
+  const [characterPerPage, setCharacterPerPage] = useState(6);
   const index = page * characterPerPage;
   const endIndex = index - characterPerPage;
   const actualPage = accesorio?.slice(endIndex, index);
+  const [ordering, setOrdering] = useState('')
   const navigate = useNavigate()
+  const [venta, setVenta] = useState('')
+  const [categorias, setCategorias] = useState('')
   const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
   const [cart /* setCart */] = useState(cartFromLocalStorage);
+ 
+  const FavFromLocalStorage = JSON.parse(localStorage.getItem("Fav") || "[]");
+  const [fav /* setCart */] = useState(FavFromLocalStorage);
 
-
+ 
   const paginado = (numPage) =>
   {
     setPage(numPage)
   }
 
-  useEffect(() =>
-  {
+  useEffect(()=>{
     localStorage.getItem("item2")
     localStorage.setItem("item2", JSON.stringify(cart));
-
+    localStorage.getItem("Fav")
+    localStorage.setItem("Fav", JSON.stringify(fav));
+    
+    
     dispatch(getItemsCart());
     dispatch(resetDetail());
     dispatch(accesorios())
 
-  }, [dispatch, cart,])
+},[dispatch, cart,localStorage.getItem("item2")])
+
 
   const volver = () =>
   {
@@ -59,14 +67,20 @@ export function Accesorios()
   return (
     <div>
 
-      <Navbar />
+      <Navbar/>
       <Box id='boxAcc'>
-        <Box id='textBox1'>VENTA</Box>
+                <Box id='textBox1'>VENTA</Box>
+                <Box id='textBox2'>Compra Online</Box>
       </Box>
-      <SearchBarProductos />
-
+      
+      <SearchBarProductos/>
+      <br /><br />
+      <FiltrosAccesorios
+    setPage={setPage}
+     />
+      
       <Grid container spacing={2}>
-
+  
         {
 
           actualPage.length > 0 ? actualPage.map(e => 
@@ -91,7 +105,9 @@ export function Accesorios()
                     descripcion={e.descripcion}
                     Tamaño={e.Tamaño}
                     id={e._id}
+                    stock={e.stock}
                     Link={<Link to={`/home/${e._id}`} >Info</Link>}
+                    comentarios={e.comentarios}
                   />
 
                 </Grid>
@@ -101,26 +117,24 @@ export function Accesorios()
 
               </Fragment>
             )
-          }) : <img className="sin_art" src={img} alt="sin articulos" />
-
-
-
-
+          }):  <img className="sin_art" src={img} alt="sin articulos" />
+          
+         
+             
+         
         }
       </Grid>
-      <br /><br /><br /><br /><br />
-      <FiltrosAccesorios
-        setPage={setPage}
-      />
-      <br /><br /><br /><br /><br />
-      <button id='buttonBack' onClick={volver}>VOLVER</button>
+     
+      
+<br /><br /><br /><br /><br />
+      <button id='buttonBackAA' onClick={volver}>VOLVER</button>
 
-      <Paginado
-        characterPerPage={characterPerPage}
-        newState={accesorio.length}
-        paginado={paginado}
-      />
+<Paginado
+  characterPerPage={characterPerPage}
+  newState={accesorio.length}
+  paginado={paginado}
+/>
 
-      <Footer />
+<Footer/>
     </div>);
 };

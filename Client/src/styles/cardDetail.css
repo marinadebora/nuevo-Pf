@@ -19,21 +19,20 @@
 
 #mainContainer{
     overflow: hidden;
-    margin-top: 40px;
+    margin-top: 20px;
     margin-left: 270px;
     padding: 10px;
     height: auto;
-    width: 900px;
+    width: 800px;
+    
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
 
-#mainImg{
-   
-}
+
 
 #imgProduc{
-    margin-top: 20px;
+    margin-top: 10px;
     margin-right: 60px;
     height: 300px;
     float:left
@@ -47,19 +46,63 @@
 }
 
 #titleDetailCard{
-   
+    margin: 1px;
     font-weight: bold;
+    
 }
 
 #ulDetail{
     margin-left: 95px;
     width: 740px;
-    
     text-align: left;
-    margin-top: 40px;
+    margin-top: 30px;
 }
 
 #ulDetail li{
+    margin:0px;
     list-style-type: none;
     font-size: 15px;
+}
+.contenedor-total{
+    margin:8px;
+    width: 80%;
+    text-align: center;
+    box-shadow: 0 3px 13px 1px rgba(6, 6, 6, 0.269);
+}
+.comentario{
+    margin:5px;
+    width: 98%;
+    text-align: left;
+    border:1px solid #0184a9;
+    box-shadow: 0 3px 3px 1px #0184a9;
+}
+.nombre{
+    margin:10px ;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+}
+.reseña{
+    margin:10px ;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+.estrellas{
+    color : orange;
+    font-size: medium;
+    margin-left:3%
+
+}
+.div{
+    position: relative;
+    left: 0; 
+    top: 0;
+}
+
+.imagen{
+   
+    width: 100%;
+    
+z-index: 2;
+margin-top:-500px;
+
+
 }

@@ -7,9 +7,13 @@ import ImagenList from  './ImagenList'
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge"
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import '../styles/card.css';
-import {addToBasket } from '../actions/actions'
+import '../styles/cardDetail.css';
+import {addToBasket, addToFavoritos } from '../actions/actions'
 import {  useState } from 'react';
+import swal from "sweetalert";
+import ContactMailIcon from "@mui/icons-material/ContactMail";
+import ImgSinStock from "../imagenes/vector-sin-stock.png"
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 export default function CardDetail()
 { 
@@ -23,35 +27,82 @@ export default function CardDetail()
   const navigate = useNavigate()
   const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
   const [cart /* setCart */] = useState(cartFromLocalStorage);
+  const FavFromLocalStorage = JSON.parse(localStorage?.getItem("Fav"));
+  const [fav /* setCart */] = useState(FavFromLocalStorage);
    
-    
+  
   useEffect(() =>
   {
     localStorage.getItem("item2")
     localStorage.setItem("item2", JSON.stringify(cart));
+    localStorage.getItem("Fav")
+    
     dispatch(productosDetail(id))
   }, [dispatch, id])
    
-   
+
  
   
-   const addToCart = () =>{
-
-    
-          dispatch(addToBasket({id}))
-          
-          return alert("producto agregado correctamente")
+  async function addToCart(){
+        dispatch(addToBasket({id}))
+          return  swal({
+            title: "El producto se ha agregado a tu carro de compras",
+            text: "Que queires hacer ahora?",
+            icon: "success",
+            buttons: {
+              cart: {
+                text: "Ir al carro",
+                value: "cart",
+              },
+             
+              cancel: "Seguir comprando",
+            },
+          }).then((value) => {
+            switch (value) {
+              case "cart":
+                navigate("/checkoutPage");
+                swal("Bienvenido a tu carro","Que tenga una buena compra" ,"success");
+                break;
+      
+              default:
+                break;
+            }
+          });
    }
+   async function addToFav () {
+    
+    dispatch(addToFavoritos({id}))
+     return  swal({
+      title: "El producto se ha agregado a tu lista de favoritos",
+      text: "Que queires hacer ahora?",
+      icon: "success",
+      buttons: {
+        cart: {
+          text: "Ir a mi lista",
+          value: "cart",
+        },
+       
+        cancel: "Quedarse",
+      },
+    }).then((value) => {
+      switch (value) {
+        case "cart":
+          navigate("/checkoutPage");
+          swal("Bienvenido a tus favoritos","Que tenga una buena compra" ,"success");
+          break;
 
+        default:
+          break;
+      }
+    });
+     
+  }
 
-  const volver = () =>
+   
+ const volver = () =>
   {
     navigate(-1)
   }
-
-
-console.log(myDetail._id);
-
   return <div>
     {
       myDetail._id !== id?
@@ -69,8 +120,14 @@ console.log(myDetail._id);
             )
           } */}
 
-
+        {myDetail.stock > 0 ?
           <ImagenList/>
+          :<div className="div"> 
+          <ImagenList/>
+          {/* <img className="imagen1" src={myDetail.imagenes[0]} alt=''></img> */}
+          <img className="imagen" src={ImgSinStock} alt=''></img>
+          </div> 
+        }
 
           </div>
       
@@ -110,15 +167,59 @@ console.log(myDetail._id);
           {
             myDetail.Tamaño ? <li><p id='titleDetailCard'>Tamaño:</p> <p>{myDetail.Tamaño}</p></li> : ''
           }
+              <div className='contenedor-total'>
+                <h2>Calificaciones de los usuarios</h2>
+          {
+            myDetail.comentarios?.length>0 ? myDetail.comentarios.map(e=>(
+              <div className="comentario">
+        
+            {
+              e.star?.estrellas=== '1'?<li className="estrellas">★</li>:e.star?.estrellas=== 2
+              ?<li className="estrellas">★★</li>:e.star?.estrellas=== '3'
+              ?<li className="estrellas">★★★</li>:e.star?.estrellas=== '4'
+              ?<li className="estrellas">★★★★</li>:e.star?.estrellas=== '5'
+              ?<li className="estrellas">★★★★</li>:''
+            }
+            <li className="nombre">El usuario {e.nombre}</li>
+            <li className="reseña">califico este producto como: {e.reseña}</li>
+            
+            </div>
+            )):<h4>Este producto aun no tiene comentarios</h4>
+          }
+          </div>
           
           </ul>
          
             <button id='buttonBack' onClick={volver}>VOLVER</button>
-            <IconButton aria-label="add to cart" onClick={addToCart}>
+            <IconButton aria-label="add to favorites" onClick={addToFav}> <FavoriteIcon /></IconButton>
+            {
+  myDetail.producto?  
+  <>
+      {
+          (myDetail.stock > 0) 
+          ?<>   
+          <IconButton aria-label="add to cart" onClick={addToCart}>
           <Badge  color="secondary" id='badge'>
             <AddShoppingCartIcon />
             </Badge>
-          </IconButton>
+          </IconButton> 
+          </> 
+          
+          :<>
+          <IconButton disabled aria-label="add to cart" onClick={addToCart}>
+          <Badge  color="secondary" id='badge'>
+            <AddShoppingCartIcon />
+            </Badge>
+          </IconButton> 
+          </>
+      }
+  </> :
+  <>
+      <IconButton href="/contactForm">
+          <ContactMailIcon/>
+        </IconButton>
+  </>
+}
          
         </div>
         

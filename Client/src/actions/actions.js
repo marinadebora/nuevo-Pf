@@ -1,8 +1,14 @@
 import axios from 'axios';
 
 
-const URL_BASE ="https://nautical25.herokuapp.com"
+
+
+ const URL_BASE = "https://nautical25.herokuapp.com";
+
+
 const URL_LOCAL ="http://localhost:4000"
+
+
 //import infoProductos from '../infoPrueba/index'
 
 
@@ -31,7 +37,7 @@ export function UsuariosDetail(id)
 	return async function (dispatch)
 	{
 		try {
-			const userDetail = await axios(`${URL_LOCAL}/usuario/${id}`)
+			const userDetail = await axios(`/usuario/${id}`)
 
 			return dispatch({
 				type: 'USUARIO_DETAIL',
@@ -139,17 +145,6 @@ export const addToBasket = (item) =>
 		console.log(err)
 	}
 };
-export const addParam = (item) =>
-{
-	try {
-		return {
-			type: 'ADD_TO_PARAM',
-			payload: item,
-		}
-	} catch (err) {
-		console.log(err)
-	}
-};
 
 
 export function removeToBasket(item)
@@ -161,6 +156,21 @@ export function removeToBasket(item)
 
 	}
 }
+export const addToFavoritos = (item) =>
+
+{console.log(item)
+	try {
+		return {
+			type: 'ADD_TO_FAV',
+			payload: item,
+		}
+	} catch (err) {
+		console.log(err)
+	}
+};
+
+
+
 
 export const getItemsCart = () =>
 {
@@ -170,6 +180,23 @@ export const getItemsCart = () =>
 		}
 	} catch (err) {
 		console.log(err)
+	}
+};
+
+export function postShippingData(payload)
+{
+	return async function (dispatch)
+	{
+		try {
+			const datosDeEnvio = await axios.post(`https://nautical25.herokuapp.com/shippingData`, payload);
+			return dispatch({
+				type: "SET_SHIPPING_DATA",
+				payload: datosDeEnvio,
+			});
+		} catch (err) {
+			console.log(err)
+		}
+
 	}
 };
 
@@ -285,7 +312,7 @@ export function postAccesorio(payload)
 	return async function (dispatch)
 	{
 		try {
-			const accesoriosCreated = await axios.post(`https://nautical25.herokuapp.com/accesorios`, payload);
+			const accesoriosCreated = await axios.post(`/accesorios`, payload);
 			return dispatch({
 				type: "POST_ACCESORIOS",
 				payload: accesoriosCreated,
@@ -334,9 +361,9 @@ export function updateAccesorio(id, payload)
 
 export function UpdateToCart(id, payload)
 {
-	return function (dispatch)
+	return async function (dispatch)
 	{
-		return axios.put(`${URL_LOCAL}/user/${id}`, payload)
+		return axios.put(`/user/${id}`, payload)
 			.then(data =>
 			{
 				dispatch({
@@ -353,7 +380,7 @@ export function postEmbarcacionEnV(payload)
 	return async function (dispatch)
 	{
 		try {
-			const embarcacionCreated = await axios.post(`https://nautical25.herokuapp.com/embrarcacionesV`, payload);
+			const embarcacionCreated = await axios.post(`/embrarcacionesV`, payload);
 			return dispatch({
 				type: "POST_EMBARCACIONENV",
 				payload: embarcacionCreated,
@@ -403,7 +430,7 @@ export function updateEmbarcacionEnV(id, payload)
 {
 	return function (dispatch)
 	{
-		return axios.put(`https://nautical25.herokuapp.com/embrarcacionesV/${id}`, payload)
+		return axios.put(`/embrarcacionesV/${id}`, payload)
 			.then(data =>
 			{
 				dispatch({
@@ -422,7 +449,7 @@ export function postEmbarcacionRT(payload)
 	return async function (dispatch)
 	{
 		try {
-			const embarcacionCreated = await axios.post(`https://nautical25.herokuapp.com/embarcacionesR`, payload);
+			const embarcacionCreated = await axios.post(`/embarcacionesR`, payload);
 			return dispatch({
 				type: "POST_EMBARCACIONRT",
 				payload: embarcacionCreated,
@@ -458,7 +485,7 @@ export function updateEmbarcacionRT(id, payload)
 {
 	return function (dispatch)
 	{
-		return axios.put(`https://nautical25.herokuapp.com/embarcacionesR/${id}`, payload)
+		return axios.put(`/embarcacionesR/${id}`, payload)
 			.then(data =>
 			{
 				dispatch({
@@ -474,26 +501,24 @@ export function updateEmbarcacionRT(id, payload)
 	};
 }
 
-/* export const registro = (value) => async (dispatch) =>{
- 	return await axios.post(`https://nautical25.herokuapp.com/registro`, value)
- 		.then(res =>{
- 			dispatch({ type: "REGISTRO", payload: res.data })
- 		}).catch(error =>{
- 			alert(error)
- 		})
-  }*/
 
-export const registro = (value)=> async (dispatch)=>{
-    return await axios.post(`http://localhost:4000/registro`,value)
-    .then(res =>{
-        dispatch({type: "REGISTRO", payload: res.data})
-    }).catch(error=>{
-        alert(error)
-    })
+export const registro = (value) => async (dispatch) =>
+{
+	return await axios.post(`/registro`, value)
+		.then(res =>
+		{
+			dispatch({ type: "REGISTRO", payload: res.data })
+		}).catch(error =>
+		{
+			alert(error)
+		})
+
 }
 
+
+
 export const registroGoogle = (value)=> async (dispatch)=>{
-    return await axios.post(`http://localhost:4000/registroGoogle`,value)
+    return await axios.post(`/registroGoogle`,value)
     .then(res =>{
         dispatch({type:"REGISTROGOOGLR", payload: res.data})
     }).catch(error=>{
@@ -510,13 +535,17 @@ export const usuarios = () => async (dispatch) =>
 		})
 }
 
+
 let token = null
-console.log(token)
+
+
+
 
 export const setToken = (newToken)=>{
     token = `Bearer ${newToken}`
     return token
 }
+
 
 export const login = (value)=> async (dispatch)=>{
     const config ={
@@ -524,12 +553,17 @@ export const login = (value)=> async (dispatch)=>{
             Authorization: token
         }
     }
+
     const action = await axios.post("/autenticar",value, config)
+
     return dispatch({
         type: 'LOGIN',
         payload: action
     })
 }
+
+
+
 
 export const busquedaAccesorios = (name)=> async (dispatch)=>{
     try {
@@ -544,4 +578,85 @@ export const busquedaAccesorios = (name)=> async (dispatch)=>{
     }catch (error) {
         alert(`El nombre: ${name}, no existe`)
     }
+}
+export function editarUsuario(){
+	return async function(dispatch){
+		try {
+			const usuarios = await axios.put('/user')
+			return dispatch({
+				type:'EDITAR_USUARIOS',
+				payload:usuarios.data
+			})
+		} catch (error) {
+			console.log(error)
+		}
+	}
+}
+
+
+ export function editarAccComentarios(id, payload){
+	return async function(dispatch){
+		try {
+			const accesorios = await axios.put(`/comentario/${id}`,payload)
+			console.log(accesorios)
+			return dispatch({
+				type:'EDITAR_ACC_COMENTARIOS',
+				payload:accesorios
+			})
+		} catch (error) {
+			console.log(error)
+		}
+	} 
+}
+export function usuarioId(id)
+{
+	return async function (dispatch)
+	{
+		try {
+			const userDetail = await axios(`/usuario/${id}`)
+
+			return dispatch({
+				type: 'USUARIO_ID',
+				payload: userDetail.data
+			})
+		} catch (error) {
+			console.log(error)
+		}
+
+	}}
+/* export function usuarioId(id)
+{
+	return async function (dispatch)
+	{
+		try {
+			return   axios.get(`http://localhost:4000/usuario/${id}`)
+            .then(data =>
+			{
+				dispatch({
+					type: "USUARIO_ID",
+					payload: data
+				})
+			})
+				
+		} catch (error) {
+			console.log(error)
+		}
+
+	}
+
+} */
+export function historialCompra(){
+	return async function(dispatch){
+		try{
+
+			const histComp= await axios(`/historia`)
+			return dispatch({
+				type:'HISTORIAL_COMPRA',
+				payload:histComp
+			})
+		}
+		catch(error){
+console.log(error)
+		}
+	}
 }
