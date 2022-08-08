@@ -27,7 +27,7 @@ export default function CardDetail()
   const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
   const [cart /* setCart */] = useState(cartFromLocalStorage);
    
-   console.log(myDetail) 
+  
   useEffect(() =>
   {
     localStorage.getItem("item2")
@@ -35,7 +35,7 @@ export default function CardDetail()
     dispatch(productosDetail(id))
   }, [dispatch, id])
    
-   
+
  
   
   async function addToCart(){
@@ -133,13 +133,21 @@ export default function CardDetail()
               <div className='contenedor-total'>
                 <h2>Calificaciones de los usuarios</h2>
           {
-            myDetail.comentarios ? myDetail.comentarios.map(e=>(
+            myDetail.comentarios.length>0 ? myDetail.comentarios.map(e=>(
               <div className="comentario">
         
+            {
+              e.star?.estrellas=== '1'?<li className="estrellas">★</li>:e.star?.estrellas=== 2
+              ?<li className="estrellas">★★</li>:e.star?.estrellas=== '3'
+              ?<li className="estrellas">★★★</li>:e.star?.estrellas=== '4'
+              ?<li className="estrellas">★★★★</li>:e.star?.estrellas=== '5'
+              ?<li className="estrellas">★★★★</li>:''
+            }
             <li className="nombre">El usuario {e.nombre}</li>
             <li className="reseña">califico este producto como: {e.reseña}</li>
+            
             </div>
-            )):<h4>Este producto sun no tiene comentarios</h4>
+            )):<h4>Este producto aun no tiene comentarios</h4>
           }
           </div>
           

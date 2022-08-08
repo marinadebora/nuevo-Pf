@@ -14,7 +14,7 @@ import '../styles/box.css'
 import {FiltrosAccesorios} from './FiltrosAccesorios';
 import img from '../imagenes/sin_productos.jpg'
 import {todosLosProductos,getItemsCart, resetDetail} from '../actions/actions'
-
+import '../styles/accesorios.css'
 
 
 export function Accesorios(){ 
@@ -24,7 +24,7 @@ export function Accesorios(){
   //----------paginado---------//
 
   const [page, setPage] = useState(1);
-  const [characterPerPage, setCharacterPerPage] = useState(5);
+  const [characterPerPage, setCharacterPerPage] = useState(6);
   const index = page * characterPerPage;
   const endIndex = index - characterPerPage;
   const actualPage = accesorio?.slice(endIndex, index);
@@ -35,7 +35,7 @@ export function Accesorios(){
   const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
   const [cart /* setCart */] = useState(cartFromLocalStorage);
 
- 
+ console.log(actualPage)
   const paginado = (numPage) =>
   {
     setPage(numPage)
@@ -101,7 +101,7 @@ export function Accesorios(){
                     id={e._id}
                     stock={e.stock}
                     Link={<Link to={`/home/${e._id}`} >Info</Link>}
-                    valoraciones={e.valoraciones}
+                    comentarios={e.comentarios}
                   />
 
                 </Grid>
