@@ -33,22 +33,22 @@ export default function Producto({ tipo,id, producto, marca ,precio, fabricacion
     
     dispatch(addToBasket({id}))
      return  swal({
-      title: "Your product was successfully added to the cart",
-      text: "What do you want to do next?",
+      title: "El producto se ha agregado a tu carro de compras",
+      text: "Que queires hacer ahora?",
       icon: "success",
       buttons: {
         cart: {
-          text: "Go to cart",
+          text: "Ir al carro",
           value: "cart",
         },
        
-        cancel: "Stay",
+        cancel: "Quedarse",
       },
     }).then((value) => {
       switch (value) {
         case "cart":
           navigate("/checkoutPage");
-          swal("Welcome to your cart", "Have a nice buy!", "success");
+          swal("Bienvenido a tu carro","Que tenga una buena compra" ,"success");
           break;
 
         default:
