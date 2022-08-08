@@ -145,17 +145,6 @@ export const addToBasket = (item) =>
 		console.log(err)
 	}
 };
-export const addParam = (item) =>
-{
-	try {
-		return {
-			type: 'ADD_TO_PARAM',
-			payload: item,
-		}
-	} catch (err) {
-		console.log(err)
-	}
-};
 
 
 export function removeToBasket(item)
@@ -167,6 +156,21 @@ export function removeToBasket(item)
 
 	}
 }
+export const addToFavoritos = (item) =>
+
+{console.log(item)
+	try {
+		return {
+			type: 'ADD_TO_FAV',
+			payload: item,
+		}
+	} catch (err) {
+		console.log(err)
+	}
+};
+
+
+
 
 export const getItemsCart = () =>
 {

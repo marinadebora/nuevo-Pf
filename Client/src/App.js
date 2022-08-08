@@ -27,6 +27,7 @@ import { useEffect ,useState} from 'react'
 import { useSelector, useDispatch ,} from 'react-redux'
 import { UsuariosDetail } from './actions/actions'
 import Checkout from "./components/CheckoutProcess/Checkout"
+import Favs from "./components/Favoritos"
 
 export default function App() {
   const dispatch = useDispatch()
@@ -61,6 +62,7 @@ export default function App() {
         <Route exact path='/home/:id' element={<CardDetail />} />
         <Route exact path='/checkoutPage' element={<CheckoutPage />}/>
         <Route exact path='/formContact' element={<ContactForm />}/>
+        <Route exact path='/favs' element={<Favs />}/>
         
         
    
@@ -89,6 +91,7 @@ export default function App() {
       <Route exact path='/home/:id' element={<CardDetail />} />
       <Route exact path='/checkoutPage' element={<CheckoutPage />}/>
       <Route exact path='/formContact' element={<ContactForm />}/>
+      <Route exact path='/favs' element={<Favs />}/>
       
       
       <Route exact path='/admin' element={<Admin/>} />
