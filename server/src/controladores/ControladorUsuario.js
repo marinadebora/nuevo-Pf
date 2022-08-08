@@ -34,4 +34,4 @@ const getUsuario = async(req,res)=>{
     /* res.send(user) */
 }
 
-module.exports = {getUsuario}
+module.exports = getUsuario

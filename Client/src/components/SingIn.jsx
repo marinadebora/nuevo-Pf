@@ -50,25 +50,26 @@ export default function SignIn() {
   const [usuario, setUsuario] = useState(null)
   /* console.log(email)
   console.log(password) */
-
+  const [u, setU] = useState(null)
 
   const handleSubmit = async (e) => {
 
     e.preventDefault();
     try {
-      const usuarioss = await (dispatch(login({ email, password })))
+      const usuarioss = await dispatch(login({ email, password }))
+      const tok = (usuarioss.payload.token)
       if (!usuarioss) {
         alert('hay errores en los campos')
       } else {
         alert('Bienvenido a nuestra pagina')
-        setUsuario(usuarioss.payload.data)
-        setToken(usuarioss.payload.data.token)
+        setUsuario(usuarioss.payload)
+        setToken(tok)
         localStorage.setItem(
-          'loguearUsuario', JSON.stringify(usuarioss.payload.data)
+          'loguearUsuario', JSON.stringify(usuarioss.payload)
         )
         setEmail('')
         setPassword('')
-        if(usuarioss.payload.data.admin === true){
+        if(usuarioss.payload.admin === true){
           history('/dashboard')
         }else{
           history("/accesorios")
@@ -83,27 +84,45 @@ export default function SignIn() {
   }
   const [user , setUser]= useState({})
 
-  
+
 async function handleCallbackResponse(response){
   /* console.log("Encoded JWT ID token: " + response.credential); */
   setUser(response.credential)
   const userObject = jwt_decode(response.credential);
   setUser(userObject);
-  console.log(user);
   /* console.log(userObject) */
   document.getElementById("signInDiv").hidden=true;
   if(userObject) {
-    alert('has iniciado sesion')
-    setToken(response.credential)
-    localStorage.setItem('logueadoGoogle', JSON.stringify({email:userObject.email, nombre:userObject.given_name, apellido:userObject.family_name, password:userObject.email, admin: false}))
-    const google = JSON.parse(localStorage.getItem('logueadoGoogle'))
-    setUsuario({google})
-    dispatch(registroGoogle(google))
-    if(google.admin === true){
-      history('/dashboard')
-    }else{
-      history("/accesorios")
+    const inf = {
+      email:userObject.email,
+      nombre:userObject.given_name,
+      apellido:userObject.family_name,
+      password:userObject.email
     }
+    const infGoogle = await (dispatch(registroGoogle({
+      email:userObject.email,
+      nombre:userObject.given_name,
+      apellido:userObject.family_name,
+      password:userObject.email
+    })))
+    console.log(infGoogle)
+    /* const toke = (infGoogle.payload.token) */
+    if(!infGoogle){
+      alert('hay errores en los campos')
+    }else{
+      alert('has iniciado sesion')
+      setToken(infGoogle.payload.token)
+      localStorage.setItem('logueadoGoogle', JSON.stringify(infGoogle.payload))
+      const google = JSON.parse(localStorage.getItem('logueadoGoogle'))
+      setUsuario({google})
+      if(google.admin === true){
+        history('/dashboard')
+      }else{
+        history("/accesorios")
+      }
+    }
+  }else{
+    alert('hay errores en los campos')
   }
 }
 
@@ -256,9 +275,6 @@ function handleSignOut(event){
           ya() :
           renderizarFormulario()
       }
-
-
-
     </div>
   );
 }
