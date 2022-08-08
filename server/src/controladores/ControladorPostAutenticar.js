@@ -12,7 +12,7 @@ const usuariosAuth= async (req,res)=>{
         id = api._id
         admin = api.admin
     }
-    console.log(admin)
+    
     
     /* console.log(nombre) */
     Usuarios.findOne({email},(err,Usuarios)=>{
@@ -29,9 +29,9 @@ const usuariosAuth= async (req,res)=>{
             let token = jwt.sign({Usuarios}, "torombolo", {
                 expiresIn: "10h"
             })
-            console.log(token)
-            res.cookie("pepito", token, { expiresIn: "10h" });
-            res.json({email,token,nombre,id,admin})
+            /* res.cookie("token", token, { expiresIn: "10h" }); */
+            res.send({email,token,nombre,id,admin})
+            console.log(req.headers)
         }else {
             res.status(500).send("Correo y/o contraseña incorrecta")
         }

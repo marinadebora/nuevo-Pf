@@ -306,7 +306,7 @@
             return{
               ...state
             }
-            case 'REGISTROGOOGLR':
+            case 'REGISTROGOOGLE':
             return{
               ...state
             }
@@ -326,13 +326,16 @@
           ...state,
           accesories: action.payload
         }
+        case 'TOKEN':
+          return{
+            ...state
+          }
       case 'EDITAR_USUARIOS':
         return {
           ...state,
           user:action.payload
         }
       case 'EDITAR_ACC_COMENTARIOS':
-       
         return{
           ...state,
           comentario:action.payload

@@ -108,13 +108,18 @@ export default function Navbar() {
             <Link to='/favs'>
               <Button variant="outlined" id="button">Favoritos</Button>
             </Link>
-            <Link to='/singIn'>
+            {
+              usuario?
+              logueado():
+              sinLogin()
+            }
+            {/* <Link to='/singIn'>
               <Button variant="outlined" id="button">Sing In</Button>
             </Link>
 
             <Link to='/singUp'>
               <Button variant="outlined" id="button">Sing Up</Button>
-            </Link>
+            </Link> */}
 
             <Link to='/checkoutPage'>
               <IconButton arial-label="show cart items" id="cartButton">
