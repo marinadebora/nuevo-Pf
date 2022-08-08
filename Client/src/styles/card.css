@@ -201,3 +201,17 @@ li{
        margin-left: 50px;
     }  
 }
+.div-img{
+    position: relative;
+    left: 0; 
+    top: 0;
+}
+
+.imagen2{
+    width: 150%;
+    position:relative;
+z-index: 2;
+margin-top:-500px;
+margin-left:-90px
+
+}
