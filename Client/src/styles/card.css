@@ -28,6 +28,7 @@
 
 #imgCard{
     overflow: hidden;
+    object-fit: contain;
 }
 
 #titleCheckoutPage{
