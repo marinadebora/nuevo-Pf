@@ -13,8 +13,7 @@ const { MONGO_USERS} = process.env;
     } catch (error) {
         console.error(error)
     }
-})() 
-
+})()
 
 /////////////////////////////////PRUEBAS\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
@@ -26,4 +25,4 @@ const { MONGO_USERS} = process.env;
 //     } catch (error) {
 //         console.error(error)
 //     }
-// })() 
+// })()
