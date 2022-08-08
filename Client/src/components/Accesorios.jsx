@@ -14,7 +14,7 @@ import '../styles/box.css'
 import {FiltrosAccesorios} from './FiltrosAccesorios';
 import img from '../imagenes/sin_productos.jpg'
 import {todosLosProductos,getItemsCart, resetDetail} from '../actions/actions'
-
+import '../styles/accesorios.css'
 
 
 export function Accesorios(){ 
