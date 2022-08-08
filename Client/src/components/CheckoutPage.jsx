@@ -270,8 +270,10 @@ return cantidadfiltrada.length
         <h2>US$ {precioTotal}</h2>
         </div>   
        
-        <Button href="/checkout" variant="contained" size="large" id='pagarButton'>Pagar</Button>
-       
+        {uniqueArray.length !== 0 
+        ?<Button href="/checkout" variant="contained" size="large" id='pagarButton'>Pagar</Button>
+        :""
+      }
 
       </div>
             <button id='buttonBackCheckout' onClick={volver}>Volver</button>
