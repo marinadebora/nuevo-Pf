@@ -7,12 +7,12 @@ import ImagenList from  './ImagenList'
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge"
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import '../styles/card.css';
+import '../styles/cardDetail.css';
 import {addToBasket, addToFavoritos } from '../actions/actions'
 import {  useState } from 'react';
 import swal from "sweetalert";
 import ContactMailIcon from "@mui/icons-material/ContactMail";
-import ImgSinStock from "../imagenes/ImgSinStock.png"
+import ImgSinStock from "../imagenes/vector-sin-stock.png"
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 export default function CardDetail()
@@ -122,7 +122,11 @@ export default function CardDetail()
 
         {myDetail.stock > 0 ?
           <ImagenList/>
-          :<img src={ImgSinStock} alt=''></img>
+          :<div className="div"> 
+          <ImagenList/>
+          {/* <img className="imagen1" src={myDetail.imagenes[0]} alt=''></img> */}
+          <img className="imagen" src={ImgSinStock} alt=''></img>
+          </div> 
         }
 
           </div>
@@ -166,7 +170,7 @@ export default function CardDetail()
               <div className='contenedor-total'>
                 <h2>Calificaciones de los usuarios</h2>
           {
-            myDetail.comentarios.length>0 ? myDetail.comentarios.map(e=>(
+            myDetail.comentarios?.length>0 ? myDetail.comentarios.map(e=>(
               <div className="comentario">
         
             {
