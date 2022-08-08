@@ -13,6 +13,8 @@ import Card from './CardShop'
 import {  Link } from 'react-router-dom';
 import swal from "sweetalert";
 import * as GiIcons from "react-icons/gi"
+import Badge from "@mui/material/Badge"
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
 
 
@@ -35,8 +37,7 @@ export default function Favs()
   const myUserDetail = useSelector(state => state?.userDetail);
   const current_cart =FavFromLocalStorage;
   const CartUser= myUserDetail[0]?.carritoDeCompra
-  const paramFromLocalStorage = JSON.parse(localStorage.getItem("parametros") || "[]");
-  const [param /* setCart */] = useState(paramFromLocalStorage);
+ 
 
   
 
@@ -89,50 +90,6 @@ function removeDuplicates(originalArray, prop) {
 
 
 var uniqueArray = removeDuplicates(current_cart, "_id");
-const [soloid] =useState(current_cart.map(item => item._id))
-const sumall = current_cart.map(item => item.precio);
-const neto = sumall.map(e=>e.split('$')[1])
-const num = neto.map(e=> parseInt(e))
-var precioTotal =num.reduce((a, b) => a + b, 0);
-//console.log(precioTotal)
-console.log(current_cart)
-
-function cantidad (id){
-  
-var cantidadfiltrada = soloid.filter(e=> e === id)
-return cantidadfiltrada.length
-}
-
-
-  async function next(id){
-  
-  dispatch(addToBasket({id}))
-  return  swal({
-    title: "El producto se ha agregado a tu carro de compras",
-    text: "Que queires hacer ahora?",
-    icon: "success",
-    buttons: {
-      cart: {
-        text: "Ir al carro",
-        value: "cart",
-      },
-     
-      cancel: "Seguir comprando",
-    },
-  }).then((value) => {
-    switch (value) {
-      case "cart":
-        navigate("/checkoutPage");
-        swal("Bienvenido a tu carro","Que tenga una buena compra" ,"success");
-        break;
-
-      default:
-        break;
-    }
-  });
-        
-};
-
 
   const volver = () =>
   {
@@ -145,7 +102,7 @@ return cantidadfiltrada.length
         JSON.stringify(FavFromLocalStorage.filter((e) => e._id !== id))
       );
       return  swal({
-          title: "El producto se ha eliminado de tu carro",
+          title: "El producto se ha eliminado de tus favoritos",
           icon: "success",
           buttons: {
               OK: {
@@ -164,26 +121,41 @@ return cantidadfiltrada.length
           }
         }); 
     };
+    async function addToCart (id) {
+    
+      dispatch(addToBasket({id}))
+       return  swal({
+        title: "El producto se ha agregado a tu carro de compras",
+        text: "Que queires hacer ahora?",
+        icon: "success",
+        buttons: {
+          cart: {
+            text: "Ir al carro",
+            value: "cart",
+          },
+         
+          cancel: "Quedarse",
+        },
+      }).then((value) => {
+        switch (value) {
+          case "cart":
+            navigate("/checkoutPage");
+            swal("Bienvenido a tu carro","Que tenga una buena compra" ,"success");
+            break;
+  
+          default:
+            break;
+        }
+      });
+       
+    }
    
    
 
-    
-    const handleSplice = (id) => {
-     
-      var myIndex2 = current_cart.findIndex((e)=> e._id === id)
-      if (myIndex2 !== -1) {
-        current_cart.splice(myIndex2, 1);
-           }
-           console.log(current_cart)
-      localStorage.setItem(
-        "Fav",
-        JSON.stringify(current_cart)
-      );
-      
-    };
+  
     
   useEffect(() => {
-  localStorage.setItem("parametros", JSON.stringify(param))
+  
   localStorage.setItem("Fav", JSON.stringify(cart));
   dispatch(getItemsCart());
   dispatch(accesorios())
@@ -202,7 +174,7 @@ return cantidadfiltrada.length
         <>
             <div>
                 <h1>LOADING</h1>
-                <button id='buttonBackCheckout' onClick={volver}>Back</button>
+                <button id='buttonBackCheckout' onClick={volver}>Volver</button>
             </div>
         </>:
         <div>
@@ -211,7 +183,7 @@ return cantidadfiltrada.length
                 className="buttonCleanCart" 
                 onClick={() => handleClearCart()}>
                   Limpiar carrito <GiIcons.GiBroom /> </button>
-            <h1 id='titleCheckoutPage'>Shopping Cart</h1>
+            <h1 id='titleCheckoutPage'>Mis Favoritos</h1>
             {
               uniqueArray?.map(e => (
                     e !== undefined &&
@@ -236,13 +208,29 @@ return cantidadfiltrada.length
                     descripcion={e.descripcion}
                     Tamaño={e.Tamaño}
                     id={e._id}
+                    stock={e.stock}
                       
                   />
                 
                 <form id="layout">
+                <Link to={`/home/${e._id}`} >Info</Link>
+                
+                {e.stock >0 
+          ?<IconButton aria-label="add to cart"onClick={() => addToCart(e._id)}>
+          <Badge  color="secondary" id='badge'>
+            <AddShoppingCartIcon />
+            </Badge>
+          </IconButton>
+          :<IconButton disabled aria-label="add to cart"onClick={() => addToCart(e._id)}>
+          <Badge  color="secondary" id='badge'>
+            <AddShoppingCartIcon />
+            </Badge>
+          </IconButton>
+          }
                
                 <button id="delete" onClick={() => handleDelete(e._id)} className="delete-button">Delete</button>
                 <div class="clearfix"></div>
+                
                 </form>
                 
                 </Grid>
