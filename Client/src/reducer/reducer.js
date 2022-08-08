@@ -277,7 +277,7 @@
             return{
               ...state
             }
-            case 'REGISTROGOOGLR':
+            case 'REGISTROGOOGLE':
             return{
               ...state
             }
@@ -295,7 +295,10 @@
           ...state,
           accesories: action.payload
         }
-  
+        case 'TOKEN':
+          return{
+            ...state
+          }
       default: {
         return state
       }

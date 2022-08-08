@@ -1,4 +1,5 @@
 import axios from "axios"
+import {configAxios} from './actions'
 
 //const URL_BASE = "http://localhost:4000"
 
@@ -111,7 +112,7 @@ export function updateEmbarcacionEnV(id, payload){
 export function postEmbarcacionRT(payload) {
   return async function (dispatch) {
     try {
-      const embarcacionCreated = await axios.post(`/embarcacionesR`, payload);
+      const embarcacionCreated = await axios.post(`/embarcacionesR`, payload/* ,configAxios() */);
       return dispatch({
         type: "POST_EMBARCACIONRT",
         payload: embarcacionCreated,

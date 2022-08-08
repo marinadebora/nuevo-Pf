@@ -87,7 +87,7 @@ export function barcosEnAlquiler()
 	{
 		try {
 
-			const prodVenta = await axios('/embarcacionesr');
+			const prodVenta = await axios('/embarcacionesr', /* configAxios() */);
 			return dispatch({
 				type: 'BARCOS_EN_ALQUILER',
 				payload: prodVenta.data
@@ -102,8 +102,7 @@ export function accesorios()
 	return async function (dispatch)
 	{
 		try {
-
-			const prodVenta = await axios('/accesorios')
+			const prodVenta = await axios('/accesorios', /* configAxios() */)
 			return dispatch({
 				type: 'ACCESORIOS',
 				payload: prodVenta.data
@@ -422,7 +421,7 @@ export function postEmbarcacionRT(payload)
 	return async function (dispatch)
 	{
 		try {
-			const embarcacionCreated = await axios.post(`https://nautical25.herokuapp.com/embarcacionesR`, payload);
+			const embarcacionCreated = await axios.post(`https://nautical25.herokuapp.com/embarcacionesR`, payload/* , configAxios() */);
 			return dispatch({
 				type: "POST_EMBARCACIONRT",
 				payload: embarcacionCreated,
@@ -483,7 +482,31 @@ export function updateEmbarcacionRT(id, payload)
  		})
   }*/
 
+let token = null
+console.log(token)
+
+export const setToken = (newToken)=>{
+		token = `Bearer ${newToken.token}`
+	
+}
+export const configAxios = ()=>{
+    const localUser = localStorage.getItem('logueadoGoogle') /* || localStorage.getItem('loguearUsuario') */;
+    const userActive = JSON.parse(localUser);
+    let configAxios = {};
+    if(userActive){
+        configAxios ={
+            headers: {
+            'Content-Type': 'application/json',
+            Authorization: `${userActive.token}`,
+            },
+        }
+    };
+	console.log(configAxios)
+    return configAxios;
+}
+
 export const registro = (value)=> async (dispatch)=>{
+	
     return await axios.post(`http://localhost:4000/registro`,value)
     .then(res =>{
         dispatch({type: "REGISTRO", payload: res.data})
@@ -493,13 +516,15 @@ export const registro = (value)=> async (dispatch)=>{
 }
 
 export const registroGoogle = (value)=> async (dispatch)=>{
-    return await axios.post(`http://localhost:4000/registroGoogle`,value)
-    .then(res =>{
-        dispatch({type:"REGISTROGOOGLR", payload: res.data})
-    }).catch(error=>{
-        alert(error)
-    })
-} 
+	/* const config ={
+        headers:{
+			'content-type': 'application/json',
+            authorization: `${token}`
+        }
+    } */
+    const inf = await axios.post(`http://localhost:4000/registroGoogle`,value)
+    return dispatch({type:'REGISTROGOOGLE', payload: inf.data})
+}
 
 export const usuarios = () => async (dispatch) =>
 {
@@ -510,24 +535,15 @@ export const usuarios = () => async (dispatch) =>
 		})
 }
 
-let token = null
-console.log(token)
-
-export const setToken = (newToken)=>{
-    token = `Bearer ${newToken}`
-    return token
-}
-
 export const login = (value)=> async (dispatch)=>{
-    const config ={
+    /* const config ={
         headers:{
+			'content-type': 'application/json',
             Authorization: token
-        }
-    }
-    const action = await axios.post("/autenticar",value, config)
-    return dispatch({
-        type: 'LOGIN',
-        payload: action
+		}
+    } */
+    const action = await axios.post("/autenticar",value)
+    return dispatch({type:'LOGIN', payload: action.data
     })
 }
 
