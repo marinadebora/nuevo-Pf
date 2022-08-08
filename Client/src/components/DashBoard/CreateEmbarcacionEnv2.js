@@ -1,6 +1,3 @@
-
-
-/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";

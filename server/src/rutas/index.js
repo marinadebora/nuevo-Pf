@@ -24,17 +24,19 @@ const postCategorias = require("./postCategoria");
 const { usuarios } = require("../controladores/controladorPostRegistro");
 const { usuariosAuth } = require("../controladores/ControladorPostAutenticar");
 const {correo}= require("../controladores/autenticar")
-const { getUsuario } =require ("../controladores/ControladorUsuario")
+const  getUsuario  =require ("../controladores/ControladorUsuario")
 const {agregarAlCarrito, borrarCarrito, asignarUsuarioAlCarrito} = require("../controladores/controladorCarrito");
 const { requireSignin } = require("../controladores/Verificaciones");
 const putUsuario = require("./putUsuarioCarrito");
 const putAccesoriosComentarios = require("./putAccesoriosComentarios");
 const { UsuarioId } = require("../controladores/controladorIdUsuario");
+
 const controladorHistoria = require("../NuevaHistoria/controladorHistoria");
 const { updateHistorial } = require("../NuevaHistoria/controladorPutHistoria");
 const { correoCompra } = require("../controladores/autenticarCompra");
 const usuariosGoogle = require('../controladores/ControladorRegistroGoogle');
 const { correoContacto } = require("./postFormularioContacto");
+
 
 /* const app = require("../modelos/SesionGoogle.js") */
 

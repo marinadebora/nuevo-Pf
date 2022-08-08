@@ -46,30 +46,30 @@ export default function CheckoutPage()
 })
 
 
-
+async function handleClearCart (e){
+  localStorage.setItem("item2", []);
+  navigate("/accesorios");
+  return  swal({
+   title: "Se han borrado todos los productos de su carro de compras",
+   text: "Puede agregar mas desde nuestro inicio!!",
+   icon: "success",
+ 
+ }).then((value) => {
+   switch (value) {
+     case "cart":
+       
+       swal("Bienvenido a nuestra Pagina","Que tenga una buena compra" ,"success");
+       break;
+ 
+     default:
+       break;
+   }
+ });
+ };
 
 
  
-async function handleClearCart (e){
- localStorage.setItem("item2", []);
- navigate("/accesorios");
- return  swal({
-  title: "Se han borrado todos los productos de su carro de compras",
-  text: "Puede agregar mas desde nuestro inicio!!",
-  icon: "success",
 
-}).then((value) => {
-  switch (value) {
-    case "cart":
-      
-      swal("Bienvenido a nuestra Pagina","Que tenga una buena compra" ,"success");
-      break;
-
-    default:
-      break;
-  }
-});
-};
 
 function removeDuplicates(originalArray, prop) {
   var newArray = [];
@@ -236,17 +236,19 @@ return cantidadfiltrada.length
                     descripcion={e.descripcion}
                     Tamaño={e.Tamaño}
                     id={e._id}
+                    stock={e.stock}
                       
                   />
                 
                 <form id="layout">
                 <p id="cantidad">Cantidad:{cantidad(e._id)}</p>
+                <p id="cantidad">Stock Disponible:{e.stock}</p>
                 <div id="buttonsCart">
-                <button onClick={() => next(e._id)}class="pagination-button p" id="buttonMasMenos">+</button>
+                {e.stock <= cantidad(e._id) ? <button disabled onClick={() => next(e._id)}class="pagination-button p" id="buttonMasMenos">+</button>:<button onClick={() => next(e._id)}class="pagination-button p" id="buttonMasMenos">+</button>}
                 <button onClick={() => handleSplice(e._id)} class="pagination-button a" id="buttonMasMenos">-</button>
                 </div>
                 <p id="precioTotal">Precio Total:US$ {e.precio.split('$')[1] * cantidad(e._id)}</p>
-                <button id="delete" onClick={() => handleDelete(e._id)} className="delete-button">Delete</button>
+                <button id="delete" onClick={() => handleDelete(e._id)} className="delete-button">Borrar</button>
                 <div class="clearfix"></div>
                 </form>
                 
@@ -272,7 +274,7 @@ return cantidadfiltrada.length
        
 
       </div>
-            <button id='buttonBackCheckout' onClick={volver}>Back</button>
+            <button id='buttonBackCheckout' onClick={volver}>Volver</button>
         </div>
         
     )
