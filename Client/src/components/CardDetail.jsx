@@ -73,12 +73,12 @@ export default function CardDetail()
     
     dispatch(addToFavoritos({id}))
      return  swal({
-      title: "El producto se ha agregado a tu carro de compras",
+      title: "El producto se ha agregado a tu lista de favoritos",
       text: "Que queires hacer ahora?",
       icon: "success",
       buttons: {
         cart: {
-          text: "Ir al carro",
+          text: "Ir a mi lista",
           value: "cart",
         },
        
@@ -88,7 +88,7 @@ export default function CardDetail()
       switch (value) {
         case "cart":
           navigate("/checkoutPage");
-          swal("Bienvenido a tu carro","Que tenga una buena compra" ,"success");
+          swal("Bienvenido a tus favoritos","Que tenga una buena compra" ,"success");
           break;
 
         default:
