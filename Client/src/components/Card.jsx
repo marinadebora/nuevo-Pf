@@ -14,7 +14,7 @@ import {addToBasket, addToFavoritos} from '../actions/actions'
 import {useDispatch } from 'react-redux'
 import swal from "sweetalert";
 import {useNavigate } from "react-router-dom";
-import ImgSinStock from "../imagenes/ImgSinStock.png"
+import ImgSinStock from "../imagenes/vector-sin-stock.png"
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 
@@ -133,12 +133,15 @@ export default function Producto({ tipo,id, producto, marca ,precio, fabricacion
          component="img"
          height="200"
          image={imagenes?.[0]} />
-         : <CardMedia
+         : <div className="div-img"> 
+           <CardMedia
          id='imgCard'
          component="img"
          height="200"
-         image={ImgSinStock} />
-            
+         image={imagenes?.[0]} />
+        {/*  <img className="imagen1" src={imagenes?.[0]} alt=''></img> */}
+         <img className="imagen2" src={ImgSinStock} alt=''></img>
+         </div> 
         }
         <CardContent>
         {
