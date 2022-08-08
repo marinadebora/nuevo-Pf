@@ -17,7 +17,7 @@ import * as GiIcons from "react-icons/gi"
 
 
 
-export default function CheckoutPage()
+export default function Favs()
 {
 
     
@@ -26,14 +26,14 @@ export default function CheckoutPage()
   const navigate = useNavigate()
   const stateBasket = useSelector((state) => state.basket)
   const accesorio = useSelector(state => state.allAccesories._id)
-  const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
-  const [cart /* setCart */] = useState(cartFromLocalStorage);
+  const FavFromLocalStorage = JSON.parse(localStorage.getItem("Fav") || "[]");
+  const [cart /* setCart */] = useState(FavFromLocalStorage);
   const [cant, SetCant]= useState(1)
   const UserFromLocalStorage = JSON.parse(localStorage.getItem("loguearUsuario"));
   const [user/* setUser */] = useState(UserFromLocalStorage);
   const current_userID =UserFromLocalStorage?.id
   const myUserDetail = useSelector(state => state?.userDetail);
-  const current_cart =cartFromLocalStorage;
+  const current_cart =FavFromLocalStorage;
   const CartUser= myUserDetail[0]?.carritoDeCompra
   const paramFromLocalStorage = JSON.parse(localStorage.getItem("parametros") || "[]");
   const [param /* setCart */] = useState(paramFromLocalStorage);
@@ -41,7 +41,7 @@ export default function CheckoutPage()
   
 
   const [input, setInput] = useState({
-    carritoDeCompra: cartFromLocalStorage
+    carritoDeCompra: FavFromLocalStorage
     
 })
 
@@ -51,10 +51,10 @@ export default function CheckoutPage()
 
  
 async function handleClearCart (e){
- localStorage.setItem("item2", []);
+ localStorage.setItem("Fav", []);
  navigate("/accesorios");
  return  swal({
-  title: "Se han borrado todos los productos de su carro de compras",
+  title: "Se han borrado todos los Favoritos de su lista de deseos",
   text: "Puede agregar mas desde nuestro inicio!!",
   icon: "success",
 
@@ -141,8 +141,8 @@ return cantidadfiltrada.length
 
   const handleDelete = (id) => {
       localStorage.setItem(
-        "item2",
-        JSON.stringify(cartFromLocalStorage.filter((e) => e._id !== id))
+        "Fav",
+        JSON.stringify(FavFromLocalStorage.filter((e) => e._id !== id))
       );
       return  swal({
           title: "El producto se ha eliminado de tu carro",
@@ -176,7 +176,7 @@ return cantidadfiltrada.length
            }
            console.log(current_cart)
       localStorage.setItem(
-        "item2",
+        "Fav",
         JSON.stringify(current_cart)
       );
       
@@ -184,13 +184,13 @@ return cantidadfiltrada.length
     
   useEffect(() => {
   localStorage.setItem("parametros", JSON.stringify(param))
-  localStorage.setItem("item2", JSON.stringify(cart));
+  localStorage.setItem("Fav", JSON.stringify(cart));
   dispatch(getItemsCart());
   dispatch(accesorios())
   dispatch(UsuariosDetail(current_userID))
-  if(typeof current_userID === "string"){
+  /*if(typeof current_userID === "string"){
     dispatch(UpdateToCart(current_userID,input ));
-  }
+  }*/
  
   
 }, [cart ,dispatch,current_userID ]);
@@ -240,12 +240,7 @@ return cantidadfiltrada.length
                   />
                 
                 <form id="layout">
-                <p id="cantidad">Cantidad:{cantidad(e._id)}</p>
-                <div id="buttonsCart">
-                <button onClick={() => next(e._id)}class="pagination-button p" id="buttonMasMenos">+</button>
-                <button onClick={() => handleSplice(e._id)} class="pagination-button a" id="buttonMasMenos">-</button>
-                </div>
-                <p id="precioTotal">Precio Total:US$ {e.precio.split('$')[1] * cantidad(e._id)}</p>
+               
                 <button id="delete" onClick={() => handleDelete(e._id)} className="delete-button">Delete</button>
                 <div class="clearfix"></div>
                 </form>
@@ -262,17 +257,8 @@ return cantidadfiltrada.length
             </div>
                 ))
                 }
-                <div>
-        <div id='pagoTotal'>  
-        <h2> TOTAL</h2>
-        <h2>US$ {precioTotal}</h2>
-        </div>   
-       
-        <Button href="/checkout" variant="contained" size="large" id='pagarButton'>Pagar</Button>
-       
-
-      </div>
-            <button id='buttonBackCheckout' onClick={volver}>Back</button>
+        
+            <button id='buttonBackCheckout' onClick={volver}>Volver</button>
         </div>
         
     )

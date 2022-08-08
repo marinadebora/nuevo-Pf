@@ -105,6 +105,9 @@ export default function Navbar() {
               </Link>
             </Typography>
             
+            <Link to='/favs'>
+              <Button variant="outlined" id="button">Favoritos</Button>
+            </Link>
             <Link to='/singIn'>
               <Button variant="outlined" id="button">Sing In</Button>
             </Link>
