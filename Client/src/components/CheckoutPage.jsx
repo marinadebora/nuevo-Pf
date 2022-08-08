@@ -12,6 +12,7 @@ import { Grid } from '@mui/material'
 import Card from './CardShop'
 import {  Link } from 'react-router-dom';
 import swal from "sweetalert";
+import * as GiIcons from "react-icons/gi"
 
 
 
@@ -49,27 +50,26 @@ export default function CheckoutPage()
 
 
  
-function handleSubmit(e){
-  e.preventDefault()
-  
-  
-      dispatch(UpdateToCart(current_userID,input ))
+async function handleClearCart (e){
+ localStorage.setItem("item2", []);
+ navigate("/accesorios");
+ return  swal({
+  title: "Se han borrado todos los productos de su carro de compras",
+  text: "Puede agregar mas desde nuestro inicio!!",
+  icon: "success",
+
+}).then((value) => {
+  switch (value) {
+    case "cart":
       
-      return (
-          alert(`El accesorio fue actualizado con éxito.`)
-          )  
-  
-}
+      swal("Bienvenido a nuestra Pagina","Que tenga una buena compra" ,"success");
+      break;
 
-
-  /*useEffect(() => {
-  
-  if(typeof current_userID === "string"){
-    dispatch(UpdateToCart(current_userID,cartFromLocalStorage ));
+    default:
+      break;
   }
-}, [cartFromLocalStorage ,dispatch ]);*/
-
-
+});
+};
 
 function removeDuplicates(originalArray, prop) {
   var newArray = [];
@@ -104,14 +104,6 @@ return cantidadfiltrada.length
 }
 
 
-
-/*function next(id,results){
-  console.log(id)
-  var results = [];
-    results.push(id);
-    return next(results);
-  
-}*/
   async function next(id){
   
   dispatch(addToBasket({id}))
@@ -140,43 +132,6 @@ return cantidadfiltrada.length
   });
         
 };
-
-async function back(id) {
-  console.log(id)
-  dispatch(removeToBasket(id))
-};
-
-/*const addToCart = () =>{
-    
-   
-  dispatch(addToBasket({id}))
-   return  swal({
-    title: "Your product was successfully added to the cart",
-    text: "What do you want to do next?",
-    icon: "success",
-    buttons: {
-      cart: {
-        text: "Go to cart",
-        value: "cart",
-      },
-     
-      cancel: "Stay",
-    },
-  }).then((value) => {
-    switch (value) {
-      case "cart":
-        navigate("/checkoutPage");
-        swal("Welcome to your cart", "Have a nice buy!", "success");
-        break;
-
-      default:
-        break;
-    }
-  });
-   
-}*/
-
-
 
 
   const volver = () =>
@@ -211,26 +166,10 @@ async function back(id) {
     };
    
    
-    /*var idprueba="62d8a6b52029a4c825e23ed6" 
-    //var myIndex2 = current_cart.findIndex((e)=> e._id === idprueba)
-    
-   
-    const prueba = (idprueba2) =>{
-      var myIndex2 = current_cart.findIndex((e)=> e._id === idprueba2)
-      if (myIndex2 !== -1) {
-        current_cart.splice(myIndex2, 1);
-           }
-           
-      
-    }*/
 
     
-   
-    
-    
     const handleSplice = (id) => {
-      //indexOf(id);
-      
+     
       var myIndex2 = current_cart.findIndex((e)=> e._id === id)
       if (myIndex2 !== -1) {
         current_cart.splice(myIndex2, 1);
@@ -268,6 +207,10 @@ async function back(id) {
         </>:
         <div>
         <NavBar />
+        <button 
+                className="buttonCleanCart" 
+                onClick={() => handleClearCart()}>
+                  Limpiar carrito <GiIcons.GiBroom /> </button>
             <h1 id='titleCheckoutPage'>Shopping Cart</h1>
             {
               uniqueArray?.map(e => (

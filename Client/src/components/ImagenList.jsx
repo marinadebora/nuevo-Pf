@@ -5,9 +5,9 @@ import { useSelector } from "react-redux";
 
 export default function ImageDetail() {
   const myDetail = useSelector((state) => state.detail); 
-  const ImgDetail = myDetail.imagenes  
+ 
   const [selectedImg, setSelectedImg] = useState(myDetail.imagenes);
-  console.log(ImageDetail)
+
   
   return (
     <div className='main'>
