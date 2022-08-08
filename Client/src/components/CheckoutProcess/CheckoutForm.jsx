@@ -6,9 +6,9 @@ import {loadStripe} from '@stripe/stripe-js'; //trae stripe
 import axios from "axios";
 import { useState } from "react";
 import '../../styles/checkout.css';
+import SET_PAYMENT_MESSAGE from "../../reducer/reducer";
+import EMPTY_BASKET from "../../reducer/reducer";
 
-// import { actionTypes } from "../../reducer/reducer.js";
-// import { getBasketTotal } from "../../reducer/reducer.js";
 
 const CARD_ELEMENT_OPTIONS = {
     iconStyle: "solid",
@@ -49,7 +49,8 @@ const CheckoutForm = ({ backStep, nextStep }) => {
     const num = neto.map(e=> parseInt(e))
     var precioTotal =num.reduce((a, b) => a + b, 0);
 
-   //const InfoTotal = [precioTotal,cartFromLocalStorage,shipp]
+    //const InfoTotal = [precioTotal,cartFromLocalStorage,shipp]
+    
   
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -64,7 +65,7 @@ const CheckoutForm = ({ backStep, nextStep }) => {
         const { id } = paymentMethod;
         try {
           const { data } = await axios.post(
-            "http://localhost:4000/api/checkout",
+            "http://localhost:4000/checkout",
             {
               id,
               amount: precioTotal * 100,
@@ -73,16 +74,16 @@ const CheckoutForm = ({ backStep, nextStep }) => {
           );
           /* enviamos al backend, y la información que vamos a enviar al backend */
            console.log(data); //lo que va a ir al backend
-          // dispatch({
-          //   type: actionTypes.SET_PAYMENT_MESSAGE,
-          //   paymentMessage: data.message,
-          // });
-          // // if (data.message === "Successful Payment") {
-          // //   dispatch({
-          // //     type: actionTypes.EMPTY_BASKET,
-          // //     basket: [],
-          // //   });
-          // }
+          dispatch({
+            type: SET_PAYMENT_MESSAGE,
+            paymentMessage: data.message,
+          });
+          if (data.message === "Successful Payment") {
+            dispatch({
+              type: EMPTY_BASKET,
+              basket: [],
+            });
+          }
   
           elements.getElement(CardElement).clear();
           nextStep();

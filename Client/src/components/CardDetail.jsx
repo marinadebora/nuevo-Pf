@@ -8,11 +8,12 @@ import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge"
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import '../styles/card.css';
-import {addToBasket } from '../actions/actions'
+import {addToBasket, addToFavoritos } from '../actions/actions'
 import {  useState } from 'react';
 import swal from "sweetalert";
 import ContactMailIcon from "@mui/icons-material/ContactMail";
 import ImgSinStock from "../imagenes/ImgSinStock.png"
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 export default function CardDetail()
 { 
@@ -26,37 +27,41 @@ export default function CardDetail()
   const navigate = useNavigate()
   const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
   const [cart /* setCart */] = useState(cartFromLocalStorage);
+  const FavFromLocalStorage = JSON.parse(localStorage?.getItem("Fav"));
+  const [fav /* setCart */] = useState(FavFromLocalStorage);
    
-   console.log(myDetail) 
+  
   useEffect(() =>
   {
     localStorage.getItem("item2")
     localStorage.setItem("item2", JSON.stringify(cart));
+    localStorage.getItem("Fav")
+    
     dispatch(productosDetail(id))
   }, [dispatch, id])
    
-   
+
  
   
   async function addToCart(){
         dispatch(addToBasket({id}))
           return  swal({
-            title: "Your product was successfully added to the cart",
-            text: "What do you want to do next?",
+            title: "El producto se ha agregado a tu carro de compras",
+            text: "Que queires hacer ahora?",
             icon: "success",
             buttons: {
               cart: {
-                text: "Go to cart",
+                text: "Ir al carro",
                 value: "cart",
               },
              
-              cancel: "Stay",
+              cancel: "Seguir comprando",
             },
           }).then((value) => {
             switch (value) {
               case "cart":
                 navigate("/checkoutPage");
-                swal("Welcome to your cart", "Have a nice buy!", "success");
+                swal("Bienvenido a tu carro","Que tenga una buena compra" ,"success");
                 break;
       
               default:
@@ -64,6 +69,34 @@ export default function CardDetail()
             }
           });
    }
+   async function addToFav () {
+    
+    dispatch(addToFavoritos({id}))
+     return  swal({
+      title: "El producto se ha agregado a tu carro de compras",
+      text: "Que queires hacer ahora?",
+      icon: "success",
+      buttons: {
+        cart: {
+          text: "Ir al carro",
+          value: "cart",
+        },
+       
+        cancel: "Quedarse",
+      },
+    }).then((value) => {
+      switch (value) {
+        case "cart":
+          navigate("/checkoutPage");
+          swal("Bienvenido a tu carro","Que tenga una buena compra" ,"success");
+          break;
+
+        default:
+          break;
+      }
+    });
+     
+  }
 
    
  const volver = () =>
@@ -130,22 +163,31 @@ export default function CardDetail()
           {
             myDetail.Tamaño ? <li><p id='titleDetailCard'>Tamaño:</p> <p>{myDetail.Tamaño}</p></li> : ''
           }
-          {
-            myDetail.comentarios && myDetail.comentarios.map(e=>(
               <div className='contenedor-total'>
                 <h2>Calificaciones de los usuarios</h2>
+          {
+            myDetail.comentarios.length>0 ? myDetail.comentarios.map(e=>(
               <div className="comentario">
         
+            {
+              e.star?.estrellas=== '1'?<li className="estrellas">★</li>:e.star?.estrellas=== 2
+              ?<li className="estrellas">★★</li>:e.star?.estrellas=== '3'
+              ?<li className="estrellas">★★★</li>:e.star?.estrellas=== '4'
+              ?<li className="estrellas">★★★★</li>:e.star?.estrellas=== '5'
+              ?<li className="estrellas">★★★★</li>:''
+            }
             <li className="nombre">El usuario {e.nombre}</li>
             <li className="reseña">califico este producto como: {e.reseña}</li>
+            
             </div>
-            </div>
-            ))
+            )):<h4>Este producto aun no tiene comentarios</h4>
           }
+          </div>
           
           </ul>
          
             <button id='buttonBack' onClick={volver}>VOLVER</button>
+            <IconButton aria-label="add to favorites" onClick={addToFav}> <FavoriteIcon /></IconButton>
             {
   myDetail.producto?  
   <>

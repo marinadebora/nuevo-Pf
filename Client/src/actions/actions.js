@@ -3,14 +3,14 @@ import axios from 'axios';
 
 
 
-/* const URL_BASE = "https://nautical25.herokuapp.com";
+ const URL_BASE = "https://nautical25.herokuapp.com";
 
-const URL_BASE ="https://nautical25.herokuapp.com"
+
 const URL_LOCAL ="http://localhost:4000"
 
 
 //import infoProductos from '../infoPrueba/index'
-const URL_LOCAL="http://localhost:4000" */
+
 
 export function todosLosProductos()
 {
@@ -145,17 +145,6 @@ export const addToBasket = (item) =>
 		console.log(err)
 	}
 };
-export const addParam = (item) =>
-{
-	try {
-		return {
-			type: 'ADD_TO_PARAM',
-			payload: item,
-		}
-	} catch (err) {
-		console.log(err)
-	}
-};
 
 
 export function removeToBasket(item)
@@ -167,6 +156,21 @@ export function removeToBasket(item)
 
 	}
 }
+export const addToFavoritos = (item) =>
+
+{console.log(item)
+	try {
+		return {
+			type: 'ADD_TO_FAV',
+			payload: item,
+		}
+	} catch (err) {
+		console.log(err)
+	}
+};
+
+
+
 
 export const getItemsCart = () =>
 {
@@ -357,7 +361,7 @@ export function updateAccesorio(id, payload)
 
 export function UpdateToCart(id, payload)
 {
-	return function (dispatch)
+	return async function (dispatch)
 	{
 		return axios.put(`/user/${id}`, payload)
 			.then(data =>
@@ -565,7 +569,7 @@ export const busquedaAccesorios = (name)=> async (dispatch)=>{
     try {
         console.log(name)
         if(name){
-            return await fetch(`/accesorios?producto=${name}`)
+            return await fetch(`${URL_BASE}/accesorios?producto=${name}`)
             .then(res => res.json())
             .then(res =>{
             dispatch({type:'BUSCAR_ACCESORIOS', payload: res})
