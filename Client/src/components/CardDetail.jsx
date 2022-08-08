@@ -8,11 +8,12 @@ import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge"
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import '../styles/card.css';
-import {addToBasket } from '../actions/actions'
+import {addToBasket, addToFavoritos } from '../actions/actions'
 import {  useState } from 'react';
 import swal from "sweetalert";
 import ContactMailIcon from "@mui/icons-material/ContactMail";
 import ImgSinStock from "../imagenes/ImgSinStock.png"
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 export default function CardDetail()
 { 
@@ -26,12 +27,16 @@ export default function CardDetail()
   const navigate = useNavigate()
   const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
   const [cart /* setCart */] = useState(cartFromLocalStorage);
+  const FavFromLocalStorage = JSON.parse(localStorage?.getItem("Fav"));
+  const [fav /* setCart */] = useState(FavFromLocalStorage);
    
   
   useEffect(() =>
   {
     localStorage.getItem("item2")
     localStorage.setItem("item2", JSON.stringify(cart));
+    localStorage.getItem("Fav")
+    
     dispatch(productosDetail(id))
   }, [dispatch, id])
    
@@ -64,6 +69,34 @@ export default function CardDetail()
             }
           });
    }
+   async function addToFav () {
+    
+    dispatch(addToFavoritos({id}))
+     return  swal({
+      title: "El producto se ha agregado a tu carro de compras",
+      text: "Que queires hacer ahora?",
+      icon: "success",
+      buttons: {
+        cart: {
+          text: "Ir al carro",
+          value: "cart",
+        },
+       
+        cancel: "Quedarse",
+      },
+    }).then((value) => {
+      switch (value) {
+        case "cart":
+          navigate("/checkoutPage");
+          swal("Bienvenido a tu carro","Que tenga una buena compra" ,"success");
+          break;
+
+        default:
+          break;
+      }
+    });
+     
+  }
 
    
  const volver = () =>
@@ -154,6 +187,7 @@ export default function CardDetail()
           </ul>
          
             <button id='buttonBack' onClick={volver}>VOLVER</button>
+            <IconButton aria-label="add to favorites" onClick={addToFav}> <FavoriteIcon /></IconButton>
             {
   myDetail.producto?  
   <>

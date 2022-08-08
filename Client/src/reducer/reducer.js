@@ -22,7 +22,7 @@
   function rootReducer(state = initialState, action)
   {
     const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
-    const paramFromLocalStorage = JSON.parse(localStorage.getItem("parametros") || "[]"); 
+    const FavFromLocalStorage = JSON.parse(localStorage.getItem("Fav") || "[]"); 
 
   
     switch (action.type) {
@@ -101,25 +101,28 @@
         return{
           ...state
         }
-        case 'ADD_TO_PARAM':
-          
-         const actual_card2 = localStorage.getItem("parametros") 
+        case 'ADD_TO_FAV':
+         const cart_add_fav = state.allAccesories?.find(e => e._id === action.payload.id)
+         const actual_card_fav = localStorage.getItem("Fav")
+         console.log(action.payload.id)
+         
           //JSON.stringify([...cartFromLocalStorage, cart_add._id, cart_add.producto])
          
-         if(paramFromLocalStorage.length) {
+         if(FavFromLocalStorage.length) {
           localStorage.setItem(
-            "parametros",
-            JSON.stringify([...paramFromLocalStorage, cart_add])
+            "Fav",
+            JSON.stringify([...FavFromLocalStorage, cart_add_fav])
           );
         } else {
           localStorage.setItem(
-            "item2",
-            JSON.stringify([cart_add])
+            "Fav",
+            JSON.stringify([cart_add_fav])
           )
         }
         return{
           ...state
         }
+     
   
         case 'REMOVE_TO_BASKET':
           //const cart_remove = state.basket.filter(e => e!==undefined&& e._id !== action.payload)

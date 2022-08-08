@@ -34,8 +34,11 @@ export function Accesorios(){
   const [categorias, setCategorias] = useState('')
   const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
   const [cart /* setCart */] = useState(cartFromLocalStorage);
+ 
+  const FavFromLocalStorage = JSON.parse(localStorage.getItem("Fav") || "[]");
+  const [fav /* setCart */] = useState(FavFromLocalStorage);
 
- console.log(actualPage)
+ 
   const paginado = (numPage) =>
   {
     setPage(numPage)
@@ -44,6 +47,9 @@ export function Accesorios(){
   useEffect(()=>{
     localStorage.getItem("item2")
     localStorage.setItem("item2", JSON.stringify(cart));
+    localStorage.getItem("Fav")
+    localStorage.setItem("Fav", JSON.stringify(fav));
+    
     
     dispatch(getItemsCart());
     dispatch(resetDetail());

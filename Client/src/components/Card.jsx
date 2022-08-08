@@ -10,7 +10,7 @@ import Badge from "@mui/material/Badge"
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Button from '@mui/material/Button';
 import '../styles/card.css';
-import {addToBasket} from '../actions/actions'
+import {addToBasket, addToFavoritos} from '../actions/actions'
 import {useDispatch } from 'react-redux'
 import swal from "sweetalert";
 import {useNavigate } from "react-router-dom";
@@ -57,10 +57,40 @@ export default function Producto({ tipo,id, producto, marca ,precio, fabricacion
     });
      
   }
+  async function addToFav () {
+    
+    dispatch(addToFavoritos({id}))
+     return  swal({
+      title: "El producto se ha agregado a tu carro de compras",
+      text: "Que queires hacer ahora?",
+      icon: "success",
+      buttons: {
+        cart: {
+          text: "Ir al carro",
+          value: "cart",
+        },
+       
+        cancel: "Quedarse",
+      },
+    }).then((value) => {
+      switch (value) {
+        case "cart":
+          navigate("/checkoutPage");
+          swal("Bienvenido a tu carro","Que tenga una buena compra" ,"success");
+          break;
+
+        default:
+          break;
+      }
+    });
+     
+  }
   
    
   useEffect(()=>{
     localStorage.getItem("item2")
+    localStorage.getItem("Fav")
+   
    
 },[localStorage.getItem("item2")])
    
@@ -70,7 +100,7 @@ export default function Producto({ tipo,id, producto, marca ,precio, fabricacion
  let filtro=parse.filter(e=>  e!==null && e!==undefined)
  let promedio=filtro?.reduce((a, b) =>a + b, 0)/filtroEstrella.length
  let total=Math.round(promedio)
-console.log(total)
+
  
   
   
@@ -137,7 +167,7 @@ console.log(total)
               ?<li className="estrellas">★★★★</li>:''
               }</div>:''
               }
-               <IconButton aria-label="add to favorites"> <FavoriteIcon /></IconButton>
+               <IconButton aria-label="add to favorites" onClick={() => addToFav()}> <FavoriteIcon /></IconButton>
           <Button sx={{marginLeft: 'auto'}} size="small">{Link}</Button>
         </CardActions>
       </Card>
