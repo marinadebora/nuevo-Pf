@@ -15,7 +15,7 @@ import {useDispatch } from 'react-redux'
 import swal from "sweetalert";
 import {useNavigate } from "react-router-dom";
 import ImgSinStock from "../imagenes/ImgSinStock.png"
-
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 
 
@@ -137,6 +137,7 @@ console.log(total)
               ?<li className="estrellas">★★★★</li>:''
               }</div>:''
               }
+               <IconButton aria-label="add to favorites"> <FavoriteIcon /></IconButton>
           <Button sx={{marginLeft: 'auto'}} size="small">{Link}</Button>
         </CardActions>
       </Card>
