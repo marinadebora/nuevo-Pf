@@ -23,7 +23,7 @@ import SingIn from './components/SingIn'
 import SingUp from './components/SingUp'
 import {CatCreate} from "./components/Admin/CreateCat"
 import ContactForm from "./components/ContactForm";
-import Checkout from './components/Checkout';
+import CheckoutPrueba from './components/CheckoutPrueba';
 
 import { loadStripe } from "@stripe/stripe-js"
 import {Elements} from "@stripe/react-stripe-js"
@@ -70,7 +70,7 @@ export default function contactForm() {
         <Route exact path='/accesorios/:id' element={<CardDetail />} />
 
 
-        <Route path='/prueba/checkout' element={<Checkout/>}/>
+        <Route path='/prueba/checkout' element={<CheckoutPrueba/>}/>
       </Routes>
       </Elements>
     </div>
