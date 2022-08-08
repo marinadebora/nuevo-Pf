@@ -1,4 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+
 import React from "react";
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
@@ -13,7 +13,7 @@ import axios from "axios"
 
 
 
-export function AccesoriosCreate(){
+export function AccesoriosCreate2(){
 
     const dispatch = useDispatch()
     const navigate = useNavigate();
@@ -26,7 +26,7 @@ export function AccesoriosCreate(){
         }
 
         if(!input.descripcion){
-            errors.descripcion='No ingresaste el resumen de la receta!'
+            errors.descripcion='No ingresaste una descripcion!'
         }
 
         if(((input.precio < 1) || (input.precio >100)) || isNaN(input.precio)){
@@ -80,7 +80,7 @@ export function AccesoriosCreate(){
     
 
     
-    console.log(input.imagenes)
+   
 
     function handleCat(e){
         if(!input.categorias.includes(e.target.value)){
@@ -201,7 +201,7 @@ export function AccesoriosCreate(){
                 !allCat ? 
                 <>
                     <div>
-                        <h1>LOADING</h1>
+                        <h1>Cargando..</h1>
                     </div>
                 </>:
                 <>
@@ -280,7 +280,7 @@ export function AccesoriosCreate(){
 
              
                { input.imagenes.length < 5? <div>
-                  <label>Main image</label>
+                  <label>Imagen Principal</label>
                   
                   <input
                     className="inputImage"
@@ -304,7 +304,7 @@ export function AccesoriosCreate(){
                           color: "#1884BE",
                         }}
                       >
-                        Save
+                        Guardar
                       </button>
 
 
@@ -387,9 +387,9 @@ export function AccesoriosCreate(){
                                 </select>
                             </div>
                             
-                            <button id='buttonSubmitForm' classproducto="button-submit" type="submit">Create Product</button>
+                            <button id='buttonSubmitForm' classproducto="button-submit" type="submit">Crear Producto</button>
                             <Link to='/dashboard'>
-                                <button id='buttonBackForm'>Back</button>
+                                <button id='buttonBackForm'>Volver</button>
                             </Link>
 
                         </form>
@@ -418,4 +418,4 @@ export function AccesoriosCreate(){
     )
 }
 
-export default AccesoriosCreate;
+export default AccesoriosCreate2;

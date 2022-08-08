@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector,  } from 'react-redux';
@@ -7,7 +6,7 @@ import { updateEmbarcacionEnV, Categorias} from '../../actions/admin-action';
 import { productosDetail, /*getAllTypes */} from '../../actions/actions'
 import { useNavigate } from 'react-router-dom';
 
-export function UpdateEmbarcacionVenta(){
+export function UpdateEmbarcacionVenta2(){
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -363,4 +362,4 @@ export function UpdateEmbarcacionVenta(){
     )
 }
 
-export default UpdateEmbarcacionVenta;
+export default UpdateEmbarcacionVenta2;

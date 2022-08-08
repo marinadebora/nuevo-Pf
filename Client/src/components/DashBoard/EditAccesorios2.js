@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector,  } from 'react-redux';
@@ -7,7 +6,7 @@ import { updateAccesorio, Categorias} from '../../actions/admin-action';
 import { productosDetail, /*getAllTypes */} from '../../actions/actions'
 import { useNavigate } from 'react-router-dom';
 
-export function UpdateAccesorio(){
+export function UpdateAccesorio2(){
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -219,4 +218,4 @@ export function UpdateAccesorio(){
     )
 }
 
-export default UpdateAccesorio;
+export default UpdateAccesorio2;

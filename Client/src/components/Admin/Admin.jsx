@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
 import { todosLosProductos } from '../../actions/actions'
 import Paginado from '../Paginado';
-import Card from '../Card';
+import Card from '../DashBoard/CardDahs';
 import Navbar from '../Navbar'
 import { Button, Typography } from "@mui/material";
 import admincss from '../../styles/admin.css'
@@ -49,10 +49,7 @@ export default function Admin()
 			<Typography sx={{ marginLeft: 'auto' }} variant="h6" component="p" id='guest1'>
 				Wellcome Admin
 			</Typography>
-			<Button id='buttonCreate' variant="contained"><Link id='linkCreate' to={`/admin/createAcc`}>Crear Accesorio</Link></Button>
-			<Button id='buttonCreate' variant="contained"><Link id='linkCreate' to={`/admin/createEmbarcacionVenta`}>Crear Embarcacion para la venta</Link></Button>
-			<Button id='buttonCreate' variant="contained"><Link id='linkCreate' to={`/admin/createEmbarcacionRenta`}>Crear Embarcacion para la renta</Link></Button>
-			<Button id='buttonCreate' variant="contained"><Link id='linkCreate' to={`/admin/createCat`}>Crear Categoria</Link></Button>
+			
 			<br />
 
 			<button id='buttonBackAdmin' onClick={volver}>VOLVER</button>
@@ -88,7 +85,7 @@ export default function Admin()
 										producto={e.producto}
 										descripcion={e.descripcion}
 										Tamaño={e.Tamaño}
-										Link={<Link to={`/admin/${e._id}`} >Info</Link>}
+										Link={<Link to={`/dashboard/${e._id}`} >Info</Link>}
 									/>
 
 								</Grid>

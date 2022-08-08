@@ -12,7 +12,7 @@
 }
 
 #campos{
-    margin-left: 140px;
+    margin-left: auto;
     
 }
 #categoriasR{
@@ -22,7 +22,8 @@
    
 }
 #text{
-    margin-right: 4px;
+    margin-left: 10px;
+    margin-right: 10px;
     color: #0184a9;
     
 }
@@ -63,8 +64,12 @@
     cursor: pointer;
 }
 
-/* @media(max-width: 1500px){
+@media(max-width: 705px){
     #appBar2{
        display: none;
     }
-} */
+}
+.Link{
+    text-decoration: none;
+   color: rgb(0, 0, 31);
+}

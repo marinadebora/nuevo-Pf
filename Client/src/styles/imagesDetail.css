@@ -5,7 +5,7 @@
 }
 
 .ImagesDetail{
-    width: 850px;
+    width: 750px;
     margin-left: 15px;
     min-height: 300px;
     background-color: white;
@@ -13,6 +13,7 @@
 }
 
 #imgD{
+   
     display: block;
     cursor:pointer;
 }
@@ -39,7 +40,7 @@
 }
 
 .container .containerImages img{
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     margin: 5px 0;
 }

@@ -14,9 +14,10 @@ import { useDispatch} from 'react-redux';
 export default function Navbar() {
   //constante para cambiar e numero del carrito de forma dinamica
   // si la activo se rompe el detail por un tema de estado
-  /*  const carrito=useSelector(state=>state.basket)
+ /*  const carrito=useSelector(state=>state.basket)
   const suma=carrito.filter(Boolean).length
  */
+
   const dispatch = useDispatch()
   const history = useNavigate()
   const[usuario, setUsuario] = useState(null)
@@ -73,36 +74,40 @@ export default function Navbar() {
   }
   
 
+
   return (
     
       <AppBar position="sticky" id="appBar">
         <Grid>
           <Toolbar>
-          <Link to='/'>
+          <Link to='/accesorios'>
               <IconButton>
                 <img src={Logo} alt="img" id="logoNavBar" />
               </IconButton>
             </Link>
 
             <Link to='/accesorios' className='paralelogramo'>
-              <button src='/accesorios' id='buttonParalel'>Insumos</button>
+              <button src='/accesorios' id='buttonNavBarMenu'>PRODUCTOS</button>
             </Link>
 
             <Link to='/venta' className='paralelogramo'>
-              <button src='/venta' id='buttonParalel'>Venta Yates</button>
+              <button src='/venta' id='buttonNavBarMenu'>VENTA YATES</button>
             </Link>
 
             <Link to='/alquiler' className='paralelogramo'>
-              <button src='/alquiler' id='buttonParalel'>Alquiler Yates</button>
+              <button src='/alquiler' id='buttonNavBarMenu'>RENTA YATES</button>
             </Link>
             
-            
+           
             <Typography sx={{marginLeft: 'auto'}} variant="h6" component="p" id='guest'>
             <Link id='adminNavbar' to='/dashboard'>
               Hello Admin
               </Link>
             </Typography>
             
+            <Link to='/favs'>
+              <Button variant="outlined" id="button">Favoritos</Button>
+            </Link>
             {
               usuario?
               logueado():

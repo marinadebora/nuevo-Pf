@@ -1,4 +1,4 @@
- const initialState = {
+ export const initialState = {
     products: [],
     allProducts:[],
     saleVessels: [],
@@ -11,14 +11,18 @@
     detail: {},
     categorias: [],
     basket: [],
-    userDetail: [],
-  
+    shippingData:[],
+    userDetail:[],
+    user:[],
+    historial:[],
+    comentario:[]
+
   };
   
   function rootReducer(state = initialState, action)
   {
     const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
-    const paramFromLocalStorage = JSON.parse(localStorage.getItem("parametros") || "[]"); 
+    const FavFromLocalStorage = JSON.parse(localStorage.getItem("Fav") || "[]"); 
 
   
     switch (action.type) {
@@ -31,7 +35,8 @@
           detail:{}
         }
       case 'PRODUCTOS_DETAIL':
-  
+
+
         return {
           ...state,
           detail: action.payload,
@@ -96,25 +101,28 @@
         return{
           ...state
         }
-        case 'ADD_TO_PARAM':
-          
-         const actual_card2 = localStorage.getItem("parametros") 
+        case 'ADD_TO_FAV':
+         const cart_add_fav = state.allAccesories?.find(e => e._id === action.payload.id)
+         const actual_card_fav = localStorage.getItem("Fav")
+         console.log(action.payload.id)
+         
           //JSON.stringify([...cartFromLocalStorage, cart_add._id, cart_add.producto])
          
-         if(paramFromLocalStorage.length) {
+         if(FavFromLocalStorage.length) {
           localStorage.setItem(
-            "parametros",
-            JSON.stringify([...paramFromLocalStorage, cart_add])
+            "Fav",
+            JSON.stringify([...FavFromLocalStorage, cart_add_fav])
           );
         } else {
           localStorage.setItem(
-            "item2",
-            JSON.stringify([cart_add])
+            "Fav",
+            JSON.stringify([cart_add_fav])
           )
         }
         return{
           ...state
         }
+     
   
         case 'REMOVE_TO_BASKET':
           //const cart_remove = state.basket.filter(e => e!==undefined&& e._id !== action.payload)
@@ -147,6 +155,12 @@
               ...state,
               basket: actual
             }
+
+            case 'SET_SHIPPING_DATA':
+              return {
+                ...state,
+                shippingData: action.payload
+              }
     
         //----------filtros----------//
   
@@ -282,10 +296,12 @@
               ...state
             }
             case "USUARIOS":
+              console.log(state.user)
             return{
               ...state,
               user: action.payload
             }
+            
             case 'LOGIN':
             return{
               ...state
@@ -299,6 +315,27 @@
           return{
             ...state
           }
+      case 'EDITAR_USUARIOS':
+        return {
+          ...state,
+          user:action.payload
+        }
+      case 'EDITAR_ACC_COMENTARIOS':
+        return{
+          ...state,
+          comentario:action.payload
+          
+        }
+  case 'USUARIO_ID':
+    return{
+      ...state,
+      userDetail:action.payload
+    }
+    case 'HISTORIAL_COMPRA':
+      return{
+        ...state,
+        historial:action.payload
+      }
       default: {
         return state
       }

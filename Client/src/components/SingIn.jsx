@@ -275,9 +275,6 @@ function handleSignOut(event){
           ya() :
           renderizarFormulario()
       }
-
-
-
     </div>
   );
 }

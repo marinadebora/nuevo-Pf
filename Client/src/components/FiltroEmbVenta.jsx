@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from "react-redux";
 import { barcosEnVenta, filtroPrecio, filtrosCategoriaEmbarcacion, precioOrden } from '../actions/actions';
+import '../styles/searchBar.css';
 
 export function FiltroEmbVenta({ setPage })
 {
@@ -57,7 +58,7 @@ export function FiltroEmbVenta({ setPage })
 	
 	return (
 		<div>
-			<label key='venta'>Filtrar por Precio </label>
+			<label id='text' key='venta'>Filtrar por Precio: </label>
 			<select name="venta" id="barcoVenta" onChange={(e) => filtroPorPrecio(e)}>
 				<option key={'sinFiltro'} value={'sinFiltro'}>Sin Filtros</option>
 				<option key={'mayor'} value={'mayor'}>Mas de US$ 300000 </option>
@@ -65,7 +66,7 @@ export function FiltroEmbVenta({ setPage })
 				<option key={'menor'} value={'menor'}>Menos de US$ 150000</option>
 			</select>
 
-			<label key='categoriasR'>Filtrar por Gama</label>
+			<label id='text' key='categoriasR'>Filtrar por Gama: </label>
 			<select name="categoriasR" id="categoriasR" onChange={(e) => filtroPorCategoria(e)}>
 				<option key={'sinFiltro2'} value={'sinFiltro'}>Sin Filtros</option>
 				<option key={'Gama Alta'} value={'Alta'}>Gama Alta</option>
@@ -73,7 +74,7 @@ export function FiltroEmbVenta({ setPage })
 				<option key={'Gama Baja'} value={'baja'}>Gama Baja</option>
 			</select>
 
-			<label key='venta'>Ordenar</label>
+			<label id='text' key='venta'>Ordenar: </label>
 			<select name="order" id="order" onChange={(e) => ordenPrecio(e)}>
 				<option key={'sinFiltro3'} value={'sinFiltro'}>Sin Filtros</option>
 				<option key={'max'} value={'max'}>Mayor Precio</option>

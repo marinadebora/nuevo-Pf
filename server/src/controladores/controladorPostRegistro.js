@@ -3,7 +3,7 @@ const bcrypt=require("bcrypt");
 const jwt = require("jsonwebtoken")
 
 const usuarios= async (req,res,next)=>{
-    const {email,password,/* nombre,apellido */firstName,lastName} = req.body;
+    const {email,password,firstName,lastName,admin} = req.body;
     const api = await Usuarios.findOne({email})
 
     console.log(api)
@@ -14,7 +14,8 @@ const usuarios= async (req,res,next)=>{
         email:email,
         password:password,
         nombre: firstName,
-        apellido:lastName
+        apellido:lastName,
+        admin:admin
     });
     user.save(err =>{
         if(err){

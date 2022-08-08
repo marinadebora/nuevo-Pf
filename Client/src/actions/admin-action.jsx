@@ -51,7 +51,7 @@ export function updateAccesorio(id, payload){
   export function postEmbarcacionEnV(payload) {
     return async function (dispatch) {
       try {
-        const embarcacionCreated = await axios.post(`/embrarcacionesV`, payload);
+        const embarcacionCreated = await axios.post(`/embarcacionesV`, payload);
         return dispatch({
           type: "POST_EMBARCACIONENV",
           payload: embarcacionCreated,
@@ -95,8 +95,8 @@ export function deleteEmbarcacionEnV(id){
 
 
 export function updateEmbarcacionEnV(id, payload){
-    return function(dispatch){
-        return axios.put(`/embrarcacionesV/${id}`, payload)
+    return async function(dispatch){
+        return axios.put(`/embarcacionesV/${id}`, payload)
         .then(data => {
             dispatch({
                 type:"UPDATE_EMBARCACIONENV",

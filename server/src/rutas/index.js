@@ -24,16 +24,19 @@ const postCategorias = require("./postCategoria");
 const { usuarios } = require("../controladores/controladorPostRegistro");
 const { usuariosAuth } = require("../controladores/ControladorPostAutenticar");
 const {correo}= require("../controladores/autenticar")
-
+const  getUsuario  =require ("../controladores/ControladorUsuario")
 const {agregarAlCarrito, borrarCarrito, asignarUsuarioAlCarrito} = require("../controladores/controladorCarrito");
 const { requireSignin, soloAdmin } = require("../controladores/Verificaciones");
 const putUsuario = require("./putUsuarioCarrito");
 const putAccesoriosComentarios = require("./putAccesoriosComentarios");
 const { UsuarioId } = require("../controladores/controladorIdUsuario");
-const controladorHistoria = require("../NuevaHistoria/controladorHistoria")
-const {getUsuario} = require("../controladores/ControladorUsuario")
-const usuariosGoogle = require('../controladores/ControladorRegistroGoogle')
+/* const {getUsuario} = require("../controladores/ControladorUsuario") */
 
+const controladorHistoria = require("../NuevaHistoria/controladorHistoria");
+const { updateHistorial } = require("../NuevaHistoria/controladorPutHistoria");
+const { correoCompra } = require("../controladores/autenticarCompra");
+const usuariosGoogle = require('../controladores/ControladorRegistroGoogle');
+const { correoContacto } = require("./postFormularioContacto");
 /* const app = require("../modelos/SesionGoogle.js") */
 
 let router = Router();
@@ -64,8 +67,19 @@ router.get("/categorias", categorias);
 router.use("/categorias", postCategorias);
 router.use('/correo', correo);
 router.post("/carrito/:id", agregarAlCarrito);
+router.delete("/carrito",borrarCarrito);
+router.get("/categorias", categorias);
+router.use("/categorias", postCategorias);
+router.get("/user",getUsuario);
+router.use("/user", putUsuario);
+router.use("/comentario", putAccesoriosComentarios);
+router.get("/usuario/:id",UsuarioId);
+router.put("/historial/:id",updateHistorial,correoCompra);
+router.post("/correoContacto",correoContacto);
 router.delete("/carrito",borrarCarrito)
-router.get("/user", getUsuario)
+
+/* router.get("/categorias", categorias)
+router.use("/categorias", postCategorias) */
 
 router.use("/user", putUsuario)
 router.use("/comentario", putAccesoriosComentarios)
@@ -81,7 +95,6 @@ router.use("/registroGoogle", usuariosGoogle, correo)
 // router.use("/a", cargarVentas)
 // router.use("/b", cargarRenta)
 // router.use("/c", cargarAccesorios)
-
 
 
 

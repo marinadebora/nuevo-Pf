@@ -1,0 +1,18 @@
+.contenedor{
+    width:575px;
+    height: 200px;
+    margin:30px 50px ;
+    
+    align-items:flex-end;
+    justify-content:flex-start;
+    background-color: #fff;
+    box-shadow: 0 3px 13px 1px rgb(0 0 0 / 9%);
+}
+.textArea{
+    margin:20px;
+    font-family: Garamond,verdana;font-size: 15pt;font-weight: bold;letter-spacing: 2px ;
+    width:500px;
+    height:80px;
+    border: 1px solid #000099;
+    border-radius:5px 
+}
