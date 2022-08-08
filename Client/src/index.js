@@ -10,15 +10,14 @@ import { StateProvider } from "./stateProvider";
 import reducer, { initialState } from "./reducer/reducer.js";
 import axios from 'axios';
 
-
 axios.defaults.baseURL = process.env.REACT_APP_API || 'http://localhost:4000'
 ReactDOM.render( 
   <Provider store={store}>
     <BrowserRouter>
       <React.StrictMode>
-      <StateProvider initialState={initialState} reducer={reducer}>
+        <StateProvider initialState={initialState} reducer={reducer}>
           <App />  
-      </StateProvider>
+        </StateProvider>
       </React.StrictMode>
     </BrowserRouter>
   </Provider>,
