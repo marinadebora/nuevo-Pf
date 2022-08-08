@@ -29,8 +29,6 @@
     "redux-thunk": "^2.4.1",
     "sweetalert": "^2.1.2",
     "web-vitals": "^2.1.4",
-    "@stripe/react-stripe-js": "^1.10.0",
-    "@stripe/stripe-js": "^1.35.0",
     "react-hook-form": "^7.34.0"
   },
   "scripts": {
@@ -39,7 +37,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-
   "browserslist": {
     "production": [
       ">0.2%",
