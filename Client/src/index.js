@@ -15,13 +15,9 @@ ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <React.StrictMode>
-<<<<<<< HEAD
-            <App />  
-=======
-      <StateProvider initialState={initialState} reducer={reducer}>
+        <StateProvider initialState={initialState} reducer={reducer}>
           <App />  
-      </StateProvider>
->>>>>>> 97fc4e2357085773f149fa0e50590b5db41667f3
+        </StateProvider>
       </React.StrictMode>
     </BrowserRouter>
   </Provider>,

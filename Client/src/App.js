@@ -21,20 +21,9 @@ import SingIn from './components/SingIn'
 import SingUp from './components/SingUp'
 import {CatCreate2} from "./components/DashBoard/CreateCat2"
 import ContactForm from "./components/ContactForm";
-<<<<<<< HEAD
 import CheckoutPrueba from './components/CheckoutPrueba';
-
 import { loadStripe } from "@stripe/stripe-js"
 import {Elements} from "@stripe/react-stripe-js"
-
-let publishableKey ="pk_test_51LTzChGPkJkLR4xlRyDUWk3Pj6SiGC8bq0An5pdnhBWsCwE0Y9eIT2uUj7baWSnQlXXXmqSlZitwQKJrd7o1LwC500k5khRIeF" 
-const stripePromise = loadStripe(publishableKey)
-
-
-export default function contactForm() {
-  return (
-    
-=======
 import { HistorialCompras } from './components/usuarios/HistorialCompras';
 import { Review } from './components/usuarios/Review';
 import { useEffect ,useState} from 'react'
@@ -42,6 +31,11 @@ import { useSelector, useDispatch ,} from 'react-redux'
 import { UsuariosDetail } from './actions/actions'
 import Checkout from "./components/CheckoutProcess/Checkout"
 import Favs from "./components/Favoritos"
+let publishableKey ="pk_test_51LTzChGPkJkLR4xlRyDUWk3Pj6SiGC8bq0An5pdnhBWsCwE0Y9eIT2uUj7baWSnQlXXXmqSlZitwQKJrd7o1LwC500k5khRIeF" 
+const stripePromise = loadStripe(publishableKey)
+
+
+    
 
 export default function App() {
   const dispatch = useDispatch()
@@ -66,7 +60,7 @@ export default function App() {
   return (
     !myUserDetail.admin  ?
     <>
->>>>>>> 97fc4e2357085773f149fa0e50590b5db41667f3
+
     <div className="App">
       <Elements stripe={stripePromise}>
       <Routes>
@@ -87,17 +81,15 @@ export default function App() {
         <Route exact path='/alquiler' element={<BarcosEnAlquiler  />} />
         <Route exact path='/accesorios' element={<Accesorios />} />
         <Route exact path='/accesorios/:id' element={<CardDetail />} />
-
-<<<<<<< HEAD
-
+        
+        
         <Route path='/prueba/checkout' element={<CheckoutPrueba/>}/>
-=======
         <Route exact path='/checkout' element={<Checkout/>}/>
         <Route exact path='/contactForm' element={<ContactForm />}/>
 
         <Route exact path='/historialC' element={<HistorialCompras/>} />
         <Route exact path='/review/:id' element={<Review />} />
->>>>>>> 97fc4e2357085773f149fa0e50590b5db41667f3
+
       </Routes>
       </Elements>
     </div>

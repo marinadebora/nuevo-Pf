@@ -30,17 +30,13 @@ const { requireSignin } = require("../controladores/Verificaciones");
 const putUsuario = require("./putUsuarioCarrito");
 const putAccesoriosComentarios = require("./putAccesoriosComentarios");
 const { UsuarioId } = require("../controladores/controladorIdUsuario");
-<<<<<<< HEAD
-const controladorHistoria = require("../NuevaHistoria/controladorHistoria")
-const getUsuario = require("../controladores/ControladorUsuario");
-const usuariosGoogle = require('../controladores/ControladorRegistroGoogle')
-=======
+
 const controladorHistoria = require("../NuevaHistoria/controladorHistoria");
 const { updateHistorial } = require("../NuevaHistoria/controladorPutHistoria");
 const { correoCompra } = require("../controladores/autenticarCompra");
 const usuariosGoogle = require('../controladores/ControladorRegistroGoogle');
 const { correoContacto } = require("./postFormularioContacto");
->>>>>>> 97fc4e2357085773f149fa0e50590b5db41667f3
+
 
 /* const app = require("../modelos/SesionGoogle.js") */
 
