@@ -208,10 +208,10 @@ li{
 }
 
 .imagen2{
-    width: 150%;
+    width: 120%;
     position:relative;
 z-index: 2;
 margin-top:-500px;
-margin-left:-90px
+margin-left:-25px
 
 }
