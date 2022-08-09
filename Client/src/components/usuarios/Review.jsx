@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { usuarioId, editarAccComentarios, productosDetail } from "../../actions/actions";
 import '../../styles/review.css'
 import '../../styles/PuntuacionEstrella.css'
+import swal from "sweetalert";
 
 export function Review()
 {
@@ -18,11 +19,13 @@ export function Review()
   const myDetail = useSelector(state => state.detail);
 
   const comentProduct = myDetail.comentarios
+ 
 
 
   const [star, setStar] = useState({
     estrellas: ''
   })
+  const estrellita = star.estrellas
   const [acces, setAcces] = useState({
 
     comentarios: {
@@ -30,7 +33,7 @@ export function Review()
     }
 
   })
-  function puntuacion(e)
+  async function puntuacion(e)
   {
 
     setStar({
@@ -64,7 +67,7 @@ export function Review()
 
 
 
-  function handleChange(e)
+  async function handleChange(e)
   {
 
     setAcces({
@@ -78,16 +81,65 @@ export function Review()
       }
 
     })
-
-
-    setError(validate({
+setError(validate({
       ...acces,
       [e.target.name]: e.target.value
     }))
+    return  swal({
+      title: "El producto se ha agregado a tu carro de compras",
+      text: "Que queires hacer ahora?",
+      icon: "success",
+      buttons: {
+        cart: {
+          text: "Ir al carro",
+          value: "cart",
+        },
+       
+        cancel: "Seguir comprando",
+      },
+    }).then((value) => {
+      switch (value) {
+        case "cart":
+          navigate("/checkoutPage");
+          swal("Bienvenido a tu carro","Que tenga una buena compra" ,"success");
+          break;
+  
+        default:
+          break;
+      }
+    });
 
   }
-  console.log(acces.comentarios)
-  console.log(star)
+ /* async function next(id){
+  
+    dispatch(addToBasket({id}))
+    return  swal({
+      title: "El producto se ha agregado a tu carro de compras",
+      text: "Que queires hacer ahora?",
+      icon: "success",
+      buttons: {
+        cart: {
+          text: "Ir al carro",
+          value: "cart",
+        },
+       
+        cancel: "Seguir comprando",
+      },
+    }).then((value) => {
+      switch (value) {
+        case "cart":
+          navigate("/checkoutPage");
+          swal("Bienvenido a tu carro","Que tenga una buena compra" ,"success");
+          break;
+  
+        default:
+          break;
+      }
+    });
+          
+  };*/
+
+  console.log(estrellita)
   function handleSubmit(e)
   {
     e.preventDefault()
@@ -102,7 +154,7 @@ export function Review()
 
 
 
-  function cancel(e)
+  async function cancel(e)
   {
     e.preventDefault()
     navigate(`/historialC`)
@@ -126,14 +178,17 @@ export function Review()
             <input onChange={puntuacion} id="radio5" type="radio" name="estrellas" value="1" /><label for="radio5">★</label>
           </p>
 
-          <textarea
+
+          {estrellita == typeof number ? 
+            <textarea
+            
             type='text'
             name='reseña'
             placeholder=''
             value={acces.reseña}
             onChange={handleChange}
             className='textArea'
-          > </textarea>
+          > </textarea>:""}
 
           {error.comentarios && <p classproducto="danger">{error.comentarios}</p>}
 

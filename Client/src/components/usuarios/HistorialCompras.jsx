@@ -13,7 +13,7 @@ export function HistorialCompras()  {
 
 
 
-console.log(user)
+console.log(current_userID)
 
   useEffect(()=>{
   dispatch(usuarioId(myUserDetail._id))
