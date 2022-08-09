@@ -8,6 +8,10 @@ import { useState } from "react";
 import '../../styles/checkout.css';
 import SET_PAYMENT_MESSAGE from "../../reducer/reducer";
 import EMPTY_BASKET from "../../reducer/reducer";
+import {postHistoria } from '../../actions/actions';
+import { useNavigate } from 'react-router-dom';
+import swal from "sweetalert";
+
 
 
 const CARD_ELEMENT_OPTIONS = {
@@ -39,6 +43,8 @@ const CheckoutForm = ({ backStep, nextStep }) => {
     const [loading, setLoading] = useState(false);
     const stripe = useStripe();
     const elements = useElements();
+    const navigate = useNavigate();
+
 
     const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
     const [cart /* setCart */] = useStateValue(cartFromLocalStorage);
@@ -48,8 +54,40 @@ const CheckoutForm = ({ backStep, nextStep }) => {
     const neto = sumall.map(e=>e.split('$')[1])
     const num = neto.map(e=> parseInt(e))
     var precioTotal =num.reduce((a, b) => a + b, 0);
+    const UserFromLocalStorage = JSON.parse(localStorage.getItem("loguearUsuario"));
+    const UserFromLocalgoogle = JSON.parse(localStorage.getItem("logueadoGoogle"));
+    const current_userID =UserFromLocalStorage?.id || UserFromLocalgoogle?.id
+
+    const [input, setInput] = useState({
+      usuario:current_userID,
+      productos:current_cart,
+      precioTotal: precioTotal, 
+    
+    })
 
     //const InfoTotal = [precioTotal,cartFromLocalStorage,shipp]
+
+    /*async function handleOnClick(e) {    
+      e.preventDefault();
+      try {
+            dispatch(postHistoria(input))
+            setInput({
+              usuario:current_userID,
+              productos:current_cart,
+              precioTotal: 0,           
+            })
+            localStorage.setItem("item2"," []");
+            return (
+                alert(`La historia fue creada con exito.`)//, navigate(`/checkoutfinal`)
+                ) 
+          
+        } catch (error) {
+          console.log(error);
+          return alert(
+            "Algo falló al crear la historia."
+          );
+        }
+    };*/
     
   
     const handleSubmit = async (e) => {
@@ -78,14 +116,28 @@ const CheckoutForm = ({ backStep, nextStep }) => {
             type: SET_PAYMENT_MESSAGE,
             paymentMessage: data.message,
           });
-          if (data.message === "Successful Payment") {
-            dispatch({
-              type: EMPTY_BASKET,
-              basket: [],
-            });
+          if (data.message === 'Pago recibido exitosamente') {
+           navigate("/checkoutfinal")
+           
+          return  swal({
+            title: "Su Compra fue aprobada!!",
+            text: "solo falta un paso mas para terminar su orden",
+            icon: "success",
+          
+          }).then((value) => {
+            switch (value) {
+              case "cart":
+                
+                swal("Bienvenido a nuestra Pagina","Que tenga una buena compra" ,"success");
+                break;
+          
+              default:
+                break;
+            }
+          });
           }
   
-          elements.getElement(CardElement).clear();
+          
           nextStep();
         } catch (error) {
           console.log(error);
@@ -111,6 +163,7 @@ const CheckoutForm = ({ backStep, nextStep }) => {
             Back
           </Button>
           <Button
+            
             type='submit'
             disabled={!stripe}
             id='buttonBackPaymentForm'

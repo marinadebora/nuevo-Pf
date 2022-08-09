@@ -126,13 +126,7 @@ export function categoriaAccesorios(payload)
 	}
 }
 
-/*  export function addToBasket(payload){
-		 return{
-						 type:'ADD_TO_BASKET',
-						 payload
- 
-						 } 
-				 } */
+
 export const addToBasket = (item) =>
 {
 	try {
@@ -168,7 +162,28 @@ export const addToFavoritos = (item) =>
 	}
 };
 
+export function postHistoria(payload)
 
+{
+	console.log(payload)
+	return async function (dispatch)
+	{
+		try {
+			const historiaCreated = await axios.post(`http://localhost:4000/historia`, payload);
+			
+			return dispatch({
+				type: "POST_HISTORIA",
+				payload: historiaCreated,
+			});
+		} catch (error) {
+			console.log(error.message);
+			return alert(
+				"Hubo un error al crear el historial. "
+			);
+
+		}
+	};
+}
 
 
 export const getItemsCart = () =>
@@ -187,7 +202,7 @@ export function postShippingData(payload)
 	return async function (dispatch)
 	{
 		try {
-			const datosDeEnvio = await axios.post(`https://nautical25.herokuapp.com/shippingData`, payload);
+			const datosDeEnvio = await axios.post(`/shippingData`, payload);
 			return dispatch({
 				type: "SET_SHIPPING_DATA",
 				payload: datosDeEnvio,
@@ -502,7 +517,7 @@ export function updateEmbarcacionRT(id, payload)
 
 
 let token = null
-console.log(token)
+
 
 export const setToken = (newToken)=>{
 		token = `Bearer ${newToken.token}`
@@ -602,12 +617,12 @@ export function editarAccComentarios(id, payload){
 		}
 	} 
 }
-export function usuarioId(id)
+/* export function usuarioId(id)
 {
 	return async function (dispatch)
 	{
 		try {
-			const userDetail = await axios(`/usuario/${id}`)
+			const userDetail = await axios(`https://nautical25.herokuapp.com/usuario/${id}`)
 
 			return dispatch({
 				type: 'USUARIO_ID',
@@ -617,7 +632,7 @@ export function usuarioId(id)
 			console.log(error)
 		}
 
-	}}
+	}} */
 /* export function usuarioId(id)
 {
 	return async function (dispatch)
@@ -643,10 +658,11 @@ export function historialCompra(){
 	return async function(dispatch){
 		try{
 
-			const histComp= await axios(`/historia`)
+			const histComp= await axios(`/historias`)
+			
 			return dispatch({
 				type:'HISTORIAL_COMPRA',
-				payload:histComp
+				payload:histComp.data
 			})
 		}
 		catch(error){

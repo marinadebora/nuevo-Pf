@@ -1,9 +1,10 @@
+
+import Navbar from './Navbar';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { productosDetail } from "../actions/actions";
 import '../styles/cardDetail.css'
-import Navbar from './Navbar';
 import ImagenList from  './ImagenList'
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge"
@@ -15,6 +16,8 @@ import swal from "sweetalert";
 import ContactMailIcon from "@mui/icons-material/ContactMail";
 import ImgSinStock from "../imagenes/vector-sin-stock.png"
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { GiConsoleController } from "react-icons/gi";
+import gif from '../imagenes/cargando-loading.gif'
 
 export default function CardDetail()
 { 
@@ -31,7 +34,7 @@ export default function CardDetail()
   const FavFromLocalStorage = JSON.parse(localStorage?.getItem("Fav"));
   const [fav /* setCart */] = useState(FavFromLocalStorage);
    
-  
+console.log(myDetail.stock)
   useEffect(() =>
   {
     localStorage.getItem("item2")
@@ -104,18 +107,17 @@ export default function CardDetail()
   {
     navigate(-1)
   }
-  return <div>
+  return 
+  <div>
+    <Navbar/>
     {
       myDetail._id !== id?
 
       <div>
-                <h1>LOADING</h1>
-            
+               <img className='gif' src={gif} alt='yates.gif' />
+                
             </div>
             :
-          <div>
-            <Navbar/>
-          
         <div id='mainContainer'>
           <div>
           {/* {
@@ -124,7 +126,7 @@ export default function CardDetail()
             )
           } */}
 
-        {myDetail.stock > 0 ?
+        {myDetail.stock > 0||myDetail.stock===undefined ?
           <ImagenList/>
           :<div className="div"> 
           <ImagenList/>
@@ -171,26 +173,30 @@ export default function CardDetail()
           {
             myDetail.Tamaño ? <li><p id='titleDetailCard'>Tamaño:</p> <p>{myDetail.Tamaño}</p></li> : ''
           }
-              <div className='contenedor-total'>
-                <h2>Calificaciones de los usuarios</h2>
           {
-            myDetail.comentarios?.length>0 ? myDetail.comentarios.map(e=>(
-              <div className="comentario">
+            myDetail.producto && 
+            <div className='contenedor-total'>
+            <h2>Calificaciones de los usuarios</h2>
+      {
+        myDetail.comentarios?.length>0 ? myDetail.comentarios.map(e=>(
+          <div className="comentario">
+    
+        {
+          e.star?.estrellas=== '1'?<li className="estrellas">★</li>:e.star?.estrellas=== 2
+          ?<li className="estrellas">★★</li>:e.star?.estrellas=== '3'
+          ?<li className="estrellas">★★★</li>:e.star?.estrellas=== '4'
+          ?<li className="estrellas">★★★★</li>:e.star?.estrellas=== '5'
+          ?<li className="estrellas">★★★★</li>:''
+        }
+        <li className="nombre">El usuario {e.nombre}</li>
+        <li className="reseña">califico este producto como: {e.reseña}</li>
         
-            {
-              e.star?.estrellas=== '1'?<li className="estrellas">★</li>:e.star?.estrellas=== 2
-              ?<li className="estrellas">★★</li>:e.star?.estrellas=== '3'
-              ?<li className="estrellas">★★★</li>:e.star?.estrellas=== '4'
-              ?<li className="estrellas">★★★★</li>:e.star?.estrellas=== '5'
-              ?<li className="estrellas">★★★★</li>:''
-            }
-            <li className="nombre">El usuario {e.nombre}</li>
-            <li className="reseña">califico este producto como: {e.reseña}</li>
-            
-            </div>
-            )):<h4>Este producto aun no tiene comentarios</h4>
+        </div>
+        )):<h4>Este producto aun no tiene comentarios</h4>
+      }
+      </div>
           }
-          </div>
+        
           
           </ul>
          
@@ -226,7 +232,6 @@ export default function CardDetail()
 }
          
         </div>
-        </div>  
         
     }
   </div>;

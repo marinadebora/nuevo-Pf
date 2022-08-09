@@ -1,11 +1,11 @@
 import NavBar from './Navbar'
-import { addToBasket, removeToBasket,getItemsCart,UsuariosDetail,UpdateToCart, } from '../actions/actions'
+import { addToBasket, getItemsCart,UsuariosDetail,} from '../actions/actions'
 import { useSelector, useDispatch ,} from 'react-redux'
 import { useEffect ,useState,Fragment} from 'react'
 import { useNavigate } from 'react-router-dom';
-import {Button} from "@mui/material";
+
 import '../styles/card.css';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+
 import IconButton from "@mui/material/IconButton";
 import { accesorios } from '../actions/actions'
 import { Grid } from '@mui/material'
@@ -26,11 +26,8 @@ export default function Favs()
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const stateBasket = useSelector((state) => state.basket)
-  const accesorio = useSelector(state => state.allAccesories._id)
   const FavFromLocalStorage = JSON.parse(localStorage.getItem("Fav") || "[]");
   const [cart /* setCart */] = useState(FavFromLocalStorage);
-  const [cant, SetCant]= useState(1)
   const UserFromLocalStorage = JSON.parse(localStorage.getItem("loguearUsuario"));
   const [user/* setUser */] = useState(UserFromLocalStorage);
   const current_userID =UserFromLocalStorage?.id
@@ -182,7 +179,7 @@ var uniqueArray = removeDuplicates(current_cart, "_id");
         <button 
                 className="buttonCleanCart" 
                 onClick={() => handleClearCart()}>
-                  Limpiar carrito <GiIcons.GiBroom /> </button>
+                  Borrar todos los favoritos <GiIcons.GiBroom /> </button>
             <h1 id='titleCheckoutPage'>Mis Favoritos</h1>
             {
               uniqueArray?.map(e => (

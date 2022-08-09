@@ -34,6 +34,8 @@
           allProducts:action.payload,
           detail:{}
         }
+        case "POST_HISTORIA":   
+    return { ...state, historial: state.historial.concat(action.payload) };
       case 'PRODUCTOS_DETAIL':
 
 
@@ -341,11 +343,11 @@
           comentario:action.payload
           
         }
-  case 'USUARIO_ID':
+ /*  case 'USUARIO_ID':
     return{
       ...state,
       userDetail:action.payload
-    }
+    } */
     case 'HISTORIAL_COMPRA':
       return{
         ...state,

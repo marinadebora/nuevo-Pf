@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector, } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from "react-router-dom";
-import { usuarioId, editarAccComentarios, productosDetail } from "../../actions/actions";
+import {  editarAccComentarios, productosDetail, UsuariosDetail } from "../../actions/actions";
 import '../../styles/review.css'
 import '../../styles/PuntuacionEstrella.css'
 
@@ -19,7 +19,8 @@ export function Review()
 
   const comentProduct = myDetail.comentarios
 
-
+const [starOk,setStarOk]= useState(false)
+const [text,setText]=useState(true)
   const [star, setStar] = useState({
     estrellas: ''
   })
@@ -28,7 +29,7 @@ export function Review()
     comentarios: {
       ...comentProduct,
     }
-
+    
   })
   function puntuacion(e)
   {
@@ -37,31 +38,14 @@ export function Review()
       ...star,
       [e.target.name]: e.target.value
     })
+    setStarOk(true)
   }
 
   useEffect(() =>
   {
-    dispatch(usuarioId(current_userID))
+    dispatch(UsuariosDetail(current_userID))
     dispatch(productosDetail(id))
   }, [dispatch, current_userID])
-
-
-
-  const [error, setError] = useState({})
-
-  function validate(acces)
-  {
-    let errors = {}
-
-    if (!acces.comentarios) {
-      errors.comentarios = 'el campo no puede estar vacio'
-    }
-
-    return errors
-  }
-
-
-
 
 
   function handleChange(e)
@@ -78,16 +62,16 @@ export function Review()
       }
 
     })
-
-
-    setError(validate({
-      ...acces,
-      [e.target.name]: e.target.value
-    }))
+    if(!acces.comentarios.reseña.length){
+      setText(true)
+    }else{
+      setText(false)
+    }
 
   }
-  console.log(acces.comentarios)
   console.log(star)
+
+
   function handleSubmit(e)
   {
     e.preventDefault()
@@ -119,14 +103,14 @@ export function Review()
           <label>Califica tu producto </label>
           <p class="clasificacion">
 
-            <input onChange={puntuacion} id="radio1" type="radio" name="estrellas" value="5" /><label for="radio1">★</label>
-            <input onChange={puntuacion} id="radio2" type="radio" name="estrellas" value="4" /><label for="radio2">★</label>
-            <input onChange={puntuacion} id="radio3" type="radio" name="estrellas" value="3" /><label for="radio3">★</label>
-            <input onChange={puntuacion} id="radio4" type="radio" name="estrellas" value="2" /><label for="radio4">★</label>
-            <input onChange={puntuacion} id="radio5" type="radio" name="estrellas" value="1" /><label for="radio5">★</label>
+            <input className='input' onChange={puntuacion} id="radio1" type="radio" name="estrellas" value="5" /><label className='label' for="radio1">★</label>
+            <input className='input' onChange={puntuacion} id="radio2" type="radio" name="estrellas" value="4" /><label className='label' for="radio2">★</label>
+            <input className='input' onChange={puntuacion} id="radio3" type="radio" name="estrellas" value="3" /><label className='label' for="radio3">★</label>
+            <input className='input' onChange={puntuacion} id="radio4" type="radio" name="estrellas" value="2" /><label className='label' for="radio4">★</label>
+            <input className='input' onChange={puntuacion} id="radio5" type="radio" name="estrellas" value="1" /><label className='label' for="radio5">★</label>
           </p>
-
-          <textarea
+          {
+            starOk&&<textarea
             type='text'
             name='reseña'
             placeholder=''
@@ -134,11 +118,13 @@ export function Review()
             onChange={handleChange}
             className='textArea'
           > </textarea>
-
-          {error.comentarios && <p classproducto="danger">{error.comentarios}</p>}
+          }
 
         </div>
-        <input type="submit" value="Enviar" />
+        
+          <input type="submit" value="Enviar"disabled={text} />
+        
+        
       </form><button onClick={cancel}>Cancelar</button>
 
 

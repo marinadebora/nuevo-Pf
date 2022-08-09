@@ -81,9 +81,9 @@ router.delete("/carrito",borrarCarrito)
 /* router.get("/categorias", categorias)
 router.use("/categorias", postCategorias) */
 
-router.use("/user", putUsuario)
+/* router.use("/user", putUsuario)
 router.use("/comentario", putAccesoriosComentarios)
-router.get("/usuario/:id",UsuarioId)
+router.get("/usuario/:id",UsuarioId) */
 
 
 /* router.use("/", app) */
