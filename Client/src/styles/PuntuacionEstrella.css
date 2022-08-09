@@ -1,4 +1,4 @@
-#form {
+/* #form {
   width: 250px;
   margin: 0 auto;
   height: 50px;
@@ -10,13 +10,13 @@
 
 #form label {
   font-size: 150px;
-}
+} */
 
-input[type="radio"] {
+.input[type="radio"] {
   display: none;
 }
 
-label {
+.label {
   color: grey;
 }
 
@@ -25,12 +25,12 @@ label {
   unicode-bidi: bidi-override;
 }
 
-label:hover,
-label:hover ~ label {
+.label:hover,
+.label:hover ~ .label {
   color: orange;
 }
 
-input[type="radio"]:checked ~ label {
+.input[type="radio"]:checked ~ .label {
   color: orange;
 }
 .pagination-button-a{
@@ -42,3 +42,4 @@ input[type="radio"]:checked ~ label {
   
   font-size: medium;
 }
+
