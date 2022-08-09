@@ -34,6 +34,8 @@
           allProducts:action.payload,
           detail:{}
         }
+        case "POST_HISTORIA":   
+    return { ...state, historial: state.historial.concat(action.payload) };
       case 'PRODUCTOS_DETAIL':
 
 
