@@ -107,8 +107,8 @@ console.log(myDetail.stock)
   {
     navigate(-1)
   }
-  return 
-  <div>
+  return (
+      <div>
     <Navbar/>
     {
       myDetail._id !== id?
@@ -234,5 +234,5 @@ console.log(myDetail.stock)
         </div>
         
     }
-  </div>;
+  </div>);
 };
