@@ -6,7 +6,6 @@ import { Box } from '@mui/system';
 import Paginado from "./Paginado";
 import CardRentaVenta from './CardRentaVenta';
 import Navbar from './Navbar';
-
 import Footer from './Footer';
 import { Grid } from '@mui/material'
 import '../styles/searchBar.css';
@@ -76,7 +75,7 @@ console.log(productAlquiler)
                     producto={e.producto}
                     descripcion={e.descripcion}
                     Tamaño={e.Tamaño}
-                    Link={<Link to={`/home/${e._id}`} >Info</Link>}
+                    Link={<Link id='infobutton' to={`/home/${e._id}`} >Info</Link>}
                   />
 
                 </Grid>
