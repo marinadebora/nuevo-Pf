@@ -5,9 +5,12 @@ import '../../styles/historialCompras.css'
 import {UsuariosDetail, usuarios,historialCompra} from '../../actions/actions'
 import { user } from "./Compras";
 import { Button } from "@mui/material";
+import imgH from '../../imagenes/hcompra.png'
+import Navbar from '../Navbar'
+
 export function HistorialCompras()  { 
   const dispatch=useDispatch()
-  const UserFromLocalStorage = /* JSON.parse(localStorage.getItem("loguearUsuario"))|| */JSON.parse(localStorage.getItem("logueadoGoogle"))
+  const UserFromLocalStorage = JSON.parse(localStorage.getItem("loguearUsuario"))||JSON.parse(localStorage.getItem("logueadoGoogle"))
   const current_userID =UserFromLocalStorage?.id
   const myUserDetail = useSelector(state => state?.userDetail);
 const detail=useSelector(state=>state.detail)
@@ -25,7 +28,7 @@ console.log(myUserDetail)
     return (
       
        <div className="contenedor-total">
-       
+       <Navbar />
 {/* 
 {    //cambiar user por myUserDetail
   //usar este en caso que la compra no tenga un array de productos
@@ -58,6 +61,7 @@ console.log(myUserDetail)
 
 {   //cambiar user por myUserDetail
 //usar este en caso de que la compra tenga un array de productos
+myUserDetail.historialDeCompra?.length<=0?<div ><h3 className='h3'>Aun no tienes compras</h3> <img className="imagenhc" src={imgH} alt=''/></div>:
 myUserDetail.historialDeCompra?.map(e=>(
   
   e.recibido === true? 

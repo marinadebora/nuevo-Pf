@@ -182,10 +182,11 @@ console.log(myDetail.stock)
           ?<li className="estrellas">★★</li>:e.star?.estrellas=== '3'
           ?<li className="estrellas">★★★</li>:e.star?.estrellas=== '4'
           ?<li className="estrellas">★★★★</li>:e.star?.estrellas=== '5'
-          ?<li className="estrellas">★★★★</li>:''
+          ?<li className="estrellas">★★★★★</li>:''
         }
-        <li className="nombre">El usuario {e.nombre}</li>
-        <li className="reseña">califico este producto como: {e.reseña}</li>
+        <li className="nombre"> {e.nombre}</li>
+        {e.reseña&&
+          <li className="reseña">califico este producto como: {e.reseña}</li>}
         
         </div>
         )):<h4>Este producto aun no tiene comentarios</h4>
