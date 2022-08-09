@@ -64,30 +64,38 @@
     font-size: 15px;
 }
 .contenedor-total{
-    margin:8px;
+    padding: 10px;
+    margin:10px;
     width: 80%;
     text-align: center;
-    box-shadow: 0 3px 13px 1px rgba(6, 6, 6, 0.269);
+    
 }
 .comentario{
-    margin:5px;
+    padding: 5px;
+    margin-top:20px;
     width: 98%;
+    border-radius: 10px;
     text-align: left;
-    border:1px solid #0184a9;
-    box-shadow: 0 3px 3px 1px #0184a9;
+    border:none;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    
 }
 .nombre{
-    margin:10px ;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    margin:5px ;
+    font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
 }
 .reseña{
-    margin:10px ;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    margin:5px ;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
 }
 .estrellas{
+    
+    float: left;
     color : orange;
     font-size: medium;
+    margin: 5px;
     margin-left:3%
 
 }

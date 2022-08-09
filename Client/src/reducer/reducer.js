@@ -343,11 +343,11 @@
           comentario:action.payload
           
         }
-  case 'USUARIO_ID':
+ /*  case 'USUARIO_ID':
     return{
       ...state,
       userDetail:action.payload
-    }
+    } */
     case 'HISTORIAL_COMPRA':
       return{
         ...state,
