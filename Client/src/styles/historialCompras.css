@@ -1,7 +1,7 @@
 .contenedor-total{
   flex-wrap: wrap;
   overflow: hidden;
-  margin:0px 12px;
+  margin:2px 40px;
   
 }
 .contenedor-orden{
@@ -14,14 +14,13 @@
     height: 200px;
     margin:30px 50px ;
     display: flex;
-
     align-items:flex-end;
     justify-content:flex-start;
     background-color: #fff;
     box-shadow: 0 3px 13px 1px rgba(3, 124, 246, 0.644);
     border-radius: 10px ;
     
-    }
+}
     .imagen-art{
         height: 100%;
         width: 250px;

@@ -42,6 +42,3 @@ input[type="radio"]:checked ~ label {
   
   font-size: medium;
 }
-p:hover{
-  color: orange;
-}
