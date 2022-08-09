@@ -126,13 +126,7 @@ export function categoriaAccesorios(payload)
 	}
 }
 
-/*  export function addToBasket(payload){
-		 return{
-						 type:'ADD_TO_BASKET',
-						 payload
- 
-						 } 
-				 } */
+
 export const addToBasket = (item) =>
 {
 	try {
@@ -168,7 +162,28 @@ export const addToFavoritos = (item) =>
 	}
 };
 
+export function postHistoria(payload)
 
+{
+	console.log(payload)
+	return async function (dispatch)
+	{
+		try {
+			const historiaCreated = await axios.post(`http://localhost:4000/historia`, payload);
+			
+			return dispatch({
+				type: "POST_HISTORIA",
+				payload: historiaCreated,
+			});
+		} catch (error) {
+			console.log(error.message);
+			return alert(
+				"Hubo un error al crear el historial. "
+			);
+
+		}
+	};
+}
 
 
 export const getItemsCart = () =>
@@ -502,7 +517,7 @@ export function updateEmbarcacionRT(id, payload)
 
 
 let token = null
-console.log(token)
+
 
 export const setToken = (newToken)=>{
 		token = `Bearer ${newToken.token}`
@@ -643,10 +658,11 @@ export function historialCompra(){
 	return async function(dispatch){
 		try{
 
-			const histComp= await axios(`/historia`)
+			const histComp= await axios(`/historias`)
+			
 			return dispatch({
 				type:'HISTORIAL_COMPRA',
-				payload:histComp
+				payload:histComp.data
 			})
 		}
 		catch(error){
