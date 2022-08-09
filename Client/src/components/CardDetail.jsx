@@ -62,7 +62,7 @@ console.log(myDetail.stock)
           }).then((value) => {
             switch (value) {
               case "cart":
-                navigate("/checkoutPage");
+                navigate("/favs");
                 swal("Bienvenido a tu carro","Que tenga una buena compra" ,"success");
                 break;
       
@@ -89,7 +89,7 @@ console.log(myDetail.stock)
     }).then((value) => {
       switch (value) {
         case "cart":
-          navigate("/checkoutPage");
+          navigate("/favoritos");
           swal("Bienvenido a tus favoritos","Que tenga una buena compra" ,"success");
           break;
 

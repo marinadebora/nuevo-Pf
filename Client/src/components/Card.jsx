@@ -75,7 +75,7 @@ export default function Producto({ tipo,id, producto, marca ,precio, fabricacion
     }).then((value) => {
       switch (value) {
         case "cart":
-          navigate("/checkoutPage");
+          navigate("/favs");
           swal("Bienvenido a tus favoritos","Que tenga una buena compra" ,"success");
           break;
 
