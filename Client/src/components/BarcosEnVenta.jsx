@@ -76,7 +76,7 @@ export function BarcosEnVenta()
                     producto={e.producto}
                     descripcion={e.descripcion}
                     Tamaño={e.Tamaño}
-                    Link={<Link to={`/home/${e._id}`} >Info</Link>}
+                    Link={<Link id="infobutton" to={`/home/${e._id}`} >Info</Link>}
                   />
 
                 </Grid>

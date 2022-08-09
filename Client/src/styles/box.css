@@ -95,6 +95,12 @@
     
 }
 
+#infobutton{
+    text-decoration: none;
+    color: grey;
+    font-weight: bold;
+}
+
 
 @media(max-width: 900px){
     #textBox1{
