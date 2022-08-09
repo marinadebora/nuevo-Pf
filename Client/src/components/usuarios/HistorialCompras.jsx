@@ -10,10 +10,10 @@ export function HistorialCompras()  {
   const UserFromLocalStorage = JSON.parse(localStorage.getItem("loguearUsuario"));
   const current_userID =UserFromLocalStorage?.id
   const myUserDetail = useSelector(state => state?.userDetail);
+const detail=useSelector(state=>state.detail)
+const userReview=detail.comentarios.filter(e=>e.email===myUserDetail.email)
 
-
-
-console.log(user)
+console.log(userReview)
 
   useEffect(()=>{
   dispatch(usuarioId(myUserDetail._id))
@@ -56,39 +56,44 @@ console.log(user)
 {   //cambiar user por myUserDetail
 //usar este en caso de que la compra tenga un array de productos
 user?.historialDeCompra?.map(e=>(
-  e.estado_de_la_compra.enviada? 
+  e.recibido === true? 
   <div   className="contenedor-orden">
-  <h3>Compra n° : {e.compra}</h3>,
- 
+  <h3>Compra n° : {e._id}</h3>,
+  <h3>Fecha : {e.fechaDeCompra}</h3>
      { e.productos.map(e=>(
           <div >
              
           <div className='contenedor-art'>
-        <img src={e.imagenes?.[0]} alt="imagen" className='imagen-art'/>
+        <img src={e.producto.imagenes?.[0]} alt="imagen" className='imagen-art'/>
         <div className='contenedor-texto-art'>
-      <p className='nombre-art'>{e.producto}</p>
-      <p className='texto-art'>Precio: {e.precio}</p>
+      <p className='nombre-art'>{e.producto.producto}</p>
+      <p className='texto-art'>Precio: {e.producto.precio}</p>
       <p>{e.cantidad} unidad</p>
-      <Link to={`/review/${e._id}`}><h3>Califica tu producto</h3></Link>
+    {/*   {
+        userReview? <h4>ya Calificaste este producto</h4>:
+        <Link to={`/review/${e.producto._id}`}><h3>Califica tu producto</h3></Link>
+      } */}
+      <Link to={`/review/${e.producto._id}`}><h3>Califica tu producto</h3></Link>
       </div>
   
       
       </div></div>
       ))},
-     <h3>Total: {e.total_de_la_compra} </h3>
+     <h3>Total: US$ {e.precioTotal} </h3>
     
       </div>:
       <div   className="contenedor-orden">
-      <h3>Compra n° : {e.compra}</h3>,
+      <h3>Compra n° : {e._id}</h3>,
+      <h3>Fecha : {e.fechaDeCompra}</h3>
      
          { e.productos.map(e=>(
               <div >
                  
               <div className='contenedor-art'>
-            <img src={e.imagenes?.[0]} alt="imagen" className='imagen-art'/>
+            <img src={e.producto.imagenes?.[0]} alt="imagen" className='imagen-art'/>
             <div className='contenedor-texto-art'>
-          <p className='nombre-art'>{e.producto}</p>
-          <p className='texto-art'>Precio: {e.precio}</p>
+          <p className='nombre-art'>{e.producto.producto}</p>
+          <p className='texto-art'>Precio: {e.producto.precio}</p>
           <p>{e.cantidad} unidad</p>
          
           </div>
@@ -96,7 +101,7 @@ user?.historialDeCompra?.map(e=>(
           
           </div></div>
           ))},
-         <h3>Total: {e.total_de_la_compra} </h3>
+         <h3>Total: US$ {e.precioTotal} </h3>
         
           </div>))
 }

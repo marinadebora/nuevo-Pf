@@ -179,7 +179,7 @@ var uniqueArray = removeDuplicates(current_cart, "_id");
         <button 
                 className="buttonCleanCart" 
                 onClick={() => handleClearCart()}>
-                  Limpiar carrito <GiIcons.GiBroom /> </button>
+                  Borrar todos los favoritos <GiIcons.GiBroom /> </button>
             <h1 id='titleCheckoutPage'>Mis Favoritos</h1>
             {
               uniqueArray?.map(e => (
