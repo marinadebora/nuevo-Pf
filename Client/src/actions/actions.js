@@ -187,7 +187,7 @@ export function postShippingData(payload)
 	return async function (dispatch)
 	{
 		try {
-			const datosDeEnvio = await axios.post(`https://nautical25.herokuapp.com/shippingData`, payload);
+			const datosDeEnvio = await axios.post(`/shippingData`, payload);
 			return dispatch({
 				type: "SET_SHIPPING_DATA",
 				payload: datosDeEnvio,
@@ -602,12 +602,12 @@ export function editarAccComentarios(id, payload){
 		}
 	} 
 }
-export function usuarioId(id)
+/* export function usuarioId(id)
 {
 	return async function (dispatch)
 	{
 		try {
-			const userDetail = await axios(`/usuario/${id}`)
+			const userDetail = await axios(`https://nautical25.herokuapp.com/usuario/${id}`)
 
 			return dispatch({
 				type: 'USUARIO_ID',
@@ -617,7 +617,7 @@ export function usuarioId(id)
 			console.log(error)
 		}
 
-	}}
+	}} */
 /* export function usuarioId(id)
 {
 	return async function (dispatch)
