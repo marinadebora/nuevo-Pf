@@ -17,25 +17,9 @@ const AddressForm = ({nextStep}) => {
   const [{ shippingData }, dispatch] = useStateValue();
   const ShippingLocalStorage = JSON.parse(localStorage.getItem("ShippingData") || "[]");
 
-  console.log(shippingData)
-
-  async function validate(){
-    let errors = {}
-
-    if (!shippingData.firsName) {
-      return alert ("Falta ingresar nombre")
-    } else if (shippingData.firsName.search(/^[a-zA-Zñáéíóúü]*$/)) {
-      //Valido el input con expresion regular.
-      return alert ("El nombre no puede contener caracteres especiales ni numeros ") 
-    }
-    if (shippingData.firsName.length > 15) {
-      return alert ("El nombre no puede exceder los 15 caracteres") ;
-    }
+  
 
 
-    
-    
-}
 
   useEffect(() => {
     localStorage.setItem("ShippingData", JSON.stringify(ShippingLocalStorage))
@@ -80,7 +64,7 @@ const AddressForm = ({nextStep}) => {
               
               <div>
                 <Button component={Link} to='/checkoutPage' id='buttonBackAddresFrom'>Atras</Button>
-                <Button onClick={() => validate()} type='submit' id='buttonBackAddresFrom'>Siguiente</Button>
+                <Button  type='submit' id='buttonBackAddresFrom'>Siguiente</Button>
               </div>
           </form>
         </FormProvider>

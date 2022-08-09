@@ -31,6 +31,8 @@ import { useSelector, useDispatch ,} from 'react-redux'
 import { UsuariosDetail } from './actions/actions'
 import Checkout from "./components/CheckoutProcess/Checkout"
 import Favs from "./components/Favoritos"
+import OrdenesDeCompras from "./components/DashBoard/OrdenesDeCompra.js"
+import CheckoutFinal from "./components/CheckoutProcess/CheckoutFinal"
 let publishableKey ="pk_test_51LTzChGPkJkLR4xlRyDUWk3Pj6SiGC8bq0An5pdnhBWsCwE0Y9eIT2uUj7baWSnQlXXXmqSlZitwQKJrd7o1LwC500k5khRIeF" 
 const stripePromise = loadStripe(publishableKey)
 
@@ -41,8 +43,11 @@ export default function App() {
   const dispatch = useDispatch()
   
   const UserFromLocalStorage = JSON.parse(localStorage.getItem("loguearUsuario"));
-  const current_userID =UserFromLocalStorage?.id
+  const UserFromLocalgoogle = JSON.parse(localStorage.getItem("logueadoGoogle"));
+  const current_userID =UserFromLocalStorage?.id || UserFromLocalgoogle?.id
   const myUserDetail = useSelector(state => state?.userDetail);
+
+  console.log(current_userID)
  
   
 
@@ -86,6 +91,8 @@ export default function App() {
         <Route path='/prueba/checkout' element={<CheckoutPrueba/>}/>
         <Route exact path='/checkout' element={<Checkout/>}/>
         <Route exact path='/contactForm' element={<ContactForm />}/>
+        <Route exact path='/checkoutfinal' element={<CheckoutFinal/>}/>
+
 
         <Route exact path='/historialC' element={<HistorialCompras/>} />
         <Route exact path='/review/:id' element={<Review />} />
@@ -106,6 +113,7 @@ export default function App() {
       <Route exact path='/checkoutPage' element={<CheckoutPage />}/>
       <Route exact path='/formContact' element={<ContactForm />}/>
       <Route exact path='/favs' element={<Favs />}/>
+      <Route exact path='/checkoutfinal' element={<CheckoutFinal/>}/>
       
       
       <Route exact path='/admin' element={<Admin/>} />
@@ -118,6 +126,7 @@ export default function App() {
       <Route exact path='/dashboard/updateacc/:id' element={<UpdateAccesorio2/>} />
       <Route exact path='/dashboard/updateembrt/:id' element={<UpdateEmbarcacionRenta2/>} />
       <Route exact path='/dashboard/updateembventa/:id' element={<UpdateEmbarcacionVenta2/>} />
+      <Route exact path='/ordenescompras' element={<OrdenesDeCompras/>} />
       <Route exact path='/venta' element={<BarcosEnVenta  />} />
       
 

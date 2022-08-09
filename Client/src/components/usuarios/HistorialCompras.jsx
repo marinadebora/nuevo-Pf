@@ -13,7 +13,7 @@ export function HistorialCompras()  {
 const detail=useSelector(state=>state.detail)
 const userReview=detail.comentarios?.filter(e=>e.email===myUserDetail.email)
 
-console.log(userReview)
+
 
   useEffect(()=>{
   dispatch(usuarioId(myUserDetail._id))
