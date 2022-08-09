@@ -6,7 +6,7 @@ import {UsuariosDetail, usuarios,historialCompra} from '../../actions/actions'
 import { user } from "./Compras";
 import { Button } from "@mui/material";
 import imgH from '../../imagenes/hcompra.png'
-import Navbar from '../Navbar.jsx'
+
 
 export function HistorialCompras()  { 
   const dispatch=useDispatch()
@@ -28,7 +28,7 @@ console.log(myUserDetail)
     return (
       
        <div className="contenedor-total">
-       <Navbar />
+       
 {/* 
 {    //cambiar user por myUserDetail
   //usar este en caso que la compra no tenga un array de productos
