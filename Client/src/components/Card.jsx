@@ -96,13 +96,12 @@ export default function Producto({ tipo,id, producto, marca ,precio, fabricacion
    
    
  let filtroEstrella=comentarios?.map(e=>e.star?.estrellas);
- let parse=filtroEstrella.map(e=> parseInt(e))
- let filtro=parse.filter(e=>  e!==null && e!==undefined)
- let promedio=filtro?.reduce((a, b) =>a + b, 0)/filtroEstrella.length
+ let filtro=filtroEstrella.filter(e=>  e!==null && e!==undefined )
+ let parse=filtro.map(e=> parseInt(e))
+ let promedio=parse?.reduce((a, b) =>a + b,0)/parse.length
  let total=Math.round(promedio)
 
- 
-  
+
   
   return (
     <Fragment>
@@ -162,7 +161,8 @@ export default function Producto({ tipo,id, producto, marca ,precio, fabricacion
             </Badge>
           </IconButton>
           }
-          {  total?<div>
+            <IconButton aria-label="add to favorites" onClick={() => addToFav()}> <FavoriteIcon /></IconButton>
+          {  total?<div className='estrellitas'>
             { total=== 1?<li className="estrellas">★</li>:total=== 2
               ?<li className="estrellas">★★</li>:total=== 3
               ?<li className="estrellas">★★★</li>:total=== 4
@@ -170,7 +170,6 @@ export default function Producto({ tipo,id, producto, marca ,precio, fabricacion
               ?<li className="estrellas">★★★★</li>:''
               }</div>:''
               }
-               <IconButton aria-label="add to favorites" onClick={() => addToFav()}> <FavoriteIcon /></IconButton>
           <Button sx={{marginLeft: 'auto'}} size="small">{Link}</Button>
         </CardActions>
       </Card>

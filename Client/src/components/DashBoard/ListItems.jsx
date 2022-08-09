@@ -20,18 +20,18 @@ export const mainListItems = (
           <ListItemText primary="Admin" />
     </ListItemButton>
 
-    <ListItemButton>
+    <ListItemButton to="/ordenescompras">
       <ListItemIcon>
         <ShoppingCartIcon />
       </ListItemIcon>
-      <ListItemText primary="Orders" />
+      <ListItemText primary="Ordenes" />
     </ListItemButton>
 
     <ListItemButton to="/admin">
       <ListItemIcon>
         <EditIcon />
       </ListItemIcon>
-      <ListItemText primary="Edit products" />
+      <ListItemText primary="Editar productos" />
     </ListItemButton>
 
     {/* <ListItemButton>

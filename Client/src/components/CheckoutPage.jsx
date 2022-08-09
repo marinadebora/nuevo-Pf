@@ -95,7 +95,7 @@ const neto = sumall.map(e=>e.split('$')[1])
 const num = neto.map(e=> parseInt(e))
 var precioTotal =num.reduce((a, b) => a + b, 0);
 //console.log(precioTotal)
-console.log(current_cart)
+
 
 function cantidad (id){
   
@@ -198,6 +198,8 @@ return cantidadfiltrada.length
  
 
     return (
+
+
         !uniqueArray ? 
         <>
             <div>
@@ -205,8 +207,16 @@ return cantidadfiltrada.length
                 <button id='buttonBackCheckout' onClick={volver}>Back</button>
             </div>
         </>:
+
+        
         <div>
         <NavBar />
+        {current_cart.length === 0 ? 
+        <>
+         <h1 id='titleCheckoutPage'>Shopping Cart</h1>
+         <h2>El Carrito esta vacio</h2>
+        </>
+       : <>
         <button 
                 className="buttonCleanCart" 
                 onClick={() => handleClearCart()}>
@@ -270,11 +280,14 @@ return cantidadfiltrada.length
         <h2>US$ {precioTotal}</h2>
         </div>   
        
-        <Button href="/checkout" variant="contained" size="large" id='pagarButton'>Pagar</Button>
-       
+        {uniqueArray.length !== 0 
+        ?<Button href="/checkout" variant="contained" size="large" id='pagarButton'>Pagar</Button>
+        :""
+      }
 
       </div>
             <button id='buttonBackCheckout' onClick={volver}>Volver</button>
+            </>}
         </div>
         
     )

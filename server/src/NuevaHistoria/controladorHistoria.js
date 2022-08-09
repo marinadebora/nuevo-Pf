@@ -1,6 +1,7 @@
 const {Router} = require("express")
 const Usuarios = require("../modelos/Usuarios")
 const Historials = require("./Historia")
+
 let router = Router()
 
 const getHistoriaToUser =async ()=>{
@@ -39,6 +40,7 @@ router.post("/historia", async(req,res,next)=>{
     const {precioTotal, productos,usuario} = req.body;
     try {
         const user = await Usuarios.findById(usuario)
+       
         console.log(user)
         let newHistoria = new Historials({
             precioTotal,
