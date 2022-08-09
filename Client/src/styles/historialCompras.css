@@ -1,12 +1,13 @@
 .contenedor-total{
   flex-wrap: wrap;
   overflow: hidden;
-  margin:0px 12px;
+  margin:0
   
 }
 .contenedor-orden{
   width: 75%;
-
+  margin:2%;
+  padding: 2%;
   box-shadow: 0 3px 13px 1px rgba(0, 0, 0, 0.503);
 }
 .contenedor-art{
@@ -50,3 +51,4 @@
       font-size:2.1rem ;
       text-align: justify;
     }
+ 
