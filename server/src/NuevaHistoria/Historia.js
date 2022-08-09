@@ -15,12 +15,7 @@ const historialsSchema = new Schema({
   procesado:{type:Boolean,default:false},
   recibido:{type:Boolean,default:false},
   cancelado:{type:Boolean,default:false},  
-  precioTotal: {type: Number},
-  pendiente:{type: Boolean, default: true},
-  procesado:{type: Boolean, default: false},
-  recibido:{type: Boolean, default: false},
-  cancelado:{type: Boolean, default: false}
-
+ 
 },{timestamps:false})
 
 

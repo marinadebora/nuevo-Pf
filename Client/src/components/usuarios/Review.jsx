@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 import { usuarioId, editarAccComentarios, productosDetail } from "../../actions/actions";
 import '../../styles/review.css'
 import '../../styles/PuntuacionEstrella.css'
-import swal from "sweetalert";
 
 export function Review()
 {
@@ -19,27 +18,27 @@ export function Review()
   const myDetail = useSelector(state => state.detail);
 
   const comentProduct = myDetail.comentarios
- 
 
-
+const [starOk,setStarOk]= useState(false)
+const [text,setText]=useState(true)
   const [star, setStar] = useState({
     estrellas: ''
   })
-  const estrellita = star.estrellas
   const [acces, setAcces] = useState({
 
     comentarios: {
       ...comentProduct,
     }
-
+    
   })
-  async function puntuacion(e)
+  function puntuacion(e)
   {
 
     setStar({
       ...star,
       [e.target.name]: e.target.value
     })
+    setStarOk(true)
   }
 
   useEffect(() =>
@@ -49,25 +48,7 @@ export function Review()
   }, [dispatch, current_userID])
 
 
-
-  const [error, setError] = useState({})
-
-  function validate(acces)
-  {
-    let errors = {}
-
-    if (!acces.comentarios) {
-      errors.comentarios = 'el campo no puede estar vacio'
-    }
-
-    return errors
-  }
-
-
-
-
-
-  async function handleChange(e)
+  function handleChange(e)
   {
 
     setAcces({
@@ -81,65 +62,22 @@ export function Review()
       }
 
     })
-setError(validate({
+    if(!acces.comentarios.reseña.length){
+      setText(true)
+    }else{
+      setText(false)
+    }
+
+
+    setError(validate({
       ...acces,
       [e.target.name]: e.target.value
     }))
-    return  swal({
-      title: "El producto se ha agregado a tu carro de compras",
-      text: "Que queires hacer ahora?",
-      icon: "success",
-      buttons: {
-        cart: {
-          text: "Ir al carro",
-          value: "cart",
-        },
-       
-        cancel: "Seguir comprando",
-      },
-    }).then((value) => {
-      switch (value) {
-        case "cart":
-          navigate("/checkoutPage");
-          swal("Bienvenido a tu carro","Que tenga una buena compra" ,"success");
-          break;
-  
-        default:
-          break;
-      }
-    });
-
+   
   }
- /* async function next(id){
-  
-    dispatch(addToBasket({id}))
-    return  swal({
-      title: "El producto se ha agregado a tu carro de compras",
-      text: "Que queires hacer ahora?",
-      icon: "success",
-      buttons: {
-        cart: {
-          text: "Ir al carro",
-          value: "cart",
-        },
-       
-        cancel: "Seguir comprando",
-      },
-    }).then((value) => {
-      switch (value) {
-        case "cart":
-          navigate("/checkoutPage");
-          swal("Bienvenido a tu carro","Que tenga una buena compra" ,"success");
-          break;
-  
-        default:
-          break;
-      }
-    });
-          
-  };*/
+  console.log(star)
 
-  console.log(estrellita)
+
   function handleSubmit(e)
   {
     e.preventDefault()
@@ -154,7 +92,7 @@ setError(validate({
 
 
 
-  async function cancel(e)
+  function cancel(e)
   {
     e.preventDefault()
     navigate(`/historialC`)
@@ -177,23 +115,22 @@ setError(validate({
             <input onChange={puntuacion} id="radio4" type="radio" name="estrellas" value="2" /><label for="radio4">★</label>
             <input onChange={puntuacion} id="radio5" type="radio" name="estrellas" value="1" /><label for="radio5">★</label>
           </p>
-
-
-          {estrellita == typeof number ? 
-            <textarea
-            
+          {
+            starOk&&<textarea
             type='text'
             name='reseña'
             placeholder=''
             value={acces.reseña}
             onChange={handleChange}
             className='textArea'
-          > </textarea>:""}
-
-          {error.comentarios && <p classproducto="danger">{error.comentarios}</p>}
+          > </textarea>
+          }
 
         </div>
-        <input type="submit" value="Enviar" />
+        
+          <input type="submit" value="Enviar"disabled={text} />
+        
+        
       </form><button onClick={cancel}>Cancelar</button>
 
 
