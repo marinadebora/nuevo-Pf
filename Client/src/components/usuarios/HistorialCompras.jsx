@@ -1,3 +1,5 @@
+
+import Navbar from "../Navbar";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link , useParams} from "react-router-dom";
@@ -7,7 +9,7 @@ import { user } from "./Compras";
 import { Button } from "@mui/material";
 export function HistorialCompras()  { 
   const dispatch=useDispatch()
-  const UserFromLocalStorage = /* JSON.parse(localStorage.getItem("loguearUsuario"))|| */JSON.parse(localStorage.getItem("logueadoGoogle"))
+  const UserFromLocalStorage = JSON.parse(localStorage.getItem("loguearUsuario"))||JSON.parse(localStorage.getItem("logueadoGoogle"))
   const current_userID =UserFromLocalStorage?.id
   const myUserDetail = useSelector(state => state?.userDetail);
 const detail=useSelector(state=>state.detail)
@@ -23,7 +25,8 @@ console.log(myUserDetail)
 
 
     return (
-      
+      <div>
+        <Navbar/>
        <div className="contenedor-total">
        
 {/* 
@@ -161,6 +164,7 @@ myUserDetail.historialDeCompra?.map(e=>(
 
 
 
+</div>
 </div>) 
     
 
