@@ -31,7 +31,8 @@ export default function CheckoutPage()
   const [cant, SetCant]= useState(1)
   const UserFromLocalStorage = JSON.parse(localStorage.getItem("loguearUsuario"));
   const [user/* setUser */] = useState(UserFromLocalStorage);
-  const current_userID =UserFromLocalStorage?.id
+  const UserFromLocalgoogle = JSON.parse(localStorage.getItem("logueadoGoogle"));
+  const current_userID =UserFromLocalStorage?.id || UserFromLocalgoogle?.id
   const myUserDetail = useSelector(state => state?.userDetail);
   const current_cart =cartFromLocalStorage;
   const CartUser= myUserDetail[0]?.carritoDeCompra

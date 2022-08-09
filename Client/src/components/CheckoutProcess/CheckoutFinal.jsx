@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 //import * as MdIcons from 'react-icons/md'
 import axios from "axios"
 import {postHistoria } from '../../actions/actions';
+import swal from "sweetalert";
 
 
 
@@ -24,7 +25,9 @@ export function CheckoutFinal(){
     const [cart /* setCart */] = useState(cartFromLocalStorage);
     const current_cart =cartFromLocalStorage;
     const UserFromLocalStorage = JSON.parse(localStorage.getItem("loguearUsuario"));
-    const current_userID =UserFromLocalStorage?.id
+    const UserFromLocalgoogle = JSON.parse(localStorage.getItem("logueadoGoogle"));
+    const current_userID =UserFromLocalStorage?.id || UserFromLocalgoogle?.id
+    
     console.log(current_cart)
 
     const sumall = current_cart.map(item => item.precio);
@@ -51,9 +54,23 @@ export function CheckoutFinal(){
             precioTotal: 0,           
           })
           localStorage.setItem("item2"," []");
-          return (
-              alert(`La historia fue creada con exito.`)//, navigate(`/checkoutfinal`)
-              ) 
+          navigate("/accesorios")
+          return  swal({
+            title: "Muchas gracias por confiar por nostoros",
+            text: "Lo esperamos nuevamente en nuestra tienda!!",
+            icon: "success",
+          
+          }).then((value) => {
+            switch (value) {
+              case "cart":
+                
+                swal("Bienvenido a nuestra Pagina","Que tenga una buena compra" ,"success");
+                break;
+          
+              default:
+                break;
+            }
+          });
         
       } catch (error) {
         console.log(error);
