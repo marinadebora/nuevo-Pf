@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { productosDetail } from "../actions/actions";
 import '../styles/cardDetail.css'
+import Navbar from './Navbar';
 import ImagenList from  './ImagenList'
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge"
@@ -109,9 +110,12 @@ export default function CardDetail()
 
       <div>
                 <h1>LOADING</h1>
-                
+            
             </div>
             :
+          <div>
+            <Navbar/>
+          
         <div id='mainContainer'>
           <div>
           {/* {
@@ -222,6 +226,7 @@ export default function CardDetail()
 }
          
         </div>
+        </div>  
         
     }
   </div>;

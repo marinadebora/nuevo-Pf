@@ -46,7 +46,7 @@ const Checkout = () => {
             ))}
           </Stepper>
           {activeStep === steps.length ? (
-            <Confirmation message={paymentMessage} />
+            <Confirmation message={paymentMemessage} />
           ) : (
             <Form step={activeStep} />
           )}
