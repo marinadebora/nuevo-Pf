@@ -1,3 +1,5 @@
+
+import Navbar from './Navbar';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -105,7 +107,9 @@ console.log(myDetail.stock)
   {
     navigate(-1)
   }
-  return <div>
+  return 
+  <div>
+    <Navbar/>
     {
       myDetail._id !== id?
 
