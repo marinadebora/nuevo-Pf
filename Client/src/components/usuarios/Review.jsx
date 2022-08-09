@@ -19,7 +19,8 @@ export function Review()
 
   const comentProduct = myDetail.comentarios
 
-
+const [starOk,setStarOk]= useState(false)
+const [text,setText]=useState(true)
   const [star, setStar] = useState({
     estrellas: ''
   })
@@ -28,7 +29,7 @@ export function Review()
     comentarios: {
       ...comentProduct,
     }
-
+    
   })
   function puntuacion(e)
   {
@@ -37,6 +38,7 @@ export function Review()
       ...star,
       [e.target.name]: e.target.value
     })
+    setStarOk(true)
   }
 
   useEffect(() =>
@@ -44,24 +46,6 @@ export function Review()
     dispatch(usuarioId(current_userID))
     dispatch(productosDetail(id))
   }, [dispatch, current_userID])
-
-
-
-  const [error, setError] = useState({})
-
-  function validate(acces)
-  {
-    let errors = {}
-
-    if (!acces.comentarios) {
-      errors.comentarios = 'el campo no puede estar vacio'
-    }
-
-    return errors
-  }
-
-
-
 
 
   function handleChange(e)
@@ -78,16 +62,22 @@ export function Review()
       }
 
     })
+    if(!acces.comentarios.reseña.length){
+      setText(true)
+    }else{
+      setText(false)
+    }
 
 
     setError(validate({
       ...acces,
       [e.target.name]: e.target.value
     }))
-
+   
   }
-  console.log(acces.comentarios)
   console.log(star)
+
+
   function handleSubmit(e)
   {
     e.preventDefault()
@@ -125,8 +115,8 @@ export function Review()
             <input onChange={puntuacion} id="radio4" type="radio" name="estrellas" value="2" /><label for="radio4">★</label>
             <input onChange={puntuacion} id="radio5" type="radio" name="estrellas" value="1" /><label for="radio5">★</label>
           </p>
-
-          <textarea
+          {
+            starOk&&<textarea
             type='text'
             name='reseña'
             placeholder=''
@@ -134,11 +124,13 @@ export function Review()
             onChange={handleChange}
             className='textArea'
           > </textarea>
-
-          {error.comentarios && <p classproducto="danger">{error.comentarios}</p>}
+          }
 
         </div>
-        <input type="submit" value="Enviar" />
+        
+          <input type="submit" value="Enviar"disabled={text} />
+        
+        
       </form><button onClick={cancel}>Cancelar</button>
 
 
