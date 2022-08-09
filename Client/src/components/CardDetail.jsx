@@ -14,6 +14,7 @@ import swal from "sweetalert";
 import ContactMailIcon from "@mui/icons-material/ContactMail";
 import ImgSinStock from "../imagenes/vector-sin-stock.png"
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { GiConsoleController } from "react-icons/gi";
 
 export default function CardDetail()
 { 
@@ -30,7 +31,7 @@ export default function CardDetail()
   const FavFromLocalStorage = JSON.parse(localStorage?.getItem("Fav"));
   const [fav /* setCart */] = useState(FavFromLocalStorage);
    
-  
+console.log(myDetail.stock)
   useEffect(() =>
   {
     localStorage.getItem("item2")
@@ -120,7 +121,7 @@ export default function CardDetail()
             )
           } */}
 
-        {myDetail.stock > 0 ?
+        {myDetail.stock > 0||myDetail.stock===undefined ?
           <ImagenList/>
           :<div className="div"> 
           <ImagenList/>
