@@ -103,7 +103,7 @@ const CheckoutForm = ({ backStep, nextStep }) => {
         const { id } = paymentMethod;
         try {
           const { data } = await axios.post(
-            "http://localhost:4000/checkout",
+            "https://nautical25.herokuapp.com/checkout",
             {
               id,
               amount: precioTotal * 100,
