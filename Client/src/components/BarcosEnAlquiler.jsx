@@ -19,7 +19,7 @@ export function BarcosEnAlquiler()
  //----------paginado---------//
 
   const [page, setPage] = useState(1);
-  const [characterPerPage, /* setCharacterPerPage */] = useState(5);
+  const [characterPerPage, /* setCharacterPerPage */] = useState(8);
   const index = page * characterPerPage;
   const endIndex = index - characterPerPage;
   const actualPage = productAlquiler?.slice(endIndex, index);
@@ -49,6 +49,12 @@ console.log(productAlquiler)
                 <Box id='textBox2'>Contactanos</Box>
                 
             </Box>
+
+            <Paginado
+        characterPerPage={characterPerPage}
+        newState={productAlquiler.length}
+        paginado={paginado}
+      />
       
     
       <Grid container spacing={2}>
@@ -91,11 +97,7 @@ console.log(productAlquiler)
       <Link to='/accesorios'>
         <button id='buttonBackAA'>VOLVER</button>
       </Link>
-      <Paginado
-        characterPerPage={characterPerPage}
-        newState={productAlquiler.length}
-        paginado={paginado}
-      />
+      
       
       <Footer/>
 

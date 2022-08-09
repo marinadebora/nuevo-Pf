@@ -21,7 +21,7 @@ export function BarcosEnVenta()
 
   const [ordering, setOrdering] = useState('')
   const [page, setPage] = useState(1);
-  const [characterPerPage, setCharacterPerPage] = useState(5);
+  const [characterPerPage, setCharacterPerPage] = useState(8);
   const index = page * characterPerPage;
   const endIndex = index - characterPerPage;
   const actualPage = productVenta?.slice(endIndex, index);
@@ -53,6 +53,12 @@ export function BarcosEnVenta()
                 <Box id='textBox2'>(Nuevos y Usados)</Box>
                 
         </Box>
+
+        <Paginado
+        characterPerPage={characterPerPage}
+        newState={productVenta.length}
+        paginado={paginado}
+      />
       
       <Grid container spacing={2}>
         {
@@ -90,11 +96,7 @@ export function BarcosEnVenta()
       <button id='buttonBackAA' onClick={volver}>VOLVER</button>
       
       
-      <Paginado
-        characterPerPage={characterPerPage}
-        newState={productVenta.length}
-        paginado={paginado}
-      />
+      
 
       <Footer/>
 

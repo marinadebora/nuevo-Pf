@@ -6,10 +6,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import {postAccesorio, Categorias } from '../../actions/admin-action';
 import { accesorios, /*getAllTypes */} from '../../actions/actions';
 import '../../styles/form.css';
+import '../../styles/cardDetail.css';
 import { Link } from 'react-router-dom';
 //import * as MdIcons from 'react-icons/md'
 import axios from "axios"
 import {postHistoria } from '../../actions/actions';
+import Logo from "./Nautical1.png"
 import swal from "sweetalert";
 
 
@@ -94,20 +96,20 @@ export function CheckoutFinal(){
    
 
     return (
-        <div classproducto="cont-form">
-            
-            
-           <h1>Su pago ha sido aprobado, presione "Ok" para terminar su compra</h1>
+        <div id="mainContainerCompraFinal" classproducto="cont-form">
+           <img src={Logo} alt='img' id='imageCompraFinal'/>
+           <h2 id='textCompra'>Gracias por su compra!</h2>
+           <h3 id='textCompra'>Su pago ha sido aprobado, presione "Ok" para terminar su compra</h3>
             
            <button
           onClick={handleOnClick}
             type='submit'
           
-            id='buttonBackPaymentForm'
+            id='buttonBack'
           > OK
            
           </button>
-          <h2>Total compra: ${precioTotal}</h2>
+          
         </div>
     )
 }
