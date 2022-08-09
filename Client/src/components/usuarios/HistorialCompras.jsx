@@ -8,7 +8,7 @@ import {UsuariosDetail, usuarios,historialCompra} from '../../actions/actions'
 import { user } from "./Compras";
 import { Button } from "@mui/material";
 import imgH from '../../imagenes/hcompra.png'
-import Navbar from '../Navbar'
+import Navbar from '../Navbar.jsx'
 
 export function HistorialCompras()  { 
   const dispatch=useDispatch()
