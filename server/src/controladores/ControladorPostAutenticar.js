@@ -8,7 +8,7 @@ const usuariosAuth= async (req,res)=>{
     let id = ''
     let admin = false
     if(api) {
-        nombre = api.nombre + ' ' + api.apellido
+        nombre = api.nombre
         id = api._id
         admin = api.admin
     }
