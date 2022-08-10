@@ -35,7 +35,7 @@ const router = Router();
 
 
 const correo = async (req,res )=>{
-    const {email,password,firstName,lastName} = req.body;
+    const {email,password,firstName,lastName,nombre, apellido} = req.body;
     try {
         await transporter.sendMail({
             from: '"Usuario Creado 🚢" <accesoriosnautica02@gmail.com>', // sender address
@@ -46,11 +46,10 @@ const correo = async (req,res )=>{
             <p>Tu solicitud de registro fue exitosa!!🎉</p>
             <p>Y te registraste con las credenciales:</p>
             <br/>
-            <p>Nombre: ${firstName}</p>
-            <p>Apellido: ${lastName}</p> 
+            <p>Nombre: ${firstName? firstName: nombre}</p>
+            <p>Apellido: ${lastName? lastName: nombre}</p> 
             <p>Password: ${password}</p>
-            <p>Apellido: ${lastName}</p>
-            <p>password: ${password}</p>
+            
             <br/>
             <p>Puedes acceder a nuestra pagina desde el siguiente enlace:</p>
             <link>🚢https://nuevo-pf.vercel.app/🚢</link>
