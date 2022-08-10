@@ -191,7 +191,7 @@ export function updateHistorial(id, payload)
 	console.log(payload)
 	return async function (dispatch)
 	{
-		return await axios.put(`http://localhost:4000/historial/${id}`, payload)
+		return await axios.put(`historial/${id}`, payload)
 			.then(data =>
 			{
 				dispatch({
@@ -395,7 +395,7 @@ export function UpdateToCart(id, payload)
 {
 	return async function (dispatch)
 	{
-		return axios.put(`/user/${id}`, payload)
+		return axios.put(`${URL_BASE}/user/${id}`, payload)
 			.then(data =>
 			{
 				dispatch({
