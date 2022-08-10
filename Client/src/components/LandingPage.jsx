@@ -65,6 +65,7 @@ export default function Home()
         return(
             <div>
             <Box id='boxButtonLanding'>
+                {/* <SingInLanding/> */}
                 <Link to='/singUp'>
                     <Button variant="outlined" id="buttonLandingSing">Registro</Button>
                 </Link>

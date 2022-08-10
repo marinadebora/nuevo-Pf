@@ -198,11 +198,12 @@ return cantidadfiltrada.length
          <h2>El Carrito esta vacio</h2>
         </>
        : <>
+       <h1 id='titleCheckoutPage'>Shopping Cart</h1>
         <button 
-                className="buttonCleanCart" 
+                id="buttonCleanCart" 
                 onClick={() => handleClearCart()}>
                   Limpiar carrito <GiIcons.GiBroom /> </button>
-            <h1 id='titleCheckoutPage'>Shopping Cart</h1>
+            
             {
               uniqueArray?.map(e => (
                     e !== undefined &&
