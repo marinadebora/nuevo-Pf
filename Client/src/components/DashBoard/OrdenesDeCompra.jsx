@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link , useParams} from "react-router-dom";
 import '../../styles/historialCompras.css'
-import {usuarioId, usuarios,historialCompra,updateHistorial} from '../../actions/actions'
+import {usuarioId, usuarios,historialCompra,updateHistorial,filtroHistorial} from '../../actions/actions'
 import swal from "sweetalert";
 import { useNavigate } from 'react-router-dom';
-
-
+import NabVarD from './NabVarD'
+import '../../styles/NabVarD.css'
 
 export default function OrdenesDeCompras()  { 
   const dispatch=useDispatch()
@@ -158,11 +158,35 @@ async function handleRecibido(id){
   console.log(Historial)
 
 
+
+
+  const filtroPorEstado = (event) =>
+  {
+    event.preventDefault()
+    if (event.target.value === 'sinFiltro') {
+      dispatch(historialCompra())
+      } else {
+      dispatch(filtroHistorial(event.target.value))
+   
+  }}
+
+
     return (
-      
+      <div>
+    <NabVarD />
+
+   
       <div className="contenedor-total">
-
-
+  <div calssName='filtro'>
+  <label id='text' key='Precio'>Filtrar por Precio: </label>
+  <select name="filtroestado" id="filtroestado" onChange={(e) => filtroPorEstado(e)}>
+    <option key={'sinFiltro'} value={'sinFiltro'}>Buscar por estados</option>
+    <option key={'pendiente'} value={'pendiente'}>Pendiente</option>
+    <option key={'procesado'} value={'procesado'}>Procesado</option>
+    <option key={'recibido'} value={'recibido'}>Recibido</option>
+    <option key={'cancelado'} value={'cancelado'}>Cancelado</option>
+  </select>
+  </div>
 {  
 Historial?.map(e=>(
  
@@ -180,7 +204,7 @@ Historial?.map(e=>(
          <div >
             
          <div className='contenedor-art'>
-       <img src={e.imagenes?.[0]} alt="imagen" className='imagen-art'/>
+       
        <div className='contenedor-texto-art'>
      <p className='nombre-art'>{e.producto}</p>
      <p className='texto-art'>Precio: {e.precio}</p>
@@ -197,7 +221,8 @@ Historial?.map(e=>(
      </div>))
 }
  
-</div>) 
+</div></div>
+) 
 }
   
   
