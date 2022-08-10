@@ -260,11 +260,19 @@ return cantidadfiltrada.length
         <h2> TOTAL</h2>
         <h2>US$ {precioTotal}</h2>
         </div>   
-       
-        {uniqueArray.length !== 0 
+        {localStorage.getItem('loguearUsuario') || localStorage.getItem('logueadoGoogle')?
+        
+          uniqueArray.length !== 0 ?
+          <Button href="/checkout" variant="contained" size="large" id='pagarButton'>Pagar</Button>
+          :" ":
+        <Link to='/singIn'>
+                <Button href="/checkout" variant="contained" size="large" id='pagarButton'>iniciar sesion</Button>
+        </Link>
+        }
+        {/* {uniqueArray.length !== 0 
         ?<Button href="/checkout" variant="contained" size="large" id='pagarButton'>Pagar</Button>
         :" " 
-      }
+        } */}
 
       </div>
             <button id='buttonBackCheckout' onClick={volver}>Volver</button>
