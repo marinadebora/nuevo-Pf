@@ -357,7 +357,7 @@
       }
       case "UPDATE_HISTORIA":
         return {
-           ...state
+          ...state
      }
       
       default: {
