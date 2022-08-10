@@ -17,7 +17,7 @@ const Confirmation = ({ message }) => {
         </Typography>
       </div>
       <br />
-      <Button component={Link} to='/' variant='outlined' type='button'>
+      <Button component={Link} to='/accesorios' variant='outlined' type='button'>
         Back to Home Page
       </Button>
     </>

@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate }from 'react-router-dom';
 import { contactForm } from "../actions/actions";
 import "./../styles/contactForm.css"
+import Logo from "./Nautical1.png"
 
 //const FORM_ENDPOINT = ""; // TODO - fill on the later step
 
@@ -40,8 +41,11 @@ const ContactForm = () => {
   if (submitted) {
    return (
      <>
-       <div className="text-2xl">Gracias!</div>
-       <div className="text-md">Te contactasremos pronto.</div>
+      <div id="mainContainerContactOK">
+        <img src={Logo} alt='img' id='imageCompraFinal'/>
+        <div id='messageContactOK' className="text-2xl">Gracias!</div>
+        <div id='messageContactOK' className="text-md">Te contactaremos pronto.</div>
+       </div>
      </>
    );
  }

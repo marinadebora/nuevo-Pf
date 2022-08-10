@@ -24,19 +24,21 @@ const postCategorias = require("./postCategoria");
 const { usuarios } = require("../controladores/controladorPostRegistro");
 const { usuariosAuth } = require("../controladores/ControladorPostAutenticar");
 const {correo}= require("../controladores/autenticar")
-const { getUsuario } =require ("../controladores/ControladorUsuario")
+const  getUsuario  =require ("../controladores/ControladorUsuario")
 const {agregarAlCarrito, borrarCarrito, asignarUsuarioAlCarrito} = require("../controladores/controladorCarrito");
-const { requireSignin } = require("../controladores/Verificaciones");
+const { requireSignin, soloAdmin } = require("../controladores/Verificaciones");
 const putUsuario = require("./putUsuarioCarrito");
 const putAccesoriosComentarios = require("./putAccesoriosComentarios");
 const { UsuarioId } = require("../controladores/controladorIdUsuario");
+/* const {getUsuario} = require("../controladores/ControladorUsuario") */
+
 const controladorHistoria = require("../NuevaHistoria/controladorHistoria");
 const { updateHistorial } = require("../NuevaHistoria/controladorPutHistoria");
 const { correoCompra } = require("../controladores/autenticarCompra");
 const usuariosGoogle = require('../controladores/ControladorRegistroGoogle');
 const { correoContacto } = require("./postFormularioContacto");
-
 /* const app = require("../modelos/SesionGoogle.js") */
+const {PutStock} = require("../controladores/controladorPutStock")
 
 let router = Router();
 
@@ -45,13 +47,13 @@ router.use("/", controladorHistoria)
 
 router.use("/embarcacionesV", getEmbarVenta);
 router.use("/embarcacionesVId", getEmbarVentaId);
-router.use("/embarcacionesR", getEmbarRenta);
+router.use("/embarcacionesR",/* requireSignin, */ getEmbarRenta);
 router.use("/embarcacionesRId", getEmbarRentaId);
-router.use("/accesorios", getAccesorios);
+router.use("/accesorios",/* requireSignin, */ getAccesorios);
 router.use("/accesorio", getAccesoriosId);
 router.use("/todos", getTodo);
 router.use("/todos", getTodoId);
-router.use("/embarcacionesR",postEmbarcacionesRenta);
+router.use("/embarcacionesR",/* soloAdmin, */ postEmbarcacionesRenta);
 router.use("/embarcacionesV",postEmbarcacionesV);
 router.use("/accesorio",postAccesorios);
 router.use("/embarcacionesR", putEmbarcacionesRenta);
@@ -65,8 +67,6 @@ router.post("/autenticar",usuariosAuth);
 router.get("/categorias", categorias);
 router.use("/categorias", postCategorias);
 router.use('/correo', correo);
-/* router.post("/registro",usuarios) */
-/* router.post("/autenticar",usuariosAuth); */
 router.post("/carrito/:id", agregarAlCarrito);
 router.delete("/carrito",borrarCarrito);
 router.get("/categorias", categorias);
@@ -82,9 +82,9 @@ router.delete("/carrito",borrarCarrito)
 /* router.get("/categorias", categorias)
 router.use("/categorias", postCategorias) */
 
-router.use("/user", putUsuario)
+/* router.use("/user", putUsuario)
 router.use("/comentario", putAccesoriosComentarios)
-router.get("/usuario/:id",UsuarioId)
+router.get("/usuario/:id",UsuarioId) */
 
 
 /* router.use("/", app) */
@@ -97,7 +97,8 @@ router.use("/registroGoogle", usuariosGoogle, correo)
 // router.use("/b", cargarRenta)
 // router.use("/c", cargarAccesorios)
 
- 
+
+router.put("/stock/:id", PutStock)
 
 
 module.exports = router;

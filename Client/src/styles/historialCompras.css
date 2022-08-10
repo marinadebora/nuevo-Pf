@@ -1,45 +1,48 @@
 .contenedor-total{
   flex-wrap: wrap;
   overflow: hidden;
-  margin:0px 12px;
+
+  margin:2% 10%;
+
   
 }
 .contenedor-orden{
   width: 75%;
-
+  margin:2%;
+  padding: 2%;
   box-shadow: 0 3px 13px 1px rgba(0, 0, 0, 0.503);
+  text-align:end;
 }
 .contenedor-art{
     width:80%;
-    height: 200px;
-    margin:30px 50px ;
+    height: 70%;
+    margin:5% ;
     display: flex;
-
     align-items:flex-end;
     justify-content:flex-start;
     background-color: #fff;
-    box-shadow: 0 3px 13px 1px rgba(3, 124, 246, 0.644);
+    box-shadow: 0 3px 13px 1px rgba(1, 20, 40, 0.644);
     border-radius: 10px ;
     
-    }
+}
     .imagen-art{
+        width: 50%;
         height: 100%;
-        width: 250px;
         display: block;
       }
       .contenedor-texto-art {
          text-align:end; 
+         width: 50%;
          height: 100%;
-         width: 250px;
-         padding: 10px;
+         padding: 2%;
          font-family: Arial, Helvetica, sans-serif;
-         font-weight: 400;
-         line-height: 1.5rem;
+         font-weight: 1%;
+         line-height: 1.2rem;
       }
       .nombre-art {
-        font-size: 1.5rem;
-        font-weight: 600;
-        margin-bottom: 20px;
+        font-size: 1rem;
+        font-weight:bold;
+        margin-bottom: 2%;
       }
     .link {
       text-decoration: none;
@@ -50,3 +53,16 @@
       font-size:2.1rem ;
       text-align: justify;
     }
+ .imagenhc{
+  width: 30%;
+ }
+ .h3{
+  color: rgb(1, 1, 42);
+ }
+ .text{
+  text-align: end;
+  margin:0
+ }
+#button{
+  margin:1% 2% 0 0
+}

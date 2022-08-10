@@ -31,7 +31,8 @@ export default function CheckoutPage()
   const [cant, SetCant]= useState(1)
   const UserFromLocalStorage = JSON.parse(localStorage.getItem("loguearUsuario"));
   const [user/* setUser */] = useState(UserFromLocalStorage);
-  const current_userID =UserFromLocalStorage?.id
+  const UserFromLocalgoogle = JSON.parse(localStorage.getItem("logueadoGoogle"));
+  const current_userID =UserFromLocalStorage?.id || UserFromLocalgoogle?.id
   const myUserDetail = useSelector(state => state?.userDetail);
   const current_cart =cartFromLocalStorage;
   const CartUser= myUserDetail[0]?.carritoDeCompra
@@ -46,30 +47,30 @@ export default function CheckoutPage()
 })
 
 
-
+async function handleClearCart (e){
+  localStorage.setItem("item2", []);
+  navigate("/accesorios");
+  return  swal({
+   title: "Se han borrado todos los productos de su carro de compras",
+   text: "Puede agregar mas desde nuestro inicio!!",
+   icon: "success",
+ 
+ }).then((value) => {
+   switch (value) {
+     case "cart":
+       
+       swal("Bienvenido a nuestra Pagina","Que tenga una buena compra" ,"success");
+       break;
+ 
+     default:
+       break;
+   }
+ });
+ };
 
 
  
-async function handleClearCart (e){
- localStorage.setItem("item2", []);
- navigate("/accesorios");
- return  swal({
-  title: "Se han borrado todos los productos de su carro de compras",
-  text: "Puede agregar mas desde nuestro inicio!!",
-  icon: "success",
 
-}).then((value) => {
-  switch (value) {
-    case "cart":
-      
-      swal("Bienvenido a nuestra Pagina","Que tenga una buena compra" ,"success");
-      break;
-
-    default:
-      break;
-  }
-});
-};
 
 function removeDuplicates(originalArray, prop) {
   var newArray = [];
@@ -94,8 +95,10 @@ const sumall = current_cart.map(item => item.precio);
 const neto = sumall.map(e=>e.split('$')[1])
 const num = neto.map(e=> parseInt(e))
 var precioTotal =num.reduce((a, b) => a + b, 0);
-//console.log(precioTotal)
-console.log(current_cart)
+
+const sumaStock = uniqueArray.map(item => item.stock).reduce((a, b) => a + b, 0);;
+
+
 
 function cantidad (id){
   
@@ -107,29 +110,7 @@ return cantidadfiltrada.length
   async function next(id){
   
   dispatch(addToBasket({id}))
-  return  swal({
-    title: "El producto se ha agregado a tu carro de compras",
-    text: "Que queires hacer ahora?",
-    icon: "success",
-    buttons: {
-      cart: {
-        text: "Ir al carro",
-        value: "cart",
-      },
-     
-      cancel: "Seguir comprando",
-    },
-  }).then((value) => {
-    switch (value) {
-      case "cart":
-        navigate("/checkoutPage");
-        swal("Bienvenido a tu carro","Que tenga una buena compra" ,"success");
-        break;
 
-      default:
-        break;
-    }
-  });
         
 };
 
@@ -198,6 +179,8 @@ return cantidadfiltrada.length
  
 
     return (
+
+
         !uniqueArray ? 
         <>
             <div>
@@ -205,13 +188,22 @@ return cantidadfiltrada.length
                 <button id='buttonBackCheckout' onClick={volver}>Back</button>
             </div>
         </>:
+
+        
         <div>
         <NavBar />
+        {current_cart.length === 0 ? 
+        <>
+         <h1 id='titleCheckoutPage'>Shopping Cart</h1>
+         <h2>El Carrito esta vacio</h2>
+        </>
+       : <>
+       <h1 id='titleCheckoutPage'>Shopping Cart</h1>
         <button 
-                className="buttonCleanCart" 
+                id="buttonCleanCart" 
                 onClick={() => handleClearCart()}>
                   Limpiar carrito <GiIcons.GiBroom /> </button>
-            <h1 id='titleCheckoutPage'>Shopping Cart</h1>
+            
             {
               uniqueArray?.map(e => (
                     e !== undefined &&
@@ -236,17 +228,19 @@ return cantidadfiltrada.length
                     descripcion={e.descripcion}
                     Tamaño={e.Tamaño}
                     id={e._id}
+                    stock={e.stock}
                       
                   />
                 
                 <form id="layout">
                 <p id="cantidad">Cantidad:{cantidad(e._id)}</p>
+                <p id="cantidad">Stock Disponible:{e.stock}</p>
                 <div id="buttonsCart">
-                <button onClick={() => next(e._id)}class="pagination-button p" id="buttonMasMenos">+</button>
+                {e.stock <= cantidad(e._id) ? " ":<button onClick={() => next(e._id)}class="pagination-button p" id="buttonMasMenos">+</button>}
                 <button onClick={() => handleSplice(e._id)} class="pagination-button a" id="buttonMasMenos">-</button>
                 </div>
                 <p id="precioTotal">Precio Total:US$ {e.precio.split('$')[1] * cantidad(e._id)}</p>
-                <button id="delete" onClick={() => handleDelete(e._id)} className="delete-button">Delete</button>
+                <button id="delete" onClick={() => handleDelete(e._id)} className="delete-button">Borrar</button>
                 <div class="clearfix"></div>
                 </form>
                 
@@ -267,12 +261,23 @@ return cantidadfiltrada.length
         <h2> TOTAL</h2>
         <h2>US$ {precioTotal}</h2>
         </div>   
-       
-        <Button href="/checkout" variant="contained" size="large" id='pagarButton'>Pagar</Button>
-       
+        {localStorage.getItem('loguearUsuario') || localStorage.getItem('logueadoGoogle')?
+        
+          uniqueArray.length !== 0 ?
+          <Button href="/checkout" variant="contained" size="large" id='pagarButton'>Pagar</Button>
+          :" ":
+        <Link to='/singIn'>
+                <Button href="/checkout" variant="contained" size="large" id='pagarButton'>iniciar sesion</Button>
+        </Link>
+        }
+        {/* {uniqueArray.length !== 0 
+        ?<Button href="/checkout" variant="contained" size="large" id='pagarButton'>Pagar</Button>
+        :" " 
+        } */}
 
       </div>
-            <button id='buttonBackCheckout' onClick={volver}>Back</button>
+            <button id='buttonBackCheckout' onClick={volver}>Volver</button>
+            </>}
         </div>
         
     )

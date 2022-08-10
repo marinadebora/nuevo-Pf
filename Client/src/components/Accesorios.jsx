@@ -24,7 +24,7 @@ export function Accesorios(){
   //----------paginado---------//
 
   const [page, setPage] = useState(1);
-  const [characterPerPage, setCharacterPerPage] = useState(6);
+  const [characterPerPage, setCharacterPerPage] = useState(8);
   const index = page * characterPerPage;
   const endIndex = index - characterPerPage;
   const actualPage = accesorio?.slice(endIndex, index);
@@ -78,6 +78,12 @@ export function Accesorios(){
       <FiltrosAccesorios
     setPage={setPage}
      />
+
+    <Paginado
+      characterPerPage={characterPerPage}
+      newState={accesorio.length}
+      paginado={paginado}
+    />
       
       <Grid container spacing={2}>
   
@@ -106,7 +112,7 @@ export function Accesorios(){
                     Tamaño={e.Tamaño}
                     id={e._id}
                     stock={e.stock}
-                    Link={<Link to={`/home/${e._id}`} >Info</Link>}
+                    Link={<Link  id='infobutton'to={`/home/${e._id}`} >Info</Link>}
                     comentarios={e.comentarios}
                   />
 
@@ -129,11 +135,7 @@ export function Accesorios(){
 <br /><br /><br /><br /><br />
       <button id='buttonBackAA' onClick={volver}>VOLVER</button>
 
-<Paginado
-  characterPerPage={characterPerPage}
-  newState={accesorio.length}
-  paginado={paginado}
-/>
+
 
 <Footer/>
     </div>);

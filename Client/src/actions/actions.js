@@ -93,7 +93,7 @@ export function barcosEnAlquiler()
 	{
 		try {
 
-			const prodVenta = await axios('/embarcacionesr');
+			const prodVenta = await axios('/embarcacionesr', /* configAxios() */);
 			return dispatch({
 				type: 'BARCOS_EN_ALQUILER',
 				payload: prodVenta.data
@@ -108,8 +108,7 @@ export function accesorios()
 	return async function (dispatch)
 	{
 		try {
-
-			const prodVenta = await axios('/accesorios')
+			const prodVenta = await axios('/accesorios', /* configAxios() */)
 			return dispatch({
 				type: 'ACCESORIOS',
 				payload: prodVenta.data
@@ -127,13 +126,7 @@ export function categoriaAccesorios(payload)
 	}
 }
 
-/*  export function addToBasket(payload){
-		 return{
-						 type:'ADD_TO_BASKET',
-						 payload
- 
-						 } 
-				 } */
+
 export const addToBasket = (item) =>
 {
 	try {
@@ -169,6 +162,45 @@ export const addToFavoritos = (item) =>
 	}
 };
 
+export function postHistoria(payload)
+
+{
+	console.log(payload)
+	return async function (dispatch)
+	{
+		try {
+			const historiaCreated = await axios.post(`/historia`, payload);
+			
+			return dispatch({
+				type: "POST_HISTORIA",
+				payload: historiaCreated,
+			});
+		} catch (error) {
+			console.log(error.message);
+			return alert(
+				"Hubo un error al crear el historial. "
+			);
+
+		}
+	};
+}
+
+
+export function updateHistorial(id, payload)
+{
+	console.log(payload)
+	return async function (dispatch)
+	{
+		return await axios.put(`historial/${id}`, payload)
+			.then(data =>
+			{
+				dispatch({
+					type: "UPDATE_HISTORIA",
+					payload: data
+				})
+			})
+	}
+}
 
 
 
@@ -188,7 +220,7 @@ export function postShippingData(payload)
 	return async function (dispatch)
 	{
 		try {
-			const datosDeEnvio = await axios.post(`https://nautical25.herokuapp.com/shippingData`, payload);
+			const datosDeEnvio = await axios.post(`/shippingData`, payload);
 			return dispatch({
 				type: "SET_SHIPPING_DATA",
 				payload: datosDeEnvio,
@@ -363,7 +395,7 @@ export function UpdateToCart(id, payload)
 {
 	return async function (dispatch)
 	{
-		return axios.put(`/user/${id}`, payload)
+		return axios.put(`${URL_BASE}/user/${id}`, payload)
 			.then(data =>
 			{
 				dispatch({
@@ -502,6 +534,29 @@ export function updateEmbarcacionRT(id, payload)
 }
 
 
+let token = null
+
+
+export const setToken = (newToken)=>{
+		token = `Bearer ${newToken.token}`
+	
+}
+export const configAxios = ()=>{
+    const localUser = localStorage.getItem('logueadoGoogle') /* || localStorage.getItem('loguearUsuario') */;
+    const userActive = JSON.parse(localUser);
+    let configAxios = {};
+    if(userActive){
+        configAxios ={
+            headers: {
+            'Content-Type': 'application/json',
+            Authorization: `${userActive.token}`,
+            },
+        }
+    };
+	console.log(configAxios)
+    return configAxios;
+}
+
 export const registro = (value) => async (dispatch) =>
 {
 	return await axios.post(`/registro`, value)
@@ -518,13 +573,9 @@ export const registro = (value) => async (dispatch) =>
 
 
 export const registroGoogle = (value)=> async (dispatch)=>{
-    return await axios.post(`/registroGoogle`,value)
-    .then(res =>{
-        dispatch({type:"REGISTROGOOGLR", payload: res.data})
-    }).catch(error=>{
-        alert(error)
-    })
-} 
+    const inf = await axios.post(`/registroGoogle`,value)
+    return dispatch({type:'REGISTROGOOGLE', payload: inf.data})
+}
 
 export const usuarios = () => async (dispatch) =>
 {
@@ -535,34 +586,10 @@ export const usuarios = () => async (dispatch) =>
 		})
 }
 
-
-let token = null
-
-
-
-
-export const setToken = (newToken)=>{
-    token = `Bearer ${newToken}`
-    return token
-}
-
-
 export const login = (value)=> async (dispatch)=>{
-    const config ={
-        headers:{
-            Authorization: token
-        }
-    }
-
-    const action = await axios.post("/autenticar",value, config)
-
-    return dispatch({
-        type: 'LOGIN',
-        payload: action
-    })
+    const action = await axios.post("/autenticar",value)
+    return dispatch({type:'LOGIN', payload: action.data})
 }
-
-
 
 
 export const busquedaAccesorios = (name)=> async (dispatch)=>{
@@ -594,7 +621,7 @@ export function editarUsuario(){
 }
 
 
- export function editarAccComentarios(id, payload){
+export function editarAccComentarios(id, payload){
 	return async function(dispatch){
 		try {
 			const accesorios = await axios.put(`/comentario/${id}`,payload)
@@ -608,12 +635,12 @@ export function editarUsuario(){
 		}
 	} 
 }
-export function usuarioId(id)
+/* export function usuarioId(id)
 {
 	return async function (dispatch)
 	{
 		try {
-			const userDetail = await axios(`/usuario/${id}`)
+			const userDetail = await axios(`https://nautical25.herokuapp.com/usuario/${id}`)
 
 			return dispatch({
 				type: 'USUARIO_ID',
@@ -623,7 +650,7 @@ export function usuarioId(id)
 			console.log(error)
 		}
 
-	}}
+	}} */
 /* export function usuarioId(id)
 {
 	return async function (dispatch)
@@ -649,10 +676,11 @@ export function historialCompra(){
 	return async function(dispatch){
 		try{
 
-			const histComp= await axios(`/historia`)
+			const histComp= await axios(`/historias`)
+			
 			return dispatch({
 				type:'HISTORIAL_COMPRA',
-				payload:histComp
+				payload:histComp.data
 			})
 		}
 		catch(error){

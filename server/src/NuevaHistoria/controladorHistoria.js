@@ -1,6 +1,7 @@
 const {Router} = require("express")
 const Usuarios = require("../modelos/Usuarios")
 const Historials = require("./Historia")
+
 let router = Router()
 
 const getHistoriaToUser =async ()=>{
@@ -32,14 +33,14 @@ const getHistoriaToUser =async ()=>{
 router.get("/historias", async (req,res)=>{
     let historias =  await getHistoriaToUser()
     res.send(historias)
-
 })
 
 router.post("/historia", async(req,res,next)=>{
     const {precioTotal, productos,usuario} = req.body;
     try {
         const user = await Usuarios.findById(usuario)
-        console.log(user)
+       
+        
         let newHistoria = new Historials({
             precioTotal,
             productos,
@@ -55,7 +56,7 @@ router.post("/historia", async(req,res,next)=>{
                     historialDeCompra:nuevaHistoria.id
                 }
             })
-            console.log(aniade);
+            
             res.send("la historia se creo correctamente cuesta: " + nuevaHistoria.precioTotal)
         }
         

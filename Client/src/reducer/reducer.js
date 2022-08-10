@@ -1,28 +1,28 @@
 export const initialState = {
   products: [],
-  allProducts: [],
+  allProducts:[],
   saleVessels: [],
-  AllSaleVessels: [],
+  AllSaleVessels:[],
   rentVessels: [],
   accesories: [],
-  allAccesories: [],
-  ordenAcc: [],
-  catAcc: [],
+  allAccesories:[],
+  ordenAcc:[],
+  catAcc:[],
   detail: {},
   categorias: [],
   basket: [],
-  shippingData: [],
-  userDetail: [],
-  user: [],
-  historial: [],
-  comentario: [],
-  modo: JSON.parse(localStorage.getItem("modoOscuro")) ? JSON.parse(localStorage.getItem("modoOscuro")) : 'light'
+  shippingData:[],
+  userDetail:[],
+  user:[],
+  historial:[],
+  comentario:[]
 
 };
 
-function rootReducer(state = initialState, action) {
+function rootReducer(state = initialState, action)
+{
   const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
-  const FavFromLocalStorage = JSON.parse(localStorage.getItem("Fav") || "[]");
+  const FavFromLocalStorage = JSON.parse(localStorage.getItem("Fav") || "[]"); 
 
 
   switch (action.type) {
@@ -31,30 +31,32 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         products: action.payload,
-        allProducts: action.payload,
-        detail: {}
+        allProducts:action.payload,
+        detail:{}
       }
+      case "POST_HISTORIA":   
+  return { ...state, historial: state.historial.concat(action.payload) };
     case 'PRODUCTOS_DETAIL':
 
 
       return {
         ...state,
         detail: action.payload,
-        basket: action.payload
+        basket:action.payload
       }
-    case 'USUARIO_DETAIL':
+      case 'USUARIO_DETAIL':
 
       return {
         ...state,
         userDetail: action.payload,
-
+        
       }
 
     case 'BARCOS_EN_VENTA':
       return {
         ...state,
         saleVessels: action.payload,
-        AllSaleVessels: action.payload,
+        AllSaleVessels:action.payload,
       }
 
     case 'BARCOS_EN_ALQUILER':
@@ -82,12 +84,12 @@ function rootReducer(state = initialState, action) {
         categories: action.payload
       }
 
-    case 'ADD_TO_BASKET':
-      const cart_add = state.allAccesories.find(e => e._id === action.payload.id)
-      const actual_card = localStorage.getItem("item2")
-      //JSON.stringify([...cartFromLocalStorage, cart_add._id, cart_add.producto])
-
-      if (cartFromLocalStorage.length) {
+      case 'ADD_TO_BASKET':
+        const cart_add = state.allAccesories.find(e => e._id === action.payload.id)
+       const actual_card = localStorage.getItem("item2") 
+        //JSON.stringify([...cartFromLocalStorage, cart_add._id, cart_add.producto])
+       
+       if(cartFromLocalStorage.length) {
         localStorage.setItem(
           "item2",
           JSON.stringify([...cartFromLocalStorage, cart_add])
@@ -98,17 +100,17 @@ function rootReducer(state = initialState, action) {
           JSON.stringify([cart_add])
         )
       }
-      return {
+      return{
         ...state
       }
-    case 'ADD_TO_FAV':
-      const cart_add_fav = state.allAccesories?.find(e => e._id === action.payload.id)
-      const actual_card_fav = localStorage.getItem("Fav")
-      console.log(action.payload.id)
-
-      //JSON.stringify([...cartFromLocalStorage, cart_add._id, cart_add.producto])
-
-      if (FavFromLocalStorage.length) {
+      case 'ADD_TO_FAV':
+       const cart_add_fav = state.allAccesories?.find(e => e._id === action.payload.id)
+       const actual_card_fav = localStorage.getItem("Fav")
+       console.log(action.payload.id)
+       
+        //JSON.stringify([...cartFromLocalStorage, cart_add._id, cart_add.producto])
+       
+       if(FavFromLocalStorage.length) {
         localStorage.setItem(
           "Fav",
           JSON.stringify([...FavFromLocalStorage, cart_add_fav])
@@ -119,50 +121,65 @@ function rootReducer(state = initialState, action) {
           JSON.stringify([cart_add_fav])
         )
       }
-      return {
+      return{
         ...state
       }
+   
 
+      case 'REMOVE_TO_BASKET':
+        //const cart_remove = state.basket.filter(e => e!==undefined&& e._id !== action.payload)
+        const spliceCart = cartFromLocalStorage
+        var myIndex = spliceCart.indexOf(action.payload);
+        console.log(action.payload)
+       /* if (myIndex !== -1) {
+          spliceCart.splice(myIndex, 1);
+           }
+         console.log(spliceCart)
+         if(cartFromLocalStorage.length) {
+          localStorage.setItem(
+            "item2",
+            JSON.stringify([spliceCart])
+          );
+        } else {
+          localStorage.setItem(
+            "item2",
+            JSON.stringify([spliceCart])
+          )
+        }*/
+         return{
+          ...state
+        }
 
-    case 'REMOVE_TO_BASKET':
-      //const cart_remove = state.basket.filter(e => e!==undefined&& e._id !== action.payload)
-      const spliceCart = cartFromLocalStorage
-      var myIndex = spliceCart.indexOf(action.payload);
-      console.log(action.payload)
-      /* if (myIndex !== -1) {
-         spliceCart.splice(myIndex, 1);
+        
+        case "GET_ALL_CART":
+          const actual = localStorage.getItem("item2")
+          return {
+            ...state,
+            basket: actual
           }
-        console.log(spliceCart)
-        if(cartFromLocalStorage.length) {
-         localStorage.setItem(
-           "item2",
-           JSON.stringify([spliceCart])
-         );
-       } else {
-         localStorage.setItem(
-           "item2",
-           JSON.stringify([spliceCart])
-         )
-       }*/
-      return {
-        ...state
-      }
 
+        case 'SET_SHIPPING_DATA':
+          return {
+            ...state,
+            shippingData: action.payload
+            }
+        
+        case "SET_PAYMENT_MESSAGE":
+            return {
+              ...state,
+              paymentMessage: action.payload,
+              };
 
-    case "GET_ALL_CART":
-      const actual = localStorage.getItem("item2")
-      return {
-        ...state,
-        basket: actual
-      }
+        case "EMPTY_BASKET":
+            return {
+              ...state,
+              basket: action.payload,
+              };
+        
 
-    case 'SET_SHIPPING_DATA':
-      return {
-        ...state,
-        shippingData: action.payload
-      }
-
-    //----------filtros----------//
+          
+  
+      //----------filtros----------//
 
     case 'FITRO_PRECIO':
       const estado = state.AllSaleVessels
@@ -175,75 +192,77 @@ function rootReducer(state = initialState, action) {
         ...state,
         saleVessels: action.payload === 'mayor' ? precios.filter(e => parseInt(e.precio) > 300000) : filterPrecio
       }
-    //----------filtros de accesorios----------//
+//----------filtros de accesorios----------//
     case 'FITRO_PRECIO_ACCESORIO':
       const estadoAcc = state.allAccesories
       const precioAcc = estadoAcc.filter(e => e.precio.split('$')[1])
       const filterPrecioAcc = action.payload === 'medio' ?
         precioAcc.filter(e => parseInt(e.precio.split('$')[1]) > 45 && parseInt(e.precio.split('$')[1]) < 120) :
-        action.payload === 'menor' ? precioAcc.filter(e => parseInt(e.precio.split('$')[1]) < 45) : action.payload === 'mayor' && precioAcc.filter(e => parseInt(e.precio.split('$')[1]) > 120)
+        action.payload === 'menor' ? precioAcc.filter(e => parseInt(e.precio.split('$')[1]) < 45): action.payload === 'mayor' && precioAcc.filter(e => parseInt(e.precio.split('$')[1]) > 120)
 
       return {
         ...state,
-        accesories: filterPrecioAcc,
-        catAcc: filterPrecioAcc,
+        accesories:  filterPrecioAcc,
+        catAcc:  filterPrecioAcc,
       }
 
     case 'FITRO_CATEGORIA_ACCESORIO':
       const allAcc = state.catAcc
       const categoria = action.payload === 'seguridad' ? allAcc.filter(e => e.categorias.find(e => e === action.payload)) :
-        action.payload === 'esparcimiento' ? allAcc.filter(e => e.categorias.find(e => e === action.payload)) : action.payload === 'electronica' && allAcc.filter(e => e.categorias.find(e => e === action.payload))
-
+      action.payload === 'esparcimiento' ? allAcc.filter(e => e.categorias.find(e => e === action.payload)):action.payload === 'electronica' && allAcc.filter(e => e.categorias.find(e => e === action.payload))
+    
       return {
         ...state,
         accesories: action.payload === 'sinFiltro' ? allAcc : categoria,
-        pecioAcc: categoria,
+        pecioAcc:categoria,
       }
-    case 'PRECIO_ORDEN_ACCESORIOS':
+      case 'PRECIO_ORDEN_ACCESORIOS':
 
-      const stateOrden = state.pecioAcc.map(e => ({
-        producto: e.producto,
-        imagenes: e.imagenes,
-        precio: e.precio.split('$')[1],
-        comentarios: e.comentarios,
-        stock: e.stock,
-        descripcion: e.descripcion,
-        dimensiones: e.dimensiones,
-        categorias: e.categorias,
-        _id: e._id,
-        valoraciones: e.valoraciones
+        const stateOrden=state.pecioAcc.map(e=>({
+          producto: e.producto,
+          imagenes:e.imagenes,
+          precio: e.precio.split('$')[1],
+          comentarios:e.comentarios,
+          stock: e.stock,
+          descripcion: e.descripcion,
+          dimensiones: e.dimensiones,
+          categorias: e.categorias,
+          _id:e._id,
+          valoraciones:e.valoraciones
 
-      }))
+        }))
 
-      const orden = action.payload === 'max' ?
-        stateOrden.sort(function (a, b) {
-          return parseInt(b.precio) - parseInt(a.precio)
-        })
-        : action.payload === 'min' && stateOrden.sort(function (a, b) {
-          return parseInt(a.precio) - parseInt(b.precio)
-        })
-      console.log(orden)
-      return {
-        ...state,
-        accesories: orden
-      }
+        const orden = action.payload === 'max' ?
+          stateOrden.sort(function (a, b)
+          {
+            return parseInt(b.precio) - parseInt(a.precio)
+          })
+          :action.payload === 'min' && stateOrden.sort(function (a, b)
+          {
+            return parseInt(a.precio) - parseInt(b.precio)
+          })
+          console.log(orden)
+        return{
+          ...state,
+          accesories:orden
+        }
 
     case 'FITRO_CATEGORIA_EMBARCACION':
       const allrent = state.rentVessels
       const allvent = state.saleVessels
 
       const categoriaR = action.payload === 'Alta' ? allrent.filter(e => e.categorias.find(e => (e.split(' ')[1]) === action.payload)) :
-        action.payload === 'Media' && allrent.filter(e => e.categorias.find(e => (e.split(' ')[1]) === action.payload))
+      action.payload === 'Media' && allrent.filter(e => e.categorias.find(e => (e.split(' ')[1]) === action.payload))
 
       const categoriaV = action.payload === 'Alta' ? allvent.filter(e => e.categorias.find(e => (e.split(' ')[1]) === action.payload)) :
-        action.payload === 'media' && allvent.filter(e => e.categorias.find(e => (e.split(' ')[1]) === action.payload))
+      action.payload === 'media' && allvent.filter(e => e.categorias.find(e => (e.split(' ')[1]) === action.payload))
 
       return {
         ...state,
         saleVessels: action.payload === 'baja' ? allvent.filter(e => e.categorias.find(e => (e.split(' ')[1]) === action.payload)) : categoriaV,
         rentVessels: action.payload === 'Economica' ? allrent.filter(e => e.categorias.find(e => (e.split(' ')[1]) === action.payload)) : categoriaR
       }
-
+    
 
     case 'FILTRO_CATEGORIAS':
       const productos = state.allProducts
@@ -255,85 +274,96 @@ function rootReducer(state = initialState, action) {
       }
 
     case 'PRECIO_ORDEN':
-      const stateOrder = state.saleVessels
-      const order = action.payload === 'max' ?
-        stateOrder.sort(function (a, b) {
-          return parseInt(b.precio) - parseInt(a.precio)
-        })
-        : stateOrder.sort(function (a, b) {
-          return parseInt(a.precio) - parseInt(b.precio)
-        })
-
+        const stateOrder = state.saleVessels
+        const order = action.payload === 'max' ?
+          stateOrder.sort(function (a, b)
+          {
+            return parseInt(b.precio) - parseInt(a.precio)
+          })
+          : stateOrder.sort(function (a, b)
+          {
+            return parseInt(a.precio) - parseInt(b.precio)
+          })
+  
       return {
-        ...state,
-        saleVessels: order
-      }
-
-
-    case 'CATEGORIAS':
-      return {
-        ...state,
-        categorias: action.payload,
-      }
-    case "POST_CATEGORIAS":
-      return { ...state, categorias: state.categorias.concat(action.payload) };
-
-    case "RESET_DETAIL":
-      return {
-        ...state,
-        detail: {},
-      };
-    case 'REGISTRO':
-      return {
-        ...state
-      }
-    case 'REGISTROGOOGLR':
-      return {
-        ...state
-      }
-    case "USUARIOS":
-      console.log(state.user)
-      return {
-        ...state,
-        user: action.payload
-      }
-
-    case 'LOGIN':
-      return {
-        ...state
-      }
-    case 'BUSCAR_ACCESORIOS':
-      return {
+          ...state,
+          saleVessels: order
+        }
+      
+      
+        case 'CATEGORIAS':
+          return {
+            ...state,
+            categorias: action.payload,
+          }
+        case "POST_CATEGORIAS":   
+          return { ...state, categorias: state.categorias.concat(action.payload) };
+          
+          case "RESET_DETAIL":
+            return {
+              ...state,
+              detail: {},
+            };
+            case 'REGISTRO':
+          return{
+            ...state
+          }
+          case 'REGISTROGOOGLE':
+          return{
+            ...state
+          }
+          case "USUARIOS":
+            console.log(state.user)
+          return{
+            ...state,
+            user: action.payload
+          }
+          
+          case 'LOGIN':
+          return{
+            ...state
+          }
+          case 'BUSCAR_ACCESORIOS':
+      return{
         ...state,
         accesories: action.payload
       }
+      case 'TOKEN':
+        return{
+          ...state
+        }
     case 'EDITAR_USUARIOS':
       return {
         ...state,
-        user: action.payload
+        user:action.payload
       }
     case 'EDITAR_ACC_COMENTARIOS':
+      return{
+        ...state,
+        comentario:action.payload
+        
+      }
+/*  case 'USUARIO_ID':
+  return{
+    ...state,
+    userDetail:action.payload
 
-      return {
-        ...state,
-        comentario: action.payload
+  } */
 
-      }
-    case 'USUARIO_ID':
+  case 'HISTORIAL_COMPRA':
+    return{
+      ...state,
+      historial:action.payload
+    }
+    case "UPDATE_HISTORIA":
       return {
-        ...state,
-        userDetail: action.payload
-      }
-    case 'HISTORIAL_COMPRA':
-      return {
-        ...state,
-        historial: action.payload
-      }
-    case "CONTACT_FORM":
+         ...state
+   }
+   case "CONTACT_FORM":
       return{
         ...state
       }
-
+    
     default: {
       return state
     }

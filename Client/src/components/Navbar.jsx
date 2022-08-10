@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom';
 import '../styles/searchBar.css';
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import { modoOscuro, setToken } from "../actions/actions";
 import { useDispatch, useSelector} from 'react-redux';
-
+import { setToken } from "../actions/actions";
+import { UsuariosDetail } from '../actions/actions';
 
 
 export default function Navbar() {
@@ -23,8 +23,16 @@ export default function Navbar() {
   const[usuario, setUsuario] = useState(null)
   const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
 
+  const UserFromLocalStorage = JSON.parse(localStorage.getItem("loguearUsuario"));
+  const UserFromLocalgoogle = JSON.parse(localStorage.getItem("logueadoGoogle"));
+  const current_userID =UserFromLocalStorage?.id || UserFromLocalgoogle?.id
+  const myUserDetail = useSelector(state => state?.userDetail);
+
+ 
+
   useEffect(()=>{
     localStorage.getItem("item2") 
+    dispatch(UsuariosDetail(current_userID))
     if(localStorage.getItem('loguearUsuario')){
     const users = JSON.parse(localStorage.getItem('loguearUsuario'))
     setUsuario(users)
@@ -32,7 +40,7 @@ export default function Navbar() {
     const users = JSON.parse(localStorage.getItem('logueadoGoogle'))
     setUsuario(users)
   }
-  },[])
+  },[dispatch,current_userID])
 
   const handelOut =()=>{
     if(usuario){
@@ -46,12 +54,48 @@ export default function Navbar() {
 
   const logueado = ()=>{
     return(
+      
       <div>
+
+        {usuario && usuario.admin === true?
+        <Toolbar>
+          
+     
+        <Typography sx={{marginLeft: '10px'}} variant="h7" component="p" id='guest'>
+        <Link id='adminNavbar' to='/dashboard'>
+          Bienvenido {usuario.nombre || usuario.firstName} Admin
+          </Link>
+        </Typography>
+        <Link to='/favs'>
+                <Button sx={{marginLeft: '10px'}} variant="outlined" id="button">Favoritos</Button>
+          </Link>
+          <Button type="onClick" variant="outlined" sx={{marginLeft: '10px'}} onClick={handelOut}>Cerrar Sesion</Button>
+        </Toolbar>:
+        <Toolbar>
+        <Typography sx={{marginLeft: '10px'}} variant="h7" component="p" id='guest'>
+        <Link id='adminNavbar'  to='/historialC'>Historial de Compras</Link>
+        </Typography>
+        <Typography sx={{marginLeft: '10px'}} variant="h7" component="p" id='guest'>
+        Bienvenido {usuario.nombre || usuario.firstName}
+        </Typography>
+          <Link to='/favs'>
+                <Button sx={{marginLeft: '10px'}} variant="outlined" id="button">Favoritos</Button>
+          </Link>
+          <Button type="onClick" variant="outlined" sx={{marginLeft: '10px'}} onClick={handelOut}>Cerrar Sesion</Button>
+          </Toolbar>
+      }
+          {/* <Toolbar>
+
         <Typography sx={{marginLeft: 'auto'}} variant="h6" component="p" id='guest'>
           Bienvenido {usuario.nombre || usuario.firstName}
-          <Button type="onClick" variant="outlined" sx={{marginLeft: '35px'}} onClick={handelOut}>Cerrar Sesion</Button>
         </Typography>
-        
+
+          <Link to='/favs'>
+                <Button sx={{marginLeft: '35px'}} variant="outlined" id="button">Favoritos</Button>
+          </Link>
+          <Button type="onClick" variant="outlined" sx={{marginLeft: '35px'}} onClick={handelOut}>Cerrar Sesion</Button>
+          </Toolbar> */}
+
       </div>
         
       
@@ -61,13 +105,16 @@ export default function Navbar() {
   const sinLogin = ()=>{
     return(
       <div>
-        <Link to='/singIn'>
-              <Button variant="outlined" id="button">Inicia Sesion</Button>
-            </Link>
+        <Toolbar>
 
+        <Link to='/singIn'>
+              <Button sx={{marginLeft: '150px'}} variant="outlined" id="button">Inicia Sesion</Button>
+            </Link>
             <Link to='/singUp'>
               <Button variant="outlined" id="button">Registro</Button>
             </Link>
+          
+            </Toolbar>
       </div>
     )
   }
@@ -96,25 +143,34 @@ export default function Navbar() {
             <Link to='/alquiler' className='paralelogramo'>
               <button src='/alquiler' id='buttonNavBarMenu'>RENTA YATES</button>
             </Link>
-            
-           
-            <Typography sx={{marginLeft: 'auto'}} variant="h6" component="p" id='guest'>
+
+            {/* {usuario && usuario.admin === true?
+            <Typography sx={{marginLeft: 'auto'}} variant="h7" component="p" id='guest'>
+            <Link id='adminNavbar' to='/dashboard'>
+              Hello Admin
+              </Link>
+            </Typography>:
+            <Typography sx={{marginLeft: 'auto'}} variant="h7" component="p" id='guest'>
+              <Link id='adminNavbar'  to='/historialC'>Historial de Compras</Link>
+            </Typography>
+            } */}
+            {/* <Typography sx={{marginLeft: 'auto'}} variant="h6" component="p" id='guest'>
+            <Link id='adminNavbar'  to='/historialC'>Historial de Compras</Link>
             <Link id='adminNavbar' to='/dashboard'>
               Hello Admin
               </Link>
             </Typography>
-            
-            <Link to='/favs'>
-              <Button variant="outlined" id="button">Favoritos</Button>
-            </Link>
-            <Link to='/singIn'>
-              <Button variant="outlined" id="button">Sing In</Button>
-            </Link>
+             */}
 
-            <Link to='/singUp'>
+           {/* <Link to='/singUp'>
               <Button variant="outlined" id="button">Sing Up</Button>
-            </Link>
-        
+            </Link> */}
+         
+            {
+              usuario?
+              logueado():
+              sinLogin()
+            }
 
             <Link to='/checkoutPage'>
               <IconButton arial-label="show cart items" id="cartButton">
