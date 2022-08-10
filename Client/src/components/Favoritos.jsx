@@ -30,11 +30,14 @@ export default function Favs()
   const [cart /* setCart */] = useState(FavFromLocalStorage);
   const UserFromLocalStorage = JSON.parse(localStorage.getItem("loguearUsuario"));
   const [user/* setUser */] = useState(UserFromLocalStorage);
-  const current_userID =UserFromLocalStorage?.id
+  const UserFromLocalgoogle = JSON.parse(localStorage.getItem("logueadoGoogle"));
+  const current_userID =UserFromLocalStorage?.id || UserFromLocalgoogle?.id
   const myUserDetail = useSelector(state => state?.userDetail);
-  const current_cart =FavFromLocalStorage;
+  const current_cart_fav =FavFromLocalStorage;
   const CartUser= myUserDetail[0]?.carritoDeCompra
- 
+  const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
+  const current_cart =cartFromLocalStorage;
+  
 
   
 
@@ -42,6 +45,17 @@ export default function Favs()
     carritoDeCompra: FavFromLocalStorage
     
 })
+
+
+
+
+const soloid =current_cart?.map(item => item._id)
+function cantidad (id){
+  
+  var cantidadfiltrada = soloid.filter(e=> e === id)
+  return cantidadfiltrada.length
+  }
+
 
 
 
@@ -86,7 +100,7 @@ function removeDuplicates(originalArray, prop) {
 
 
 
-var uniqueArray = removeDuplicates(current_cart, "_id");
+var uniqueArray = removeDuplicates(current_cart_fav, "_id");
 
   const volver = () =>
   {
@@ -141,6 +155,7 @@ var uniqueArray = removeDuplicates(current_cart, "_id");
             break;
   
           default:
+            window.location.reload()
             break;
         }
       });
@@ -212,17 +227,13 @@ var uniqueArray = removeDuplicates(current_cart, "_id");
                 <form id="layout">
                 <Link to={`/home/${e._id}`} >Info</Link>
                 
-                {e.stock >0 
+                {e.stock > cantidad(e._id)
           ?<IconButton aria-label="add to cart"onClick={() => addToCart(e._id)}>
           <Badge  color="secondary" id='badge'>
             <AddShoppingCartIcon />
             </Badge>
           </IconButton>
-          :<IconButton disabled aria-label="add to cart"onClick={() => addToCart(e._id)}>
-          <Badge  color="secondary" id='badge'>
-            <AddShoppingCartIcon />
-            </Badge>
-          </IconButton>
+          :<><p>Agregaste el maximo de Stock disponible</p></>
           }
                
                 <button id="delete" onClick={() => handleDelete(e._id)} className="delete-button">Delete</button>

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -26,7 +26,33 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 export default function Producto({ tipo,id, producto, marca ,precio, fabricacion, imagenes, Link, stock,comentarios}) {
    
   const navigate = useNavigate();
-   const dispatch = useDispatch() 
+  const dispatch = useDispatch() 
+  const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
+  const current_cart =cartFromLocalStorage;
+
+
+
+
+
+  
+const soloid =current_cart?.map(item => item._id)
+var cantidadfiltrada = soloid.filter(e=> e === id)
+
+
+/*const sumall = current_cart.map(item => item.precio);
+const neto = sumall.map(e=>e.split('$')[1])
+const num = neto.map(e=> parseInt(e))
+var precioTotal =num.reduce((a, b) => a + b, 0);
+
+const sumaStock = uniqueArray.map(item => item.stock).reduce((a, b) => a + b, 0);;
+console.log(sumaStock)*/
+
+
+/*function cantidad (id){
+  
+var cantidadfiltrada = soloid.filter(e=> e === id)
+return cantidadfiltrada.length
+}*/
   
   
    async function addToCart () {
@@ -43,6 +69,7 @@ export default function Producto({ tipo,id, producto, marca ,precio, fabricacion
         },
        
         cancel: "Quedarse",
+        
       },
     }).then((value) => {
       switch (value) {
@@ -52,6 +79,7 @@ export default function Producto({ tipo,id, producto, marca ,precio, fabricacion
           break;
 
         default:
+          window.location.reload()
           break;
       }
     });
@@ -149,17 +177,13 @@ export default function Producto({ tipo,id, producto, marca ,precio, fabricacion
           <Typography>Precio: {precio}</Typography>
         </CardContent>
         <CardActions disableSpacing id='cardAction'>
-          {stock >0 
+          {stock > cantidadfiltrada.length
           ?<IconButton aria-label="add to cart"onClick={() => addToCart()}>
           <Badge  color="secondary" id='badge'>
             <AddShoppingCartIcon />
             </Badge>
           </IconButton>
-          :<IconButton disabled aria-label="add to cart"onClick={() => addToCart()}>
-          <Badge  color="secondary" id='badge'>
-            <AddShoppingCartIcon />
-            </Badge>
-          </IconButton>
+          :<><p>Agregaste el maximo de Stock disponible</p></>
           }
             <IconButton aria-label="add to favorites" onClick={() => addToFav()}> <FavoriteIcon /></IconButton>
           {  total?<div className='estrellitas'>
