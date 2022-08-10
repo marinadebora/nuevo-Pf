@@ -33,7 +33,6 @@ const getHistoriaToUser =async ()=>{
 router.get("/historias", async (req,res)=>{
     let historias =  await getHistoriaToUser()
     res.send(historias)
-
 })
 
 router.post("/historia", async(req,res,next)=>{

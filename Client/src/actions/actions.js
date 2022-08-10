@@ -185,6 +185,7 @@ export function postHistoria(payload)
 	};
 }
 
+
 export function updateHistorial(id, payload)
 {
 	console.log(payload)
@@ -200,6 +201,7 @@ export function updateHistorial(id, payload)
 			})
 	}
 }
+
 
 
 export const getItemsCart = () =>
