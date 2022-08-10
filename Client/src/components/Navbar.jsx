@@ -10,6 +10,7 @@ import { setToken } from "../actions/actions";
 import { useDispatch} from 'react-redux';
 import { UsuariosDetail } from '../actions/actions';
 import { useSelector} from 'react-redux';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 export default function Navbar() {
   //constante para cambiar e numero del carrito de forma dinamica
@@ -66,9 +67,9 @@ export default function Navbar() {
           </Link>
         </Typography>
         <Link to='/favs'>
-                <Button sx={{marginLeft: '10px'}} variant="outlined" id="button">Favoritos</Button>
+              <FavoriteIcon id="buttonFavoritos"/>
           </Link>
-          <Button type="onClick" variant="outlined" sx={{marginLeft: '10px'}} onClick={handelOut}>Cerrar Sesion</Button>
+          <Button type="onClick" variant="outlined" sx={{marginLeft: '10px'}} onClick={handelOut} id='button'>Cerrar Sesion</Button>
         </Toolbar>:
         <Toolbar>
         <Typography sx={{marginLeft: '10px'}} variant="h7" component="p" id='guest'>
@@ -78,9 +79,11 @@ export default function Navbar() {
         Bienvenido {usuario.nombre || usuario.firstName}
         </Typography>
           <Link to='/favs'>
-                <Button sx={{marginLeft: '10px'}} variant="outlined" id="button">Favoritos</Button>
+                {/* <IconButton sx={{marginLeft: '10px'}} aria-label="add to favorites"> */}
+                  <FavoriteIcon id="buttonFavoritos"/>
+                {/* </IconButton> */}
           </Link>
-          <Button type="onClick" variant="outlined" sx={{marginLeft: '10px'}} onClick={handelOut}>Cerrar Sesion</Button>
+          <Button type="onClick" variant="outlined" sx={{marginLeft: '10px'}} onClick={handelOut} id='button'>Cerrar Sesion</Button>
           </Toolbar>
       }
           {/* <Toolbar>
@@ -103,14 +106,15 @@ export default function Navbar() {
 
   const sinLogin = ()=>{
     return(
-      <div>
+      <div id='containerButtonsRegistroInicio'>
         <Toolbar>
 
         <Link to='/singIn'>
               <Button sx={{marginLeft: '150px'}} variant="outlined" id="button">Inicia Sesion</Button>
-            </Link>
+        </Link>
+            
             <Link to='/singUp'>
-              <Button variant="outlined" id="button">Registro</Button>
+              <Button sx={{marginLeft: '150px'}} variant="outlined" id="button">Registro</Button>
             </Link>
           
             </Toolbar>

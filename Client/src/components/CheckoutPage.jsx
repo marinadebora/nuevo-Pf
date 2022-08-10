@@ -194,15 +194,19 @@ return cantidadfiltrada.length
         <NavBar />
         {current_cart.length === 0 ? 
         <>
-         <h1 id='titleCheckoutPage'>Shopping Cart</h1>
+         <h1 id='titleCheckoutPage'>Carro de compras</h1>
+         
          <h2>El Carrito esta vacio</h2>
         </>
        : <>
        <h1 id='titleCheckoutPage'>Shopping Cart</h1>
-        <button 
+       <div id='mainButtonCleanCart'>
+          <button 
                 id="buttonCleanCart" 
                 onClick={() => handleClearCart()}>
-                  Limpiar carrito <GiIcons.GiBroom /> </button>
+                  Limpiar carrito <GiIcons.GiBroom /> 
+          </button>
+        </div>
             
             {
               uniqueArray?.map(e => (

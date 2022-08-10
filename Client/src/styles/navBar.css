@@ -15,11 +15,17 @@
     color: #0184a9;
 }
 
+#containerButtonsRegistroInicio{
+    width: 400px;
+}
+
 #button{
     color: #0184a9;
     border: solid 1px #0184a9;
     float: left;
-    margin-left: 10px;
+    width: 150px;
+    font-size: 10px;
+    margin-right: 15px;
 }
 
 #cart{
@@ -35,6 +41,14 @@
 #adminNavbar{
     text-decoration: none;
       color: #0184a9
+}
+
+#buttonFavoritos{
+    margin-top: 5px;
+    margin-right: 15px;
+    color: #0184a9;
+    padding: 10px;
+
 }
 
 
