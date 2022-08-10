@@ -63,7 +63,7 @@ export function FiltrosAccesorios({setPage}) {
     }
     
   return (
-<div>
+<div id='filtroContainer'>
    <label id='text' key='Precio'>Filtrar por Precio: </label>
   <select name="Precio" id="barcoVentaAcc" onChange={(e) => filtroPorPrecio(e)}>
     <option key={'sinFiltro'} value={'sinFiltro'}>Sin Filtros</option>

@@ -194,15 +194,20 @@ return cantidadfiltrada.length
         <NavBar />
         {current_cart.length === 0 ? 
         <>
-         <h1 id='titleCheckoutPage'>Shopping Cart</h1>
+         <h1 id='titleCheckoutPage'>Carro de compras</h1>
+         
          <h2>El Carrito esta vacio</h2>
         </>
        : <>
-        <button 
-                className="buttonCleanCart" 
+       <h1 id='titleCheckoutPage'>Shopping Cart</h1>
+       <div id='mainButtonCleanCart'>
+          <button 
+                id="buttonCleanCart" 
                 onClick={() => handleClearCart()}>
-                  Limpiar carrito <GiIcons.GiBroom /> </button>
-            <h1 id='titleCheckoutPage'>Shopping Cart</h1>
+                  Limpiar carrito <GiIcons.GiBroom /> 
+          </button>
+        </div>
+            
             {
               uniqueArray?.map(e => (
                     e !== undefined &&
@@ -260,11 +265,19 @@ return cantidadfiltrada.length
         <h2> TOTAL</h2>
         <h2>US$ {precioTotal}</h2>
         </div>   
-       
-        {uniqueArray.length !== 0 
+        {localStorage.getItem('loguearUsuario') || localStorage.getItem('logueadoGoogle')?
+        
+          uniqueArray.length !== 0 ?
+          <Button href="/checkout" variant="contained" size="large" id='pagarButton'>Pagar</Button>
+          :" ":
+        <Link to='/singIn'>
+                <Button href="/checkout" variant="contained" size="large" id='pagarButton'>iniciar sesion</Button>
+        </Link>
+        }
+        {/* {uniqueArray.length !== 0 
         ?<Button href="/checkout" variant="contained" size="large" id='pagarButton'>Pagar</Button>
         :" " 
-      }
+        } */}
 
       </div>
             <button id='buttonBackCheckout' onClick={volver}>Volver</button>

@@ -688,3 +688,10 @@ console.log(error)
 		}
 	}
 }
+
+export function filtroHistorial(payload){
+	return {
+		type: 'FITRO_HISTORIAL',
+		payload
+	}
+}
