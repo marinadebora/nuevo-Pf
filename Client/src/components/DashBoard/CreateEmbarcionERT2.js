@@ -7,6 +7,7 @@ import { barcosEnAlquiler, /*getAllTypes */} from '../../actions/actions';
 import '../../styles/form.css';
 import { Link } from 'react-router-dom';
 import axios from "axios"
+import NabVarD from './NabVarD';
 
 
 export function EmbarcacionCreateRT2(){
@@ -259,6 +260,8 @@ export function EmbarcacionCreateRT2(){
       };
     
     return (
+        <div>
+        <NabVarD />
         <div className="cont-form">
             
             
@@ -600,7 +603,7 @@ export function EmbarcacionCreateRT2(){
                 </>
             }
             
-
+            </div>
         </div>
     )
 }

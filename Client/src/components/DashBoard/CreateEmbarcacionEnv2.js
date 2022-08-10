@@ -7,6 +7,7 @@ import { barcosEnVenta, /*getAllTypes */} from '../../actions/actions';
 import '../../styles/form.css';
 import { Link } from 'react-router-dom';
 import axios from "axios"
+import NabVarD from './NabVarD';
 
 
 
@@ -260,6 +261,8 @@ export function EmbarcacionCreateEnV2(){
       
     
     return (
+        <div>
+        <NabVarD />
         <div className="cont-form">
             
             
@@ -595,7 +598,7 @@ export function EmbarcacionCreateEnV2(){
                 </>
             }
            
-            
+           </div>  
         </div>
     )
 }
