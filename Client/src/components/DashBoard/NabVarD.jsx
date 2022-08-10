@@ -13,7 +13,7 @@ export default function Navbar() {
   
   return (
     
-      <AppBar position="sticky" id="appBar2">
+      <AppBar position="sticky" id="appBar3">
         <Grid>
           <Toolbar>
           <Link to='/accesorios'>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link , useParams} from "react-router-dom";
-import '../../styles/historialCompras.css'
+import '../../styles/ordenesDeCompra.css'
 import {usuarioId, usuarios,historialCompra,updateHistorial,filtroHistorial} from '../../actions/actions'
 import swal from "sweetalert";
 import { useNavigate } from 'react-router-dom';
@@ -191,32 +191,35 @@ async function handleRecibido(id){
 Historial?.map(e=>(
  
  <div   className="contenedor-orden">
- <h3>Compra n° : {e._id}</h3>,
- <h2>Estado de la compra:{e.pendiente? <p>PENDIENTE</p>: e.procesado? <p>PROCESADO</p>: e.recibido?<p>RECIBIDO</p>: e.cancelado? <p>CANCELADO</p>:" "}
- </h2>
- Cambiar estado a:
-  {!e.cancelado?<button onClick={() => handleCancelado(e._id)}class="bt-cancel" id="bt-cancel">Cancelado</button>:""}
-  {!e.pendiente?<button onClick={() => handlePendiente(e._id)}class="bt-cancel" id="bt-cancel">Pendiente</button>:""}
-  {!e.procesado?<button onClick={() => handleProcesado(e._id)}class="bt-cancel" id="bt-cancel">Procesado</button>:""}
-  {!e.recibido?<button onClick={() => handleRecibido(e._id)}class="bt-cancel" id="bt-cancel">Recibido</button>:""}
-
+  <div id='contenedorInfo'>
+    <h3 id='compraN'>Compra n° : {e._id}</h3>
+    <h2 id='estado'>Estado de la compra:{e.pendiente? <p id='estadoPendiente'>Pendiente</p>: e.procesado? <p id='estadoProcesado'>Procesado</p>: e.recibido?<p id='estadoRecibido'>Entregado</p>: e.cancelado? <p id='estadoCancelado'>Cancelado</p>:" "}
+    </h2>
+    
+    <div id='estadoCompra'>
+    <h4 id='estadoA'>Cambiar estado a:</h4>
+      {!e.cancelado?<button onClick={() => handleCancelado(e._id)}class="bt-cancel" id="bt-cancel">Cancelado</button>:""}
+      {!e.pendiente?<button onClick={() => handlePendiente(e._id)}class="bt-cancel" id="bt-cancel">Pendiente</button>:""}
+      {!e.procesado?<button onClick={() => handleProcesado(e._id)}class="bt-cancel" id="bt-cancel">Procesado</button>:""}
+      {!e.recibido?<button onClick={() => handleRecibido(e._id)}class="bt-cancel" id="bt-cancel">Entregado</button>:""}
+    </div>
+  </div>
     { e.productos.map(e=>(
          <div >
             
-         <div className='contenedor-art'>
+      
        
-       <div className='contenedor-texto-art'>
-     <p className='nombre-art'>{e.producto}</p>
-     <p className='texto-art'>Precio: {e.precio}</p>
-     <p>{e.cantidad} unidad</p>
-     
+    <div id='contenedor-texto-art'>
+      <p id='nombre-art'>{e.producto}</p>
+      <p id='texto-art'>Precio: {e.precio}</p>
+      <p id='cant'>{e.cantidad} unidad</p>
      </div>
  
      
-     </div></div>
-     ))},
+   </div>
+     ))}
     
-    <p>Precio Total: $ {e.precioTotal}</p>
+    <p id='precioTotalH'>Precio Total: $ {e.precioTotal}</p>
    
      </div>))
 }
