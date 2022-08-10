@@ -12,7 +12,7 @@
 }
 
 #campos{
-    margin-left: auto;
+    margin-left: 35%;
     
 }
 #categoriasR{
@@ -62,6 +62,10 @@
     margin-left: 10px;
     font-size: 15px;
     cursor: pointer;
+}
+
+#filtroContainer{
+    height: 30px;
 }
 
 @media(max-width: 705px){

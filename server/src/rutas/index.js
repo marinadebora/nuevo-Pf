@@ -38,6 +38,7 @@ const { correoCompra } = require("../controladores/autenticarCompra");
 const usuariosGoogle = require('../controladores/ControladorRegistroGoogle');
 const { correoContacto } = require("./postFormularioContacto");
 /* const app = require("../modelos/SesionGoogle.js") */
+const {PutStock} = require("../controladores/controladorPutStock")
 
 let router = Router();
 
@@ -96,6 +97,8 @@ router.use("/registroGoogle", usuariosGoogle, correo)
 // router.use("/b", cargarRenta)
 // router.use("/c", cargarAccesorios)
 
+
+router.put("/stock/:id", PutStock)
 
 
 module.exports = router;

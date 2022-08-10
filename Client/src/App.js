@@ -31,7 +31,7 @@ import { useSelector, useDispatch ,} from 'react-redux'
 import { UsuariosDetail } from './actions/actions'
 import Checkout from "./components/CheckoutProcess/Checkout"
 import Favs from "./components/Favoritos"
-import OrdenesDeCompras from "./components/DashBoard/OrdenesDeCompra.js"
+import OrdenesDeCompras from "./components/DashBoard/OrdenesDeCompra.jsx"
 import CheckoutFinal from "./components/CheckoutProcess/CheckoutFinal"
 let publishableKey ="pk_test_51LTzChGPkJkLR4xlRyDUWk3Pj6SiGC8bq0An5pdnhBWsCwE0Y9eIT2uUj7baWSnQlXXXmqSlZitwQKJrd7o1LwC500k5khRIeF" 
 const stripePromise = loadStripe(publishableKey)
@@ -63,7 +63,7 @@ export default function App() {
  
   
   return (
-    !myUserDetail.admin  ?
+    !myUserDetail?.admin  ?
     <>
 
     <div className="App">
