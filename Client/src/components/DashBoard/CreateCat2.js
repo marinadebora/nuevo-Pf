@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {postCategorias, Categorias } from '../../actions/admin-action';
 import '../../styles/form.css';
 import { Link } from 'react-router-dom';
+import NabVarD from './NabVarD';
 
 
 
@@ -118,6 +119,8 @@ export function CatCreate2(){
       };
     
     return (
+        <div>
+        <NabVarD />
         <div classname="cont-form">
             
             
@@ -171,7 +174,8 @@ export function CatCreate2(){
                     </div>
                 </>
             }
-            
+        </div>
+        
         </div>
     )
 }
