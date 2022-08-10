@@ -24,14 +24,14 @@ let agregarAlCarrito = async (req,res)=>{
         console.log({carritoDeCompra: [{idAccesorio}]})
         res.send("El producto se agrego correctamente" + usuario);
       } catch (err) {
-       console.error(err);
+      console.error(err);
       }
     };
 
     const borrarCarrito = async (req, res) => {
         try {
           const { id } = req.body;
-         let usuario = await Usuarios.updateOne(
+        let usuario = await Usuarios.updateOne(
             { _id: id },
             { carritoDeCompra: [], cantidad: 0 }
           );

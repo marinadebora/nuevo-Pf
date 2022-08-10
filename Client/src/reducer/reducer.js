@@ -347,7 +347,9 @@
     return{
       ...state,
       userDetail:action.payload
+
     } */
+
     case 'HISTORIAL_COMPRA':
       return{
         ...state,
