@@ -104,7 +104,7 @@ function DashboardContent() {
               <MenuIcon />
             </IconButton>
 
-            <Link href="/">
+            <Link href="/accesorios">
             <Button><img id='logoDashboard' src={logoDashBoard} alt='imgDashboard'/></Button>
             </Link> 
 
