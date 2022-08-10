@@ -47,7 +47,7 @@ export default function App() {
   const current_userID =UserFromLocalStorage?.id || UserFromLocalgoogle?.id
   const myUserDetail = useSelector(state => state?.userDetail);
 
-  console.log(current_userID)
+  
  
   
 
