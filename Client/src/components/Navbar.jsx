@@ -60,13 +60,11 @@ export default function Navbar() {
 
         {usuario && usuario.admin === true?
         <Toolbar>
+     
         <Typography sx={{marginLeft: '10px'}} variant="h7" component="p" id='guest'>
         <Link id='adminNavbar' to='/dashboard'>
-          Hello Admin
+          Bienvenido {usuario.nombre || usuario.firstName} Admin
           </Link>
-        </Typography>
-        <Typography sx={{marginLeft: '10px'}} variant="h7" component="p" id='guest'>
-          Bienvenido {usuario.nombre || usuario.firstName}
         </Typography>
         <Link to='/favs'>
                 <Button sx={{marginLeft: '10px'}} variant="outlined" id="button">Favoritos</Button>
