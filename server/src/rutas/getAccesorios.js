@@ -6,7 +6,7 @@ const getAccesorios = Router();
 getAccesorios.get('/', async (req,res)=>{
     const {producto} = req.query
     const api = await Accesorios.find()
-    console.log(req.headers)
+    /* console.log(req.headers) */
     try {
         if(producto){
         const busqueda = api.filter( e => e.producto.toLowerCase().includes(producto.toLowerCase()))

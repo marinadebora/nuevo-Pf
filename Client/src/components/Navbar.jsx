@@ -48,11 +48,43 @@ export default function Navbar() {
   const logueado = ()=>{
     return(
       <div>
+        {usuario && usuario.admin === true?
+        <Toolbar>
+        <Typography sx={{marginLeft: '10px'}} variant="h7" component="p" id='guest'>
+        <Link id='adminNavbar' to='/dashboard'>
+          Hello Admin
+          </Link>
+        </Typography>
+        <Typography sx={{marginLeft: '10px'}} variant="h7" component="p" id='guest'>
+          Bienvenido {usuario.nombre || usuario.firstName}
+        </Typography>
+        <Link to='/favs'>
+                <Button sx={{marginLeft: '10px'}} variant="outlined" id="button">Favoritos</Button>
+          </Link>
+          <Button type="onClick" variant="outlined" sx={{marginLeft: '10px'}} onClick={handelOut}>Cerrar Sesion</Button>
+        </Toolbar>:
+        <Toolbar>
+        <Typography sx={{marginLeft: '10px'}} variant="h7" component="p" id='guest'>
+        <Link id='adminNavbar'  to='/historialC'>Historial de Compras</Link>
+        </Typography>
+        <Typography sx={{marginLeft: '10px'}} variant="h7" component="p" id='guest'>
+        Bienvenido {usuario.nombre || usuario.firstName}
+        </Typography>
+          <Link to='/favs'>
+                <Button sx={{marginLeft: '10px'}} variant="outlined" id="button">Favoritos</Button>
+          </Link>
+          <Button type="onClick" variant="outlined" sx={{marginLeft: '10px'}} onClick={handelOut}>Cerrar Sesion</Button>
+          </Toolbar>
+      }
+          {/* <Toolbar>
         <Typography sx={{marginLeft: 'auto'}} variant="h6" component="p" id='guest'>
           Bienvenido {usuario.nombre || usuario.firstName}
-          <Button type="onClick" variant="outlined" sx={{marginLeft: '35px'}} onClick={handelOut}>Cerrar Sesion</Button>
         </Typography>
-        
+          <Link to='/favs'>
+                <Button sx={{marginLeft: '35px'}} variant="outlined" id="button">Favoritos</Button>
+          </Link>
+          <Button type="onClick" variant="outlined" sx={{marginLeft: '35px'}} onClick={handelOut}>Cerrar Sesion</Button>
+          </Toolbar> */}
       </div>
         
       
@@ -62,13 +94,14 @@ export default function Navbar() {
   const sinLogin = ()=>{
     return(
       <div>
+        <Toolbar>
         <Link to='/singIn'>
-              <Button variant="outlined" id="button">Inicia Sesion</Button>
+              <Button sx={{marginLeft: '150px'}} variant="outlined" id="button">Inicia Sesion</Button>
             </Link>
-
             <Link to='/singUp'>
               <Button variant="outlined" id="button">Registro</Button>
             </Link>
+            </Toolbar>
       </div>
     )
   }
@@ -97,29 +130,28 @@ export default function Navbar() {
             <Link to='/alquiler' className='paralelogramo'>
               <button src='/alquiler' id='buttonNavBarMenu'>RENTA YATES</button>
             </Link>
-            
-           
-            <Typography sx={{marginLeft: 'auto'}} variant="h6" component="p" id='guest'>
+            {/* {usuario && usuario.admin === true?
+            <Typography sx={{marginLeft: 'auto'}} variant="h7" component="p" id='guest'>
+            <Link id='adminNavbar' to='/dashboard'>
+              Hello Admin
+              </Link>
+            </Typography>:
+            <Typography sx={{marginLeft: 'auto'}} variant="h7" component="p" id='guest'>
+              <Link id='adminNavbar'  to='/historialC'>Historial de Compras</Link>
+            </Typography>
+            } */}
+            {/* <Typography sx={{marginLeft: 'auto'}} variant="h6" component="p" id='guest'>
+            <Link id='adminNavbar'  to='/historialC'>Historial de Compras</Link>
             <Link id='adminNavbar' to='/dashboard'>
               Hello Admin
               </Link>
             </Typography>
-            
-            <Link to='/favs'>
-              <Button variant="outlined" id="button">Favoritos</Button>
-            </Link>
+             */}
             {
               usuario?
               logueado():
               sinLogin()
             }
-            {/* <Link to='/singIn'>
-              <Button variant="outlined" id="button">Sing In</Button>
-            </Link>
-
-            <Link to='/singUp'>
-              <Button variant="outlined" id="button">Sing Up</Button>
-            </Link> */}
 
             <Link to='/checkoutPage'>
               <IconButton arial-label="show cart items" id="cartButton">
