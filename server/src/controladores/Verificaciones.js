@@ -1,4 +1,4 @@
-const jwt = require("jsonwebtoken")
+/*const jwt = require("jsonwebtoken")
 
 exports.requireSignin = (req, res, next) => {
     const respuesta = req.headers.authorization
@@ -7,7 +7,7 @@ exports.requireSignin = (req, res, next) => {
         res.status(400).send("Authorization required");
     } else {
         /* const token = req.headers.authorization.split(" ")[1] */;
-        jwt.verify(respuesta, "torombolo",(error, usuario)=>{
+       /* jwt.verify(respuesta, "torombolo",(error, usuario)=>{
             if(error){
                 res.send('Acceso denegado')
             }else{
@@ -24,7 +24,7 @@ exports.soloAdmin = (req, res, next) => {
         res.status(400).send("Authorization required");
     } else {
         /* const token = req.headers.authorization.split(" ")[1] */;
-        jwt.verify(respuesta, "torombolo",(error, usuario)=>{
+      /*  jwt.verify(respuesta, "torombolo",(error, usuario)=>{
             if(error){
                 res.send('Acceso denegado')
             }else{
@@ -38,4 +38,4 @@ exports.soloAdmin = (req, res, next) => {
             }
         });
     }
-};
+};*/

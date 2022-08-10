@@ -185,6 +185,22 @@ export function postHistoria(payload)
 	};
 }
 
+export function updateHistorial(id, payload)
+{
+	console.log(payload)
+	return async function (dispatch)
+	{
+		return await axios.put(`http://localhost:4000/historial/${id}`, payload)
+			.then(data =>
+			{
+				dispatch({
+					type: "UPDATE_HISTORIA",
+					payload: data
+				})
+			})
+	}
+}
+
 
 export const getItemsCart = () =>
 {
