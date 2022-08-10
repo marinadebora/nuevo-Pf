@@ -8,10 +8,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { setToken } from "../actions/actions";
 import { useDispatch} from 'react-redux';
-import { UsuariosDetail } from '../actions/actions'
-import { useSelector} from 'react-redux'
-
-
+import { UsuariosDetail } from '../actions/actions';
+import { useSelector} from 'react-redux';
 
 export default function Navbar() {
   //constante para cambiar e numero del carrito de forma dinamica
@@ -60,6 +58,7 @@ export default function Navbar() {
 
         {usuario && usuario.admin === true?
         <Toolbar>
+          
      
         <Typography sx={{marginLeft: '10px'}} variant="h7" component="p" id='guest'>
         <Link id='adminNavbar' to='/dashboard'>
@@ -106,12 +105,14 @@ export default function Navbar() {
     return(
       <div>
         <Toolbar>
+
         <Link to='/singIn'>
               <Button sx={{marginLeft: '150px'}} variant="outlined" id="button">Inicia Sesion</Button>
             </Link>
             <Link to='/singUp'>
               <Button variant="outlined" id="button">Registro</Button>
             </Link>
+          
             </Toolbar>
       </div>
     )

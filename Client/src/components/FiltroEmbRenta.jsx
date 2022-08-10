@@ -29,7 +29,7 @@ export function FiltroEmbRenta({setPage}){
 
   }
   return (
-    <div>
+    <div id='filtroContainer'>
         <label id='text' key='venta'>Filtrar por Gama: </label>
       <select name="categoriasR" id="categoriasR" onChange={(e) => filtroPorCategoria(e)}>
         <option key={'sinFiltro'} value={'sinFiltro'}>Sin Filtros</option>

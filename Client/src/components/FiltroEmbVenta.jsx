@@ -57,7 +57,7 @@ export function FiltroEmbVenta({ setPage })
 	}
 	
 	return (
-		<div>
+		<div id='filtroContainer'>
 			<label id='text' key='venta'>Filtrar por Precio: </label>
 			<select name="venta" id="barcoVenta" onChange={(e) => filtroPorPrecio(e)}>
 				<option key={'sinFiltro'} value={'sinFiltro'}>Sin Filtros</option>
