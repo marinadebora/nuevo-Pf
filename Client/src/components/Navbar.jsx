@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { setToken } from "../actions/actions";
 import { useDispatch} from 'react-redux';
+import { UsuariosDetail } from '../actions/actions'
+import { useSelector} from 'react-redux'
 
 
 
@@ -22,10 +24,16 @@ export default function Navbar() {
   const history = useNavigate()
   const[usuario, setUsuario] = useState(null)
   const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
+  const UserFromLocalStorage = JSON.parse(localStorage.getItem("loguearUsuario"));
+  const UserFromLocalgoogle = JSON.parse(localStorage.getItem("logueadoGoogle"));
+  const current_userID =UserFromLocalStorage?.id || UserFromLocalgoogle?.id
+  const myUserDetail = useSelector(state => state?.userDetail);
+
  
 
   useEffect(()=>{
     localStorage.getItem("item2") 
+    dispatch(UsuariosDetail(current_userID))
     if(localStorage.getItem('loguearUsuario')){
     const users = JSON.parse(localStorage.getItem('loguearUsuario'))
     setUsuario(users)
@@ -33,7 +41,7 @@ export default function Navbar() {
     const users = JSON.parse(localStorage.getItem('logueadoGoogle'))
     setUsuario(users)
   }
-  },[])
+  },[dispatch,current_userID])
 
   const handelOut =()=>{
     if(usuario){
@@ -47,12 +55,18 @@ export default function Navbar() {
 
   const logueado = ()=>{
     return(
+      
       <div>
+        
+        {!myUserDetail.admin  ?
         <Typography sx={{marginLeft: 'auto'}} variant="h6" component="p" id='guest'>
           Bienvenido {usuario.nombre || usuario.firstName}
           <Button type="onClick" variant="outlined" sx={{marginLeft: '35px'}} onClick={handelOut}>Cerrar Sesion</Button>
         </Typography>
-        
+        :<Link to='/dashboard'>
+        <Button variant="outlined" id="button">ADMIN</Button>
+      </Link>
+            }
       </div>
         
       
@@ -98,12 +112,6 @@ export default function Navbar() {
               <button src='/alquiler' id='buttonNavBarMenu'>RENTA YATES</button>
             </Link>
             
-           
-            <Typography sx={{marginLeft: 'auto'}} variant="h6" component="p" id='guest'>
-            <Link id='adminNavbar' to='/dashboard'>
-              Hello Admin
-              </Link>
-            </Typography>
             
             <Link to='/favs'>
               <Button variant="outlined" id="button">Favoritos</Button>

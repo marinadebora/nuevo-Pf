@@ -353,6 +353,11 @@
         ...state,
         historial:action.payload
       }
+      case "UPDATE_HISTORIA":
+        return {
+           ...state
+     }
+      
       default: {
         return state
       }
