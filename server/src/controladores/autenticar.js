@@ -47,7 +47,7 @@ const correo = async (req,res )=>{
             <p>Y te registraste con las credenciales:</p>
             <br/>
             <p>Nombre: ${firstName? firstName: nombre}</p>
-            <p>Apellido: ${lastName? lastName: nombre}</p> 
+            <p>Apellido: ${lastName? lastName: apellido}</p> 
             <p>Password: ${password}</p>
             
             <br/>
