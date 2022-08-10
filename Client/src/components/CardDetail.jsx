@@ -1,7 +1,7 @@
 
 import Navbar from './Navbar';
 import { useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { productosDetail } from "../actions/actions";
 import '../styles/cardDetail.css'
@@ -19,6 +19,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { GiConsoleController } from "react-icons/gi";
 import gif from '../imagenes/cargando-loading.gif'
 
+
 export default function CardDetail()
 { 
   
@@ -29,20 +30,27 @@ export default function CardDetail()
   const { id } = useParams();
   const myDetail = useSelector(state => state.detail);
   const navigate = useNavigate()
-  const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
+  const cartFromLocalStorage = JSON.parse(localStorage?.getItem("item2") || "[]");
   const [cart /* setCart */] = useState(cartFromLocalStorage);
   const FavFromLocalStorage = JSON.parse(localStorage?.getItem("Fav"));
   const [fav /* setCart */] = useState(FavFromLocalStorage);
+  
+  const current_cart =cartFromLocalStorage;
+  
+const soloid =current_cart?.map(item => item._id)
+const stockProduct = myDetail?.stock
+
+
    
-console.log(myDetail.stock)
+
   useEffect(() =>
   {
-    localStorage.getItem("item2")
-    localStorage.setItem("item2", JSON.stringify(cart));
-    localStorage.getItem("Fav")
     
+    localStorage?.setItem("item2", JSON.stringify(current_cart));
+    localStorage?.getItem("Fav")
     dispatch(productosDetail(id))
-  }, [dispatch, id])
+    
+  }, [dispatch, id,current_cart])
    
 
  
@@ -69,6 +77,7 @@ console.log(myDetail.stock)
                 break;
       
               default:
+                
                 break;
             }
           });
@@ -207,22 +216,15 @@ console.log(myDetail.stock)
   myDetail.producto?  
   <>
       {
-          (myDetail.stock > 0) 
+          (stockProduct > soloid?.length) 
           ?<>   
           <IconButton aria-label="add to cart" onClick={addToCart}>
           <Badge  color="secondary" id='badge'>
             <AddShoppingCartIcon />
             </Badge>
           </IconButton> 
-          </> 
-          
-          :<>
-          <IconButton disabled aria-label="add to cart" onClick={addToCart}>
-          <Badge  color="secondary" id='badge'>
-            <AddShoppingCartIcon />
-            </Badge>
-          </IconButton> 
-          </>
+          </>  
+          :<><p>Agregaste el maximo de Stock disponible</p></>
       }
   </> :
   <>
