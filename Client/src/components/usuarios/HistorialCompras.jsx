@@ -89,7 +89,7 @@ myUserDetail.historialDeCompra?.map(e=>(
         userReview? <h4>ya Calificaste este producto</h4>:
         <Link to={`/review/${e.producto._id}`}><h3>Califica tu producto</h3></Link>
       }
-      <Link to={`/review/${e._id}`}><h3>Califica tu producto</h3></Link>
+     
       </div>
   
       
