@@ -3,7 +3,6 @@ import { addToBasket, getItemsCart,UsuariosDetail,} from '../actions/actions'
 import { useSelector, useDispatch ,} from 'react-redux'
 import { useEffect ,useState,Fragment} from 'react'
 import { useNavigate } from 'react-router-dom';
-
 import '../styles/card.css';
 
 import IconButton from "@mui/material/IconButton";
@@ -190,12 +189,15 @@ var uniqueArray = removeDuplicates(current_cart_fav, "_id");
             </div>
         </>:
         <div>
-        <NavBar />
-        <button 
-                className="buttonCleanCart" 
-                onClick={() => handleClearCart()}>
-                  Borrar todos los favoritos <GiIcons.GiBroom /> </button>
+        <NavBar/>
             <h1 id='titleCheckoutPage'>Mis Favoritos</h1>
+            <div id='mainButtonCleanCart'>
+              <button 
+                id="buttonCleanCart" 
+                onClick={() => handleClearCart()}>
+                  Borrar favoritos<GiIcons.GiBroom />
+              </button>
+              </div>
             {
               uniqueArray?.map(e => (
                     e !== undefined &&
