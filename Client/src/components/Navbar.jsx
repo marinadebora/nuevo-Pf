@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { setToken } from "../actions/actions";
 import { useDispatch} from 'react-redux';
+import { UsuariosDetail } from '../actions/actions'
+import { useSelector} from 'react-redux'
 
 
 
@@ -22,10 +24,16 @@ export default function Navbar() {
   const history = useNavigate()
   const[usuario, setUsuario] = useState(null)
   const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
+  const UserFromLocalStorage = JSON.parse(localStorage.getItem("loguearUsuario"));
+  const UserFromLocalgoogle = JSON.parse(localStorage.getItem("logueadoGoogle"));
+  const current_userID =UserFromLocalStorage?.id || UserFromLocalgoogle?.id
+  const myUserDetail = useSelector(state => state?.userDetail);
+
  
 
   useEffect(()=>{
     localStorage.getItem("item2") 
+    dispatch(UsuariosDetail(current_userID))
     if(localStorage.getItem('loguearUsuario')){
     const users = JSON.parse(localStorage.getItem('loguearUsuario'))
     setUsuario(users)
@@ -33,7 +41,7 @@ export default function Navbar() {
     const users = JSON.parse(localStorage.getItem('logueadoGoogle'))
     setUsuario(users)
   }
-  },[])
+  },[dispatch,current_userID])
 
   const handelOut =()=>{
     if(usuario){
@@ -47,7 +55,9 @@ export default function Navbar() {
 
   const logueado = ()=>{
     return(
+      
       <div>
+
         {usuario && usuario.admin === true?
         <Toolbar>
         <Typography sx={{marginLeft: '10px'}} variant="h7" component="p" id='guest'>
@@ -77,14 +87,17 @@ export default function Navbar() {
           </Toolbar>
       }
           {/* <Toolbar>
+
         <Typography sx={{marginLeft: 'auto'}} variant="h6" component="p" id='guest'>
           Bienvenido {usuario.nombre || usuario.firstName}
         </Typography>
+
           <Link to='/favs'>
                 <Button sx={{marginLeft: '35px'}} variant="outlined" id="button">Favoritos</Button>
           </Link>
           <Button type="onClick" variant="outlined" sx={{marginLeft: '35px'}} onClick={handelOut}>Cerrar Sesion</Button>
           </Toolbar> */}
+
       </div>
         
       
@@ -130,6 +143,7 @@ export default function Navbar() {
             <Link to='/alquiler' className='paralelogramo'>
               <button src='/alquiler' id='buttonNavBarMenu'>RENTA YATES</button>
             </Link>
+
             {/* {usuario && usuario.admin === true?
             <Typography sx={{marginLeft: 'auto'}} variant="h7" component="p" id='guest'>
             <Link id='adminNavbar' to='/dashboard'>
@@ -147,6 +161,7 @@ export default function Navbar() {
               </Link>
             </Typography>
              */}
+
             {
               usuario?
               logueado():

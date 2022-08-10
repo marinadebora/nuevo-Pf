@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector, } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from "react-router-dom";
-import { usuarioId, editarAccComentarios, productosDetail } from "../../actions/actions";
+import {  editarAccComentarios, productosDetail, UsuariosDetail } from "../../actions/actions";
 import '../../styles/review.css'
 import '../../styles/PuntuacionEstrella.css'
 
@@ -43,7 +43,7 @@ const [text,setText]=useState(true)
 
   useEffect(() =>
   {
-    dispatch(usuarioId(current_userID))
+    dispatch(UsuariosDetail(current_userID))
     dispatch(productosDetail(id))
   }, [dispatch, current_userID])
 
@@ -68,12 +68,6 @@ const [text,setText]=useState(true)
       setText(false)
     }
 
-
-    setError(validate({
-      ...acces,
-      [e.target.name]: e.target.value
-    }))
-   
   }
   console.log(star)
 
@@ -109,11 +103,11 @@ const [text,setText]=useState(true)
           <label>Califica tu producto </label>
           <p class="clasificacion">
 
-            <input onChange={puntuacion} id="radio1" type="radio" name="estrellas" value="5" /><label for="radio1">★</label>
-            <input onChange={puntuacion} id="radio2" type="radio" name="estrellas" value="4" /><label for="radio2">★</label>
-            <input onChange={puntuacion} id="radio3" type="radio" name="estrellas" value="3" /><label for="radio3">★</label>
-            <input onChange={puntuacion} id="radio4" type="radio" name="estrellas" value="2" /><label for="radio4">★</label>
-            <input onChange={puntuacion} id="radio5" type="radio" name="estrellas" value="1" /><label for="radio5">★</label>
+            <input className='input' onChange={puntuacion} id="radio1" type="radio" name="estrellas" value="5" /><label className='label' for="radio1">★</label>
+            <input className='input' onChange={puntuacion} id="radio2" type="radio" name="estrellas" value="4" /><label className='label' for="radio2">★</label>
+            <input className='input' onChange={puntuacion} id="radio3" type="radio" name="estrellas" value="3" /><label className='label' for="radio3">★</label>
+            <input className='input' onChange={puntuacion} id="radio4" type="radio" name="estrellas" value="2" /><label className='label' for="radio4">★</label>
+            <input className='input' onChange={puntuacion} id="radio5" type="radio" name="estrellas" value="1" /><label className='label' for="radio5">★</label>
           </p>
           {
             starOk&&<textarea

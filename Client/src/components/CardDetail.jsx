@@ -1,3 +1,5 @@
+
+import Navbar from './Navbar';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -62,7 +64,7 @@ console.log(myDetail.stock)
           }).then((value) => {
             switch (value) {
               case "cart":
-                navigate("/checkoutPage");
+                navigate("/favs");
                 swal("Bienvenido a tu carro","Que tenga una buena compra" ,"success");
                 break;
       
@@ -89,7 +91,7 @@ console.log(myDetail.stock)
     }).then((value) => {
       switch (value) {
         case "cart":
-          navigate("/checkoutPage");
+          navigate("/favoritos");
           swal("Bienvenido a tus favoritos","Que tenga una buena compra" ,"success");
           break;
 
@@ -105,7 +107,9 @@ console.log(myDetail.stock)
   {
     navigate(-1)
   }
-  return <div>
+  return (
+      <div>
+    <Navbar/>
     {
       myDetail._id !== id?
 
@@ -182,10 +186,11 @@ console.log(myDetail.stock)
           ?<li className="estrellas">★★</li>:e.star?.estrellas=== '3'
           ?<li className="estrellas">★★★</li>:e.star?.estrellas=== '4'
           ?<li className="estrellas">★★★★</li>:e.star?.estrellas=== '5'
-          ?<li className="estrellas">★★★★</li>:''
+          ?<li className="estrellas">★★★★★</li>:''
         }
-        <li className="nombre">El usuario {e.nombre}</li>
-        <li className="reseña">califico este producto como: {e.reseña}</li>
+        <li className="nombre"> {e.nombre}</li>
+        {e.reseña&&
+          <li className="reseña">califico este producto como: {e.reseña}</li>}
         
         </div>
         )):<h4>Este producto aun no tiene comentarios</h4>
@@ -230,5 +235,5 @@ console.log(myDetail.stock)
         </div>
         
     }
-  </div>;
+  </div>);
 };

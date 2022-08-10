@@ -6,8 +6,10 @@ const updateHistorial= async (req,res,next)=>{
     const{email}= req.body;
     const usuario= await Usuario.findOne({email})
     const {pendiente,procesado,recibido,cancelado}=req.body;
+
     try {
-    const update = await Historials.findOneAndUpdate({id},{pendiente,procesado,recibido,cancelado});
+    const update = await Historials.findOneAndUpdate({_id: id},{pendiente:pendiente,procesado:procesado,recibido:recibido,cancelado:cancelado});
+    console.log(update)
     res.send(update)
     next()
     } catch (error) {
