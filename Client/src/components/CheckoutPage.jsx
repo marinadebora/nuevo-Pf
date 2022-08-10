@@ -31,7 +31,8 @@ export default function CheckoutPage()
   const [cant, SetCant]= useState(1)
   const UserFromLocalStorage = JSON.parse(localStorage.getItem("loguearUsuario"));
   const [user/* setUser */] = useState(UserFromLocalStorage);
-  const current_userID =UserFromLocalStorage?.id
+  const UserFromLocalgoogle = JSON.parse(localStorage.getItem("logueadoGoogle"));
+  const current_userID =UserFromLocalStorage?.id || UserFromLocalgoogle?.id
   const myUserDetail = useSelector(state => state?.userDetail);
   const current_cart =cartFromLocalStorage;
   const CartUser= myUserDetail[0]?.carritoDeCompra
@@ -94,7 +95,9 @@ const sumall = current_cart.map(item => item.precio);
 const neto = sumall.map(e=>e.split('$')[1])
 const num = neto.map(e=> parseInt(e))
 var precioTotal =num.reduce((a, b) => a + b, 0);
-//console.log(precioTotal)
+
+const sumaStock = uniqueArray.map(item => item.stock).reduce((a, b) => a + b, 0);;
+
 
 
 function cantidad (id){
@@ -107,29 +110,7 @@ return cantidadfiltrada.length
   async function next(id){
   
   dispatch(addToBasket({id}))
-  return  swal({
-    title: "El producto se ha agregado a tu carro de compras",
-    text: "Que queires hacer ahora?",
-    icon: "success",
-    buttons: {
-      cart: {
-        text: "Ir al carro",
-        value: "cart",
-      },
-     
-      cancel: "Seguir comprando",
-    },
-  }).then((value) => {
-    switch (value) {
-      case "cart":
-        navigate("/checkoutPage");
-        swal("Bienvenido a tu carro","Que tenga una buena compra" ,"success");
-        break;
 
-      default:
-        break;
-    }
-  });
         
 };
 
@@ -254,7 +235,7 @@ return cantidadfiltrada.length
                 <p id="cantidad">Cantidad:{cantidad(e._id)}</p>
                 <p id="cantidad">Stock Disponible:{e.stock}</p>
                 <div id="buttonsCart">
-                {e.stock <= cantidad(e._id) ? <button disabled onClick={() => next(e._id)}class="pagination-button p" id="buttonMasMenos">+</button>:<button onClick={() => next(e._id)}class="pagination-button p" id="buttonMasMenos">+</button>}
+                {e.stock <= cantidad(e._id) ? " ":<button onClick={() => next(e._id)}class="pagination-button p" id="buttonMasMenos">+</button>}
                 <button onClick={() => handleSplice(e._id)} class="pagination-button a" id="buttonMasMenos">-</button>
                 </div>
                 <p id="precioTotal">Precio Total:US$ {e.precio.split('$')[1] * cantidad(e._id)}</p>
@@ -282,7 +263,7 @@ return cantidadfiltrada.length
        
         {uniqueArray.length !== 0 
         ?<Button href="/checkout" variant="contained" size="large" id='pagarButton'>Pagar</Button>
-        :""
+        :" " 
       }
 
       </div>

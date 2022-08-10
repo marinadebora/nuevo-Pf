@@ -27,6 +27,8 @@ const Checkout = () => {
   const Form = () => activeStep === 0 ? <AddressForm nextStep={nextStep}/> : <PaymentForm backStep={backStep} nextStep={nextStep}/>;
 
 
+
+
   return (
     
 
@@ -46,7 +48,7 @@ const Checkout = () => {
             ))}
           </Stepper>
           {activeStep === steps.length ? (
-            <Confirmation message={paymentMessage} />
+            <Confirmation message={paymentMemessage} />
           ) : (
             <Form step={activeStep} />
           )}

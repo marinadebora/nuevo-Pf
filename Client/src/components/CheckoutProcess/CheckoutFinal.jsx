@@ -6,10 +6,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import {postAccesorio, Categorias } from '../../actions/admin-action';
 import { accesorios, /*getAllTypes */} from '../../actions/actions';
 import '../../styles/form.css';
+import '../../styles/cardDetail.css';
 import { Link } from 'react-router-dom';
 //import * as MdIcons from 'react-icons/md'
 import axios from "axios"
 import {postHistoria } from '../../actions/actions';
+import Logo from "./Nautical1.png"
+import swal from "sweetalert";
 
 
 
@@ -24,7 +27,9 @@ export function CheckoutFinal(){
     const [cart /* setCart */] = useState(cartFromLocalStorage);
     const current_cart =cartFromLocalStorage;
     const UserFromLocalStorage = JSON.parse(localStorage.getItem("loguearUsuario"));
-    const current_userID =UserFromLocalStorage?.id
+    const UserFromLocalgoogle = JSON.parse(localStorage.getItem("logueadoGoogle"));
+    const current_userID =UserFromLocalStorage?.id || UserFromLocalgoogle?.id
+    
     console.log(current_cart)
 
     const sumall = current_cart.map(item => item.precio);
@@ -51,9 +56,23 @@ export function CheckoutFinal(){
             precioTotal: 0,           
           })
           localStorage.setItem("item2"," []");
-          return (
-              alert(`La historia fue creada con exito.`)//, navigate(`/checkoutfinal`)
-              ) 
+          navigate("/accesorios")
+          return  swal({
+            title: "Muchas gracias por confiar por nostoros",
+            text: "Lo esperamos nuevamente en nuestra tienda!!",
+            icon: "success",
+          
+          }).then((value) => {
+            switch (value) {
+              case "cart":
+                
+                swal("Bienvenido a nuestra Pagina","Que tenga una buena compra" ,"success");
+                break;
+          
+              default:
+                break;
+            }
+          });
         
       } catch (error) {
         console.log(error);
@@ -77,20 +96,20 @@ export function CheckoutFinal(){
    
 
     return (
-        <div classproducto="cont-form">
-            
-            
-           <h1>Su pago ha sido aprobado, presione "Ok" para terminar su compra</h1>
+        <div id="mainContainerCompraFinal" classproducto="cont-form">
+           <img src={Logo} alt='img' id='imageCompraFinal'/>
+           <h2 id='textCompra'>Gracias por su compra!</h2>
+           <h3 id='textCompra'>Su pago ha sido aprobado, presione "Ok" para terminar su compra</h3>
             
            <button
           onClick={handleOnClick}
             type='submit'
           
-            id='buttonBackPaymentForm'
+            id='buttonBack'
           > OK
            
           </button>
-          <h2>Total compra: ${precioTotal}</h2>
+          
         </div>
     )
 }

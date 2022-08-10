@@ -1,5 +1,7 @@
+
+import Navbar from './Navbar';
 import { useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { productosDetail } from "../actions/actions";
 import '../styles/cardDetail.css'
@@ -17,6 +19,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { GiConsoleController } from "react-icons/gi";
 import gif from '../imagenes/cargando-loading.gif'
 
+
 export default function CardDetail()
 { 
   
@@ -27,20 +30,27 @@ export default function CardDetail()
   const { id } = useParams();
   const myDetail = useSelector(state => state.detail);
   const navigate = useNavigate()
-  const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
+  const cartFromLocalStorage = JSON.parse(localStorage?.getItem("item2") || "[]");
   const [cart /* setCart */] = useState(cartFromLocalStorage);
   const FavFromLocalStorage = JSON.parse(localStorage?.getItem("Fav"));
   const [fav /* setCart */] = useState(FavFromLocalStorage);
+  
+  const current_cart =cartFromLocalStorage;
+  
+const soloid =current_cart?.map(item => item._id)
+const stockProduct = myDetail?.stock
+
+
    
-console.log(myDetail.stock)
+
   useEffect(() =>
   {
-    localStorage.getItem("item2")
-    localStorage.setItem("item2", JSON.stringify(cart));
-    localStorage.getItem("Fav")
     
+    localStorage?.setItem("item2", JSON.stringify(current_cart));
+    localStorage?.getItem("Fav")
     dispatch(productosDetail(id))
-  }, [dispatch, id])
+    
+  }, [dispatch, id,current_cart])
    
 
  
@@ -62,11 +72,12 @@ console.log(myDetail.stock)
           }).then((value) => {
             switch (value) {
               case "cart":
-                navigate("/checkoutPage");
+                navigate("/favs");
                 swal("Bienvenido a tu carro","Que tenga una buena compra" ,"success");
                 break;
       
               default:
+                
                 break;
             }
           });
@@ -89,7 +100,7 @@ console.log(myDetail.stock)
     }).then((value) => {
       switch (value) {
         case "cart":
-          navigate("/checkoutPage");
+          navigate("/favs");
           swal("Bienvenido a tus favoritos","Que tenga una buena compra" ,"success");
           break;
 
@@ -105,7 +116,9 @@ console.log(myDetail.stock)
   {
     navigate(-1)
   }
-  return <div>
+  return (
+      <div>
+    <Navbar/>
     {
       myDetail._id !== id?
 
@@ -182,10 +195,11 @@ console.log(myDetail.stock)
           ?<li className="estrellas">★★</li>:e.star?.estrellas=== '3'
           ?<li className="estrellas">★★★</li>:e.star?.estrellas=== '4'
           ?<li className="estrellas">★★★★</li>:e.star?.estrellas=== '5'
-          ?<li className="estrellas">★★★★</li>:''
+          ?<li className="estrellas">★★★★★</li>:''
         }
-        <li className="nombre">El usuario {e.nombre}</li>
-        <li className="reseña">califico este producto como: {e.reseña}</li>
+        <li className="nombre"> {e.nombre}</li>
+        {e.reseña&&
+          <li className="reseña">califico este producto como: {e.reseña}</li>}
         
         </div>
         )):<h4>Este producto aun no tiene comentarios</h4>
@@ -202,22 +216,15 @@ console.log(myDetail.stock)
   myDetail.producto?  
   <>
       {
-          (myDetail.stock > 0) 
+          (stockProduct > soloid?.length) 
           ?<>   
           <IconButton aria-label="add to cart" onClick={addToCart}>
           <Badge  color="secondary" id='badge'>
             <AddShoppingCartIcon />
             </Badge>
           </IconButton> 
-          </> 
-          
-          :<>
-          <IconButton disabled aria-label="add to cart" onClick={addToCart}>
-          <Badge  color="secondary" id='badge'>
-            <AddShoppingCartIcon />
-            </Badge>
-          </IconButton> 
-          </>
+          </>  
+          :<><p>Agregaste el maximo de Stock disponible</p></>
       }
   </> :
   <>
@@ -230,5 +237,5 @@ console.log(myDetail.stock)
         </div>
         
     }
-  </div>;
+  </div>);
 };

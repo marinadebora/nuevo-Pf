@@ -40,7 +40,7 @@ router.post("/historia", async(req,res,next)=>{
     try {
         const user = await Usuarios.findById(usuario)
        
-        console.log(user)
+        
         let newHistoria = new Historials({
             precioTotal,
             productos,
@@ -56,7 +56,7 @@ router.post("/historia", async(req,res,next)=>{
                     historialDeCompra:nuevaHistoria.id
                 }
             })
-            console.log(aniade);
+            
             res.send("la historia se creo correctamente cuesta: " + nuevaHistoria.precioTotal)
         }
         

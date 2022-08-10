@@ -6,7 +6,6 @@ import { Box } from '@mui/system';
 import Paginado from "./Paginado";
 import CardRentaVenta from './CardRentaVenta';
 import Navbar from './Navbar';
-
 import Footer from './Footer';
 import { Grid } from '@mui/material'
 import '../styles/searchBar.css';
@@ -20,7 +19,7 @@ export function BarcosEnAlquiler()
  //----------paginado---------//
 
   const [page, setPage] = useState(1);
-  const [characterPerPage, /* setCharacterPerPage */] = useState(5);
+  const [characterPerPage, /* setCharacterPerPage */] = useState(8);
   const index = page * characterPerPage;
   const endIndex = index - characterPerPage;
   const actualPage = productAlquiler?.slice(endIndex, index);
@@ -50,6 +49,12 @@ console.log(productAlquiler)
                 <Box id='textBox2'>Contactanos</Box>
                 
             </Box>
+
+            <Paginado
+        characterPerPage={characterPerPage}
+        newState={productAlquiler.length}
+        paginado={paginado}
+      />
       
     
       <Grid container spacing={2}>
@@ -76,7 +81,7 @@ console.log(productAlquiler)
                     producto={e.producto}
                     descripcion={e.descripcion}
                     Tamaño={e.Tamaño}
-                    Link={<Link to={`/home/${e._id}`} >Info</Link>}
+                    Link={<Link id='infobutton' to={`/home/${e._id}`} >Info</Link>}
                   />
 
                 </Grid>
@@ -92,11 +97,7 @@ console.log(productAlquiler)
       <Link to='/accesorios'>
         <button id='buttonBackAA'>VOLVER</button>
       </Link>
-      <Paginado
-        characterPerPage={characterPerPage}
-        newState={productAlquiler.length}
-        paginado={paginado}
-      />
+      
       
       <Footer/>
 

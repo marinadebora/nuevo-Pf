@@ -169,7 +169,7 @@ export function postHistoria(payload)
 	return async function (dispatch)
 	{
 		try {
-			const historiaCreated = await axios.post(`http://localhost:4000/historia`, payload);
+			const historiaCreated = await axios.post(`/historia`, payload);
 			
 			return dispatch({
 				type: "POST_HISTORIA",
@@ -184,6 +184,25 @@ export function postHistoria(payload)
 		}
 	};
 }
+
+
+export function updateHistorial(id, payload)
+{
+	console.log(payload)
+	return async function (dispatch)
+	{
+		return await axios.put(`http://localhost:4000/historial/${id}`, payload)
+			.then(data =>
+			{
+				dispatch({
+					type: "UPDATE_HISTORIA",
+					payload: data
+				})
+			})
+	}
+}
+
+
 
 export const getItemsCart = () =>
 {
@@ -201,7 +220,7 @@ export function postShippingData(payload)
 	return async function (dispatch)
 	{
 		try {
-			const datosDeEnvio = await axios.post(`https://nautical25.herokuapp.com/shippingData`, payload);
+			const datosDeEnvio = await axios.post(`/shippingData`, payload);
 			return dispatch({
 				type: "SET_SHIPPING_DATA",
 				payload: datosDeEnvio,
@@ -616,12 +635,12 @@ export function editarAccComentarios(id, payload){
 		}
 	} 
 }
-export function usuarioId(id)
+/* export function usuarioId(id)
 {
 	return async function (dispatch)
 	{
 		try {
-			const userDetail = await axios(`/usuario/${id}`)
+			const userDetail = await axios(`https://nautical25.herokuapp.com/usuario/${id}`)
 
 			return dispatch({
 				type: 'USUARIO_ID',
@@ -631,7 +650,7 @@ export function usuarioId(id)
 			console.log(error)
 		}
 
-	}}
+	}} */
 /* export function usuarioId(id)
 {
 	return async function (dispatch)
