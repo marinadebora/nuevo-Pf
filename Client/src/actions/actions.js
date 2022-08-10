@@ -395,7 +395,7 @@ export function UpdateToCart(id, payload)
 {
 	return async function (dispatch)
 	{
-		return axios.put(`/user/${id}`, payload)
+		return axios.put(`${URL_BASE}/user/${id}`, payload)
 			.then(data =>
 			{
 				dispatch({
