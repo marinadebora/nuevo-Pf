@@ -405,6 +405,22 @@ export function UpdateToCart(id, payload)
 			})
 	}
 }
+
+export function UpdateToFavs(id, payload)
+{
+	console.log(payload)
+	return async function (dispatch)
+	{
+		return axios.put(`${URL_BASE}/userfavs/${id}`, payload)
+			.then(data =>
+			{
+				dispatch({
+					type: "UPDATE_FAVS",
+					payload: data
+				})
+			})
+	}
+}
 //---------------------EMBARCACIONENV---------------------
 //--------------------------------------------------------
 export function postEmbarcacionEnV(payload)

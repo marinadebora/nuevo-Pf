@@ -1,5 +1,5 @@
 import NavBar from './Navbar'
-import { addToBasket, getItemsCart,UsuariosDetail,} from '../actions/actions'
+import { addToBasket, getItemsCart,UsuariosDetail,UpdateToCart,UpdateToFavs} from '../actions/actions'
 import { useSelector, useDispatch ,} from 'react-redux'
 import { useEffect ,useState,Fragment} from 'react'
 import { useNavigate } from 'react-router-dom';
@@ -41,8 +41,13 @@ export default function Favs()
   
 
   const [input, setInput] = useState({
-    carritoDeCompra: FavFromLocalStorage
+    favoritos: FavFromLocalStorage
     
+})
+
+const [carrito, setCarrito] = useState({
+  carritoDeCompra: cartFromLocalStorage
+  
 })
 
 
@@ -171,12 +176,21 @@ var uniqueArray = removeDuplicates(current_cart_fav, "_id");
   dispatch(getItemsCart());
   dispatch(accesorios())
   dispatch(UsuariosDetail(current_userID))
-  /*if(typeof current_userID === "string"){
-    dispatch(UpdateToCart(current_userID,input ));
-  }*/
- 
+  if(typeof current_userID === "string"){
+    dispatch(UpdateToCart(current_userID,carrito ));
+    dispatch(UpdateToFavs(current_userID,input ));
+  }
   
 }, [cart ,dispatch,current_userID ]);
+
+/*useEffect(() => {
+  localStorage.setItem("parametros", JSON.stringify(param))
+  localStorage.setItem("item2", JSON.stringify(cart));
+  dispatch(getItemsCart());
+  dispatch(accesorios())
+  dispatch(UsuariosDetail(current_userID))*/
+  
+  
  
  
 
