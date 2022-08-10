@@ -5,6 +5,12 @@
     cursor: pointer;
 }
 
+#infobuttonFav{
+    text-decoration: none;
+    color: grey;
+    font-weight: bold;
+}
+
 #titulo{
     text-decoration: none;
 }
@@ -68,6 +74,11 @@ li{
 
 #pagarButton{
     background-color:#0184a9;
+    text-decoration: none;
+}
+
+#pagarButtonLink{
+   
     text-decoration: none;
 }
 

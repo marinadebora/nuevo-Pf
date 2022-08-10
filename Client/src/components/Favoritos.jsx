@@ -4,7 +4,6 @@ import { useSelector, useDispatch ,} from 'react-redux'
 import { useEffect ,useState,Fragment} from 'react'
 import { useNavigate } from 'react-router-dom';
 import '../styles/card.css';
-
 import IconButton from "@mui/material/IconButton";
 import { accesorios } from '../actions/actions'
 import { Grid } from '@mui/material'
@@ -21,7 +20,6 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 export default function Favs()
 {
 
-    
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -227,7 +225,7 @@ var uniqueArray = removeDuplicates(current_cart_fav, "_id");
                   />
                 
                 <form id="layout">
-                <Link to={`/home/${e._id}`} >Info</Link>
+                <Link id='infobuttonFav' to={`/home/${e._id}`} >INFO</Link>
                 
                 {e.stock > cantidad(e._id)
           ?<IconButton aria-label="add to cart"onClick={() => addToCart(e._id)}>
