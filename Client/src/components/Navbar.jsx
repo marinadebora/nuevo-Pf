@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 import '../styles/searchBar.css';
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import { setToken } from "../actions/actions";
-import { useDispatch} from 'react-redux';
+import { modoOscuro, setToken } from "../actions/actions";
+import { useDispatch, useSelector} from 'react-redux';
 
 
 
@@ -22,7 +22,6 @@ export default function Navbar() {
   const history = useNavigate()
   const[usuario, setUsuario] = useState(null)
   const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
- 
 
   useEffect(()=>{
     localStorage.getItem("item2") 
@@ -115,6 +114,7 @@ export default function Navbar() {
             <Link to='/singUp'>
               <Button variant="outlined" id="button">Sing Up</Button>
             </Link>
+        
 
             <Link to='/checkoutPage'>
               <IconButton arial-label="show cart items" id="cartButton">

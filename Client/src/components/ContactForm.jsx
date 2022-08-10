@@ -1,17 +1,41 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate }from 'react-router-dom';
+import { contactForm } from "../actions/actions";
 import "./../styles/contactForm.css"
 
 //const FORM_ENDPOINT = ""; // TODO - fill on the later step
 
 const ContactForm = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate()
   const [submitted, setSubmitted] = useState(false);
+  const [data, setData] = useState({
+    nombre:'',
+    email:'',
+    message:""
+  })
+  
+  const handleOnChange = (e)=>{
+    setData({
+      ...data,
+      [e.target.name]: e.target.value
+    })
+    console.log(data)
+  }
+  
+
   const handleSubmit = () => {
+    dispatch(contactForm(data))
+    alert('Tu solicitud fue creada exitosamente')
+    navigate("/accesorios")
+   
     setTimeout(() => {
       setSubmitted(true);
     }, 100);
   };
+
 
   if (submitted) {
    return (
@@ -40,8 +64,9 @@ const ContactForm = () => {
         <input
           type="text"
           placeholder="Your name"
-          name="name"
+          name="nombre"
           className="px-3 py-3 placeholder-gray-400 text-gray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
+          onChange={handleOnChange}
          required
         />
       </div>
@@ -53,6 +78,7 @@ const ContactForm = () => {
           placeholder="Email"
           name="email"
           className="px-3 py-3 placeholder-gray-400 text-gray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
+          onChange={handleOnChange}
          required
         />
       </div>
@@ -62,6 +88,7 @@ const ContactForm = () => {
           placeholder="Your message"
           name="message"
           className="px-3 py-3 placeholder-gray-400 text-gray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
+          onChange={handleOnChange}
           required
         />
       </div>

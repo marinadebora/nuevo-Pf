@@ -4,6 +4,7 @@ const { transporter } = require('../controladores/controladorPostEmail');
 
 const correoContacto = async (req,res )=>{
     const {email,nombre,message} = req.body;
+    console.log(req.body)
     try {
         await transporter.sendMail({
             from: '"Recibimos tu mensaje! 🚢" <accesoriosnautica02@gmail.com>', // sender address

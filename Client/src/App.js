@@ -48,10 +48,10 @@ export default function App() {
     
   }, [dispatch,current_userID ]);
  
-  
   return (
     !myUserDetail.admin  ?
     <>
+        
     <div className="App">
       <Routes>
         <Route exact path= '/' element={<LandingPage/>}/>
@@ -61,7 +61,7 @@ export default function App() {
         {/* <Route exact path='/home' element={<Home />} /> */}
         <Route exact path='/home/:id' element={<CardDetail />} />
         <Route exact path='/checkoutPage' element={<CheckoutPage />}/>
-        <Route exact path='/formContact' element={<ContactForm />}/>
+        <Route exact path='/contactForm' element={<ContactForm />}/>
         <Route exact path='/favs' element={<Favs />}/>
         
         
@@ -79,6 +79,7 @@ export default function App() {
         <Route exact path='/review/:id' element={<Review />} />
       </Routes>
     </div>
+        
     </>
     : <>
     <div className="App">
@@ -90,7 +91,7 @@ export default function App() {
       {/* <Route exact path='/home' element={<Home />} /> */}
       <Route exact path='/home/:id' element={<CardDetail />} />
       <Route exact path='/checkoutPage' element={<CheckoutPage />}/>
-      <Route exact path='/formContact' element={<ContactForm />}/>
+      <Route exact path='/contactForm' element={<ContactForm />}/>
       <Route exact path='/favs' element={<Favs />}/>
       
       
@@ -112,12 +113,12 @@ export default function App() {
       <Route exact path='/accesorios/:id' element={<CardDetail />} />
 
       <Route exact path='/checkout' element={<Checkout/>}/>
-      <Route exact path='/contactForm' element={<ContactForm />}/>
+      {/* <Route exact path='/contactForm' element={<ContactForm />}/> */}
 
       <Route exact path='/historialC' element={<HistorialCompras/>} />
       <Route exact path='/review/:id' element={<Review />} />
     </Routes>
-  </div>
+      </div>
   </>
    
   );

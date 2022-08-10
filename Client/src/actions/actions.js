@@ -660,3 +660,17 @@ console.log(error)
 		}
 	}
 }
+
+export function contactForm(value){
+	return async function(dispatch){
+		try{
+			const form = await axios.post("/contactForm",value)
+			return dispatch({
+				type:"CONTACT_FORM",
+				payload:form
+			})
+		}catch(error){
+			console.log(error)
+		}
+	}
+}
