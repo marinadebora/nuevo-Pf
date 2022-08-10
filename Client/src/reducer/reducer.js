@@ -1,21 +1,30 @@
-export const initialState = {
-  products: [],
-  allProducts:[],
-  saleVessels: [],
-  AllSaleVessels:[],
-  rentVessels: [],
-  accesories: [],
-  allAccesories:[],
-  ordenAcc:[],
-  catAcc:[],
-  detail: {},
-  categorias: [],
-  basket: [],
-  shippingData:[],
-  userDetail:[],
-  user:[],
-  historial:[],
-  comentario:[]
+
+ export const initialState = {
+    products: [],
+    allProducts:[],
+    saleVessels: [],
+    AllSaleVessels:[],
+    rentVessels: [],
+    accesories: [],
+    allAccesories:[],
+    ordenAcc:[],
+    catAcc:[],
+    detail: {},
+    categorias: [],
+    basket: [],
+    shippingData:[],
+    userDetail:[],
+    user:[],
+    historial:[],
+    comentario:[],
+    allhistorial:[]
+  };
+  
+  function rootReducer(state = initialState, action)
+  {
+    const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
+    const FavFromLocalStorage = JSON.parse(localStorage.getItem("Fav") || "[]"); 
+
 
 };
 
@@ -340,6 +349,7 @@ function rootReducer(state = initialState, action)
     case 'EDITAR_ACC_COMENTARIOS':
       return{
         ...state,
+
         comentario:action.payload
         
       }
@@ -362,6 +372,19 @@ function rootReducer(state = initialState, action)
    case "CONTACT_FORM":
       return{
         ...state
+
+     }
+     case 'FITRO_HISTORIAL':
+      const estadoTotal =state.allhistorial
+      const filterH= action.payload==='pendiente'?estadoTotal.filter(e=>e.pendiente===true):
+      action.payload==='procesado'?estadoTotal.filter(e=>e.procesado===true):
+      action.payload==='recibido'?estadoTotal.filter(e=>e.recibido===true):
+      action.payload==='cancelado'&& estadoTotal.filter(e=>e.cancelado===true)
+      console.log(filterH)
+      return{
+        ...state,
+        historial:filterH
+
       }
     
     default: {

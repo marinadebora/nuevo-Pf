@@ -689,6 +689,7 @@ console.log(error)
 	}
 }
 
+
 export function contactForm(value){
 	return async function(dispatch){
 		try{
@@ -702,3 +703,11 @@ export function contactForm(value){
 		}
 	}
 }
+
+export function filtroHistorial(payload){
+	return {
+		type: 'FITRO_HISTORIAL',
+		payload
+	}
+}
+
