@@ -169,7 +169,7 @@ export function postHistoria(payload)
 	return async function (dispatch)
 	{
 		try {
-			const historiaCreated = await axios.post(`http://localhost:4000/historia`, payload);
+			const historiaCreated = await axios.post(`/historia`, payload);
 			
 			return dispatch({
 				type: "POST_HISTORIA",
