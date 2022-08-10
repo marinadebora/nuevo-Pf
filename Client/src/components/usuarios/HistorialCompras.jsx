@@ -85,10 +85,10 @@ myUserDetail.historialDeCompra?.map(e=>(
       <p className='nombre-art'>{e.producto.producto}</p>
       <p className='texto-art'>Precio: {e.precio}</p>
       <p>{e.cantidad||1} unidad</p>
-    {/*   {
+      {
         userReview? <h4>ya Calificaste este producto</h4>:
         <Link to={`/review/${e.producto._id}`}><h3>Califica tu producto</h3></Link>
-      } */}
+      }
       <Link to={`/review/${e._id}`}><h3>Califica tu producto</h3></Link>
       </div>
   
