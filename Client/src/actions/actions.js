@@ -169,7 +169,7 @@ export function postHistoria(payload)
 	return async function (dispatch)
 	{
 		try {
-			const historiaCreated = await axios.post(`/historia`, payload);
+			const historiaCreated = await axios.post(`${URL_BASE}/historia`, payload);
 			
 			return dispatch({
 				type: "POST_HISTORIA",
@@ -191,7 +191,7 @@ export function updateHistorial(id, payload)
 	console.log(payload)
 	return async function (dispatch)
 	{
-		return await axios.put(`historial/${id}`, payload)
+		return await axios.put(`${URL_BASE}historial/${id}`, payload)
 			.then(data =>
 			{
 				dispatch({

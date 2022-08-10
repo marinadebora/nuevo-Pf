@@ -79,7 +79,7 @@ function DashboardContent() {
 
   const volver = () =>
   {
-      navigate('/dashboard')
+      navigate('/accesorios')
   }
   return (
     <ThemeProvider theme={mdTheme}>
@@ -172,7 +172,7 @@ function DashboardContent() {
                 <Button id='buttonCreate' variant="contained"><Link id='linkCreate' href ={`/dashboard/createCat`}>Crear Categoria</Link></Button>
                 <br/>
                 
-                <button id='buttonBackAdmin' onClick={volver}>Volver</button>
+                <button id='buttonBackAdmin' onClick={volver}>Inicio</button>
                   
                
             
