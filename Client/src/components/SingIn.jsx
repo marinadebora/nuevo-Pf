@@ -209,7 +209,7 @@ function handleSignOut(event){
   const ya = () => {
     return (
       <div>
-        <h1>listo ya mentego sesion</h1>
+        <h1>Disculpa Actualmente te encuetras bloqueado</h1>
         { Object.keys(user).length != 0 &&
               <button onClick={(e)=>handleSignOut(e)}>Sign Out</button>
             }

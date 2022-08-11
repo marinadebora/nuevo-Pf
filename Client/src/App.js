@@ -33,6 +33,7 @@ import Checkout from "./components/CheckoutProcess/Checkout"
 import Favs from "./components/Favoritos"
 import OrdenesDeCompras from "./components/DashBoard/OrdenesDeCompra.jsx"
 import CheckoutFinal from "./components/CheckoutProcess/CheckoutFinal"
+import ListaUsuario from './components/DashBoard/ListaUsuario';
 let publishableKey ="pk_test_51LTzChGPkJkLR4xlRyDUWk3Pj6SiGC8bq0An5pdnhBWsCwE0Y9eIT2uUj7baWSnQlXXXmqSlZitwQKJrd7o1LwC500k5khRIeF" 
 const stripePromise = loadStripe(publishableKey)
 import ErrorAdmin from"./components/DashBoard/ErrorDashbord"
@@ -117,7 +118,7 @@ export default function App() {
       <Route exact path='/favs' element={<Favs />}/>
       <Route exact path='/checkoutfinal' element={<CheckoutFinal/>}/>
       
-      
+      <Route exact path='/todousuario' element={<ListaUsuario/>} />
       <Route exact path='/admin' element={<Admin/>} />
       <Route exact path='/dashboard' element={<Dashboard/>} />
       <Route exact path='/dashboard/:id' element={<CardDetailAdmin2 />} />

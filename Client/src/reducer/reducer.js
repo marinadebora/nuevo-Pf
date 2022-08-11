@@ -313,7 +313,6 @@
               ...state
             }
             case "USUARIOS":
-              console.log(state.user)
             return{
               ...state,
               user: action.payload
@@ -358,8 +357,18 @@
       }
       case "UPDATE_HISTORIA":
         return {
-           ...state
+          ...state
      }
+
+      case "ACTUALIZARADMIN":
+        return{
+          ...state
+        }
+      case "ACTUALIZARBANEADOS":
+        return{
+          ...state
+        }
+
      case 'FITRO_HISTORIAL':
       const estadoTotal =state.allhistorial
       const filterH= action.payload==='pendiente'?estadoTotal.filter(e=>e.pendiente===true):
@@ -374,7 +383,7 @@
       case "CONTACT_FORM":
         return{
           ...state
-        } 
+        }
       default: {
         return state
       }
