@@ -19,6 +19,7 @@ import { useState } from 'react';
 import { login, setToken, usuarios, registroGoogle } from '../actions/actions';
 import { useEffect } from 'react';
 import jwt_decode from 'jwt-decode';
+import swal from "sweetalert";
 
 
 
@@ -59,9 +60,18 @@ export default function SignIn() {
       const usuarioss = await dispatch(login({ email, password }))
       const tok = (usuarioss.payload.token)
       if (!usuarioss) {
-        alert('hay errores en los campos')
+        
+        swal({
+          text: "hay errores en los campos",
+          icon: "error",
+          timer: 1250
+        })
       } else {
-        alert('Bienvenido a nuestra pagina')
+        swal({
+          text: 'Bienvenido a nuestra pagina',
+          icon: "success",
+          timer: 1250
+        })
         setUsuario(usuarioss.payload)
         setToken(tok)
         localStorage.setItem(
@@ -79,7 +89,12 @@ export default function SignIn() {
 
     } catch (error) {
       console.log(error)
-      alert("Correo y/o contraseña incorrecta")
+      
+      swal({
+        text: "Correo y/o contraseña incorrecta",
+        icon: "error",
+        timer: 1250
+      })
     }
   }
   const [user , setUser]= useState({})
@@ -108,9 +123,17 @@ async function handleCallbackResponse(response){
     console.log(infGoogle)
     /* const toke = (infGoogle.payload.token) */
     if(!infGoogle){
-      alert('hay errores en los campos')
+      swal({
+        text: "hay errores en los campos",
+        icon: "error",
+        timer: 1250
+      })
     }else{
-      alert('has iniciado sesion')
+      swal({
+        text: 'Has iniciado sesion',
+        icon: "success",
+        timer: 1250
+      })
       setToken(infGoogle.payload.token)
       localStorage.setItem('logueadoGoogle', JSON.stringify(infGoogle.payload))
       const google = JSON.parse(localStorage.getItem('logueadoGoogle'))
@@ -122,7 +145,11 @@ async function handleCallbackResponse(response){
       }
     }
   }else{
-    alert('hay errores en los campos')
+    swal({
+      text: "hay errores en los campos",
+      icon: "error",
+      timer: 1250
+    })
   }
 }
 
@@ -141,7 +168,11 @@ function handleSignOut(event){
   document.getElementById("signInDiv").hidden=false;
   if(usuario){
     setUser({});
-    alert('Has cerrado sesion con exito')
+    swal({
+      text: 'Has cerrado sesion con exito',
+      icon: "success",
+      timer: 1250
+    })
     setUsuario(null)
     localStorage.removeItem('logueadoGoogle')
     setToken(usuario)

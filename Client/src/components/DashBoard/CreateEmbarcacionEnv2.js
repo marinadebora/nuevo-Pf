@@ -8,6 +8,7 @@ import '../../styles/form.css';
 import { Link } from 'react-router-dom';
 import axios from "axios"
 import NabVarD from './NabVarD';
+import swal from "sweetalert";
 
 
 
@@ -222,7 +223,11 @@ export function EmbarcacionCreateEnV2(){
             let findproducto = allEmbarcacionVenta.find((e) => e.tipo.toLowerCase() === input.tipo.toLowerCase()
             )
             if (findproducto) {
-              return alert("Ya existe un producto con este nombre. ¡Cambialo!");
+                return  swal({
+                    title: "Ya existe un producto con este nombre. ¡Cambialo!",
+                    icon: "warning",
+                    timer:1250
+                 })
             }else if(Object.keys(errors).length === 0 && (input.tipo!=='')){
             
             
@@ -246,15 +251,19 @@ export function EmbarcacionCreateEnV2(){
                 categorias: [],
                 imagenes: [],
             })
-            return (
-                alert(`La Embarcacion fue creada con éxito.`), navigate(`/admin`)
-                ) 
+            return  swal({
+                title: "La embarcacion fue creada con exito.",
+                icon: "success",
+                timer:1250
+             })
           
        } } catch (error) {
           console.log(error);
-          return alert(
-            "Algo falló al crear la embarcacion. "
-          );
+          return  swal({
+            title: "Algo fallo en crear la embarcacion",
+            icon: "warning",
+            timer:1250
+         })
         }
       };
       

@@ -40,7 +40,7 @@ export default function Admin()
 
 	function volver()
 	{
-		navigate(-1)
+		navigate("/dashboard")
 	}
 
 

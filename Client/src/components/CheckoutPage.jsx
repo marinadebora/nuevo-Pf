@@ -54,18 +54,9 @@ async function handleClearCart (e){
    title: "Se han borrado todos los productos de su carro de compras",
    text: "Puede agregar mas desde nuestro inicio!!",
    icon: "success",
+   timer: 1250
  
- }).then((value) => {
-   switch (value) {
-     case "cart":
-       
-       swal("Bienvenido a nuestra Pagina","Que tenga una buena compra" ,"success");
-       break;
- 
-     default:
-       break;
-   }
- });
+ })
  };
 
 
@@ -117,7 +108,7 @@ return cantidadfiltrada.length
 
   const volver = () =>
   {
-      navigate(-1)
+      navigate("/accesorios")
   }
 
   const handleDelete = (id) => {
@@ -128,19 +119,11 @@ return cantidadfiltrada.length
       return  swal({
           title: "El producto se ha eliminado de tu carro",
           icon: "success",
-          buttons: {
-              OK: {
-                  text: "OK",
-                  value: "check",
-                },      
-          },
+         timer:1250
         }).then((value) => {
           switch (value) {
-            case "check":
-              navigate("/checkoutPage");
-              break;
-    
             default:
+              navigate("/checkoutPage");
               break;
           }
         }); 

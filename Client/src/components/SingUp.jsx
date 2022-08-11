@@ -18,6 +18,7 @@ import { useNavigate } from 'react-router-dom';
 import { registro, usuarios } from '../actions/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import swal from "sweetalert";
 
 
 function Copyright(props) {
@@ -96,12 +97,27 @@ useEffect(()=>{
   const handleSubmit = (event) => {
     event.preventDefault();
     if(error.hasOwnProperty('lastName') || error.hasOwnProperty('firstName') || error.hasOwnProperty('email') || error.hasOwnProperty('password')){
-            alert('Hay errores en los datos')
+              swal({
+              text: "hay errores en los datos",
+              icon: "error",
+              timer: 1250
+            })
         }else if(user.find(e=> e.email.toLowerCase() === datos.email.toLowerCase())){
-            alert(`el Usuario con el correo: ${datos.email}, ya existe`)
+            
+            swal({
+              text: `el Usuario con el correo: ${datos.email}, ya existe`,
+              icon: "warning",
+              timer: 1250
+            })
         }else{
             dispatch(registro(datos))
-            alert('El usuario se registro correctamente')
+            
+            swal({
+              text: 'El usuario se registro correctamente',
+              icon: "success",
+              timer: 1250
+            })
+            
             setDatos({
                 firstName:'',
                 lastName:'',

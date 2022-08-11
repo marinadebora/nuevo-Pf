@@ -39,21 +39,6 @@ export function Accesorios(){
   const UserFromLocalStorage = JSON.parse(localStorage.getItem("loguearUsuario"))||JSON.parse(localStorage.getItem("logueadoGoogle"))
   const current_userID =UserFromLocalStorage?.id
  
-  const myUserDetail = useSelector(state => state?.userDetail);
-  const carroUserDb = myUserDetail?.carritoDeCompra
-  const cartForDb = carroUserDb
-  const [cartDb] = useState(cartForDb)
-
-  
- 
-
-  console.log(cartForDb)
-  
-  const [carrito, setCarrito] = useState({
-    carritoDeCompra: carroUserDb
-    
-})
-
  
   const paginado = (numPage) =>
   {
@@ -73,18 +58,15 @@ export function Accesorios(){
     localStorage.setItem("Fav", JSON.stringify(fav));
     
     
-    if(typeof current_userID === "string"){
-      localStorage.setItem("item2", JSON.stringify([...cartForDb]));
-      //JSON.stringify([...FavFromLocalStorage, cart_add_fav])
-      }
-      localStorage.setItem("item2", JSON.stringify(cart))
+   
+    localStorage.setItem("item2", JSON.stringify(cart))
       
 },[dispatch, cart,localStorage.getItem("item2")])
 
 
   const volver = () =>
   {
-    navigate(-1)
+    navigate("/")
   }
 
 

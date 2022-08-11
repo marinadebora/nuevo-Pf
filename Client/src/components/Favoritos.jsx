@@ -71,6 +71,7 @@ async function handleClearCart (e){
   title: "Se han borrado todos los Favoritos de su lista de deseos",
   text: "Puede agregar mas desde nuestro inicio!!",
   icon: "success",
+  timer: 1250
 
 }).then((value) => {
   switch (value) {
@@ -117,45 +118,20 @@ var uniqueArray = removeDuplicates(current_cart_fav, "_id");
       return  swal({
           title: "El producto se ha eliminado de tus favoritos",
           icon: "success",
-          buttons: {
-              OK: {
-                  text: "OK",
-                  value: "check",
-                },      
-          },
-        }).then((value) => {
-          switch (value) {
-            case "check":
-              navigate("/checkoutPage");
-              break;
-    
-            default:
-              break;
-          }
-        }); 
+          timer: 1250
+        })
     };
     async function addToCart (id) {
     
       dispatch(addToBasket({id}))
-       return  swal({
-        title: "El producto se ha agregado a tu carro de compras",
-        text: "Que queires hacer ahora?",
+      return  swal({
+        text: "El producto se ha agregado a tu carro de compras",
         icon: "success",
-        buttons: {
-          cart: {
-            text: "Ir al carro",
-            value: "cart",
-          },
-         
-          cancel: "Quedarse",
-        },
+        timer: 1250
       }).then((value) => {
         switch (value) {
-          case "cart":
-            navigate("/checkoutPage");
-            swal("Bienvenido a tu carro","Que tenga una buena compra" ,"success");
-            break;
-  
+         
+           
           default:
             window.location.reload()
             break;

@@ -6,6 +6,7 @@ import { updateEmbarcacionRT, Categorias} from '../../actions/admin-action';
 import { productosDetail, /*getAllTypes */} from '../../actions/actions'
 import { useNavigate } from 'react-router-dom';
 import NabVarD from './NabVarD';
+import swal from "sweetalert";
 
 export function UpdateEmbarcacionRenta2(){
     const dispatch = useDispatch()
@@ -90,9 +91,12 @@ export function UpdateEmbarcacionRenta2(){
         if(Object.keys(errors).length === 0){
             if(input.precio){parseInt(input.precio)}
             dispatch(updateEmbarcacionRT(id, input))
-            return (
-                alert(`La embarcacion fue actualizada con éxito.`), navigate(`/admin`)
-                ) 
+            return  swal({
+                title: "la embarcacion fue actualizada con exito",
+                icon: "success",
+                timer:1250
+             })
+            
             
         }
         

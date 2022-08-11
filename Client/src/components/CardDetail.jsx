@@ -59,63 +59,28 @@ const stockProduct = myDetail?.stock
   async function addToCart(){
         dispatch(addToBasket({id}))
           return  swal({
-            title: "El producto se ha agregado a tu carro de compras",
-            text: "Que queires hacer ahora?",
+            
+            text: "El producto se ha agregado a tu carro de compras",
             icon: "success",
-            buttons: {
-              cart: {
-                text: "Ir al carro",
-                value: "cart",
-              },
-             
-              cancel: "Seguir comprando",
-            },
-          }).then((value) => {
-            switch (value) {
-              case "cart":
-                navigate("/favs");
-                swal("Bienvenido a tu carro","Que tenga una buena compra" ,"success");
-                break;
-      
-              default:
-                
-                break;
-            }
-          });
+            timer: 1250
+          })
    }
    async function addToFav () {
     
     dispatch(addToFavoritos({id}))
      return  swal({
-      title: "El producto se ha agregado a tu lista de favoritos",
-      text: "Que queires hacer ahora?",
+      
+      text: "El producto se ha agregado a tu lista de favoritos",
       icon: "success",
-      buttons: {
-        cart: {
-          text: "Ir a mi lista",
-          value: "cart",
-        },
-       
-        cancel: "Quedarse",
-      },
-    }).then((value) => {
-      switch (value) {
-        case "cart":
-          navigate("/favs");
-          swal("Bienvenido a tus favoritos","Que tenga una buena compra" ,"success");
-          break;
-
-        default:
-          break;
-      }
-    });
+     timer: 1250
+    })
      
   }
 
    
  const volver = () =>
   {
-    navigate(-1)
+    navigate("/accesorios")
   }
   return (
       <div>
