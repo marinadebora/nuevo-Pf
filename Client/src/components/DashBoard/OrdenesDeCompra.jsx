@@ -177,7 +177,7 @@ async function handleRecibido(id){
 
    
       <div className="contenedor-total">
-  <div calssName='filtro'>
+  <div id='filtro'>
   <label id='text' key='Precio'>Filtrar por Precio: </label>
   <select name="filtroestado" id="filtroestado" onChange={(e) => filtroPorEstado(e)}>
     <option key={'sinFiltro'} value={'sinFiltro'}>Buscar por estados</option>
@@ -191,6 +191,7 @@ async function handleRecibido(id){
 Historial?.map(e=>(
  
  <div   className="contenedor-orden">
+
   <div id='contenedorInfo'>
     <h3 id='compraN'>Compra n° : {e._id}</h3>
     <h2 id='estado'>Estado de la compra:{e.pendiente? <p id='estadoPendiente'>Pendiente</p>: e.procesado? <p id='estadoProcesado'>Procesado</p>: e.recibido?<p id='estadoRecibido'>Entregado</p>: e.cancelado? <p id='estadoCancelado'>Cancelado</p>:" "}
@@ -204,6 +205,7 @@ Historial?.map(e=>(
       {!e.recibido?<button onClick={() => handleRecibido(e._id)}class="bt-cancel" id="bt-cancel">Entregado</button>:""}
     </div>
   </div>
+
     { e.productos.map(e=>(
          <div >
             

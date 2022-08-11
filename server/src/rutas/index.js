@@ -78,7 +78,7 @@ router.use("/userfavs", putUsuarioF);
 router.use("/comentario", putAccesoriosComentarios);
 router.get("/usuario/:id",UsuarioId);
 router.put("/historial/:id",updateHistorial,correoCompra);
-router.post("/correoContacto",correoContacto);
+router.post("/contactForm",correoContacto);
 router.delete("/carrito",borrarCarrito)
 
 /* router.get("/categorias", categorias)

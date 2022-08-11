@@ -371,7 +371,10 @@
         ...state,
         historial:filterH
       }
-      
+      case "CONTACT_FORM":
+        return{
+          ...state
+        } 
       default: {
         return state
       }

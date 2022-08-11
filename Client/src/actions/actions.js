@@ -37,7 +37,7 @@ export function UsuariosDetail(id)
 	return async function (dispatch)
 	{
 		try {
-			const userDetail = await axios(`/usuario/${id}`)
+			const userDetail = await axios(`http://localhost:4000/usuario/${id}`)
 
 			return dispatch({
 				type: 'USUARIO_DETAIL',
@@ -709,5 +709,18 @@ export function filtroHistorial(payload){
 	return {
 		type: 'FITRO_HISTORIAL',
 		payload
+	}
+}
+export function contactForm(value){
+	return async function(dispatch){
+		try{
+			const form = await axios.post("/contactForm",value)
+			return dispatch({
+				type:"CONTACT_FORM",
+				payload:form
+			})
+		}catch(error){
+			console.log(error)
+		}
 	}
 }
