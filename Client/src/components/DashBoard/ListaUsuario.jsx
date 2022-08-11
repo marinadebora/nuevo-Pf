@@ -6,6 +6,7 @@ import { useParams,useNavigate,Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { actualizarAdmin, usuarios, actualizarBaneado} from '../../actions/actions';
 import est from './ListaUsuario.module.css';
+import NabVarD from './NabVarD';
 
 
 
@@ -38,9 +39,10 @@ const ListaUsuario = () => {
 
     return (
         <div>
-            <h1>lista de Usuarios</h1>
+            <NabVarD />
+            <h1>Usuarios Registrados</h1>
             <div>
-            <Link to="/dashboard"><button  className={est.boton}>Volver</button></Link>
+            <Link to="/dashboard"><button  className={est.botonU}>Volver</button></Link>
             </div>
             <div>
             <div>
@@ -63,10 +65,10 @@ const ListaUsuario = () => {
                                 </div>
                                 <div>
                                     <Button sx={{marginLeft: '150px'}} variant="outlined" id="button" name='id' value={e._id} onClick={handleAdmin}>Admin</Button>
-                                    <h5>{e.admin === true? 'si': 'no'}</h5>
+                                    <h5 id>{e.admin === true? 'si': 'no'}</h5>
                                 </div>
                                 <div>
-                                    <Button sx={{marginLeft: '150px'}} variant="outlined" id="button" value={e._id} onClick={handleBloqueado}>Bloqueado</Button>
+                                    <Button sx={{marginLeft: '150px'}} margin='5px' variant="outlined" id="button" value={e._id} onClick={handleBloqueado}>Bloqueado</Button>
                                     {console.log(e?.baneado)}
                                     <h5>{e.baneado? 'si': 'no'}</h5>
                                 </div>
