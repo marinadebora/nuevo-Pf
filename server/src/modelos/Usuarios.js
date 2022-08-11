@@ -13,7 +13,8 @@ const UsuariosSchema = new Schema({
     carritoDeCompra:{type:Array},
     historialDeCompra:[{ type: Schema.Types.ObjectId, ref:"Historials"}],
     favoritos:{type:Array},
-    admin:{type:Boolean,default:false}
+    admin:{type:Boolean,default:false},
+    baneado:{type:Boolean,default:false}
 })
 
 const saltRounds = 10;

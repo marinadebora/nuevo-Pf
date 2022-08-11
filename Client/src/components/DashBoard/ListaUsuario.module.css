@@ -1,0 +1,45 @@
+
+.boton{
+    color: #0184a9;
+    font-size: 15px;
+    line-height: 20px;
+    padding: 10px;
+    border-color: #0184a9;
+    border-radius: 7px;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+    background-image: linear-gradient(to right, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0.76) 50%, rgba(255, 255, 255, 0.603) 100%);
+    /* box-shadow: rgb(0, 0, 0) 5px 5px 15px 5px; border: 2px solid rgb(28, 110, 164); */
+    display: inline-block;
+    cursor: pointer;
+}
+
+
+
+.ordern{
+    display: flex;
+    margin: 3%;
+    padding: auto;
+    border-color: black ;
+    border: 2px;
+    box-shadow: 1px 1px 1px 1px black;
+    justify-content: flex-start;
+    align-content: center;
+}
+.ordern div{
+    /* border-color: black;
+    border: 2px; */
+    margin-left: 3%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+.ordern h4{
+    margin: 2%;
+}
+.ordern h5{
+    margin: 2%;
+}

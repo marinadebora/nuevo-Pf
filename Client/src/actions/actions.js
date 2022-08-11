@@ -717,12 +717,33 @@ console.log(error)
 	}
 }
 
+export const actualizarAdmin = (value)=> async (dispatch)=>{
+	try {
+		const respuesta = await axios.put(`/actualizarAdmin`,value)
+	return dispatch({type:"ACTUALIZARADMIN", payload: respuesta.data})
+	} catch (error) {
+		alert(error)
+	}
+	
+}
+
+export const actualizarBaneado = (value)=> async (dispatch)=>{
+	try {
+		const respuesta = await axios.put(`/actualizarBaneado`,value)
+	return dispatch({type:"ACTUALIZARBANEADOS", payload: respuesta.data})
+	} catch (error) {
+		alert(error)
+	}
+	
+}
+
 export function filtroHistorial(payload){
 	return {
 		type: 'FITRO_HISTORIAL',
 		payload
 	}
 }
+
 export function contactForm(value){
 	return async function(dispatch){
 		try{
