@@ -270,7 +270,7 @@ return cantidadfiltrada.length
           uniqueArray.length !== 0 ?
           <Button href="/checkout" variant="contained" size="large" id='pagarButton'>Pagar</Button>
           :" ":
-        <Link to='/singIn'>
+        <Link to='/singIn' id='pagarButtonLink'>
                 <Button href="/checkout" variant="contained" size="large" id='pagarButton'>iniciar sesion</Button>
         </Link>
         }

@@ -28,6 +28,7 @@ const  getUsuario  =require ("../controladores/ControladorUsuario")
 const {agregarAlCarrito, borrarCarrito, asignarUsuarioAlCarrito} = require("../controladores/controladorCarrito");
 const { requireSignin, soloAdmin } = require("../controladores/Verificaciones");
 const putUsuario = require("./putUsuarioCarrito");
+const putUsuarioF = require("./putUsuarioFavs");
 const putAccesoriosComentarios = require("./putAccesoriosComentarios");
 const { UsuarioId } = require("../controladores/controladorIdUsuario");
 /* const {getUsuario} = require("../controladores/ControladorUsuario") */
@@ -73,6 +74,7 @@ router.get("/categorias", categorias);
 router.use("/categorias", postCategorias);
 router.get("/user",getUsuario);
 router.use("/user", putUsuario);
+router.use("/userfavs", putUsuarioF);
 router.use("/comentario", putAccesoriosComentarios);
 router.get("/usuario/:id",UsuarioId);
 router.put("/historial/:id",updateHistorial,correoCompra);
