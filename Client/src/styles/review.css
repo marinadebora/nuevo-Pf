@@ -16,3 +16,15 @@
     border: 1px solid #000099;
     border-radius:5px 
 }
+#gifStar{
+    width: 40%;
+    height: 20%;
+}
+#buttonestrellas{
+text-decoration: none;
+font-size: medium;
+margin:2%
+}
+#id{
+    color: rgb(1, 1, 67)
+}
