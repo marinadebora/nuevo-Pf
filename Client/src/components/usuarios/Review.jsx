@@ -70,7 +70,7 @@ const [text,setText]=useState(true)
     }
 
   }
-  console.log(star)
+
 
 
   function handleSubmit(e)

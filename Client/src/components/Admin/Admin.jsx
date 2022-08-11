@@ -7,10 +7,11 @@ import Paginado from '../Paginado';
 import Card from '../DashBoard/CardDahs';
 import Navbar from '../Navbar'
 import { Button, Typography } from "@mui/material";
-import admincss from '../../styles/admin.css'
+import '../../styles/admin.css';
 import { Grid } from '@mui/material'
 //import '../styles/card.css';
 import { useNavigate } from 'react-router-dom';
+import NabVarD from '../DashBoard/NabVarD';
 
 
 export default function Admin()
@@ -45,9 +46,9 @@ export default function Admin()
 
 	return (
 		<div>
-
+			<NabVarD />
 			<Typography sx={{ marginLeft: 'auto' }} variant="h6" component="p" id='guest1'>
-				Wellcome Admin
+				Edita tus productos
 			</Typography>
 			
 			<br />
