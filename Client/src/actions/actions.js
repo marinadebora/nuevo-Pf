@@ -139,6 +139,18 @@ export const addToBasket = (item) =>
 	}
 };
 
+export const DbtoLocal = (item) =>
+{
+	try {
+		return {
+			type: 'DB_TO_LOCAL',
+			payload: item,
+		}
+	} catch (err) {
+		console.log(err)
+	}
+};
+
 
 export function removeToBasket(item)
 
@@ -191,7 +203,7 @@ export function updateHistorial(id, payload)
 	console.log(payload)
 	return async function (dispatch)
 	{
-		return await axios.put(`${URL_BASE}historial/${id}`, payload)
+		return await axios.put(`${URL_BASE}/historial/${id}`, payload)
 			.then(data =>
 			{
 				dispatch({
@@ -411,7 +423,7 @@ export function UpdateToFavs(id, payload)
 	console.log(payload)
 	return async function (dispatch)
 	{
-		return axios.put(`${URL_BASE}/userfavs/${id}`, payload)
+		return axios.put(`${URL_LOCAL}/userfavs/${id}`, payload)
 			.then(data =>
 			{
 				dispatch({

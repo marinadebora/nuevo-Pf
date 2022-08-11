@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import {postAccesorio, Categorias } from '../../actions/admin-action';
-import { accesorios, /*getAllTypes */} from '../../actions/actions';
+import { accesorios, /*getAllTypes */UpdateToCart} from '../../actions/actions';
 import '../../styles/form.css';
 import '../../styles/cardDetail.css';
 import { Link } from 'react-router-dom';
@@ -42,6 +42,10 @@ export function CheckoutFinal(){
     precioTotal: precioTotal, 
   
   })
+  const [carrito, setCarrito] = useState({
+    carritoDeCompra: []
+    
+})
 
 
 
@@ -55,6 +59,7 @@ export function CheckoutFinal(){
             productos:current_cart,
             precioTotal: 0,           
           })
+          dispatch(UpdateToCart(current_userID,carrito ));
           localStorage.setItem("item2"," []");
           navigate("/accesorios")
           return  swal({

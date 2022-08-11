@@ -155,7 +155,7 @@ async function handleRecibido(id){
   dispatch(historialCompra())
   },[dispatch])
 
-  console.log(Historial)
+  
 
 
 
