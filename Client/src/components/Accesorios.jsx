@@ -77,7 +77,7 @@ export function Accesorios(){
       localStorage.setItem("item2", JSON.stringify([...cartForDb]));
       //JSON.stringify([...FavFromLocalStorage, cart_add_fav])
       }
-      localStorage.setItem("item2", JSON.stringify(cart))
+    localStorage.setItem("item2", JSON.stringify(cart))
       
 },[dispatch, cart,localStorage.getItem("item2")])
 
