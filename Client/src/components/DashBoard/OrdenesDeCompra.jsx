@@ -177,7 +177,7 @@ async function handleRecibido(id){
 
    
       <div className="contenedor-total">
-  <div calssName='filtro'>
+  <div id='filtro'>
   <label id='text' key='Precio'>Filtrar por Precio: </label>
   <select name="filtroestado" id="filtroestado" onChange={(e) => filtroPorEstado(e)}>
     <option key={'sinFiltro'} value={'sinFiltro'}>Buscar por estados</option>
@@ -192,6 +192,7 @@ Historial?.map(e=>(
  
  <div   className="contenedor-orden">
  <h3>Compra n° : {e._id}</h3>,
+ <p> usuario {e.usuario?.nombre} {e.usuario?.apellido} </p>
  <h2>Estado de la compra:{e.pendiente? <p>PENDIENTE</p>: e.procesado? <p>PROCESADO</p>: e.recibido?<p>RECIBIDO</p>: e.cancelado? <p>CANCELADO</p>:" "}
  </h2>
  Cambiar estado a:
