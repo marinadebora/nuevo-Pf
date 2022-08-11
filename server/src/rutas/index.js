@@ -38,7 +38,8 @@ const { correoCompra } = require("../controladores/autenticarCompra");
 const usuariosGoogle = require('../controladores/ControladorRegistroGoogle');
 const { correoContacto } = require("./postFormularioContacto");
 /* const app = require("../modelos/SesionGoogle.js") */
-const {PutStock} = require("../controladores/controladorPutStock")
+const {PutStock} = require("../controladores/controladorPutStock");
+const { UsuariosAdmin, UsuariosBaneo } = require("./putUsuarioAdmin");
 
 let router = Router();
 
@@ -78,6 +79,8 @@ router.get("/usuario/:id",UsuarioId);
 router.put("/historial/:id",updateHistorial,correoCompra);
 router.post("/correoContacto",correoContacto);
 router.delete("/carrito",borrarCarrito)
+router.use("/actualizarAdmin", UsuariosAdmin)
+router.use("/actualizarBaneado",UsuariosBaneo)
 
 /* router.get("/categorias", categorias)
 router.use("/categorias", postCategorias) */

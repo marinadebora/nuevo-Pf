@@ -313,7 +313,6 @@
               ...state
             }
             case "USUARIOS":
-              console.log(state.user)
             return{
               ...state,
               user: action.payload
@@ -359,7 +358,14 @@
         return {
           ...state
      }
-      
+      case "ACTUALIZARADMIN":
+        return{
+          ...state
+        }
+      case "ACTUALIZARBANEADOS":
+        return{
+          ...state
+        }
       default: {
         return state
       }

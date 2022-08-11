@@ -2,21 +2,18 @@ const {Router} = require("express")
 let Usuario = require("../modelos/Usuarios")
 
 
- const UsuariosAdmin = Router();
-
- UsuariosAdmin.put("/:id", async (req, res)=>{
-    const {_id} = req.params
-    const { admin } = req.body;
-    let usuario =await Usuario.findById({_id})
-    try{ if (admin===true){
-         let cambio =await  Usuario.findOneAndUpdate({_id}, {admin:false})
+const UsuariosAdmin = Router();
+  UsuariosAdmin.put("/", async (req, res)=>{
+    const { id } = req.body;
+    let usuario =await Usuario.findById({_id:id})
+    try{ if (usuario.admin===true){
+         let cambio =await  Usuario.findOneAndUpdate({_id:id}, {admin:false})
          res.send(`El usuario ${cambio.nombre}, ya no es un administrador`)    
     }
     else{
-         let cambio = await Usuario.findOneAndUpdate({_id}, {admin:true})
+         let cambio = await Usuario.findOneAndUpdate({_id:id}, {admin:true})
          res.send(`Ahora el usuario ${cambio.nombre} es un administrador`)
         }
-        
     }catch(error){
         console.log(error)
     }
@@ -24,11 +21,10 @@ let Usuario = require("../modelos/Usuarios")
 
 const UsuariosBaneo= Router();
 
- UsuariosBaneo.put("/:id", async (req, res)=>{
-    const {_id} = req.params
-    const { baneado } = req.body;
+ UsuariosBaneo.put("/", async (req, res)=>{
+    const { id } = req.body;
     let usuario =await Usuario.findById({_id})
-    try{ if (baneado===true){
+    try{ if (usuario.baneado===true){
          let cambio =await  Usuario.findOneAndUpdate({_id}, {baneado:false})
          res.send(`El usuario ${cambio.nombre}, ya no esta baneado`)    
     }

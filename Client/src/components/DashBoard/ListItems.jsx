@@ -40,7 +40,7 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Reports" />
     </ListItemButton> */}
-    <ListItemButton>
+    <ListItemButton to="/todousuario">
       <ListItemIcon>
         <UsersIcon />
       </ListItemIcon>
