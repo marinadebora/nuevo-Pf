@@ -8,6 +8,7 @@ import '../../styles/form.css';
 import { Link } from 'react-router-dom';
 import axios from "axios"
 import NabVarD from './NabVarD';
+import swal from "sweetalert";
 
 
 export function EmbarcacionCreateRT2(){
@@ -224,7 +225,11 @@ export function EmbarcacionCreateRT2(){
             let findName = allEmbarcacionRenta.find((e) => e.marca.toLowerCase() === input.marca.toLowerCase()
             )
             if (findName) {
-              return alert("Ya existe una embarcacion con este nombre. ¡Cambialo!");
+                return  swal({
+                    title: "Ya existe un producto con este nombre. ¡Cambialo!",
+                    icon: "warning",
+                    timer:1250
+                 })
             }else if(Object.keys(errors).length === 0 && (input.marca!=='')){
               
               dispatch(postEmbarcacionRT(input))
@@ -247,16 +252,20 @@ export function EmbarcacionCreateRT2(){
                   categorias: [],
                   imagenes: [],
               })
-              return (
-                  alert(`La Embarcacion fue creada con éxito.`), navigate(`/admin`)
-                  ) 
+              return  swal({
+                title: "La embarcacion fue creada con exito.",
+                icon: "success",
+                timer:1250
+             })
             
          } } catch (error) {
             console.log(error);
-            return alert(
-              "Algo falló al crear la embarcacion. "
-            );
-          }
+             return  swal({
+            title: "Algo fallo en crear la embarcacion",
+            icon: "warning",
+            timer:1250
+         })
+        }
       };
     
     return (

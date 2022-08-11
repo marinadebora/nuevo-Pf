@@ -44,7 +44,12 @@ export default function Navbar() {
 
   const handelOut =()=>{
     if(usuario){
-      alert('Has cerrado sesion con exito')
+      
+      swal({
+        text: 'Has cerrado sesion con exito',
+        icon: "success",
+        timer: 1250
+      })
       setUsuario(null)
       localStorage.removeItem('loguearUsuario') || localStorage.removeItem('logueadoGoogle')
       setToken(usuario)

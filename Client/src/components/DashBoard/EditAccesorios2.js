@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { updateAccesorio, Categorias} from '../../actions/admin-action';
 import { productosDetail, /*getAllTypes */} from '../../actions/actions'
 import { useNavigate } from 'react-router-dom';
+import swal from "sweetalert";
 
 export function UpdateAccesorio2(){
     const dispatch = useDispatch()
@@ -80,9 +81,11 @@ export function UpdateAccesorio2(){
         if(Object.keys(errors).length === 0){
             if(input.precio){parseInt(input.precio)}
             dispatch(updateAccesorio(id, input))
-            return (
-                alert(`El accesorio fue actualizado con éxito.`), navigate(`/admin`)
-                ) 
+            return  swal({
+                title: "El accesorio fue actualizado con exito",
+                icon: "success",
+                timer:1250
+             })
             
         }
         

@@ -123,6 +123,7 @@ const CheckoutForm = ({ backStep, nextStep }) => {
             title: "Su Compra fue aprobada!!",
             text: "solo falta un paso mas para terminar su orden",
             icon: "success",
+            timer:1250
           
           }).then((value) => {
             switch (value) {

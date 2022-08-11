@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { updateEmbarcacionEnV, Categorias} from '../../actions/admin-action';
 import { productosDetail, /*getAllTypes */} from '../../actions/actions'
 import { useNavigate } from 'react-router-dom';
+import swal from "sweetalert";
 
 export function UpdateEmbarcacionVenta2(){
     const dispatch = useDispatch()
@@ -89,9 +90,11 @@ export function UpdateEmbarcacionVenta2(){
         if(Object.keys(errors).length === 0){
             if(input.precio){parseInt(input.precio)}
             dispatch(updateEmbarcacionEnV(id, input))
-            return (
-                alert(`La embarcacion fue actualizada con éxito.`), navigate(`/admin`)
-                ) 
+            return  swal({
+                title: "la embarcacion fue actualizada con exito",
+                icon: "success",
+                timer:1250
+             })
             
         }
         
