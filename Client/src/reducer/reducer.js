@@ -359,7 +359,7 @@
         return {
           ...state
      }
-<<<<<<< HEAD
+
       case "ACTUALIZARADMIN":
         return{
           ...state
@@ -368,7 +368,7 @@
         return{
           ...state
         }
-=======
+
      case 'FITRO_HISTORIAL':
       const estadoTotal =state.allhistorial
       const filterH= action.payload==='pendiente'?estadoTotal.filter(e=>e.pendiente===true):
@@ -383,8 +383,7 @@
       case "CONTACT_FORM":
         return{
           ...state
-        } 
->>>>>>> b11913a43a16effec44bd910c9d434e80db60198
+        }
       default: {
         return state
       }

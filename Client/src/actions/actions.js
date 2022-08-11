@@ -717,7 +717,6 @@ console.log(error)
 	}
 }
 
-<<<<<<< HEAD
 export const actualizarAdmin = (value)=> async (dispatch)=>{
 	try {
 		const respuesta = await axios.put(`/actualizarAdmin`,value)
@@ -736,13 +735,15 @@ export const actualizarBaneado = (value)=> async (dispatch)=>{
 		alert(error)
 	}
 	
-=======
+}
+
 export function filtroHistorial(payload){
 	return {
 		type: 'FITRO_HISTORIAL',
 		payload
 	}
 }
+
 export function contactForm(value){
 	return async function(dispatch){
 		try{
@@ -755,5 +756,4 @@ export function contactForm(value){
 			console.log(error)
 		}
 	}
->>>>>>> b11913a43a16effec44bd910c9d434e80db60198
 }
