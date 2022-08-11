@@ -18,6 +18,7 @@ export function Review()
   const myDetail = useSelector(state => state.detail);
 
   const comentProduct = myDetail.comentarios
+  console.log(id)
 
 const [starOk,setStarOk]= useState(false)
 const [text,setText]=useState(true)
