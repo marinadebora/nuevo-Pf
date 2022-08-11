@@ -21,7 +21,7 @@ const getUsuario = async(req,res)=>{
             _id: e._id,
             nombre: e.nombre,
             apellido: e.apellido,
-
+            baneado: e.baneado,
             email: e.email,
             carritoDeCompra: e.carritoDeCompra,
             historialDeCompra: e.historialDeCompra,

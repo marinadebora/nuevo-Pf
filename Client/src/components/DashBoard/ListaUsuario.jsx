@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { useParams,useNavigate } from 'react-router-dom'
+import {Button, Typography} from "@mui/material";
+import { useParams,useNavigate,Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { actualizarAdmin, usuarios, actualizarBaneado} from '../../actions/actions';
 import est from './ListaUsuario.module.css';
+
 
 
 const ListaUsuario = () => {
@@ -19,15 +21,15 @@ const ListaUsuario = () => {
 
     const handleAdmin = (e)=>{
         console.log(e)
-        dispatch(actualizarAdmin())
+        dispatch(actualizarAdmin({id:e.target.value}))
         dispatch(usuarios())
-        
+        window.location.reload()
     }
 
-    const handleBloqueado = ()=>{
+    const handleBloqueado = (e)=>{
         dispatch(actualizarBaneado({id:e.target.value}))
         dispatch(usuarios())
-        history("/todousuario")
+        window.location.reload()
     }
 
     useEffect(()=>{
@@ -36,7 +38,11 @@ const ListaUsuario = () => {
 
     return (
         <div>
-            <h1>lista</h1>
+            <h1>lista de Usuarios</h1>
+            <div>
+            <Link to="/dashboard"><button  className={est.boton}>Volver</button></Link>
+            </div>
+            <div>
             <div>
                 {
                     user.length ?
@@ -56,17 +62,19 @@ const ListaUsuario = () => {
                                     <h5>{e.email}</h5>
                                 </div>
                                 <div>
-                                    <button name='id' value={e._id} onClick={handleAdmin(e._id)}>Admin</button>
+                                    <Button sx={{marginLeft: '150px'}} variant="outlined" id="button" name='id' value={e._id} onClick={handleAdmin}>Admin</Button>
                                     <h5>{e.admin === true? 'si': 'no'}</h5>
                                 </div>
                                 <div>
-                                    <button value={e._id} onClick={handleBloqueado}>Bloqueado</button>
-                                    <h6></h6>
+                                    <Button sx={{marginLeft: '150px'}} variant="outlined" id="button" value={e._id} onClick={handleBloqueado}>Bloqueado</Button>
+                                    {console.log(e?.baneado)}
+                                    <h5>{e.baneado? 'si': 'no'}</h5>
                                 </div>
                             </div>
                         )
                     }):<>Cargando</>
                 }
+            </div>
             </div>
         </div>
     );

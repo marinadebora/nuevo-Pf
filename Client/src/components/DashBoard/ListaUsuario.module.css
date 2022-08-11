@@ -1,3 +1,25 @@
+
+.boton{
+    color: #0184a9;
+    font-size: 15px;
+    line-height: 20px;
+    padding: 10px;
+    border-color: #0184a9;
+    border-radius: 7px;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+    background-image: linear-gradient(to right, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0.76) 50%, rgba(255, 255, 255, 0.603) 100%);
+    /* box-shadow: rgb(0, 0, 0) 5px 5px 15px 5px; border: 2px solid rgb(28, 110, 164); */
+    display: inline-block;
+    cursor: pointer;
+}
+
+
+
 .ordern{
     display: flex;
     margin: 3%;
