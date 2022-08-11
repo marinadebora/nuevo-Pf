@@ -18,6 +18,7 @@ import ImgSinStock from "../imagenes/vector-sin-stock.png"
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { GiConsoleController } from "react-icons/gi";
 import gif from '../imagenes/cargando-loading.gif'
+import { ErrorAdmin } from './DashBoard/ErrorDashbord';
 
 
 export default function CardDetail()
@@ -118,6 +119,7 @@ const stockProduct = myDetail?.stock
   }
   return (
       <div>
+       
     <Navbar/>
     {
       myDetail._id !== id?
