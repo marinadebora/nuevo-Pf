@@ -21,7 +21,7 @@ export function HistorialCompras()  {
 const detail=useSelector(state=>state.detail)
 const accesorioId=accesorio[0]?._id
 let { id } = useParams()
-const userReview= detail.comentarios?.map(e=>e.email===myUserDetail.email) 
+
 
 
   useEffect(()=>{
@@ -29,7 +29,7 @@ const userReview= detail.comentarios?.map(e=>e.email===myUserDetail.email)
   dispatch(accesorios())
   dispatch(productosDetail(accesorioId))
   },[dispatch,current_userID])
-console.log(userReview)
+
     return (
       <div>
         <Navbar/>
