@@ -1,0 +1,150 @@
+
+.contenedor-orden{
+  width: 90%;
+  padding: 2%;
+  box-shadow: 0 3px 13px 1px rgba(0, 0, 0, 0.503);
+  border-radius: 10px;
+  text-align: start;
+  
+}
+.contenedor-art{
+    width:80%;
+    height: 70%;
+    display: flex;
+    align-items:flex-start;
+    justify-content:flex-start;
+    background-color: #fff;
+    box-shadow: 0 3px 13px 1px rgba(1, 20, 40, 0.644);
+    border-radius: 10px ;
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+
+
+#contenedorInfo{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#compraN{
+  float: right;
+  margin-top: 0px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#estado{
+    padding: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#estadoA{
+    margin-top: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#estadoPendiente{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: orange;
+
+
+}
+#estadoProcesado{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: rgb(174, 78, 5);
+}
+#estadoRecibido{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: green;
+}
+#estadoCancelado{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: red;
+}
+
+
+#estadoCompra{
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#bt-cancel{
+   
+    display: inline-block;
+    font-weight: bold;
+    color: #0184a9;
+    height: 20px;
+    width: 80px;
+    margin-right: 5px;
+    background-color:transparent;
+    border-radius: 10px;
+    border: 1px solid #0184a9;
+    cursor: pointer;
+    font-size: 10px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+       
+    }
+
+
+    .imagen-art{
+        width: 50%;
+        height: 100%;
+        display: block;
+      }
+      #contenedor-texto-art {
+         text-align:start; 
+         width: 100%;
+         height: 100%;
+         font-family: Arial, Helvetica, sans-serif;
+         font-weight: 1%;
+         margin-top: 5px;
+         margin-bottom: 5px;
+         border-top: 1px solid black;
+         border-bottom: 1px solid black;
+      }
+      #nombre-art {
+        float: right;
+        margin-top: 10px;
+        margin-right: 20px;
+        font-size: 1rem;
+        font-weight:bold;
+        
+      }
+
+      #precioTotalH{
+        font-weight: bold;
+      }
+
+      #cant{
+        width: 50px;
+        
+      }
+
+      
+    .link {
+      text-decoration: none;
+      font-size:1.1rem ;
+      text-align: justify;
+    }
+    #texto.art {
+      float: left;
+      font-size:2.1rem ;
+      text-align: justify;
+    }
+ .imagenhc{
+  width: 30%;
+ }
+ .h3{
+  color: rgb(1, 1, 42);
+ }
+ .text{
+  text-align: end;
+  margin:0
+ }
+#button{
+  margin:1% 2% 0 0
+}

@@ -21,6 +21,9 @@
 }
 
 #guest1{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 30px;
     margin-top: 70px;
     margin-left: 50px;
 }
@@ -35,7 +38,7 @@
     border-radius: 10px;
     border: none;
     margin: 10px;
-    margin-top: 100px;
+    margin-top: 20px;
     margin-left: 50px;
     cursor: pointer;
 }
