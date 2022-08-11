@@ -37,7 +37,7 @@ export function UsuariosDetail(id)
 	return async function (dispatch)
 	{
 		try {
-			const userDetail = await axios(`/usuario/${id}`)
+			const userDetail = await axios(`http://localhost:4000/usuario/${id}`)
 
 			return dispatch({
 				type: 'USUARIO_DETAIL',
@@ -139,6 +139,18 @@ export const addToBasket = (item) =>
 	}
 };
 
+export const DbtoLocal = (item) =>
+{
+	try {
+		return {
+			type: 'DB_TO_LOCAL',
+			payload: item,
+		}
+	} catch (err) {
+		console.log(err)
+	}
+};
+
 
 export function removeToBasket(item)
 
@@ -169,7 +181,7 @@ export function postHistoria(payload)
 	return async function (dispatch)
 	{
 		try {
-			const historiaCreated = await axios.post(`/historia`, payload);
+			const historiaCreated = await axios.post(`${URL_BASE}/historia`, payload);
 			
 			return dispatch({
 				type: "POST_HISTORIA",
@@ -191,7 +203,7 @@ export function updateHistorial(id, payload)
 	console.log(payload)
 	return async function (dispatch)
 	{
-		return await axios.put(`historial/${id}`, payload)
+		return await axios.put(`${URL_BASE}/historial/${id}`, payload)
 			.then(data =>
 			{
 				dispatch({
@@ -400,6 +412,22 @@ export function UpdateToCart(id, payload)
 			{
 				dispatch({
 					type: "UPDATE_CART",
+					payload: data
+				})
+			})
+	}
+}
+
+export function UpdateToFavs(id, payload)
+{
+	console.log(payload)
+	return async function (dispatch)
+	{
+		return axios.put(`${URL_LOCAL}/userfavs/${id}`, payload)
+			.then(data =>
+			{
+				dispatch({
+					type: "UPDATE_FAVS",
 					payload: data
 				})
 			})
@@ -689,6 +717,7 @@ console.log(error)
 	}
 }
 
+<<<<<<< HEAD
 export const actualizarAdmin = (value)=> async (dispatch)=>{
 	try {
 		const respuesta = await axios.put(`/actualizarAdmin`,value)
@@ -707,4 +736,24 @@ export const actualizarBaneado = (value)=> async (dispatch)=>{
 		alert(error)
 	}
 	
+=======
+export function filtroHistorial(payload){
+	return {
+		type: 'FITRO_HISTORIAL',
+		payload
+	}
+}
+export function contactForm(value){
+	return async function(dispatch){
+		try{
+			const form = await axios.post("/contactForm",value)
+			return dispatch({
+				type:"CONTACT_FORM",
+				payload:form
+			})
+		}catch(error){
+			console.log(error)
+		}
+	}
+>>>>>>> b11913a43a16effec44bd910c9d434e80db60198
 }

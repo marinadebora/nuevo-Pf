@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector, } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useParams } from "react-router-dom";
 import {  editarAccComentarios, productosDetail, UsuariosDetail } from "../../actions/actions";
 import '../../styles/review.css'
 import '../../styles/PuntuacionEstrella.css'
+import gif from '../../imagenes/estrellas.gif'
+import Navbar from "../Navbar";
+import {Button, Typography} from "@mui/material";
 
 export function Review()
 {
@@ -18,6 +21,12 @@ export function Review()
   const myDetail = useSelector(state => state.detail);
 
   const comentProduct = myDetail.comentarios
+
+  const userReview= myDetail.comentarios?.map(e=>e.email===UserFromLocalStorage.email) 
+  console.log(myDetail.comentarios)
+
+  console.log(id)
+
 
 const [starOk,setStarOk]= useState(false)
 const [text,setText]=useState(true)
@@ -69,7 +78,7 @@ const [text,setText]=useState(true)
     }
 
   }
-  console.log(star)
+
 
 
   function handleSubmit(e)
@@ -96,6 +105,16 @@ const [text,setText]=useState(true)
 
   return (
     <div>
+      {
+        userReview?.length>0 ?
+        <div> 
+          <Navbar />
+          <h2 id='h2'>Parece que ya dejaste tu comentario para este producto
+          <Link to='/historialC'>
+          <Button variant="outlined" id="buttonestrellas">Volver </Button></Link></h2>
+          <img id="gifStar" src={gif} alt='estrellas' />
+        </div>:
+      <div>
       <form onSubmit={handleSubmit}>
 
 
@@ -126,9 +145,10 @@ const [text,setText]=useState(true)
         
         
       </form><button onClick={cancel}>Cancelar</button>
-
-
+      </div>
+}
     </div>
+ 
   );
 };
 

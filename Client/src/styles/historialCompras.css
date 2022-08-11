@@ -1,7 +1,7 @@
 .contenedor-total{
   flex-wrap: wrap;
   overflow: hidden;
-
+  height: auto;
   margin:2% 10%;
 
   
@@ -11,23 +11,33 @@
   margin:2%;
   padding: 2%;
   box-shadow: 0 3px 13px 1px rgba(0, 0, 0, 0.503);
-  text-align:end;
+  text-align:start;
 }
 .contenedor-art{
     width:80%;
     height: 70%;
-    margin:5% ;
+    margin-top: 10px;
+    margin-left: 10%;
     display: flex;
-    align-items:flex-end;
+    align-items:flex-start;
     justify-content:flex-start;
     background-color: #fff;
     box-shadow: 0 3px 13px 1px rgba(1, 20, 40, 0.644);
     border-radius: 10px ;
     
 }
-    .imagen-art{
-        width: 50%;
-        height: 100%;
+
+#estadoCompra{
+  width: 80px;
+}
+
+#textCompraNumero{
+  width: 80px;
+  float: right;
+}
+    #imagen-art{
+        width: 20%;
+        
         display: block;
       }
       .contenedor-texto-art {
@@ -60,9 +70,22 @@
   color: rgb(1, 1, 42);
  }
  .text{
-  text-align: end;
-  margin:0
+  text-align: start;
+  margin-top:10px;
  }
-#button{
-  margin:1% 2% 0 0
+#buttonHistotialCliente{
+  display: inline-block;
+    font-weight: bold;
+    color: #0184a9;
+    height: 30px;
+    width: 100px;
+    background-color:transparent;
+    border-radius: 10px;
+    border: 2px solid #0184a9;
+    cursor: pointer;
+    font-size: 10px;
+    margin-left: 45%;
+    margin-top: 15px;
+    font-weight: bold;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
 }

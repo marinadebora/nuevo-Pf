@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { updateEmbarcacionRT, Categorias} from '../../actions/admin-action';
 import { productosDetail, /*getAllTypes */} from '../../actions/actions'
 import { useNavigate } from 'react-router-dom';
+import NabVarD from './NabVarD';
 
 export function UpdateEmbarcacionRenta2(){
     const dispatch = useDispatch()
@@ -108,8 +109,8 @@ export function UpdateEmbarcacionRenta2(){
     
 
     return (
-
-        
+        <div>
+        <NabVarD />
         <div className="cont-form">
             {!allCat  ? 
                 <>
@@ -358,6 +359,7 @@ export function UpdateEmbarcacionRenta2(){
                     </div>
                     </>
       }
+      </div>
         </div>
     )
 }

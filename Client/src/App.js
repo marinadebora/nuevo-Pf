@@ -31,12 +31,12 @@ import { useSelector, useDispatch ,} from 'react-redux'
 import { UsuariosDetail } from './actions/actions'
 import Checkout from "./components/CheckoutProcess/Checkout"
 import Favs from "./components/Favoritos"
-import OrdenesDeCompras from "./components/DashBoard/OrdenesDeCompra.js"
+import OrdenesDeCompras from "./components/DashBoard/OrdenesDeCompra.jsx"
 import CheckoutFinal from "./components/CheckoutProcess/CheckoutFinal"
 import ListaUsuario from './components/DashBoard/ListaUsuario';
 let publishableKey ="pk_test_51LTzChGPkJkLR4xlRyDUWk3Pj6SiGC8bq0An5pdnhBWsCwE0Y9eIT2uUj7baWSnQlXXXmqSlZitwQKJrd7o1LwC500k5khRIeF" 
 const stripePromise = loadStripe(publishableKey)
-
+import ErrorAdmin from"./components/DashBoard/ErrorDashbord"
 
     
 
@@ -64,7 +64,7 @@ export default function App() {
  
   
   return (
-    !myUserDetail.admin  ?
+    !myUserDetail?.admin  ?
     <>
 
     <div className="App">
@@ -88,7 +88,8 @@ export default function App() {
         <Route exact path='/accesorios' element={<Accesorios />} />
         <Route exact path='/accesorios/:id' element={<CardDetail />} />
         
-        
+        <Route exact path='/admin' element={<ErrorAdmin/>} />
+        <Route exact path='/dashboard' element={<ErrorAdmin/>} />
         <Route path='/prueba/checkout' element={<CheckoutPrueba/>}/>
         <Route exact path='/checkout' element={<Checkout/>}/>
         <Route exact path='/contactForm' element={<ContactForm />}/>

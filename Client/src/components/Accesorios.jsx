@@ -13,7 +13,7 @@ import '../styles/searchBar.css';
 import '../styles/box.css'
 import {FiltrosAccesorios} from './FiltrosAccesorios';
 import img from '../imagenes/sin_productos.jpg'
-import {todosLosProductos,getItemsCart, resetDetail} from '../actions/actions'
+import {todosLosProductos,getItemsCart, resetDetail,UsuariosDetail} from '../actions/actions'
 import '../styles/accesorios.css'
 
 
@@ -34,9 +34,25 @@ export function Accesorios(){
   const [categorias, setCategorias] = useState('')
   const cartFromLocalStorage = JSON.parse(localStorage.getItem("item2") || "[]");
   const [cart /* setCart */] = useState(cartFromLocalStorage);
- 
   const FavFromLocalStorage = JSON.parse(localStorage.getItem("Fav") || "[]");
   const [fav /* setCart */] = useState(FavFromLocalStorage);
+  const UserFromLocalStorage = JSON.parse(localStorage.getItem("loguearUsuario"))||JSON.parse(localStorage.getItem("logueadoGoogle"))
+  const current_userID =UserFromLocalStorage?.id
+ 
+  const myUserDetail = useSelector(state => state?.userDetail);
+  const carroUserDb = myUserDetail?.carritoDeCompra
+  const cartForDb = carroUserDb
+  const [cartDb] = useState(cartForDb)
+
+  
+ 
+
+  console.log(cartForDb)
+  
+  const [carrito, setCarrito] = useState({
+    carritoDeCompra: carroUserDb
+    
+})
 
  
   const paginado = (numPage) =>
@@ -45,16 +61,24 @@ export function Accesorios(){
   }
 
   useEffect(()=>{
-    localStorage.getItem("item2")
-    localStorage.setItem("item2", JSON.stringify(cart));
-    localStorage.getItem("Fav")
-    localStorage.setItem("Fav", JSON.stringify(fav));
     
-    
+    dispatch(UsuariosDetail(current_userID))
     dispatch(getItemsCart());
     dispatch(resetDetail());
     dispatch(accesorios())
 
+    localStorage.getItem("item2")
+   
+    localStorage.getItem("Fav")
+    localStorage.setItem("Fav", JSON.stringify(fav));
+    
+    
+    if(typeof current_userID === "string"){
+      localStorage.setItem("item2", JSON.stringify([...cartForDb]));
+      //JSON.stringify([...FavFromLocalStorage, cart_add_fav])
+      }
+      localStorage.setItem("item2", JSON.stringify(cart))
+      
 },[dispatch, cart,localStorage.getItem("item2")])
 
 

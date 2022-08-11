@@ -15,8 +15,8 @@
     userDetail:[],
     user:[],
     historial:[],
-    comentario:[]
-
+    comentario:[],
+    allhistorial:[]
   };
   
   function rootReducer(state = initialState, action)
@@ -352,12 +352,14 @@
     case 'HISTORIAL_COMPRA':
       return{
         ...state,
-        historial:action.payload
+        historial:action.payload,
+        allhistorial:action.payload,
       }
       case "UPDATE_HISTORIA":
         return {
           ...state
      }
+<<<<<<< HEAD
       case "ACTUALIZARADMIN":
         return{
           ...state
@@ -366,6 +368,23 @@
         return{
           ...state
         }
+=======
+     case 'FITRO_HISTORIAL':
+      const estadoTotal =state.allhistorial
+      const filterH= action.payload==='pendiente'?estadoTotal.filter(e=>e.pendiente===true):
+      action.payload==='procesado'?estadoTotal.filter(e=>e.procesado===true):
+      action.payload==='recibido'?estadoTotal.filter(e=>e.recibido===true):
+      action.payload==='cancelado'&& estadoTotal.filter(e=>e.cancelado===true)
+      console.log(filterH)
+      return{
+        ...state,
+        historial:filterH
+      }
+      case "CONTACT_FORM":
+        return{
+          ...state
+        } 
+>>>>>>> b11913a43a16effec44bd910c9d434e80db60198
       default: {
         return state
       }

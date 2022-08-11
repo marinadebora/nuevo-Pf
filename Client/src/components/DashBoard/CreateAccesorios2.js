@@ -8,6 +8,7 @@ import { accesorios, /*getAllTypes */} from '../../actions/actions';
 import '../../styles/form.css';
 import { Link } from 'react-router-dom';
 //import * as MdIcons from 'react-icons/md'
+import NabVarD from './NabVarD';
 import axios from "axios"
 
 
@@ -194,6 +195,9 @@ export function AccesoriosCreate2(){
       };
     
     return (
+      <div>
+        <NabVarD />
+      
         <div classproducto="cont-form">
             
             
@@ -413,8 +417,9 @@ export function AccesoriosCreate2(){
                 </>
             }
             
-            
+      </div>
         </div>
+
     )
 }
 

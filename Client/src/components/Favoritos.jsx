@@ -1,11 +1,9 @@
 import NavBar from './Navbar'
-import { addToBasket, getItemsCart,UsuariosDetail,} from '../actions/actions'
+import { addToBasket, getItemsCart,UsuariosDetail,UpdateToCart,UpdateToFavs} from '../actions/actions'
 import { useSelector, useDispatch ,} from 'react-redux'
 import { useEffect ,useState,Fragment} from 'react'
 import { useNavigate } from 'react-router-dom';
-
 import '../styles/card.css';
-
 import IconButton from "@mui/material/IconButton";
 import { accesorios } from '../actions/actions'
 import { Grid } from '@mui/material'
@@ -22,7 +20,6 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 export default function Favs()
 {
 
-    
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -42,8 +39,13 @@ export default function Favs()
   
 
   const [input, setInput] = useState({
-    carritoDeCompra: FavFromLocalStorage
+    favoritos: FavFromLocalStorage
     
+})
+
+const [carrito, setCarrito] = useState({
+  carritoDeCompra: cartFromLocalStorage
+  
 })
 
 
@@ -172,12 +174,21 @@ var uniqueArray = removeDuplicates(current_cart_fav, "_id");
   dispatch(getItemsCart());
   dispatch(accesorios())
   dispatch(UsuariosDetail(current_userID))
-  /*if(typeof current_userID === "string"){
-    dispatch(UpdateToCart(current_userID,input ));
-  }*/
- 
+  if(typeof current_userID === "string"){
+    dispatch(UpdateToCart(current_userID,carrito ));
+    dispatch(UpdateToFavs(current_userID,input ));
+  }
   
 }, [cart ,dispatch,current_userID ]);
+
+/*useEffect(() => {
+  localStorage.setItem("parametros", JSON.stringify(param))
+  localStorage.setItem("item2", JSON.stringify(cart));
+  dispatch(getItemsCart());
+  dispatch(accesorios())
+  dispatch(UsuariosDetail(current_userID))*/
+  
+  
  
  
 
@@ -190,12 +201,15 @@ var uniqueArray = removeDuplicates(current_cart_fav, "_id");
             </div>
         </>:
         <div>
-        <NavBar />
-        <button 
-                className="buttonCleanCart" 
-                onClick={() => handleClearCart()}>
-                  Borrar todos los favoritos <GiIcons.GiBroom /> </button>
+        <NavBar/>
             <h1 id='titleCheckoutPage'>Mis Favoritos</h1>
+            <div id='mainButtonCleanCart'>
+              <button 
+                id="buttonCleanCart" 
+                onClick={() => handleClearCart()}>
+                  Borrar favoritos<GiIcons.GiBroom />
+              </button>
+              </div>
             {
               uniqueArray?.map(e => (
                     e !== undefined &&
@@ -225,7 +239,7 @@ var uniqueArray = removeDuplicates(current_cart_fav, "_id");
                   />
                 
                 <form id="layout">
-                <Link to={`/home/${e._id}`} >Info</Link>
+                <Link id='infobuttonFav' to={`/home/${e._id}`} >INFO</Link>
                 
                 {e.stock > cantidad(e._id)
           ?<IconButton aria-label="add to cart"onClick={() => addToCart(e._id)}>
