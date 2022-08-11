@@ -31,7 +31,7 @@ export function AccesoriosCreate2(){
             errors.descripcion='No ingresaste una descripcion!'
         }
 
-        if(((input.precio < 1) || (input.precio >100)) || isNaN(input.precio)){
+        if(((input.precio < 1) || (input.precio >10000)) || isNaN(input.precio)){
             errors.precio = 'Ingresaste un precio invalido.'
         }
 

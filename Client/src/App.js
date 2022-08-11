@@ -36,6 +36,7 @@ import CheckoutFinal from "./components/CheckoutProcess/CheckoutFinal"
 let publishableKey ="pk_test_51LTzChGPkJkLR4xlRyDUWk3Pj6SiGC8bq0An5pdnhBWsCwE0Y9eIT2uUj7baWSnQlXXXmqSlZitwQKJrd7o1LwC500k5khRIeF" 
 const stripePromise = loadStripe(publishableKey)
 import ErrorAdmin from"./components/DashBoard/ErrorDashbord"
+import EditarStock from "./components/DashBoard/EditarStock"
 
     
 
@@ -129,6 +130,7 @@ export default function App() {
       <Route exact path='/dashboard/updateembventa/:id' element={<UpdateEmbarcacionVenta2/>} />
       <Route exact path='/ordenescompras' element={<OrdenesDeCompras/>} />
       <Route exact path='/venta' element={<BarcosEnVenta  />} />
+      <Route exact path='/dashboard/stock/:id' element={<EditarStock/>} />
       
 
       <Route exact path='/alquiler' element={<BarcosEnAlquiler  />} />
