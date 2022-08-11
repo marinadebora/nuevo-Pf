@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link , useParams} from "react-router-dom";
 import '../../styles/historialCompras.css'
-import {UsuariosDetail, usuarios,historialCompra} from '../../actions/actions'
+import {UsuariosDetail, usuarios,historialCompra,productosDetail, accesorios} from '../../actions/actions'
 import { user } from "./Compras";
 import { Button } from "@mui/material";
 import imgH from '../../imagenes/hcompra.png'
@@ -12,21 +12,24 @@ import imgH from '../../imagenes/hcompra.png'
 
 export function HistorialCompras()  { 
   const dispatch=useDispatch()
-  const UserFromLocalStorage = JSON.parse(localStorage.getItem("loguearUsuario"))||JSON.parse(localStorage.getItem("logueadoGoogle"))
+  const UserFromLocalStorage = JSON.parse(localStorage.getItem("loguearUsuario"))
+  const UserFromLocalStorageGoogle=JSON.parse(localStorage.getItem("logueadoGoogle"))
+  const current_userIDGoogle=UserFromLocalStorageGoogle?.id
   const current_userID =UserFromLocalStorage?.id
   const myUserDetail = useSelector(state => state?.userDetail);
+  const accesorio = useSelector(state => state?.accesories);
 const detail=useSelector(state=>state.detail)
-const userReview=detail.comentarios?.filter(e=>e.email===myUserDetail.email)
-
-
-console.log(myUserDetail)
+const accesorioId=accesorio[0]?._id
+let { id } = useParams()
+const userReview= detail.comentarios?.map(e=>e.email===myUserDetail.email) 
 
 
   useEffect(()=>{
-  dispatch(UsuariosDetail(current_userID))
+  dispatch(UsuariosDetail(current_userID||current_userIDGoogle))
+  dispatch(accesorios())
+  dispatch(productosDetail(accesorioId))
   },[dispatch,current_userID])
-
-
+console.log(userReview)
     return (
       <div>
         <Navbar/>
@@ -85,14 +88,14 @@ myUserDetail.historialDeCompra?.map(e=>(
           <div className='contenedor-art'>
         <img src={e.imagenes?.[0]} alt="imagen" id='imagen-art'/>
         <div className='contenedor-texto-art'>
-      <p className='nombre-art'>{e.producto.producto}</p>
+      <p className='nombre-art'>{e.producto}</p>
       <p className='texto-art'>Precio: {e.precio}</p>
       <p>{e.cantidad||1} unidad</p>
       {
         userReview? <h4>ya Calificaste este producto</h4>:
-        <Link to={`/review/${e.producto._id}`}><h3>Califica tu producto</h3></Link>
+        <Link to={`/review/${e._id}`}><h3>Califica tu producto</h3></Link>
       }
-     
+    
       </div>
   
       
