@@ -37,7 +37,7 @@ export function UsuariosDetail(id)
 	return async function (dispatch)
 	{
 		try {
-			const userDetail = await axios(`http://localhost:4000/usuario/${id}`)
+			const userDetail = await axios(`${URL_BASE}/usuario/${id}`)
 
 			return dispatch({
 				type: 'USUARIO_DETAIL',
@@ -423,7 +423,7 @@ export function UpdateToFavs(id, payload)
 	console.log(payload)
 	return async function (dispatch)
 	{
-		return axios.put(`${URL_LOCAL}/userfavs/${id}`, payload)
+		return axios.put(`${URL_BASE}/userfavs/${id}`, payload)
 			.then(data =>
 			{
 				dispatch({

@@ -38,9 +38,10 @@ export default function Admin()
 
 	}, [dispatch])
 
+
 	function volver()
 	{
-		navigate(-1)
+		navigate("/dashboard")
 	}
 
 
@@ -87,10 +88,13 @@ export default function Admin()
 										descripcion={e.descripcion}
 										Tamaño={e.Tamaño}
 										Link={<Link to={`/dashboard/${e._id}`} >Info</Link>}
+										
+										Link2={<Link to={`/dashboard/stock/${e._id}`} >Editar Stock</Link>}
 									/>
+									
 
 								</Grid>
-
+								
 
 
 

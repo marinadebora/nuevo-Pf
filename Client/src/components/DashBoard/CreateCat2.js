@@ -7,6 +7,7 @@ import {postCategorias, Categorias } from '../../actions/admin-action';
 import '../../styles/form.css';
 import { Link } from 'react-router-dom';
 import NabVarD from './NabVarD';
+import swal from "sweetalert";
 
 
 
@@ -98,7 +99,11 @@ export function CatCreate2(){
             let findproducto = allCat.find((e) => e.toLowerCase() === input.nombre.toLowerCase()
             )
             if (findproducto) {
-              return alert("Ya existe un producto con este nombre. ¡Cambialo!");
+                return  swal({
+                    title: "Ya existe un producto con este nombre. ¡Cambialo!",
+                    icon: "warning",
+                    timer:1250
+                 })
             }
             
             dispatch(postCategorias(input))
@@ -106,15 +111,20 @@ export function CatCreate2(){
                 nombre: '',
                
             })
-            return (
-                alert(`La Categoria fue creada con exito.`), navigate(`/admin`)
-                ) 
+            return  swal({
+                title: "La categoria fue creada con exito.",
+                icon: "success",
+                timer:1250
+             })
+        
           
         } catch (error) {
           console.log(error);
-          return alert(
-            "Algo falló al crear la categoria."
-          );
+          return  swal({
+            title: "Algo fallo en crear el producto",
+            icon: "warning",
+            timer:1250
+         })
         }
       };
     

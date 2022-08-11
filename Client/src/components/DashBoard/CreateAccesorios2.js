@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 //import * as MdIcons from 'react-icons/md'
 import NabVarD from './NabVarD';
 import axios from "axios"
+import swal from "sweetalert";
 
 
 
@@ -30,7 +31,7 @@ export function AccesoriosCreate2(){
             errors.descripcion='No ingresaste una descripcion!'
         }
 
-        if(((input.precio < 1) || (input.precio >100)) || isNaN(input.precio)){
+        if(((input.precio < 1) || (input.precio >10000)) || isNaN(input.precio)){
             errors.precio = 'Ingresaste un precio invalido.'
         }
 
@@ -167,7 +168,12 @@ export function AccesoriosCreate2(){
             let findproducto = allAccesories.find((e) => e.producto.toLowerCase() === input.producto.toLowerCase()
             )
             if (findproducto) {
-              return alert("Ya existe un producto con este nombre. ¡Cambialo!");
+              
+              return  swal({
+                 title: "Ya existe un producto con este nombre. ¡Cambialo!",
+                 icon: "warning",
+                 timer:1250
+              })
             }else if(Object.keys(errors).length === 0 && (input.producto!=='')){
               if(input.precio){parseInt(input.precio)}
               dispatch(postAccesorio(input))
@@ -182,15 +188,20 @@ export function AccesoriosCreate2(){
                   
                   
               })
-              return (
-                  alert(`El Accesorio fue creado con exito.`), navigate(`/admin`)
-                  ) 
+           
+                  return  swal({
+                    title: "El Accesorio fue creado con exito.",
+                    icon: "success",
+                    timer:1250
+                 })
             
          } } catch (error) {
             console.log(error);
-            return alert(
-              "Algo falló al crear el accesorio."
-            );
+            return  swal({
+              title: "Algo fallo en crear el producto",
+              icon: "warning",
+              timer:1250
+           })
           }
       };
     
@@ -218,7 +229,7 @@ export function AccesoriosCreate2(){
                                 <input 
                                     type='text' 
                                     name='producto' 
-                                    placeholder='producto of recipe...' 
+                                    placeholder='producto ' 
                                     value={input.producto}
                                     onChange={handleChange}
                                     className={errors.producto && 'danger'}

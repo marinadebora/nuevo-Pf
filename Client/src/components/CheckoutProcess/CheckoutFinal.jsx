@@ -66,6 +66,7 @@ export function CheckoutFinal(){
             title: "Muchas gracias por confiar por nostoros",
             text: "Lo esperamos nuevamente en nuestra tienda!!",
             icon: "success",
+            timer:1250
           
           }).then((value) => {
             switch (value) {
@@ -81,9 +82,13 @@ export function CheckoutFinal(){
         
       } catch (error) {
         console.log(error);
-        return alert(
-          "Algo falló al crear la historia."
-        );
+        return  swal({
+         
+          text: "Algo fallo en la ordn de compra",
+          icon: "error",
+          timer:1250
+        
+        })
       }
   };
 

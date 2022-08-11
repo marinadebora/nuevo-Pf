@@ -22,7 +22,7 @@ import {useNavigate } from "react-router-dom";
 
 
 
-export default function Producto2({ tipo,id, producto, marca ,precio, fabricacion, imagenes, Link}) {
+export default function Producto2({ tipo,id, producto, marca ,precio, fabricacion, imagenes, Link, Link2}) {
    
   const navigate = useNavigate();
    const dispatch = useDispatch() 
@@ -84,6 +84,7 @@ export default function Producto2({ tipo,id, producto, marca ,precio, fabricacio
           
           
           <Button sx={{marginLeft: 'auto'}} size="small">{Link}</Button>
+          <Button sx={{marginRigth: 'auto'}} size="small">{Link2}</Button>
         </CardActions>
       </Card>
     </Fragment>

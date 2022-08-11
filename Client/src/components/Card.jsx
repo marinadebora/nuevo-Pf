@@ -59,55 +59,31 @@ return cantidadfiltrada.length
     
     dispatch(addToBasket({id}))
      return  swal({
-      title: "El producto se ha agregado a tu carro de compras",
-      text: "Que queires hacer ahora?",
+      text: "El producto se ha agregado a tu carro de compras",
       icon: "success",
-      buttons: {
-        cart: {
-          text: "Ir al carro",
-          value: "cart",
-        },
-       
-        cancel: "Quedarse",
-        
-      },
+      timer: 1250
     }).then((value) => {
       switch (value) {
-        case "cart":
-          navigate("/checkoutPage");
-          swal("Bienvenido a tu carro","Que tenga una buena compra" ,"success");
-          break;
-
+       
+         
         default:
           window.location.reload()
           break;
       }
     });
-     
+   
   }
   async function addToFav () {
     
     dispatch(addToFavoritos({id}))
      return  swal({
-      title: "El producto se ha agregado a tu lista de favoritos",
-      text: "Que queires hacer ahora?",
+      text: "El producto se ha agregado a tu lista de favoritos",
       icon: "success",
-      buttons: {
-        cart: {
-          text: "Ir a mi lista",
-          value: "cart",
-        },
-       
-        cancel: "Quedarse",
-      },
+     timer: 1250
     }).then((value) => {
       switch (value) {
-        case "cart":
-          navigate("/favs");
-          swal("Bienvenido a tus favoritos","Que tenga una buena compra" ,"success");
-          break;
-
         default:
+          
           break;
       }
     });

@@ -34,18 +34,12 @@ async function handleCancelado(id){
     title: "El producto ha cambiado su estado a cancelado",
     
     icon: "success",
-    buttons: { 
-     
-      OK: "OK"
-    },
+  timer:1250
   }).then((value) => {
     switch (value) {
-      case "OK":
-        window.location.reload()
-       
-        break;
-    
+   
       default:
+        window.location.reload()
         break;
     }
   });
@@ -65,18 +59,12 @@ async function handlePendiente(id){
     title: "El producto ha cambiado su estado a pendiente",
     
     icon: "success",
-    buttons: { 
-     
-      OK: "OK"
-    },
+   timer:1250
   }).then((value) => {
     switch (value) {
-      case "OK":
-        window.location.reload()
-       
-        break;
-    
+     
       default:
+        window.location.reload()
         break;
     }
   });
@@ -96,18 +84,12 @@ async function handleProcesado(id){
     title: "El producto ha cambiado su estado a procesado",
     
     icon: "success",
-    buttons: { 
-     
-      OK: "OK"
-    },
+    timer:1250
   }).then((value) => {
     switch (value) {
-      case "OK":
-        window.location.reload()
-       
-        break;
-    
+     
       default:
+        window.location.reload()
         break;
     }
   });
@@ -125,21 +107,15 @@ async function handleRecibido(id){
   } 
   dispatch(updateHistorial(id, order))
  return  swal({
-    title: "El producto ha cambiado su estado a procesado",
+    title: "El producto ha cambiado su estado a Entregado",
     
     icon: "success",
-    buttons: { 
-     
-      OK: "OK"
-    },
+    timer:1250
   }).then((value) => {
     switch (value) {
-      case "OK":
-        window.location.reload()
-       
-        break;
-    
+      
       default:
+        window.location.reload()
         break;
     }
   });
