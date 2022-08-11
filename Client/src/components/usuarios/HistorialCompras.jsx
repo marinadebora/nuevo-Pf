@@ -120,7 +120,7 @@ myUserDetail.historialDeCompra?.map(e=>(
           <p className='nombre-art'>{e.producto}</p>
           <p className='texto-art'>Precio: {e.precio}</p>
           <p>{e.cantidad||1} unidad</p>
-         
+          <Link  id='infobutton'to={`/home/${e._id}`} >Info</Link>
           </div>
       
           

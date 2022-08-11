@@ -183,7 +183,7 @@ return cantidadfiltrada.length
             <AddShoppingCartIcon />
             </Badge>
           </IconButton>
-          :<><p>Agregaste el maximo de Stock disponible</p></>
+          :<><p> maximo Stock disponible</p></>
           }
             <IconButton aria-label="add to favorites" onClick={() => addToFav()}> <FavoriteIcon /></IconButton>
           {  total?<div className='estrellitas'>
